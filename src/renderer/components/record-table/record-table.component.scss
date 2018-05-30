@@ -1,0 +1,40 @@
+@import '../../scss/colors.scss';
+
+$tableRowHeaderBackgroundColor: $gray-700;
+$tableRowHeaderColor: $white;
+$tableRowBackgroundColor: $gray-300;
+$tableRowBackgroundAlternateColor: $gray-100;
+$cellBorderColor: $gray-800;
+$cellBorderWidth: 0.25px;
+
+.record-table {
+  display: grid;
+  grid-template-columns: minmax(100px, auto) minmax(100px, 2fr) minmax(100px, auto) minmax(100px, auto);
+  border: 1px solid $cellBorderColor;
+
+  .header {
+    color: $tableRowHeaderColor;
+    background: $tableRowHeaderBackgroundColor;
+  }
+  
+  .even-row {
+    background: $tableRowBackgroundColor;
+  }
+
+  .odd-row {
+    background: $tableRowBackgroundAlternateColor;
+  }
+
+  .cell {
+    border-right: $cellBorderWidth solid $cellBorderColor;
+    padding: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .last-cell {
+    @extend .cell;
+    border-right: none;
+  }
+}
