@@ -1,5 +1,5 @@
 {
-  "name": "fin-monthly",
+  "name": "fin-tracker",
   "version": "1.0.0",
   "description": "A financial tracker.",
   "main": "index.js",
