@@ -1,0 +1,27 @@
+{
+  "name": "fin-monthly",
+  "version": "1.0.0",
+  "description": "A financial tracker.",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf .cache dist",
+    "build:background": "node ./src/background/background.config.js",
+    "build:renderer": "node ./src/renderer/renderer.config.js",
+    "build": "tsc && npm run build:renderer && npm run build:background",
+    "dev": "npm run build && electron ./dist/main.js"
+  },
+  "author": "Dustin Jensen",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^2.0.1",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  },
+  "devDependencies": {
+    "@types/react": "^16.3.14",
+    "@types/react-dom": "^16.0.5",
+    "parcel-bundler": "^1.8.1",
+    "rimraf": "^2.6.2",
+    "typescript": "^2.8.3"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "dist"
+  },
+  "exclude": [
+    "src/renderer",
+    "src/background",
+    "node_modules"
+  ]
+}
