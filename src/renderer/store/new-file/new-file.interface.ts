@@ -1,4 +1,4 @@
-export default interface RecordTableProps {
+export default interface INewFile {
   records?: Record[];
 }
 

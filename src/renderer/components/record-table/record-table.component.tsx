@@ -2,7 +2,7 @@ import * as React from 'react';
 import RecordTableProps from './record-table.props';
 import './record-table.component.scss';
 
-export class RecordTable extends React.Component<RecordTableProps> {
+export default class RecordTable extends React.Component<RecordTableProps> {
   render() {
     let rows = [];
 

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import './file-picker.component.scss';
+import FilePickerProps from './file-picker.props';
 
-export class FilePicker extends React.Component {
+export default class FilePicker extends React.Component<FilePickerProps> {
 
   private readonly inputOpenFileRef: React.RefObject<HTMLInputElement>;
 
@@ -16,9 +17,7 @@ export class FilePicker extends React.Component {
 
   onFileSelected = (evt) => {
     const files = evt.target.files;
-
-    // TODO do something with the files.
-    console.log(files);
+    this.props.filesSelected(files);
   };
 
   render() {
