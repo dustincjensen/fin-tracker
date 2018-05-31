@@ -17,7 +17,9 @@ export default class FilePicker extends React.Component<FilePickerProps> {
 
   onFileSelected = (evt) => {
     const files = evt.target.files;
-    this.props.filesSelected(files);
+    if (files && files[0]) {
+      this.props.fileSelected(files[0]);
+    }
   };
 
   render() {
