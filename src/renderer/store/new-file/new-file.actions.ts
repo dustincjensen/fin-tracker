@@ -1,13 +1,12 @@
-import { send } from 'redux-electron-ipc';
+import { sender } from '../ipc.send';
 
-export function NewFileSelected(dispatch, filePath) {
-  // TODO abstract away the redux-electron-ipc send so we don't have to 
-  // manually specify IPC_RECEIVE_RENDERER on each dispatch.
-  dispatch(send('IPC_RECEIVE_RENDERER', 'IPC_NEW_FILE_SELECTED', filePath));
-}
+// IPC dispatch actions
+export const NewFileSelected = (dispatch, filePath) => sender(dispatch, 'IPC_NEW_FILE_SELECTED', filePath);
 
+// Action constants
 export const NEW_FILE_PARSED = 'NEW_FILE_PARSED';
 
+// Action creators
 export function NewFileParsed(records) {
   return {
     type: NEW_FILE_PARSED,
