@@ -7,6 +7,7 @@ import ipcReceive from './store/ipc';
 import NewImportFilePickerContainer from './containers/new-import-file-picker.container';
 import NewImportRecordTableContainer from './containers/new-import-record-table.container';
 import Tabs from './components/tabs/tabs.component';
+import { NewScotiabankChequingFileSelected, NewScotiabankVisaFileSelected, NewScotiabankSavingsFileSelected } from './store/new-file/new-file.actions';
 
 const store = createStore(rootReducer, applyMiddleware(ipcReceive));
 
@@ -34,7 +35,7 @@ ReactDOM.render(
   <Provider store={store}>
     <div>
       <Tabs {...props} />
-      <NewImportFilePickerContainer />
+      <NewImportFilePickerContainer newFileSelectedAction={NewScotiabankVisaFileSelected} />
       <NewImportRecordTableContainer />
     </div>
   </Provider>,

@@ -3,11 +3,14 @@ import { connect, Dispatch } from 'react-redux';
 import IStore from '../store/store.interface';
 import FilePicker from '../components/file-picker/file-picker.component';
 import FilePickerProps from '../components/file-picker/file-picker.props';
-import { NewFileSelected } from '../store/new-file/new-file.actions';
 
-const mapDispatchToProps = (dispatch: Dispatch): FilePickerProps => {
+interface INewImportFilePickerOwnProps {
+  newFileSelectedAction: (dispatch: Dispatch, filePath: string) => void;
+}
+
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: INewImportFilePickerOwnProps): FilePickerProps => {
   const props: FilePickerProps = {
-    fileSelected: (file) => NewFileSelected(dispatch, file.path)
+    fileSelected: (file) => ownProps.newFileSelectedAction(dispatch, file.path)
   }
   return props;
 };
