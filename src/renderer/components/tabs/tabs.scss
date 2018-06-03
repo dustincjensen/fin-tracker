@@ -1,0 +1,26 @@
+@import '../../scss/colors.scss';
+
+$tabForegroundColor: $white;
+$tabActiveBackgroundColor: $blue;
+$tabHoverBackgroundColor: lighten($blue, 10%);
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.tab-link {
+  color: $tabForegroundColor;
+  padding: .5rem 1rem;
+  border-radius: .25rem;
+  cursor: pointer;
+
+  &.active {
+    background: $tabActiveBackgroundColor;    
+  }
+
+  &:not(.active):hover {
+    background: $tabHoverBackgroundColor;
+  }
+}
