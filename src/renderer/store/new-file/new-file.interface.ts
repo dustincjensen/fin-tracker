@@ -1,8 +1,10 @@
 export default interface INewFile {
-  records?: Record[];
+  chequingRecords?: Record[];
+  savingsRecords?: Record[];
+  visaRecords?: Record[];
 }
 
-interface Record {
+export interface Record {
   id: number;
   date: string;
   description: string;

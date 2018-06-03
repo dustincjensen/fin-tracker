@@ -4,10 +4,9 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './store/store';
 import ipcReceive from './store/ipc';
-import NewImportFilePickerContainer from './containers/new-import-file-picker.container';
-import NewImportRecordTableContainer from './containers/new-import-record-table.container';
 import Tabs from './components/tabs/tabs.component';
-import { NewScotiabankChequingFileSelected, NewScotiabankVisaFileSelected, NewScotiabankSavingsFileSelected } from './store/new-file/new-file.actions';
+import * as newFileActions from './store/new-file/new-file.actions';
+import NewMonthly from './layout/new-monthly/new-monthly.layout';
 
 const store = createStore(rootReducer, applyMiddleware(ipcReceive));
 
@@ -35,8 +34,9 @@ ReactDOM.render(
   <Provider store={store}>
     <div>
       <Tabs {...props} />
-      <NewImportFilePickerContainer newFileSelectedAction={NewScotiabankVisaFileSelected} />
-      <NewImportRecordTableContainer />
+      <NewMonthly newFileSelectedAction={newFileActions.NewScotiabankChequingFileSelected} stateSelector={newFileActions.NewScotiabankChequingStateSelector} />
+      <NewMonthly newFileSelectedAction={newFileActions.NewScotiabankSavingsFileSelected} stateSelector={newFileActions.NewScotiabankSavingsStateSelector} />
+      <NewMonthly newFileSelectedAction={newFileActions.NewScotiabankVisaFileSelected} stateSelector={newFileActions.NewScotiabankVisaStateSelector} />
     </div>
   </Provider>,
   document.getElementById('root')
