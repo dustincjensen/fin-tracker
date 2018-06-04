@@ -1,0 +1,15 @@
+How to structure the app.
+- Create Account
+  - Name of Account
+  - Starting Month/Year
+  - Starting Balance
+  - How to parse the records?
+    - Scotiabank
+      - chequing
+      - savings
+      - visa
+  - Completing this will give the Account an ID.
+- The data store can be an array of accounts
+  - Each account will have records for months/years underneath it.
+  - When you load a month/year you ask all accounts, do you have records for this month, or was the account started by this month then 
+    don't even show the account.
