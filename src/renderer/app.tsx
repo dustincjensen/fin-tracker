@@ -34,9 +34,18 @@ ReactDOM.render(
   <Provider store={store}>
     <div>
       <Tabs {...props} />
-      <NewMonthly newFileSelectedAction={newFileActions.NewScotiabankChequingFileSelected} stateSelector={newFileActions.NewScotiabankChequingStateSelector} />
-      <NewMonthly newFileSelectedAction={newFileActions.NewScotiabankSavingsFileSelected} stateSelector={newFileActions.NewScotiabankSavingsStateSelector} />
-      <NewMonthly newFileSelectedAction={newFileActions.NewScotiabankVisaFileSelected} stateSelector={newFileActions.NewScotiabankVisaStateSelector} />
+      <NewMonthly
+        filePickerText="New Chequing File"
+        newFileSelectedAction={newFileActions.NewScotiabankChequingFileSelected}
+        stateSelector={newFileActions.NewScotiabankChequingStateSelector} />
+      <NewMonthly
+        filePickerText="New Savings File"
+        newFileSelectedAction={newFileActions.NewScotiabankSavingsFileSelected}
+        stateSelector={newFileActions.NewScotiabankSavingsStateSelector} />
+      <NewMonthly
+        filePickerText="New Visa File"
+        newFileSelectedAction={newFileActions.NewScotiabankVisaFileSelected}
+        stateSelector={newFileActions.NewScotiabankVisaStateSelector} />
     </div>
   </Provider>,
   document.getElementById('root')

@@ -6,13 +6,13 @@ import IStore from '../../store/store.interface';
 import { Record } from '../../store/new-file/new-file.interface';
 
 interface INewMonthlyProps {
+  filePickerText: string;
   newFileSelectedAction: (dispatch: Dispatch, filePath: string) => void;
   stateSelector: (state: IStore) => Record[];
 }
 
 export default class NewMonthly extends React.Component<INewMonthlyProps> {
   render() {
-    const { newFileSelectedAction, stateSelector } = this.props;
     return (
       <div>
         <NewImportFilePickerContainer {...this.props} />

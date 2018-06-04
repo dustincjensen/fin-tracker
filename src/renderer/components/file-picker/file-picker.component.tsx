@@ -26,7 +26,7 @@ export default class FilePicker extends React.Component<FilePickerProps> {
     return (
       <div>
         <input ref={this.inputOpenFileRef} type="file" style={{ display: "none" }} onChange={this.onFileSelected} />
-        <button onClick={this.openFileDialog} className="select-btn">Select file</button>
+        <button onClick={this.openFileDialog} className="select-btn">{this.props.buttonText}</button>
       </div>
     );
   }
