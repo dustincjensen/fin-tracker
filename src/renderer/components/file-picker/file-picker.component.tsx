@@ -1,5 +1,4 @@
 import * as React from 'react';
-import './file-picker.component.scss';
 import FilePickerProps from './file-picker.props';
 
 export default class FilePicker extends React.Component<FilePickerProps> {
@@ -26,7 +25,7 @@ export default class FilePicker extends React.Component<FilePickerProps> {
     return (
       <div>
         <input ref={this.inputOpenFileRef} type="file" style={{ display: "none" }} onChange={this.onFileSelected} />
-        <button onClick={this.openFileDialog} className="select-btn">{this.props.buttonText}</button>
+        <button onClick={this.openFileDialog} className="btn btn-primary">{this.props.buttonText}</button>
       </div>
     );
   }
