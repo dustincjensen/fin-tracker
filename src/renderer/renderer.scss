@@ -1,4 +1,4 @@
-@import './colors.scss';
+@import './scss/colors.scss';
 
 $scrollbarColor: $gray-700;
 
@@ -14,6 +14,7 @@ html {
 
 body {
   @extend .scroll-bar-styled;
+  height: 100%;
 }
 
 button {
