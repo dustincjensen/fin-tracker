@@ -13,3 +13,17 @@ How to structure the app.
   - Each account will have records for months/years underneath it.
   - When you load a month/year you ask all accounts, do you have records for this month, or was the account started by this month then 
     don't even show the account.
+
+
+Instead of uploading files on a monthly basis,
+allow the user to upload a file that contains records
+and update them based on date. That way if a user uploads
+a file that contains half of may and half of june, they
+don't need to separate out the records. Records uploaded
+a 2nd time that match, date, description, credit, debit
+will flagged as duplicates.
+- How does the data structure look then?
+-- accounts (base account info)
+-- records (object with key of account id)
+  -- contains all records?
+    -- would this mean getting december of 2017 would require parsing?
