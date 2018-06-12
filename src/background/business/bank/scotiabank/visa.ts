@@ -8,7 +8,7 @@ const stringRemoveExtraneousSpaces = /\s{2,}/g;
 const quotes = /"/g;
 const commas = /,/g;
 
-export function parse(filePath): Record[] {
+export function parse(accountId, filePath): Record[] {
   const data = fs.readFileSync(filePath, { encoding: 'utf-8' });
   const separated = data
     .split('\n')
@@ -25,6 +25,7 @@ export function parse(filePath): Record[] {
           .trim();
       return {
         id: i,
+        accountId,
         date,
         debit,
         credit,

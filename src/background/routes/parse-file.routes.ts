@@ -2,29 +2,26 @@ import { parse as chequingParse } from '../business/bank/scotiabank/chequing';
 import { parse as savingsParse } from '../business/bank/scotiabank/chequing';
 import { parse as visaParse } from '../business/bank/scotiabank/visa';
 
-export function parseScotiabankChequingToRecords(filePath: string) {
-  const chequing = chequingParse(filePath);
-  const obj = { records: chequing };
+export function parseScotiabankChequingToRecords(accountId: string, filePath: string) {
+  const chequing = chequingParse(accountId, filePath);
   return {
-    type: 'IPC_NEW_SCOTIABANK_CHEQUING_RECORDS_PARSED',
-    args: [obj]
+    type: 'IPC_NEW_RECORDS_PARSED',
+    args: [chequing]
   };
 }
 
-export function parseScotiabankSavingsToRecords(filePath: string) {
-  const savings = savingsParse(filePath);
-  const obj = { records: savings };
+export function parseScotiabankSavingsToRecords(accountId: string, filePath: string) {
+  const savings = savingsParse(accountId, filePath);
   return {
-    type: 'IPC_NEW_SCOTIABANK_SAVINGS_RECORDS_PARSED',
-    args: [obj]
+    type: 'IPC_NEW_RECORDS_PARSED',
+    args: [savings]
   };
 }
 
-export function parseScotiabankVisaToRecords(filePath: string) {
-  const visa = visaParse(filePath);
-  const obj = { records: visa };
+export function parseScotiabankVisaToRecords(accountId: string, filePath: string) {
+  const visa = visaParse(accountId, filePath);
   return {
-    type: 'IPC_NEW_SCOTIABANK_VISA_RECORDS_PARSED',
-    args: [obj]
+    type: 'IPC_NEW_RECORDS_PARSED',
+    args: [visa]
   };
 }

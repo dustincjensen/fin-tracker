@@ -1,8 +1,4 @@
-export default interface RecordTableProps {
-  records?: Record[];
-}
-
-interface Record {
+export default interface IRecord {
   id: string;
   accountId: string;
   date: string;

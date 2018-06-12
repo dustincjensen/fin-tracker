@@ -1,9 +1,7 @@
-import * as newFileActions from './new-file/new-file.actions';
+import * as recordsActions from './records/records.actions';
 
 const lookup: { [type: string]: Function } = {
-  ['IPC_NEW_SCOTIABANK_CHEQUING_RECORDS_PARSED']: newFileActions.NewScotiabankChequingFileParsed,
-  ['IPC_NEW_SCOTIABANK_SAVINGS_RECORDS_PARSED']: newFileActions.NewScotiabankSavingsFileParsed,
-  ['IPC_NEW_SCOTIABANK_VISA_RECORDS_PARSED']: newFileActions.NewScotiabankVisaFileParsed,
+  ['IPC_NEW_RECORDS_PARSED']: recordsActions.SaveNewRecords
 };
 
 export default function ipcHandler(event, ipcType, ...args: any[]) {

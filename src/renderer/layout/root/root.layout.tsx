@@ -16,20 +16,6 @@ export default class RootLayout extends React.Component {
             <Route exact path="/new-account" component={NewAccount} />
           </Switch>
         </div>
-        {/* <div>
-          <NewMonthly
-            filePickerText="New Chequing File"
-            newFileSelectedAction={newFileActions.NewScotiabankChequingFileSelected}
-            stateSelector={newFileActions.NewScotiabankChequingStateSelector} />
-          <NewMonthly
-            filePickerText="New Savings File"
-            newFileSelectedAction={newFileActions.NewScotiabankSavingsFileSelected}
-            stateSelector={newFileActions.NewScotiabankSavingsStateSelector} />
-          <NewMonthly
-            filePickerText="New Visa File"
-            newFileSelectedAction={newFileActions.NewScotiabankVisaFileSelected}
-            stateSelector={newFileActions.NewScotiabankVisaStateSelector} />
-        </div> */}
       </div>
     );
   }
