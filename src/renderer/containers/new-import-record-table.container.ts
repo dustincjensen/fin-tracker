@@ -2,17 +2,27 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import IStore from '../store/store.interface';
 import IRecord from '../store/records/record.interface';
-import RecordTable from '../components/record-table/record-table.component';
-import RecordTableProps from '../components/record-table/record-table.props';
+import { Table } from '../components/table/table.component';
+import { ITableProps } from '../components/table/table.props';
 
 interface INewImportRecordTableOwnProps {
   stateSelector: (state: IStore) => IRecord[];
 }
 
-const mapStateToProps = (state: IStore, ownProps: INewImportRecordTableOwnProps): RecordTableProps => {
+const mapStateToProps = (state: IStore, ownProps: INewImportRecordTableOwnProps): ITableProps<IRecord> => {
   return {
-    records: ownProps.stateSelector(state)
+    tableHeader: [
+      { description: '', gridWidth: 'auto' },
+      { description: 'Date', gridWidth: 'minmax(100px, auto)' },
+      { description: 'Description', gridWidth: 'minmax(100px, 2fr)' },
+      { description: 'Debit', gridWidth: 'minmax(100px, auto)' },
+      { description: 'Credit', gridWidth: 'minmax(100px, auto)' }
+    ],
+    dataKeys: [
+      'rowNumber', 'date', 'description', 'debit', 'credit'
+    ],
+    rowData: ownProps.stateSelector(state)
   }
 };
 
-export default connect(mapStateToProps, null)(RecordTable);
+export default connect(mapStateToProps, null)(Table);

@@ -9,9 +9,8 @@ $cellHoverColor: $gray-500;
 $cellBorderColor: $gray-800;
 $cellBorderWidth: 0.25px;
 
-.record-table {
+.table {
   display: grid;
-  grid-template-columns: auto minmax(100px, auto) minmax(100px, 2fr) minmax(100px, auto) minmax(100px, auto);
   border: 1px solid $cellBorderColor;
 
   .header {
