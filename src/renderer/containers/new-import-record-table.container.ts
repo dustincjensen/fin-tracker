@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import IStore from '../store/store.interface';
 import IRecord from '../store/records/record.interface';
 import { Table } from '../components/table/table.component';
-import { ITableProps } from '../components/table/table.props';
+import { ITableStateProps } from '../components/table/table.props';
+import { SSL_OP_CISCO_ANYCONNECT } from 'constants';
 
 interface INewImportRecordTableOwnProps {
   stateSelector: (state: IStore) => IRecord[];
 }
 
-const mapStateToProps = (state: IStore, ownProps: INewImportRecordTableOwnProps): ITableProps<IRecord> => {
+const mapStateToProps = (state: IStore, ownProps: INewImportRecordTableOwnProps): ITableStateProps<IRecord> => {
   return {
     tableHeader: [
       { description: '', gridWidth: 'auto' },
@@ -25,4 +26,5 @@ const mapStateToProps = (state: IStore, ownProps: INewImportRecordTableOwnProps)
   }
 };
 
-export default connect(mapStateToProps, null)(Table);
+export default connect<ITableStateProps<IRecord>, {}, INewImportRecordTableOwnProps>(mapStateToProps)
+  (Table as new (props: ITableStateProps<IRecord>) => Table<IRecord>);

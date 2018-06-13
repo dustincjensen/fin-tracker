@@ -21,17 +21,17 @@ $cellBorderWidth: 0.25px;
   .even-row {
     background: $tableRowBackgroundColor;
 
-    &:hover {
-      background: $cellHoverColor;
-    }
+    // &:hover {
+    //   background: $cellHoverColor;
+    // }
   }
 
   .odd-row {
     background: $tableRowBackgroundAlternateColor;
 
-    &:hover {
-      background: $cellHoverColor;
-    }
+    // &:hover {
+    //   background: $cellHoverColor;
+    // }
   }
 
   .cell {
@@ -40,7 +40,7 @@ $cellBorderWidth: 0.25px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    cursor: pointer;
+    //cursor: pointer;
   }
 
   .last-cell {

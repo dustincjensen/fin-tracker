@@ -1,16 +1,19 @@
 import * as React from 'react';
-import { ITableProps, IHeaderDefinition, TableKeyType } from './table.props';
+import { ITableStateProps, ITableDispatchProps, IHeaderDefinition, TableKeyType, IActionDefinition } from './table.props';
 import './table.component.scss';
 
-export class Table<T> extends React.Component<ITableProps<T>> {
+export class Table<T> extends React.Component<ITableStateProps<T> & ITableDispatchProps> {
   /**
    * Throws an error if the tableHeader and dataKeys don't match in length.
    * @param props the props for the component.
    */
-  constructor(props: ITableProps<T>) {
+  constructor(props: ITableStateProps<T> & ITableDispatchProps) {
     super(props);
 
-    if (props.tableHeader.length !== props.dataKeys.length) {
+    const { tableHeader, dataKeys, actions } = props;
+    const dataKeyActionsLength = dataKeys.length + (actions && actions.length || 0);
+
+    if (tableHeader.length !== dataKeyActionsLength) {
       throw new Error('Table Header and dataKeys must have the same length.');
     }
   }
@@ -19,9 +22,9 @@ export class Table<T> extends React.Component<ITableProps<T>> {
    * Render the component.
    */
   render() {
-    const { tableHeader, dataKeys, rowData } = this.props;
+    const { tableHeader, dataKeys, rowData, actions } = this.props;
     const [header, style] = this.createHeader(tableHeader);
-    const rows = this.createRows(rowData, dataKeys);
+    const rows = this.createRows(rowData, dataKeys, actions);
     return (
       <div className="table" style={style}>
         {header}
@@ -52,16 +55,39 @@ export class Table<T> extends React.Component<ITableProps<T>> {
    * @param rowData the data to display
    * @param dataKeys the keys to index the data.
    */
-  private createRows(rowData, dataKeys: TableKeyType<T>[]) {
+  private createRows(rowData, dataKeys: TableKeyType<T>[], actions: IActionDefinition[]) {
+    // TODO clean up this function to make it more solid.
     let rows: JSX.Element[] = [];
     if (rowData && dataKeys) {
       rows = rowData.map((record, index) => {
         const rowType = this.getRowType(index);
-        return dataKeys.map((dataKey, keyIndex) => {
-          const cellClass = this.getCellClass(keyIndex, dataKeys);
+        const row = dataKeys.map((dataKey, keyIndex) => {
+          const cellClass = actions && actions.length > 0 ? 'cell' : this.getCellClass(keyIndex, dataKeys);
           const cellValue = dataKey === 'rowNumber' ? index + 1 : record[dataKey];
           return <div key={`data-${index}-${keyIndex}`} className={`${cellClass} ${rowType}`}>{cellValue}</div>;
         });
+
+        if (actions) {
+          const mappedActions = actions.map((a, actionIndex) => {
+            switch (a.type) {
+              case 'button':
+                return (
+                  // TODO change this to be dynamic for any number of actions.
+                  // It won't always be last-cell
+                  <div key={`action-${index}-${actionIndex}`} className={`last-cell ${rowType}`}>
+                    <button
+                      className={a.classes}
+                      onClick={() => a.event(record)}>
+                      {a.text}
+                    </button>
+                  </div>
+                );
+            }
+          });
+          row.push(...mappedActions);
+        }
+
+        return row;
       });
     }
     return rows;
