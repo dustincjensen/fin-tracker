@@ -2,7 +2,7 @@
 
 .sidebar {
   display: grid;
-  grid-template-rows: auto auto 1fr;
+  grid-template-rows: auto auto auto 1fr;
   grid-gap: 10px;
   background: $gray-900;
   padding: 20px;

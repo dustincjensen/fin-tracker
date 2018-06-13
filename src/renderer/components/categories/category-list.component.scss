@@ -1,0 +1,51 @@
+@import '../../scss/colors.scss';
+
+$tableRowHeaderBackgroundColor: $gray-700;
+$tableRowHeaderColor: $white;
+$tableRowBackgroundColor: $gray-300;
+$tableRowBackgroundAlternateColor: $gray-100;
+
+$cellHoverColor: $gray-500;
+$cellBorderColor: $gray-800;
+$cellBorderWidth: 0.25px;
+
+.category-table {
+  display: grid;
+  grid-template-columns: auto minmax(100px, 1fr) auto;
+  border: 1px solid $cellBorderColor;
+
+  .header {
+    color: $tableRowHeaderColor;
+    background: $tableRowHeaderBackgroundColor;
+  }
+  
+  .even-row {
+    background: $tableRowBackgroundColor;
+
+    &:hover {
+      background: $cellHoverColor;
+    }
+  }
+
+  .odd-row {
+    background: $tableRowBackgroundAlternateColor;
+
+    &:hover {
+      background: $cellHoverColor;
+    }
+  }
+
+  .cell {
+    border-right: $cellBorderWidth solid $cellBorderColor;
+    padding: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+  }
+
+  .last-cell {
+    @extend .cell;
+    border-right: none;
+  }
+}

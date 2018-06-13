@@ -24,8 +24,8 @@ export default class RecordTable extends React.Component<RecordTableProps> {
         <div className="cell header"></div>
         <div className="cell header">Date</div>
         <div className="cell header">Description</div>
-        <div className="last-cell header">Debit</div>
-        <div className="cell header">Credit</div>
+        <div className="cell header">Debit</div>
+        <div className="last-cell header">Credit</div>
         {rows}
       </div>
     );
