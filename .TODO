@@ -14,6 +14,10 @@ How to structure the app.
   - When you load a month/year you ask all accounts, do you have records for this month, or was the account started by this month then 
     don't even show the account.
 
+// Sample for calculating balance.
+account.newBalance = account.startingBalance
+  - records.map(r => r.debit || 0).reduce((a, b) => a + b)
+  + records.map(r => r.credit || 0).reduce((a, b) => a + b);
 
 Instead of uploading files on a monthly basis,
 allow the user to upload a file that contains records
