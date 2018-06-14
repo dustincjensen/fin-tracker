@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch: Dispatch): ITableDispatchProps => {
       {
         type: 'button',
         text: 'Delete',
-        classes: 'btn btn-danger',
+        classes: 'btn btn-danger btn-sm',
         event: (category: ICategory) => dispatch(DeleteCategory(category.id))
       }
     ]
