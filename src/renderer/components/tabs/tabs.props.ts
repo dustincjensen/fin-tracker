@@ -1,10 +1,10 @@
-export default interface TabsProps {
-  tabs: Tab[];
-  selectTab: (id: number) => void;
+export interface ITabsProps {
+  tabs: ITab[];
+  selectTab: (id: string) => void;
 }
 
-interface Tab {
-  id: number;
+export interface ITab {
+  id: string;
   display: string;
   active?: boolean;
 }

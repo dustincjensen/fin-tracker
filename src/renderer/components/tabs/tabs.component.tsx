@@ -1,12 +1,12 @@
 import * as React from 'react';
-import TabsProps from './tabs.props';
+import { ITabsProps } from './tabs.props';
 
 import './tabs.scss';
 
-export default class Tabs extends React.Component<TabsProps> {
+export default class Tabs extends React.Component<ITabsProps> {
   render() {
-    const { selectTab } = this.props;
-    const tabs = this.props.tabs.map(t => {
+    const { selectTab, tabs } = this.props;
+    const tabsToRender = tabs.map(t => {
       return (
         <li
           key={t.id}
@@ -18,11 +18,7 @@ export default class Tabs extends React.Component<TabsProps> {
     });
 
     return (
-      <ul className="tabs">{tabs}</ul>
+      <ul className="tabs">{tabsToRender}</ul>
     );
   }
-
-  selectTab = (id: number) => {
-    this.props.selectTab(id);
-  };
 }

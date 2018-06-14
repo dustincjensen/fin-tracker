@@ -11,6 +11,13 @@ $tabHoverBackgroundColor: lighten($blue, 10%);
 }
 
 .tab-link {
+  // Responds to the .tabs flex and stretches.
+  flex: 1;
+  
+  // Set myself to flex and center so each stretch has centered content
+  display: flex;
+  justify-content: center;
+
   color: $tabForegroundColor;
   padding: .5rem 1rem;
   border-radius: .25rem;
