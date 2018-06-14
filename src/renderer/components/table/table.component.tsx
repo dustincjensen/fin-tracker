@@ -69,8 +69,6 @@ export class Table<T> extends React.Component<ITableStateProps<T> & ITableDispat
             switch (a.type) {
               case 'button':
                 return (
-                  // TODO change this to be dynamic for any number of actions.
-                  // It won't always be last-cell
                   <div key={`action-${index}-${actionIndex}`} className="cell">
                     <button
                       className={a.classes}
