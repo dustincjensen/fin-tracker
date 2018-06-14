@@ -31,3 +31,5 @@ will flagged as duplicates.
 -- records (object with key of account id)
   -- contains all records?
     -- would this mean getting december of 2017 would require parsing?
+
+-- CSS is not component specific

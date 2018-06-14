@@ -39,8 +39,7 @@ export class Table<T> extends React.Component<ITableStateProps<T> & ITableDispat
    */
   private createHeader(tableHeader: IHeaderDefinition[]): any[] {
     const header = tableHeader.map((h, index) => {
-      const cellClass = this.getCellClass(index, tableHeader);
-      return <div key={`header-${index}`} className={`${cellClass} header`}>{h.description}</div>
+      return <div key={`header-${index}`} className="header cell">{h.description}</div>
     });
 
     const style = {
@@ -60,11 +59,9 @@ export class Table<T> extends React.Component<ITableStateProps<T> & ITableDispat
     let rows: JSX.Element[] = [];
     if (rowData && dataKeys) {
       rows = rowData.map((record, index) => {
-        const rowType = this.getRowType(index);
         const row = dataKeys.map((dataKey, keyIndex) => {
-          const cellClass = actions && actions.length > 0 ? 'cell' : this.getCellClass(keyIndex, dataKeys);
           const cellValue = dataKey === 'rowNumber' ? index + 1 : record[dataKey];
-          return <div key={`data-${index}-${keyIndex}`} className={`${cellClass} ${rowType}`}>{cellValue}</div>;
+          return <div key={`data-${index}-${keyIndex}`} className="cell">{cellValue}</div>;
         });
 
         if (actions) {
@@ -74,7 +71,7 @@ export class Table<T> extends React.Component<ITableStateProps<T> & ITableDispat
                 return (
                   // TODO change this to be dynamic for any number of actions.
                   // It won't always be last-cell
-                  <div key={`action-${index}-${actionIndex}`} className={`last-cell ${rowType}`}>
+                  <div key={`action-${index}-${actionIndex}`} className="cell">
                     <button
                       className={a.classes}
                       onClick={() => a.event(record)}>
@@ -92,21 +89,4 @@ export class Table<T> extends React.Component<ITableStateProps<T> & ITableDispat
     }
     return rows;
   };
-
-  /**
-   * Returns 'cell' or 'last-cell'
-   * @param index the index of the cell
-   * @param arr the array of cells
-   */
-  private getCellClass(index: number, arr: any): 'cell' | 'last-cell' {
-    return index !== arr.length - 1 ? 'cell' : 'last-cell';
-  };
-
-  /**
-   * Returns 'even-row' or 'odd-row'
-   * @param index the index of the row.
-   */
-  private getRowType(index: number): 'even-row' | 'odd-row' {
-    return index % 2 === 0 ? 'even-row' : 'odd-row';
-  }
 }

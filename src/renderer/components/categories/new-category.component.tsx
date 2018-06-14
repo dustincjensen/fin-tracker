@@ -17,10 +17,14 @@ export default class NewCategory extends React.Component<INewCategoryProps, INew
     return (
       <div className="new-category-background">
         <div className="new-category-header">New Category</div>
-        <form onSubmit={this.handleSubmit} className="form-layout">
-          <label>Name</label>
-          <input type="text" name="name" placeholder="Name" value={this.state.name} onChange={this.handleChange} required />
-          <button className="btn btn-primary">Save</button>
+        <form onSubmit={this.handleSubmit}>
+          <div className="form-layout">
+            <label>Name</label>
+            <input type="text" name="name" placeholder="Name" value={this.state.name} onChange={this.handleChange} required />
+          </div>
+          <div className="new-category-footer">
+            <button className="btn btn-primary btn-lg">Save</button>
+          </div>
         </form>
       </div>
     );

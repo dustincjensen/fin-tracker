@@ -1,50 +1,21 @@
 @import '../../scss/colors.scss';
 
-$tableRowHeaderBackgroundColor: $gray-700;
-$tableRowHeaderColor: $white;
-$tableRowBackgroundColor: $gray-300;
-$tableRowBackgroundAlternateColor: $gray-100;
-
-$cellHoverColor: $gray-500;
-$cellBorderColor: $gray-800;
-$cellBorderWidth: 0.25px;
+$tableRowBackgroundColor: $gray-900;
+$tableRowColor: $white;
+$tableRowDividerColor: $gray-800;
 
 .table {
   display: grid;
-  border: 1px solid $cellBorderColor;
-
-  .header {
-    color: $tableRowHeaderColor;
-    background: $tableRowHeaderBackgroundColor;
-  }
-  
-  .even-row {
-    background: $tableRowBackgroundColor;
-
-    // &:hover {
-    //   background: $cellHoverColor;
-    // }
-  }
-
-  .odd-row {
-    background: $tableRowBackgroundAlternateColor;
-
-    // &:hover {
-    //   background: $cellHoverColor;
-    // }
-  }
 
   .cell {
-    border-right: $cellBorderWidth solid $cellBorderColor;
+    color: $tableRowColor;
+    background: $tableRowBackgroundColor;
+    border-bottom: 1px solid $tableRowDividerColor;
     padding: 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    //cursor: pointer;
-  }
-
-  .last-cell {
-    @extend .cell;
-    border-right: none;
+    display: flex;
+    align-items: center;
   }
 }

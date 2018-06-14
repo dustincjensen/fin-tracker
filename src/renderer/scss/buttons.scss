@@ -52,4 +52,16 @@ $dangerBackColor: $red;
       border-color: darken($dangerBackColor, 10%);
     }
   }
+
+  &-sm {
+    width: 80px;
+  }
+
+  &-md {
+    width: 100px;
+  }
+
+  &-lg {
+    width: 120px;
+  }
 }

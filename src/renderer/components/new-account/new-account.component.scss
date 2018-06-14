@@ -12,6 +12,7 @@ $backgroundColor: $gray-900;
   display: grid;
   grid-template-columns: auto 1fr;
   grid-gap: 10px;
+  align-items: center;
 
   label {
     color: $textColor;
@@ -31,4 +32,10 @@ $backgroundColor: $gray-900;
   color: $textColor;
   font-size: 32px;
   margin-bottom: 30px;
+}
+
+.new-account-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
 }
