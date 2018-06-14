@@ -4,7 +4,6 @@ import IStore from '../store/store.interface';
 import IRecord from '../store/records/record.interface';
 import { Table } from '../components/table/table.component';
 import { ITableStateProps } from '../components/table/table.props';
-import { SSL_OP_CISCO_ANYCONNECT } from 'constants';
 
 interface INewImportRecordTableOwnProps {
   stateSelector: (state: IStore) => IRecord[];
