@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { ITabsProps } from './tabs.props';
-
+import { ITabsProps } from './tabs.interface';
 import './tabs.scss';
 
-export default class Tabs extends React.Component<ITabsProps> {
+export class Tabs extends React.Component<ITabsProps> {
   render() {
     const { selectTab, tabs } = this.props;
     const tabsToRender = tabs.map(t => {

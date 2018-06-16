@@ -1,4 +1,4 @@
-import IAccount from './account.interface';
+import { IAccount } from './account.interface';
 import * as accountActions from './account.actions';
 
 const initialState: { [id: string]: IAccount } = {};

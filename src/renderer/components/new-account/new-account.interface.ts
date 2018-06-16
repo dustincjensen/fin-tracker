@@ -1,3 +1,8 @@
+export interface INewAccountProps {
+  saveNewAccount: (account: any) => void;
+  afterSave: () => void;
+}
+
 export interface INewAccountState {
   name: string;
   startYear: number;
@@ -6,7 +11,6 @@ export interface INewAccountState {
   parseType: ParseType;
 }
 
-// TODO Do I need to recreate this in component state?
 type ParseType =
   'ScotiabankChequing' |
   'ScotiabankSavings' |

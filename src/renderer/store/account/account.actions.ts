@@ -1,4 +1,4 @@
-import IAccount from "./account.interface";
+import { IAccount } from "./account.interface";
 
 // Action constants
 export const SAVE_NEW_ACCOUNT = 'SAVE_NEW_ACCOUNT';

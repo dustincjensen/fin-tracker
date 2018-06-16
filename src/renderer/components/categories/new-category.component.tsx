@@ -1,18 +1,14 @@
 import * as React from 'react';
-import { INewCategoryState } from './new-category.state';
-import { INewCategoryProps } from './new-category.props';
-
+import { INewCategoryProps, INewCategoryState } from './new-category.interface';
+import { newGuid } from '../../utils/guid.util';
 import './new-category.component.scss';
 
-export default class NewCategory extends React.Component<INewCategoryProps, INewCategoryState> {
+export class NewCategory extends React.Component<INewCategoryProps, INewCategoryState> {
   constructor(props) {
     super(props);
-    this.state = {
-      name: ''
-    };
+    this.state = { name: '' };
   }
 
-  // TODO do this better?
   render() {
     return (
       <div className="new-category-background">
@@ -41,20 +37,10 @@ export default class NewCategory extends React.Component<INewCategoryProps, INew
 
     const newCategory = {
       ...this.state,
-      id: this.getGuid()
+      id: newGuid()
     };
 
     this.props.saveNewCategory(newCategory);
     this.setState({ name: '' });
   };
-
-  // TODO move somewhere else.
-  getGuid = () => {
-    function s4() {
-      return Math.floor((1 + Math.random()) * 0x10000)
-        .toString(16)
-        .substring(1);
-    }
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-  }
 }

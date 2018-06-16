@@ -1,6 +1,6 @@
 import { ParseType } from './parse.type';
 
-export default interface IAccount {
+export interface IAccount {
   /**
    * The ID of the account.
    */

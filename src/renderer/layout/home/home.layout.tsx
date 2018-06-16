@@ -1,14 +1,14 @@
 import * as React from 'react';
 
 // REMOVE BETWEEN
-import IStore from '../../store/store.interface';
+import { IStore } from '../../store/store.interface';
 import { connect } from 'react-redux';
 import { ByAccountId } from '../../store/records/records.selectors';
-import NewMonthly from '../new-monthly/new-monthly.layout';
+import { NewMonthly } from '../new-monthly/new-monthly.layout';
 import * as recordsActions from '../../store/records/records.actions';
 import * as recordsSelectors from '../../store/records/records.selectors';
 import { Dispatch } from 'redux';
-import IAccount from '../../store/account/account.interface';
+import { IAccount } from '../../store/account/account.interface';
 
 const accounts = ({ accounts }) => {
   const items = Object.keys(accounts).map(a => {
@@ -50,7 +50,7 @@ const mapStateToProps = (state: IStore) => {
 const AccountsContainer = connect(mapStateToProps)(accounts);
 // REMOVE BETWEEN
 
-export default class Home extends React.Component {
+export class HomeLayout extends React.Component {
   render() {
     return (
       <div>

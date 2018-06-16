@@ -1,7 +1,7 @@
 import * as React from 'react';
-import FilePickerProps from './file-picker.props';
+import { FilePickerProps } from './file-picker.interface';
 
-export default class FilePicker extends React.Component<FilePickerProps> {
+export class FilePicker extends React.Component<FilePickerProps> {
 
   private readonly inputOpenFileRef: React.RefObject<HTMLInputElement>;
 

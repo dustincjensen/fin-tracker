@@ -1,4 +1,4 @@
-import ICategory from './category.interface';
+import { ICategory } from './category.interface';
 import * as categoryActions from './category.actions';
 
 const initialState: ICategory[] = [];

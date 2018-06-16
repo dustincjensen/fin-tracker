@@ -1,9 +1,9 @@
 import * as React from 'react';
-import NewImportFilePickerContainer from '../../containers/new-import-file-picker.container';
-import NewImportRecordTableContainer from '../../containers/new-import-record-table.container';
 import { Dispatch } from 'redux';
-import IStore from '../../store/store.interface';
-import IRecord from '../../store/records/record.interface';
+import { NewImportFilePickerContainer } from '../../containers/new-import-file-picker.container';
+import { NewImportRecordTableContainer } from '../../containers/new-import-record-table.container';
+import { IStore } from '../../store/store.interface';
+import { IRecord } from '../../store/records/record.interface';
 
 interface INewMonthlyProps {
   filePickerText: string;
@@ -11,7 +11,7 @@ interface INewMonthlyProps {
   stateSelector: (state: IStore) => IRecord[];
 }
 
-export default class NewMonthly extends React.Component<INewMonthlyProps> {
+export class NewMonthly extends React.Component<INewMonthlyProps> {
   render() {
     return (
       <div>

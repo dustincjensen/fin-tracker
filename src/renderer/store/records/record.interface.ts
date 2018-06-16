@@ -1,4 +1,4 @@
-export default interface IRecord {
+export interface IRecord {
   id: string;
   accountId: string;
   date: string;

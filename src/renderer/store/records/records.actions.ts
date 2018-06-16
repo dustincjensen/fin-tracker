@@ -1,6 +1,6 @@
-import { sender } from '../ipc.send';
 import { Dispatch } from 'redux';
-import IRecord from './record.interface';
+import { sender } from '../ipc.send';
+import { IRecord } from './record.interface';
 
 // IPC dispatch actions
 export const NewScotiabankChequingFileSelected = (dispatch: Dispatch, accountId: string, filePath: string) => sender(dispatch, 'IPC_NEW_SCOTIABANK_CHEQUING_RECORDS_SELECTED', accountId, filePath);

@@ -1,4 +1,4 @@
-import IStore from '../store.interface';
+import { IStore } from '../store.interface';
 import { isInYearMonth } from '../../utils/date.util';
 
 export function ByAccountId(store: IStore, accountId: string) {

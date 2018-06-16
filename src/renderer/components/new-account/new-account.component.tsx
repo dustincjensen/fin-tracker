@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { INewAccountState } from './new-account.state';
-import { INewAccountProps } from './new-account.props';
-
+import { INewAccountProps, INewAccountState } from './new-account.interface';
+import { newGuid } from '../../utils/guid.util';
 import './new-account.component.scss';
 
 // TODO do we need the account type from finance? so we know credit or debit is up/down?
-export default class NewAccount extends React.Component<INewAccountProps, INewAccountState> {
+export class NewAccount extends React.Component<INewAccountProps, INewAccountState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,20 +70,10 @@ export default class NewAccount extends React.Component<INewAccountProps, INewAc
 
     const newAccount = {
       ...this.state,
-      id: this.getGuid()
+      id: newGuid()
     };
 
     this.props.saveNewAccount(newAccount);
     this.props.afterSave();
   };
-
-  // TODO move somewhere else.
-  getGuid = () => {
-    function s4() {
-      return Math.floor((1 + Math.random()) * 0x10000)
-        .toString(16)
-        .substring(1);
-    }
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-  }
 }

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import NewAccount from '../components/new-account/new-account.component';
-import { INewAccountProps } from '../components/new-account/new-account.props';
+import { NewAccount } from '../components/new-account/new-account.component';
+import { INewAccountProps } from '../components/new-account/new-account.interface';
 import { SaveNewAccount } from '../store/account/account.actions';
 
 interface INewAccountContainerProps {
@@ -15,4 +15,4 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: INewAccountContainerPr
   };
 };
 
-export default connect(null, mapDispatchToProps)(NewAccount);
+export const NewAccountContainer = connect(null, mapDispatchToProps)(NewAccount);

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import IStore from '../store/store.interface';
-import IRecord from '../store/records/record.interface';
+import { IStore } from '../store/store.interface';
+import { IRecord } from '../store/records/record.interface';
 import { Table } from '../components/table/table.component';
-import { ITableStateProps } from '../components/table/table.props';
+import { ITableStateProps } from '../components/table/table.interface';
 
 interface INewImportRecordTableOwnProps {
   stateSelector: (state: IStore) => IRecord[];
@@ -25,5 +25,5 @@ const mapStateToProps = (state: IStore, ownProps: INewImportRecordTableOwnProps)
   }
 };
 
-export default connect<ITableStateProps<IRecord>, {}, INewImportRecordTableOwnProps>(mapStateToProps)
+export const NewImportRecordTableContainer = connect<ITableStateProps<IRecord>, {}, INewImportRecordTableOwnProps>(mapStateToProps)
   (Table as new (props: ITableStateProps<IRecord>) => Table<IRecord>);

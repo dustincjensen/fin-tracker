@@ -1,4 +1,4 @@
-import ICategory from './category.interface';
+import { ICategory } from './category.interface';
 
 export const SAVE_NEW_CATEGORY = 'SAVE_NEW_CATEGORY';
 export const DELETE_CATEGORY = 'DELETE_CATEGORY';

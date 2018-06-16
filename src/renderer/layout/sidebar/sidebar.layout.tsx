@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { AccountsSidebarContainer } from '../../containers/accounts-sidebar.container';
 import './sidebar.layout.scss';
-import AccountsSidebarContainer from '../../containers/accounts-sidebar.container';
 
-export default class Sidebar extends React.Component {
+export class SidebarLayout extends React.Component {
   render() {
     return (
       <div className="sidebar">

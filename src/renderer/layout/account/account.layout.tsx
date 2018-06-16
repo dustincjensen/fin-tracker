@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { withRouter } from 'react-router';
-import Tabs from '../../components/tabs/tabs.component';
-import { ITab } from '../../components/tabs/tabs.props';
+import { Tabs } from '../../components/tabs/tabs.component';
+import { ITab } from '../../components/tabs/tabs.interface';
 import { monthNamesShort } from '../../utils/date.util';
-import AccountMonthly from '../../containers/account-monthly.container';
+import { AccountMonthlyContainer } from '../../containers/account-monthly.container';
 import { ByAccountIdAndDate } from '../../store/records/records.selectors';
 
 class AccountLayoutClass extends React.Component<any, any> {
@@ -40,7 +40,7 @@ class AccountLayoutClass extends React.Component<any, any> {
     return (
       <div>
         <Tabs tabs={this.state.tabs} selectTab={this.selectTabFunc} />
-        <AccountMonthly accountId={this.props.match.params.accountId} date={this.state.date} stateSelector={ByAccountIdAndDate} />
+        <AccountMonthlyContainer accountId={this.props.match.params.accountId} date={this.state.date} stateSelector={ByAccountIdAndDate} />
       </div>
     );
   }

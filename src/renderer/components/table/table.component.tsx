@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ITableStateProps, ITableDispatchProps, IHeaderDefinition, TableKeyType, IActionDefinition } from './table.props';
+import { ITableStateProps, ITableDispatchProps, IHeaderDefinition, TableKeyType, IActionDefinition } from './table.interface';
 import './table.component.scss';
 
 export class Table<T> extends React.Component<ITableStateProps<T> & ITableDispatchProps> {

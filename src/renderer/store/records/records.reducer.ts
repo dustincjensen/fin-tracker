@@ -1,4 +1,4 @@
-import IRecord from './record.interface';
+import { IRecord } from './record.interface';
 import * as recordsActions from './records.actions';
 
 const initialState: IRecord[] = [];

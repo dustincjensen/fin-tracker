@@ -1,21 +1,21 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router';
-import Sidebar from '../sidebar/sidebar.layout';
-import Home from '../home/home.layout';
-import NewAccount from '../new-account/new-account.layout';
+import { SidebarLayout } from '../sidebar/sidebar.layout';
+import { HomeLayout } from '../home/home.layout';
+import { NewAccountLayout } from '../new-account/new-account.layout';
 import { CategoryLayout } from '../category/category.layout';
 import { AccountLayout } from '../account/account.layout';
 import './root.layout.scss';
 
-export default class RootLayout extends React.Component {
+export class RootLayout extends React.Component {
   render() {
     return (
       <div className="root">
-        <Sidebar />
+        <SidebarLayout />
         <div className="main-content">
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/new-account" component={NewAccount} />
+            <Route exact path="/" component={HomeLayout} />
+            <Route exact path="/new-account" component={NewAccountLayout} />
             <Route exact path="/categories" component={CategoryLayout} />
             <Route exact path="/account/:accountId" component={AccountLayout} />
           </Switch>

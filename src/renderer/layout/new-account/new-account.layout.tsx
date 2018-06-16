@@ -1,7 +1,6 @@
 import * as React from 'react';
-import NewAccountContainer from '../../containers/new-account.container';
 import { withRouter } from 'react-router';
-
+import { NewAccountContainer } from '../../containers/new-account.container';
 
 const NewAccount = ({ history }) => {
   return (
@@ -11,4 +10,4 @@ const NewAccount = ({ history }) => {
   );
 };
 
-export default withRouter(NewAccount);
+export const NewAccountLayout = withRouter(NewAccount);
