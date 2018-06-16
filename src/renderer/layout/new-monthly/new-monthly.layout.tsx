@@ -16,7 +16,7 @@ export default class NewMonthly extends React.Component<INewMonthlyProps> {
     return (
       <div>
         <NewImportFilePickerContainer {...this.props} />
-        <NewImportRecordTableContainer {...this.props} />
+        {/* <NewImportRecordTableContainer {...this.props} /> */}
       </div>
     );
   }
