@@ -3,10 +3,23 @@ import * as recordsActions from './records.actions';
 
 const initialState: IRecord[] = [];
 
+// TODO modify records reducer state to be indexed by account id?
 export function RecordsReducer(state = initialState, action): IRecord[] {
   switch (action.type) {
     case recordsActions.SAVE_NEW_RECORDS:
-      return action.payload;
+      // Get the records and check if they were any returned.
+      const records = action.payload;
+      if (!records || records.length === 0) {
+        return state;
+      }
+      // Take the account id from the new records, because we want to filter
+      // out those records when updating our state.
+      const excludeAccountId = records[0] && records[0].accountId;
+      const otherAccountsRecords = state.filter(r => r.accountId !== excludeAccountId);
+      return [
+        ...(otherAccountsRecords || []),
+        ...records
+      ];
   }
   return state;
 }
