@@ -5,4 +5,5 @@ export interface IRecord {
   description: string;
   debit?: number;
   credit?: number;
+  balance?: number;
 }

@@ -9,27 +9,29 @@ import * as recordsActions from '../../store/records/records.actions';
 import * as recordsSelectors from '../../store/records/records.selectors';
 import { Dispatch } from 'redux';
 import { IAccount } from '../../store/account/account.interface';
+import { IRecord } from '../../store/records/record.interface';
 
-const accounts = ({ accounts }) => {
-  const items = Object.keys(accounts).map(a => {
-    const account: IAccount = accounts[a];
+const accounts = ({ accounts, records }) => {
+  const items = Object.keys(accounts).map(accountId => {
+    const account: IAccount = accounts[accountId];
+    const recordsForAccount: IRecord[] = records.filter(r => r.accountId === accountId);
 
     const newFileAction = (dispatch: Dispatch, filePath: string) => {
       if (account.parseType === "ScotiabankChequing") {
-        return recordsActions.NewScotiabankChequingFileSelected(dispatch, a, filePath);
+        return recordsActions.NewScotiabankChequingFileSelected(dispatch, accountId, filePath, account.startingBalance, recordsForAccount);
       } else if (account.parseType === "ScotiabankSavings") {
-        return recordsActions.NewScotiabankSavingsFileSelected(dispatch, a, filePath);
+        return recordsActions.NewScotiabankSavingsFileSelected(dispatch, accountId, filePath, account.startingBalance, recordsForAccount);
       } else if (account.parseType === "ScotiabankVisa") {
-        return recordsActions.NewScotiabankVisaFileSelected(dispatch, a, filePath);
+        return recordsActions.NewScotiabankVisaFileSelected(dispatch, accountId, filePath, account.startingBalance, recordsForAccount);
       }
     };
     const selector = (store: IStore) => {
-      return recordsSelectors.ByAccountId(store, a);
+      return recordsSelectors.ByAccountId(store, accountId);
     };
 
     return (
-      <div key={a}>
-        Name: {accounts[a].name}, Balance: {accounts[a].startingBalance}
+      <div key={accountId}>
+        Name: {account.name}, Balance: {account.startingBalance}
         <div>
           <NewMonthly
             filePickerText="New File"
@@ -44,7 +46,10 @@ const accounts = ({ accounts }) => {
 };
 
 const mapStateToProps = (state: IStore) => {
-  return { accounts: state.accounts };
+  return {
+    accounts: state.accounts,
+    records: state.records
+  };
 };
 
 const AccountsContainer = connect(mapStateToProps)(accounts);

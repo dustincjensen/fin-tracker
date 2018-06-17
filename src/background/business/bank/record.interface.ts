@@ -4,4 +4,5 @@ export interface Record {
   description: string;
   debit: number;
   credit: number;
+  balance?: number;
 }

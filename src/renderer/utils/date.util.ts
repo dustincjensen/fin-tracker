@@ -35,3 +35,11 @@ function isInYearMonthMoment(date: Moment, target: Moment): boolean {
   return date.year() === target.year()
     && date.month() === target.month();
 }
+
+/**
+ * Returns the date formatted as following 'June 16th, 2018'.
+ * @param date the date to be formatted.
+ */
+export function formatDate(date: string): string {
+  return moment(date).format('MMM Do');
+}
