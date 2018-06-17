@@ -13,6 +13,10 @@ export function AccountReducer(state = initialState, action): { [id: string]: IA
         ...state,
         ...newRecord
       }
+    case accountActions.DELETE_ACCOUNT:
+      const obj = { ...state };
+      delete obj[action.payload];
+      return obj;
   }
   return state;
 }

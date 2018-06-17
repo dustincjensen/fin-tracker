@@ -1,5 +1,6 @@
 import { IRecord } from './record.interface';
 import * as recordsActions from './records.actions';
+import * as accountActions from '../account/account.actions';
 
 const initialState: IRecord[] = [];
 
@@ -19,6 +20,11 @@ export function RecordsReducer(state = initialState, action): IRecord[] {
       return [
         ...(otherAccountsRecords || []),
         ...records
+      ];
+    case accountActions.DELETE_ACCOUNT:
+      const accountId = action.payload;
+      return [
+        ...state.filter(r => r.accountId !== accountId)
       ];
   }
   return state;

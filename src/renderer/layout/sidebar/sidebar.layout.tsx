@@ -8,7 +8,7 @@ export class SidebarLayout extends React.Component {
     return (
       <div className="sidebar">
         <Link className="btn btn-primary sidebar-btn-width" to="/">Home</Link>
-        <Link className="btn btn-success sidebar-btn-width" to="/new-account">New Account</Link>
+        <Link className="btn btn-success sidebar-btn-width" to="/accounts">Accounts</Link>
         <Link className="btn btn-success sidebar-btn-width" to="/categories">Categories</Link>
         <AccountsSidebarContainer />
       </div>
