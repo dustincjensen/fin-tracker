@@ -16,8 +16,10 @@ export interface IHeaderDefinition {
 }
 
 export interface IActionDefinition {
-  type: 'button';
+  type: ActionType;
   event: Function;
   text: string;
   classes?: string;
 }
+
+type ActionType = 'button' | 'modalButton';

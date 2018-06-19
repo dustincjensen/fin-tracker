@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ITableStateProps, ITableDispatchProps, IHeaderDefinition, TableKeyType, IActionDefinition } from './table.interface';
+import { ModalButton } from '../modal/modal-button.component';
 import './table.component.scss';
 
 export class Table<T> extends React.Component<ITableStateProps<T> & ITableDispatchProps> {
@@ -66,18 +67,7 @@ export class Table<T> extends React.Component<ITableStateProps<T> & ITableDispat
 
         if (actions) {
           const mappedActions = actions.map((a, actionIndex) => {
-            switch (a.type) {
-              case 'button':
-                return (
-                  <div key={`action-${index}-${actionIndex}`} className="cell">
-                    <button
-                      className={a.classes}
-                      onClick={() => a.event(record)}>
-                      {a.text}
-                    </button>
-                  </div>
-                );
-            }
+            return this.getType(a, record, index, actionIndex);
           });
           row.push(...mappedActions);
         }
@@ -87,4 +77,30 @@ export class Table<T> extends React.Component<ITableStateProps<T> & ITableDispat
     }
     return rows;
   };
+
+  private getType(action: IActionDefinition, record: any, index: number, actionIndex: number): JSX.Element {
+    switch (action.type) {
+      case 'button': {
+        return (
+          <div key={`action-${index}-${actionIndex}`} className="cell">
+            <button
+              className={action.classes}
+              onClick={() => action.event(record)}>
+              {action.text}
+            </button>
+          </div>
+        );
+      }
+      case 'modalButton': {
+        return (
+          <div key={`action-${index}-${actionIndex}`} className="cell">
+            <ModalButton
+              text={action.text}
+              classes={action.classes}
+              modalDisplay={(closeModal: () => void) => action.event(record, closeModal)} />
+          </div>
+        );
+      }
+    }
+  }
 }

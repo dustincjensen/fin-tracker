@@ -1,0 +1,72 @@
+@import '../../scss/colors.scss';
+
+$modalBorderRadius: 5px;
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba($color: $black, $alpha: 0.8);
+}
+
+.modal-container {
+  // Display flex makes the content/buttons
+  // into a column.
+  display: flex;
+  flex-direction: column;
+
+  background: $gray-900;
+  border-radius: $modalBorderRadius;
+
+  // Position relative places the container into the center
+  // of the modal-overlay.
+  position: relative;
+  // TODO make width settable through the component as a style.
+  // You can make height settable too, but as it stands it will
+  // just stretch vertically as you need.
+  width: 50%; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);    
+}
+
+.modal-content {
+  // Flex 1 makes the content grow, and push the 
+  // .modal-buttons to the bottom of the modal.
+  flex: 1;
+  display: grid;
+  color: $white;
+  font-size: 20px;
+  align-content: center;
+  justify-content: center;
+  padding: 50px 15px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 10px 10px 10px;
+  
+  button {
+    width: 100%;
+
+    &:first-child {
+      // If we wanted buttons hugging the bottom going with the border-radius
+      // we could do the following with the border-radius of the buttons.
+      // border-radius: 0 0 0 $modalBorderRadius;
+      margin-right: 5px;
+    }
+
+    &:last-child {
+      // border-radius: 0 0 $modalBorderRadius 0;
+      margin-left: 5px;
+    }
+
+    &:first-child:last-child {
+      // border-radius: 0 0 $modalBorderRadius $modalBorderRadius;
+      margin: 0;
+    }
+  }
+}
