@@ -1,62 +1,9 @@
 import * as React from 'react';
 
-// REMOVE BETWEEN
-import { IStore } from '../../store/store.interface';
-import { connect } from 'react-redux';
-import { ByAccountId } from '../../store/records/records.selectors';
-import { NewMonthly } from '../new-monthly/new-monthly.layout';
-import * as recordsActions from '../../store/records/records.actions';
-import * as recordsSelectors from '../../store/records/records.selectors';
-import { Dispatch } from 'redux';
-import { IAccount } from '../../store/account/account.interface';
-import { IRecord } from '../../store/records/record.interface';
-import { mapParseType } from '../../store/account/parse.type.mapper';
-
-const accounts = ({ accounts, records }) => {
-  const items = Object.keys(accounts).map(accountId => {
-    const account: IAccount = accounts[accountId];
-    const recordsForAccount: IRecord[] = records.filter(r => r.accountId === accountId);
-
-    const newFileAction = (dispatch: Dispatch, filePath: string) => {
-      const action = mapParseType(account.parseType);
-      return action(dispatch, accountId, filePath, account.startingBalance, recordsForAccount);
-    };
-    const selector = (store: IStore) => {
-      return recordsSelectors.ByAccountId(store, accountId);
-    };
-
-    return (
-      <div key={accountId}>
-        Name: {account.name}, Balance: {account.startingBalance}
-        <div>
-          <NewMonthly
-            filePickerText="New File"
-            newFileSelectedAction={newFileAction}
-            stateSelector={selector} />
-        </div>
-      </div>
-    );
-  })
-
-  return <div>{items}</div>;
-};
-
-const mapStateToProps = (state: IStore) => {
-  return {
-    accounts: state.accounts,
-    records: state.records
-  };
-};
-
-const AccountsContainer = connect(mapStateToProps)(accounts);
-// REMOVE BETWEEN
-
 export class HomeLayout extends React.Component {
   render() {
     return (
-      <div>
-        <AccountsContainer />
-      </div>
+      <div>Home</div>
     );
   }
 }
