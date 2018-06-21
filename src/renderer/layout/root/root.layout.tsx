@@ -12,7 +12,7 @@ export class RootLayout extends React.Component {
     return (
       <div className="root">
         <SidebarLayout />
-        <div className="main-content">
+        <div className="main-content scroll-bar-styled">
           <Switch>
             <Route exact path="/" component={HomeLayout} />
             <Route exact path="/accounts" component={ManageAccountLayout} />

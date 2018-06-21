@@ -15,7 +15,7 @@ export class AccountBalanceLineChart extends React.Component<IAccountBalanceLine
     const { records } = this.props;
     const dipsBelowZero = records.some(r => r.balance < 0);
     return (
-      <ResponsiveContainer minHeight={300} minWidth={150} width="99%">
+      <ResponsiveContainer minHeight={300} minWidth={150}>
         <LineChart data={records} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
           <Line type="monotone" dataKey="balance" stroke="#008800" dot={false} />
           <CartesianGrid stroke="#222" strokeDasharray="5 5" />
