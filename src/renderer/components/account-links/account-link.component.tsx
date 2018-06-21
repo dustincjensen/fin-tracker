@@ -7,7 +7,6 @@ export const AccountLink = (props: IAccount) => {
   const { id, name } = props;
   return (
     <Link
-      key={id}
       to={`/account/${id}`}
       className="btn btn-primary account-link">
       {name}
