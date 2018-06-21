@@ -1,6 +1,6 @@
 import { connect, Dispatch } from 'react-redux';
-import { NewCategory } from '../components/categories/new-category.component';
-import { INewCategoryProps } from '../components/categories/new-category.interface';
+import { NewCategory } from '../components/new-category/new-category.component';
+import { INewCategoryProps } from '../components/new-category/new-category.interface';
 import { SaveNewCategory } from '../store/category/category.actions';
 import { ICategory } from '../store/category/category.interface';
 

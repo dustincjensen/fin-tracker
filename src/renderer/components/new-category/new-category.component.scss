@@ -3,7 +3,7 @@
 $textColor: $white;
 $backgroundColor: $gray-900;
 
-.new-account-background {
+.new-category-background {
   padding: 20px;
   background: $backgroundColor;
 
@@ -33,15 +33,16 @@ $backgroundColor: $gray-900;
     }
   }
   
-  .new-account-header {
+  .new-category-header {
     color: $textColor;
     font-size: 32px;
     margin-bottom: 30px;
   }
   
-  .new-account-footer {
+  .new-category-footer {
     display: flex;
     justify-content: flex-end;
     margin-top: 20px;
   }
+  
 }

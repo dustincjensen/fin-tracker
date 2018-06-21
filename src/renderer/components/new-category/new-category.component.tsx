@@ -28,8 +28,8 @@ export class NewCategory extends React.Component<INewCategoryProps, INewCategory
 
   handleChange = (evt) => {
     const { target } = evt;
-    const { value, name } = target;
-    this.setState({ [name]: value });
+    const { value } = target;
+    this.setState({ name: value });
   };
 
   handleSubmit = (evt) => {
