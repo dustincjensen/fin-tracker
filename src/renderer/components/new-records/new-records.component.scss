@@ -1,0 +1,48 @@
+@import '../../scss/colors.scss';
+
+$textColor: $white;
+$backgroundColor: $gray-900;
+
+.new-records-background {
+  padding: 20px;
+  background: $backgroundColor;
+
+  .form-layout {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 10px;
+    align-items: center;
+  
+    label {
+      color: $textColor;
+      font-size: 16px;
+    }
+  
+    input, select {
+      color: $textColor;
+      font-size: 16px;
+      padding: 10px;
+      border: none;
+      border-bottom: 1px solid $white;
+      outline: none;
+      background: transparent;
+    }
+  
+    select option {
+      background: $backgroundColor;
+    }
+  }
+  
+  .new-records-header {
+    color: $textColor;
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+  
+  .new-records-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+}

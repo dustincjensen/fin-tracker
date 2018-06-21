@@ -5,6 +5,7 @@ import { HomeLayout } from '../home/home.layout';
 import { ManageAccountLayout } from '../account/manage-accounts.layout';
 import { ManageCategoryLayout } from '../category/manage-categories.layout';
 import { AccountLayout } from '../account/account.layout';
+import { UploadLayout } from '../upload/upload.layout';
 import './root.layout.scss';
 
 export class RootLayout extends React.Component {
@@ -18,6 +19,7 @@ export class RootLayout extends React.Component {
             <Route exact path="/accounts" component={ManageAccountLayout} />
             <Route exact path="/categories" component={ManageCategoryLayout} />
             <Route exact path="/account/:accountId" component={AccountLayout} />
+            <Route exact path="/upload" component={UploadLayout} />
           </Switch>
         </div>
       </div>

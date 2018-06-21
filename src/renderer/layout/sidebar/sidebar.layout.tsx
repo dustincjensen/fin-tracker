@@ -11,6 +11,7 @@ export class SidebarLayout extends React.Component {
         <Link className="btn btn-success sidebar-btn-width" to="/accounts">Accounts</Link>
         <Link className="btn btn-success sidebar-btn-width" to="/categories">Categories</Link>
         <AccountsSidebarContainer />
+        <Link className="btn btn-success sidebar-btn-width" to="/upload">Upload</Link>
       </div>
     );
   }
