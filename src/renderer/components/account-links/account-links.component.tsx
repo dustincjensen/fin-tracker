@@ -9,7 +9,7 @@ export const AccountLinks = (props: IAccountProps) => {
 
   const links = Object.keys(accounts).map((accountId: string) => {
     const a: IAccount = accounts[accountId];
-    return <AccountLink id={a.id} name={a.name} />;
+    return <AccountLink key={a.id} id={a.id} name={a.name} />;
   });
 
   return (
