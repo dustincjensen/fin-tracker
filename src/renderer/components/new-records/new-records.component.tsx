@@ -66,7 +66,8 @@ export class NewRecords extends React.Component<INewRecordsStateProps & INewReco
     this.setState({ selectedAccountId: value });
   };
 
-  handleSubmit = () => {
+  handleSubmit = (evt) => {
+    evt.preventDefault();
     const { selectedFile, selectedAccountId } = this.state;
 
     // Don't do anything if the form isn't properly filled out.
