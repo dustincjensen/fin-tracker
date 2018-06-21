@@ -1,6 +1,4 @@
-import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
-import { IStore } from '../store/store.interface';
 import { FilePicker } from '../components/file-picker/file-picker.component';
 import { FilePickerProps } from '../components/file-picker/file-picker.interface';
 

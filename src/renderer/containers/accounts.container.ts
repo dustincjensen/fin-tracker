@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { IStore } from '../store/store.interface';
 import { IAccount } from '../store/account/account.interface';

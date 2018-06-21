@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { connect } from 'react-redux';
 import { IStore } from '../store/store.interface';
 import { IRecord } from '../store/records/record.interface';

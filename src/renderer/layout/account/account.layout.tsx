@@ -7,6 +7,7 @@ import { AccountMonthlyContainer } from '../../containers/account-monthly.contai
 import { AccountMonthlyBalanceChartContainer } from '../../containers/account-monthly-balance-chart.container';
 import { ByAccountIdAndDate } from '../../store/records/records.selectors';
 
+// TODO props and state interfaces
 class AccountLayoutClass extends React.Component<any, any> {
   constructor(props) {
     super(props);

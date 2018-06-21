@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { NewAccount } from '../components/new-account/new-account.component';
 import { INewAccountProps } from '../components/new-account/new-account.interface';

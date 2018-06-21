@@ -1,10 +1,8 @@
-import * as React from 'react';
 import { connect } from 'react-redux';
 import { IStore } from '../store/store.interface';
 import { IRecord } from '../store/records/record.interface';
 import { Table } from '../components/table/table.component';
 import { ITableStateProps } from '../components/table/table.interface';
-import { IAccount } from '../store/account/account.interface';
 import { formatDate } from '../utils/date.util';
 
 interface IAccountRecord {

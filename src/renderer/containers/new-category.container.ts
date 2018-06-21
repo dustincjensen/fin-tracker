@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { NewCategory } from '../components/categories/new-category.component';
 import { INewCategoryProps } from '../components/categories/new-category.interface';
