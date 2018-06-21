@@ -10,6 +10,7 @@ import * as recordsSelectors from '../../store/records/records.selectors';
 import { Dispatch } from 'redux';
 import { IAccount } from '../../store/account/account.interface';
 import { IRecord } from '../../store/records/record.interface';
+import { mapParseType } from '../../store/account/parse.type.mapper';
 
 const accounts = ({ accounts, records }) => {
   const items = Object.keys(accounts).map(accountId => {
@@ -17,13 +18,8 @@ const accounts = ({ accounts, records }) => {
     const recordsForAccount: IRecord[] = records.filter(r => r.accountId === accountId);
 
     const newFileAction = (dispatch: Dispatch, filePath: string) => {
-      if (account.parseType === "ScotiabankChequing") {
-        return recordsActions.NewScotiabankChequingFileSelected(dispatch, accountId, filePath, account.startingBalance, recordsForAccount);
-      } else if (account.parseType === "ScotiabankSavings") {
-        return recordsActions.NewScotiabankSavingsFileSelected(dispatch, accountId, filePath, account.startingBalance, recordsForAccount);
-      } else if (account.parseType === "ScotiabankVisa") {
-        return recordsActions.NewScotiabankVisaFileSelected(dispatch, accountId, filePath, account.startingBalance, recordsForAccount);
-      }
+      const action = mapParseType(account.parseType);
+      return action(dispatch, accountId, filePath, account.startingBalance, recordsForAccount);
     };
     const selector = (store: IStore) => {
       return recordsSelectors.ByAccountId(store, accountId);

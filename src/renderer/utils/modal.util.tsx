@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Modal } from '../components/modal/modal.component';
 import { IModalProps } from '../components/modal/modal.interface';
 

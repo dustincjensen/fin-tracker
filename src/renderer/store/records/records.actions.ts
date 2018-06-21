@@ -1,9 +1,10 @@
 import { Dispatch } from 'redux';
 import { sender } from '../ipc.send';
 import { IRecord } from './record.interface';
+import { ImportRecordsFunc } from './import-records.type';
 
 // IPC dispatch actions
-export const NewScotiabankChequingFileSelected = (
+export const NewScotiabankChequingFileSelected: ImportRecordsFunc = (
   dispatch: Dispatch,
   accountId: string,
   filePath: string,
@@ -11,7 +12,7 @@ export const NewScotiabankChequingFileSelected = (
   records: IRecord[]
 ) => sender(dispatch, 'IPC_NEW_SCOTIABANK_CHEQUING_RECORDS_SELECTED', accountId, filePath, startingBalance, records);
 
-export const NewScotiabankSavingsFileSelected = (
+export const NewScotiabankSavingsFileSelected: ImportRecordsFunc = (
   dispatch: Dispatch,
   accountId: string,
   filePath: string,
@@ -19,7 +20,7 @@ export const NewScotiabankSavingsFileSelected = (
   records: IRecord[]
 ) => sender(dispatch, 'IPC_NEW_SCOTIABANK_SAVINGS_RECORDS_SELECTED', accountId, filePath, startingBalance, records);
 
-export const NewScotiabankVisaFileSelected = (
+export const NewScotiabankVisaFileSelected: ImportRecordsFunc = (
   dispatch: Dispatch,
   accountId: string,
   filePath: string,
