@@ -33,7 +33,10 @@ const mapDispatchToProps = (dispatch: Dispatch): ITableDispatchProps => {
           return createModal({
             type: 'delete',
             message: 'Are you sure you want to delete this account? All associated records will also be deleted.',
-            confirm: () => dispatch(DeleteAccount(account.id)),
+            confirm: () => {
+              dispatch(DeleteAccount(account.id));
+              closeModal();
+            },
             close: () => closeModal()
           });
         }
