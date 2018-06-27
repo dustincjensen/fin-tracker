@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './modal.component.scss';
-import { IModalProps, ModalType } from './modal.interface';
+import { IModalProps, ModalType } from './modal.component.interface';
 
 export class Modal extends React.Component<IModalProps> {
   render() {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Portal } from 'react-portal';
-import { IModalButtonProps, IModalButtonState } from './modal-button.interface';
+import { IModalButtonProps, IModalButtonState } from './modal-button.component.interface';
 
 export class ModalButton extends React.Component<IModalButtonProps, IModalButtonState> {
   constructor(props) {

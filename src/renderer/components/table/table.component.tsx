@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ITableStateProps, ITableDispatchProps, IHeaderDefinition, TableKeyType, IActionDefinition } from './table.interface';
+import { ITableStateProps, ITableDispatchProps, IHeaderDefinition, TableKeyType, IActionDefinition } from './table.component.interface';
 import { ModalButton } from '../modal/modal-button.component';
 import './table.component.scss';
 

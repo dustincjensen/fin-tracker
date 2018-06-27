@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FilePickerProps } from './file-picker.interface';
+import { FilePickerProps } from './file-picker.component.interface';
 
 export class FilePicker extends React.Component<FilePickerProps> {
 

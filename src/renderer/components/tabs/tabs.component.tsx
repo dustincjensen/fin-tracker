@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ITabsProps } from './tabs.interface';
+import { ITabsProps } from './tabs.component.interface';
 import './tabs.scss';
 
 export class Tabs extends React.Component<ITabsProps> {
