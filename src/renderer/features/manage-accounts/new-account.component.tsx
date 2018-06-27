@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { INewAccountProps, INewAccountState } from './new-account.interface';
+import { INewAccountProps, INewAccountState } from './new-account.component.interface';
 import { newGuid } from '../../utils/guid.util';
 import './new-account.component.scss';
 
@@ -62,7 +62,7 @@ export class NewAccount extends React.Component<INewAccountProps, INewAccountSta
   handleChange = (evt) => {
     const { target } = evt;
     const { value, name } = target;
-    this.setState({ [name]: value });
+    this.setState({ [name]: value } as any);
   };
 
   handleSubmit = (evt) => {

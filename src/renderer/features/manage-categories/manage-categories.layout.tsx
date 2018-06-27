@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { CategoriesContainer } from '../../containers/categories.container';
-import { NewCategoryContainer } from '../../containers/new-category.container';
+import { CategoriesContainer } from './categories.container';
+import { NewCategoryContainer } from './new-category.container';
 import './manage-categories.layout.scss';
 
 export const ManageCategoryLayout = () => {

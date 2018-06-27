@@ -1,10 +1,10 @@
 import { connect, Dispatch } from 'react-redux';
-import { IStore } from '../store/store.interface';
-import { IAccount } from '../store/account/account.interface';
-import { DeleteAccount } from '../store/account/account.actions';
-import { Table } from '../components/table/table.component';
-import { ITableStateProps, ITableDispatchProps } from '../components/table/table.interface';
-import { createModal } from '../utils/modal.util';
+import { IStore } from '../../store/store.interface';
+import { IAccount } from '../../store/account/account.interface';
+import { DeleteAccount } from '../../store/account/account.actions';
+import { Table } from '../../components/table/table.component';
+import { ITableStateProps, ITableDispatchProps } from '../../components/table/table.interface';
+import { createModal } from '../../utils/modal.util';
 
 const mapStateToProps = (state: IStore): ITableStateProps<IAccount> => {
   const accounts: IAccount[] = Object.keys(state.accounts).map(id => state.accounts[id]);

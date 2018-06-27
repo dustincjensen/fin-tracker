@@ -1,7 +1,7 @@
 import { connect, Dispatch } from 'react-redux';
-import { NewAccount } from '../components/new-account/new-account.component';
-import { INewAccountProps } from '../components/new-account/new-account.interface';
-import { SaveNewAccount } from '../store/account/account.actions';
+import { NewAccount } from './new-account.component';
+import { INewAccountProps } from './new-account.component.interface';
+import { SaveNewAccount } from '../../store/account/account.actions';
 
 interface INewAccountContainerProps {
   navigate: () => void;

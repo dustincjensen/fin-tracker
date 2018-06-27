@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { INewCategoryProps, INewCategoryState } from './new-category.interface';
+import { INewCategoryProps, INewCategoryState } from './new-category.component.interface';
 import { newGuid } from '../../utils/guid.util';
 import './new-category.component.scss';
 
