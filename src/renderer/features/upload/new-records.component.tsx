@@ -43,7 +43,7 @@ export class NewRecords extends React.Component<INewRecordsStateProps & INewReco
             </select>
           </div>
           <div className="new-records-footer">
-            <button className="btn btn-primary btn-lg">Save</button>
+            <button className="btn btn-primary btn-lg">Upload</button>
           </div>
         </form>
       </div>

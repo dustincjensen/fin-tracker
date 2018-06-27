@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { HashRouter } from 'react-router-dom';
 import { rootReducer } from './store/store';
 import { ipcReceive } from './store/ipc';
-import { RootLayout } from './layout/root/root.layout';
+import { RootLayout } from './features/_root_/root.layout';
 import './renderer.scss';
 
 // TODO change implementation of initial state.

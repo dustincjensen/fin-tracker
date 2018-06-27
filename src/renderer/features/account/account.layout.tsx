@@ -3,8 +3,8 @@ import { withRouter } from 'react-router';
 import { Tabs } from '../../components/tabs/tabs.component';
 import { ITab } from '../../components/tabs/tabs.interface';
 import { monthNamesShort } from '../../utils/date.util';
-import { AccountMonthlyContainer } from '../../containers/account-monthly.container';
-import { AccountMonthlyBalanceChartContainer } from '../../containers/account-monthly-balance-chart.container';
+import { AccountMonthlyContainer } from './account-monthly.container';
+import { AccountMonthlyBalanceChartContainer } from './account-monthly-balance-chart.container';
 import { ByAccountIdAndDate } from '../../store/records/records.selectors';
 
 // TODO props and state interfaces

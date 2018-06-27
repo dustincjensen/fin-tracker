@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { IAccount } from './account-links.interface';
+import { IAccount } from './account-links.component.interface';
 import './account-link.component.scss';
 
 export const AccountLink = (props: IAccount) => {

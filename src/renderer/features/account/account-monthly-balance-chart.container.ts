@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import { IStore } from '../store/store.interface';
-import { IRecord } from '../store/records/record.interface';
-import { AccountBalanceLineChart } from '../components/account-charts/account-balance-line-chart.component';
-import { formatDate } from '../utils/date.util';
+import { IStore } from '../../store/store.interface';
+import { IRecord } from '../../store/records/record.interface';
+import { AccountBalanceLineChart } from './account-balance-line-chart.component';
+import { formatDate } from '../../utils/date.util';
 
 interface IAccountMonthlyOwnProps {
   accountId: string;

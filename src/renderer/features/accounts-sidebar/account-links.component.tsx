@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { IAccountProps, IAccount } from './account-links.interface';
+import { IAccountProps, IAccount } from './account-links.component.interface';
 import { AccountLink } from './account-link.component';
 import './account-links.component.scss';
 

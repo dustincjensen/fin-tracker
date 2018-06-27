@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { IStore } from '../store/store.interface';
-import { AccountLinks } from '../components/account-links/account-links.component';
-import { IAccountProps } from '../components/account-links/account-links.interface';
+import { IStore } from '../../store/store.interface';
+import { AccountLinks } from './account-links.component';
+import { IAccountProps } from './account-links.component.interface';
 
 const mapStateToProps = (state: IStore): IAccountProps => {
   return { accounts: state.accounts };
