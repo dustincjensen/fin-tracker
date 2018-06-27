@@ -5,7 +5,7 @@ import { HomeLayout } from '../home/home.layout';
 import { ManageAccountLayout } from '../account/manage-accounts.layout';
 import { ManageCategoryLayout } from '../category/manage-categories.layout';
 import { AccountLayout } from '../account/account.layout';
-import { UploadLayout } from '../upload/upload.layout';
+import { UploadLayout } from '../../features/upload/upload.layout';
 import './root.layout.scss';
 
 export class RootLayout extends React.Component {

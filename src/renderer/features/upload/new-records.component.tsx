@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FilePicker } from '../file-picker/file-picker.component';
+import { FilePicker } from '../../components/file-picker/file-picker.component';
 import { IAccount } from '../../store/account/account.interface';
 import { IRecord } from '../../store/records/record.interface';
 import './new-records.component.scss';

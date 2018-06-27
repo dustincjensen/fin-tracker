@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NewRecordsContainer } from '../../containers/new-records.container';
+import { NewRecordsContainer } from './new-records.container';
 import './upload.layout.scss';
 
 export const UploadLayout = () => {
