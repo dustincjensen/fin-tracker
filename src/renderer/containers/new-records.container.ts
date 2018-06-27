@@ -16,7 +16,7 @@ const mapStateToProps = (store: IStore): INewRecordsStateProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): INewRecordsDispatchProps => {
   return {
-    uploadAction: (account: IAccount, records: IRecord[], file: File) => {
+    uploadAction: (account: IAccount, records: IRecord[], file: any) => {
       const parseAction = mapParseType(account.parseType);
       return parseAction(dispatch, account.id, file.path, account.startingBalance, records);
     }

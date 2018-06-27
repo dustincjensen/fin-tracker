@@ -1,4 +1,4 @@
 export interface FilePickerProps {
   buttonText: string;
-  fileSelected: (file: File) => void;
+  fileSelected: (file: any) => void;
 }
