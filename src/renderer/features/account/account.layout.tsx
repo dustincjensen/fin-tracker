@@ -6,6 +6,7 @@ import { monthNamesShort } from '../../utils/date.util';
 import { AccountMonthlyContainer } from './account-monthly.container';
 import { AccountMonthlyBalanceChartContainer } from './account-monthly-balance-chart.container';
 import { ByAccountIdAndDate } from '../../store/records/records.selectors';
+import { AccountMonthsComparisonContainer } from './account-months-comparison.container';
 
 // TODO props and state interfaces
 class AccountLayoutClass extends React.Component<any, any> {
@@ -24,35 +25,35 @@ class AccountLayoutClass extends React.Component<any, any> {
         return t;
       }),
       date: '2018-05-01'
-    }
+    };
   }
 
   selectTabFunc = (tabId: string) => {
     const { tabs } = this.state;
-    tabs.forEach(t => t.active = false);
+    tabs.forEach(t => (t.active = false));
     const month = tabs.filter(t => t.id === tabId)[0];
     month.active = true;
     this.setState({
       tabs,
       date: `1 ${month.display} 2018`
     });
-  }
+  };
 
   render() {
+    const { accountId } = this.props.match.params;
+    const { date } = this.state;
     return (
       <div>
         <AccountMonthlyBalanceChartContainer
-          accountId={this.props.match.params.accountId}
-          date={this.state.date}
+          accountId={accountId}
+          date={date}
           stateSelector={ByAccountIdAndDate}
         />
-        <Tabs
-          tabs={this.state.tabs}
-          selectTab={this.selectTabFunc}
-        />
+        <AccountMonthsComparisonContainer accountId={accountId} date={date} />
+        <Tabs tabs={this.state.tabs} selectTab={this.selectTabFunc} />
         <AccountMonthlyContainer
-          accountId={this.props.match.params.accountId}
-          date={this.state.date}
+          accountId={accountId}
+          date={date}
           stateSelector={ByAccountIdAndDate}
         />
       </div>

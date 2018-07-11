@@ -1,5 +1,5 @@
 import { IStore } from '../store.interface';
-import { isInYearMonth } from '../../utils/date.util';
+import { isInYearMonth, getPreviousMonth } from '../../utils/date.util';
 
 export function ByAccountId(store: IStore, accountId: string) {
   if (accountId) {
@@ -16,4 +16,24 @@ export function ByAccountIdAndDate(store: IStore, accountId: string, date: strin
     );
   }
   return [];
+}
+
+// TODO make better by using the starting balance of the account if the month matches?
+export function GetPreviousMonthEndBalance(store: IStore, accountId: string, date: string): number {
+  if (accountId) {
+    const previousMonth = getPreviousMonth(date);
+    const previousMonthRecords = ByAccountIdAndDate(store, accountId, previousMonth);
+    const lastRecord = previousMonthRecords[previousMonthRecords.length - 1];
+    return lastRecord && lastRecord.balance;
+  }
+  return null;
+}
+
+export function GetCurrentMonthEndBalance(store: IStore, accountId: string, date: string): number {
+  if (accountId) {
+    const monthsRecords = ByAccountIdAndDate(store, accountId, date);
+    const lastRecord = monthsRecords[monthsRecords.length - 1];
+    return lastRecord && lastRecord.balance;
+  }
+  return null;
 }
