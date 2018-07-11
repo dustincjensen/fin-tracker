@@ -3,7 +3,7 @@ import { IStore } from '../../store/store.interface';
 import { IAccount } from '../../store/account/account.interface';
 import { DeleteAccount } from '../../store/account/account.actions';
 import { Table } from '../../components/table/table.component';
-import { ITableStateProps, ITableDispatchProps } from '../../components/table/table.interface';
+import { ITableStateProps, ITableDispatchProps } from '../../components/table/table.component.interface';
 import { createModal } from '../../utils/modal.util';
 
 const mapStateToProps = (state: IStore): ITableStateProps<IAccount> => {

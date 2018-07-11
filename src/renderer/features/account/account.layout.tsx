@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { withRouter } from 'react-router';
 import { Tabs } from '../../components/tabs/tabs.component';
-import { ITab } from '../../components/tabs/tabs.interface';
+import { ITab } from '../../components/tabs/tabs.component.interface';
 import { monthNamesShort } from '../../utils/date.util';
 import { AccountMonthlyContainer } from './account-monthly.container';
 import { AccountMonthlyBalanceChartContainer } from './account-monthly-balance-chart.container';
@@ -41,9 +41,20 @@ class AccountLayoutClass extends React.Component<any, any> {
   render() {
     return (
       <div>
-        <AccountMonthlyBalanceChartContainer accountId={this.props.match.params.accountId} date={this.state.date} stateSelector={ByAccountIdAndDate} />
-        <Tabs tabs={this.state.tabs} selectTab={this.selectTabFunc} />
-        <AccountMonthlyContainer accountId={this.props.match.params.accountId} date={this.state.date} stateSelector={ByAccountIdAndDate} />
+        <AccountMonthlyBalanceChartContainer
+          accountId={this.props.match.params.accountId}
+          date={this.state.date}
+          stateSelector={ByAccountIdAndDate}
+        />
+        <Tabs
+          tabs={this.state.tabs}
+          selectTab={this.selectTabFunc}
+        />
+        <AccountMonthlyContainer
+          accountId={this.props.match.params.accountId}
+          date={this.state.date}
+          stateSelector={ByAccountIdAndDate}
+        />
       </div>
     );
   }
