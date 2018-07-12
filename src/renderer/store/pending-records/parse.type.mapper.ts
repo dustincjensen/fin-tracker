@@ -1,10 +1,10 @@
-import { ParseType } from "./parse.type";
-import { ImportRecordsFunc } from "../records/import-records.type";
+import { ParseType } from './parse.type';
+import { ImportRecordsFunc } from './import-records.type';
 import {
   NewScotiabankChequingFileSelected,
   NewScotiabankSavingsFileSelected,
   NewScotiabankVisaFileSelected
-} from "../records/records.actions";
+} from './pending-records.actions';
 
 /**
  * Defines a type that requires the parseTypeLookup

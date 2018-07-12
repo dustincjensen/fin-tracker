@@ -3,7 +3,7 @@ import { IStore } from '../../store/store.interface';
 import { ICategory } from '../../store/category/category.interface';
 import { DeleteCategory } from '../../store/category/category.actions';
 import { Table } from '../../components/table/table.component';
-import { ITableStateProps, ITableDispatchProps } from '../../components/table/table.interface';
+import { ITableStateProps, ITableDispatchProps } from '../../components/table/table.component.interface';
 
 const mapStateToProps = (state: IStore): ITableStateProps<ICategory> => {
   return {

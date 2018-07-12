@@ -1,32 +1,15 @@
+import { IRecord } from './record.interface';
 import { Dispatch } from 'redux';
 import { sender } from '../ipc.send';
-import { IRecord } from './record.interface';
-import { ImportRecordsFunc } from './import-records.type';
+import { MergeRecordsFunc } from './merge-records.type';
 
-// IPC dispatch actions
-export const NewScotiabankChequingFileSelected: ImportRecordsFunc = (
+// IPC Actions
+export const PendingRecordsMerged: MergeRecordsFunc = (
   dispatch: Dispatch,
-  accountId: string,
-  filePath: string,
   startingBalance: number,
-  records: IRecord[]
-) => sender(dispatch, 'IPC_NEW_SCOTIABANK_CHEQUING_RECORDS_SELECTED', accountId, filePath, startingBalance, records);
-
-export const NewScotiabankSavingsFileSelected: ImportRecordsFunc = (
-  dispatch: Dispatch,
-  accountId: string,
-  filePath: string,
-  startingBalance: number,
-  records: IRecord[]
-) => sender(dispatch, 'IPC_NEW_SCOTIABANK_SAVINGS_RECORDS_SELECTED', accountId, filePath, startingBalance, records);
-
-export const NewScotiabankVisaFileSelected: ImportRecordsFunc = (
-  dispatch: Dispatch,
-  accountId: string,
-  filePath: string,
-  startingBalance: number,
-  records: IRecord[]
-) => sender(dispatch, 'IPC_NEW_SCOTIABANK_VISA_RECORDS_SELECTED', accountId, filePath, startingBalance, records);
+  newRecords: IRecord[],
+  existingRecords: IRecord[]
+) => sender(dispatch, 'IPC_PENDING_RECORDS_MERGED', startingBalance, newRecords, existingRecords);
 
 // Action constants
 export const SAVE_NEW_RECORDS = 'SAVE_NEW_RECORDS';

@@ -1,4 +1,4 @@
-import { ParseType } from './parse.type';
+import { ParseType } from '../pending-records/parse.type';
 
 export interface IAccount {
   /**

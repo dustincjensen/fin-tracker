@@ -1,6 +1,11 @@
 import moment from 'moment';
 import { Record } from './record.interface';
 
+export function sortRecordsByDate(records: Record[]): Record[] {
+  records.sort(sortByDate);
+  return records;
+}
+
 // TODO improvement...
 // if all new records have dates greater than the previous records
 // then you don't need to recalculate those balances.

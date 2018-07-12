@@ -1,32 +1,30 @@
 import { parse as chequingParse } from '../business/bank/scotiabank/chequing';
 import { parse as savingsParse } from '../business/bank/scotiabank/chequing';
 import { parse as visaParse } from '../business/bank/scotiabank/visa';
-import { sortAndCalculateBalance } from '../business/bank/util';
+import { sortRecordsByDate } from '../business/bank/util';
 import { Record } from '../business/bank/record.interface';
 
-export function parseScotiabankChequingToRecords(accountId: string, filePath: string, startingBalance: number, records: Record[]) {
-  return parse(chequingParse, accountId, filePath, startingBalance, records);
+export function parseScotiabankChequingToRecords(accountId: string, filePath: string) {
+  return parse(chequingParse, accountId, filePath);
 }
 
-export function parseScotiabankSavingsToRecords(accountId: string, filePath: string, startingBalance: number, records: Record[]) {
-  return parse(savingsParse, accountId, filePath, startingBalance, records);
+export function parseScotiabankSavingsToRecords(accountId: string, filePath: string) {
+  return parse(savingsParse, accountId, filePath);
 }
 
-export function parseScotiabankVisaToRecords(accountId: string, filePath: string, startingBalance: number, records: Record[]) {
-  return parse(visaParse, accountId, filePath, startingBalance, records);
+export function parseScotiabankVisaToRecords(accountId: string, filePath: string) {
+  return parse(visaParse, accountId, filePath);
 }
 
 function parse(
   method: (accountId: string, filePath: string) => Record[],
   accountId: string,
-  filePath: string,
-  startingBalance: number,
-  records: Record[]
+  filePath: string
 ) {
   const parsedFileRecords = method(accountId, filePath);
-  const sortedWithBalances = sortAndCalculateBalance(startingBalance, parsedFileRecords, records);
+  const sorted = sortRecordsByDate(parsedFileRecords);
   return {
     type: 'IPC_NEW_RECORDS_PARSED',
-    args: [sortedWithBalances]
+    args: [sorted]
   };
 }
