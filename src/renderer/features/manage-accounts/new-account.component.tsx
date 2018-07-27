@@ -74,6 +74,5 @@ export class NewAccount extends React.Component<INewAccountProps, INewAccountSta
     };
 
     this.props.saveNewAccount(newAccount);
-    this.props.afterSave();
   };
 }

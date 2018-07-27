@@ -7,7 +7,7 @@ import './manage-accounts.layout.scss';
 const ManageAccount = ({ history }) => {
   return (
     <div className="manage-accounts">
-      <NewAccountContainer navigate={() => history.push('/')} />
+      <NewAccountContainer />
       <AccountsContainer />
     </div>
   );

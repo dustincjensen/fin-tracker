@@ -1,6 +1,5 @@
 export interface INewAccountProps {
   saveNewAccount: (account: any) => void;
-  afterSave: () => void;
 }
 
 export interface INewAccountState {
