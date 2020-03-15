@@ -15,7 +15,9 @@ const mapStateToProps = (state: IStore): ITableStateProps<ICategory> => {
     dataKeys: [
       'rowNumber', 'name'
     ],
-    rowData: state.categories
+    rowData: Object.keys(state.categories).map(key => {
+      return state.categories[key];
+    })
   };
 };
 

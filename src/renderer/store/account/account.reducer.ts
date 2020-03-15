@@ -1,22 +1,27 @@
+import produce from 'immer';
 import { IAccount } from './account.interface';
 import * as accountActions from './account.actions';
 
 const initialState: { [id: string]: IAccount } = {};
 
-export function AccountReducer(state = initialState, action): { [id: string]: IAccount } {
+export const AccountReducer = produce((state, action) => {
   switch (action.type) {
-    case accountActions.SAVE_NEW_ACCOUNT:
-      const { id } = action.payload;
-      let newRecord = {};
-      newRecord[id] = action.payload;
-      return {
-        ...state,
-        ...newRecord
-      }
-    case accountActions.DELETE_ACCOUNT:
-      const obj = { ...state };
-      delete obj[action.payload];
-      return obj;
+    case accountActions.SAVE_NEW_ACCOUNT: {
+      saveNewAccount(state, action);
+      break;
+    }
+    case accountActions.DELETE_ACCOUNT: {
+      deleteAccount(state, action);
+      break;
+    }
   }
-  return state;
-}
+}, initialState);
+
+const saveNewAccount = (state, action) => {
+  const { id } = action.payload;
+  state[id] = action.payload;
+};
+
+const deleteAccount = (state, action) => {
+  delete state[action.payload];
+};

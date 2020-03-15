@@ -4,6 +4,8 @@ import * as accountActions from '../account/account.actions';
 
 const initialState: IRecord[] = [];
 
+// TODO modify to use IMMER
+
 // TODO modify records reducer state to be indexed by account id?
 export function RecordsReducer(state = initialState, action): IRecord[] {
   switch (action.type) {

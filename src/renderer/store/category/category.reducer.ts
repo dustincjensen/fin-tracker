@@ -1,20 +1,27 @@
 import { ICategory } from './category.interface';
 import * as categoryActions from './category.actions';
+import produce from 'immer';
 
-const initialState: ICategory[] = [];
+const initialState: { [id: string]: ICategory } = {};
 
-export function CategoryReducer(state = initialState, action): ICategory[] {
+export const CategoryReducer = produce((state, action) => {
   switch (action.type) {
-    case categoryActions.SAVE_NEW_CATEGORY:
-      return [
-        ...state,
-        ...action.payload
-      ];
-    case categoryActions.DELETE_CATEGORY:
-      const filteredState = state.filter(s => s.id !== action.payload);
-      return [
-        ...filteredState
-      ];
+    case categoryActions.SAVE_NEW_CATEGORY:{
+      saveNewCategory(state, action);
+      break;
+    }
+    case categoryActions.DELETE_CATEGORY: {
+      deleteCategory(state, action);
+      break;
+    }
   }
-  return state;
-}
+}, initialState);
+
+const saveNewCategory = (state, action) => {
+  const { id } = action.payload;
+  state[id] = action.payload;
+};
+
+const deleteCategory = (state, action) => {
+  delete state[action.payload];
+};
