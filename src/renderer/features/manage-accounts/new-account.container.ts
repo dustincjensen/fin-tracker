@@ -5,7 +5,7 @@ import { SaveNewAccount } from '../../store/account/account.actions';
 
 const mapDispatchToProps = (dispatch: Dispatch): INewAccountProps => {
   return {
-    saveNewAccount: (account: any) => dispatch(SaveNewAccount(account))
+    saveNewAccount: (account: any) => dispatch(SaveNewAccount(account)),
   };
 };
 

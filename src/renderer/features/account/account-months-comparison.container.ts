@@ -9,13 +9,16 @@ interface IAccountMonthsComparisonOwnProps {
   date: string;
 }
 
-const mapStateToProps = (state: IStore, ownProps: IAccountMonthsComparisonOwnProps): IAccountMonthsComparisonStateProps => {
+const mapStateToProps = (
+  state: IStore,
+  ownProps: IAccountMonthsComparisonOwnProps
+): IAccountMonthsComparisonStateProps => {
   const { accountId, date } = ownProps;
   const previousMonthEndBalance = GetPreviousMonthEndBalance(state, accountId, date);
   const currentMonthEndBalance = GetCurrentMonthEndBalance(state, accountId, date);
   return {
     previousMonthEndBalance: `${(previousMonthEndBalance && previousMonthEndBalance.toFixed(2)) || ''}`,
-    currentMonthEndBalance: `${(currentMonthEndBalance && currentMonthEndBalance.toFixed(2)) || ''}`
+    currentMonthEndBalance: `${(currentMonthEndBalance && currentMonthEndBalance.toFixed(2)) || ''}`,
   };
 };
 

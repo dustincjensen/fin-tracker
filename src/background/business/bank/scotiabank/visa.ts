@@ -19,18 +19,15 @@ export function parse(accountId, filePath): Record[] {
       const [date, empty, d, strCredit, strDebit] = rowSplit;
       const credit = parseFloat(strCredit.replace(quotes, '').replace(commas, ''));
       const debit = parseFloat(strDebit.replace(quotes, '').replace(commas, ''));
-      let description =
-        `${d.replace(quotes, '')}`
-          .replace(stringRemoveExtraneousSpaces, ' ')
-          .trim();
+      let description = `${d.replace(quotes, '')}`.replace(stringRemoveExtraneousSpaces, ' ').trim();
       return {
         id: i,
         accountId,
         date,
         debit,
         credit,
-        description
-      }
+        description,
+      };
     })
     .filter(r => r != null);
 

@@ -8,13 +8,13 @@ export interface IImportLayoutStateProps {
   hasPendingRecords: boolean;
 }
 
-export interface IImportLayoutProps extends IImportLayoutStateProps { }
+export interface IImportLayoutProps extends IImportLayoutStateProps {}
 
 export class ImportLayout extends React.Component<IImportLayoutProps> {
   public render() {
     const { hasPendingRecords } = this.props;
     return (
-      <div className="imports">
+      <div className='imports'>
         {!hasPendingRecords && <NewRecordsContainer />}
         {hasPendingRecords && <ActionPendingRecordsContainer />}
         {hasPendingRecords && <PendingRecordsContainer />}

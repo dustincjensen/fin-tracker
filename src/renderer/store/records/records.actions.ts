@@ -18,6 +18,6 @@ export const SAVE_NEW_RECORDS = 'SAVE_NEW_RECORDS';
 export function SaveNewRecords(records: IRecord[]) {
   return {
     type: SAVE_NEW_RECORDS,
-    payload: records
+    payload: records,
   };
 }

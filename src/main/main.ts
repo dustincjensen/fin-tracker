@@ -5,8 +5,7 @@ import { Intercommunication } from './intercommunication';
 // import { Squirrel } from './ipcMain/squirrel';
 
 export class MainElectron {
-
-  // Keep a reference to the window object, if you don't, the 
+  // Keep a reference to the window object, if you don't, the
   // window will be closed automatically when the Javascript
   // object is garbage collected.
   public static renderer: BrowserWindow;
@@ -61,8 +60,8 @@ export class MainElectron {
       minHeight: 300,
       backgroundColor: '#fff',
       webPreferences: {
-        nodeIntegration: true
-      }
+        nodeIntegration: true,
+      },
     };
 
     // if (MainElectron.__DARWIN__) {
@@ -74,18 +73,20 @@ export class MainElectron {
     MainElectron.renderer = new BrowserWindow(windowOptions);
 
     // and load the index.html of the app.
-    MainElectron.renderer.loadURL(url.format({
-      pathname: path.join(__dirname, './renderer.html'),
-      protocol: 'file:',
-      slashes: true
-    }));
+    MainElectron.renderer.loadURL(
+      url.format({
+        pathname: path.join(__dirname, './renderer.html'),
+        protocol: 'file:',
+        slashes: true,
+      })
+    );
 
     // Open the DevTools.
     MainElectron.renderer.webContents.openDevTools();
 
     // Stop the window from changing it's title
     // TODO remove when we have a custom title bar.
-    MainElectron.renderer.on('page-title-updated', (event) => {
+    MainElectron.renderer.on('page-title-updated', event => {
       event.preventDefault();
     });
 
@@ -103,11 +104,13 @@ export class MainElectron {
 
     // Create the background window to handle work for us.
     MainElectron.background = new BrowserWindow({ show: false });
-    MainElectron.background.loadURL(url.format({
-      pathname: path.join(__dirname, './background.html'),
-      protocol: 'file:',
-      slashes: true
-    }));
+    MainElectron.background.loadURL(
+      url.format({
+        pathname: path.join(__dirname, './background.html'),
+        protocol: 'file:',
+        slashes: true,
+      })
+    );
     MainElectron.background.webContents.openDevTools();
   }
 }

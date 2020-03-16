@@ -3,28 +3,29 @@ import { IDeleteCategoryProps } from './delete-category.props.interface';
 import { Dialog } from 'evergreen-ui';
 
 export const DeleteCategoryDialog: React.FC<IDeleteCategoryProps> = props => {
-    const { category, onClose, onConfirm, deleteCategory } = props;
+  const { category, onClose, onConfirm, deleteCategory } = props;
 
-    if (!category) {
-        return null;
-    }
+  if (!category) {
+    return null;
+  }
 
-    const confirm = () => {
-        deleteCategory(category.id);
-        onConfirm();
-    };
+  const confirm = () => {
+    deleteCategory(category.id);
+    onConfirm();
+  };
 
-    return (
-        <Dialog
-            isShown={true}
-            onCloseComplete={onClose}
-            preventBodyScrolling
-            intent="danger"
-            confirmLabel="Delete"
-            title="Delete Category?"
-            onConfirm={confirm}
-        >
-            Are you sure you want to delete the <b>"{category.name}"</b> category? Records will be kept, but you will need to re-associate them with a new category.
-        </Dialog>
-    );
-}
+  return (
+    <Dialog
+      isShown={true}
+      onCloseComplete={onClose}
+      preventBodyScrolling
+      intent='danger'
+      confirmLabel='Delete'
+      title='Delete Category?'
+      onConfirm={confirm}
+    >
+      Are you sure you want to delete the <b>"{category.name}"</b> category? Records will be kept, but you will need to
+      re-associate them with a new category.
+    </Dialog>
+  );
+};

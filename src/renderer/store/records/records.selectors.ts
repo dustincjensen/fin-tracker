@@ -10,10 +10,7 @@ export function ByAccountId(store: IStore, accountId: string) {
 
 export function ByAccountIdAndDate(store: IStore, accountId: string, date: string) {
   if (accountId) {
-    return store.records.filter(r =>
-      r.accountId === accountId &&
-      isInYearMonth(r.date, date)
-    );
+    return store.records.filter(r => r.accountId === accountId && isInYearMonth(r.date, date));
   }
   return [];
 }

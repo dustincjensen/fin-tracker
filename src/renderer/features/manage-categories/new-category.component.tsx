@@ -11,9 +11,9 @@ export class NewCategory extends React.Component<INewCategoryProps, INewCategory
 
   render() {
     return (
-      <Pane border padding={20} background="tint1" borderRadius={5}>
+      <Pane border padding={20} background='tint1' borderRadius={5}>
         <Pane borderBottom display='flex' alignItems='center' marginBottom={20} paddingBottom={10}>
-          <Icon icon="group-objects" size={25} marginRight={10} color="default" />
+          <Icon icon='group-objects' size={25} marginRight={10} color='default' />
           <Heading size={700}>New Category</Heading>
         </Pane>
 
@@ -21,7 +21,7 @@ export class NewCategory extends React.Component<INewCategoryProps, INewCategory
           <Pane>
             <TextInputField
               width={350}
-              label="Name"
+              label='Name'
               value={this.state.name}
               onChange={this.handleChange}
               required
@@ -29,12 +29,8 @@ export class NewCategory extends React.Component<INewCategoryProps, INewCategory
               //validationMessage='Please enter a category name.'
             />
           </Pane>
-          <Pane display='flex' justifyContent="flex-end" borderTop paddingTop={10}>
-            <Button
-              appearance="primary"
-              iconBefore="floppy-disk"
-              height={majorScale(5)}
-            >
+          <Pane display='flex' justifyContent='flex-end' borderTop paddingTop={10}>
+            <Button appearance='primary' iconBefore='floppy-disk' height={majorScale(5)}>
               Save Category
             </Button>
           </Pane>
@@ -43,18 +39,18 @@ export class NewCategory extends React.Component<INewCategoryProps, INewCategory
     );
   }
 
-  handleChange = (evt) => {
+  handleChange = evt => {
     const { target } = evt;
     const { value } = target;
     this.setState({ name: value });
   };
 
-  handleSubmit = (evt) => {
+  handleSubmit = evt => {
     evt.preventDefault();
 
     const newCategory = {
       ...this.state,
-      id: newGuid()
+      id: newGuid(),
     };
 
     this.props.saveNewCategory(newCategory);

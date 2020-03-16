@@ -16,15 +16,11 @@ export function parseScotiabankVisaToRecords(accountId: string, filePath: string
   return parse(visaParse, accountId, filePath);
 }
 
-function parse(
-  method: (accountId: string, filePath: string) => Record[],
-  accountId: string,
-  filePath: string
-) {
+function parse(method: (accountId: string, filePath: string) => Record[], accountId: string, filePath: string) {
   const parsedFileRecords = method(accountId, filePath);
   const sorted = sortRecordsByDate(parsedFileRecords);
   return {
     type: 'IPC_NEW_RECORDS_PARSED',
-    args: [sorted]
+    args: [sorted],
   };
 }

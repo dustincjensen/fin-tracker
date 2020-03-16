@@ -6,13 +6,13 @@ export const DELETE_CATEGORY = 'DELETE_CATEGORY';
 export function SaveNewCategory(category: ICategory) {
   return {
     type: SAVE_NEW_CATEGORY,
-    payload: category
+    payload: category,
   };
 }
 
 export function DeleteCategory(id: string) {
   return {
     type: DELETE_CATEGORY,
-    payload: id
+    payload: id,
   };
 }

@@ -1,6 +1,6 @@
-import { IRecord } from "../records/record.interface";
+import { IRecord } from '../records/record.interface';
 
 export interface PendingRecords {
-    records: IRecord[];
-    accountId: string;
+  records: IRecord[];
+  accountId: string;
 }

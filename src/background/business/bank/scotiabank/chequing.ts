@@ -17,18 +17,17 @@ export function parse(accountId, filePath): Record[] {
       const rowSplit = r.split(csvCommaSplitIgnoreCommaInQuotes);
       const [date, strAmount, dash, d1, d2] = rowSplit;
       const amount = parseFloat(strAmount);
-      let description =
-        `${d1.replace(quotes, '')} ${d2.replace(quotes, '')}`
-          .replace(stringRemoveExtraneousSpaces, ' ')
-          .trim();
+      let description = `${d1.replace(quotes, '')} ${d2.replace(quotes, '')}`
+        .replace(stringRemoveExtraneousSpaces, ' ')
+        .trim();
       return {
         id: i,
         accountId,
         date,
         debit: amount < 0 ? amount * -1 : null,
         credit: amount >= 0 ? amount : null,
-        description
-      }
+        description,
+      };
     })
     .filter(r => r != null);
 

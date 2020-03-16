@@ -9,7 +9,7 @@ const mapStateToProps = (store: IStore): INewRecordsStateProps => {
   return {
     accounts: Object.keys(store.accounts).map(accountId => {
       return store.accounts[accountId];
-    })
+    }),
   };
 };
 
@@ -18,8 +18,8 @@ const mapDispatchToProps = (dispatch: Dispatch): INewRecordsDispatchProps => {
     importAction: (account: IAccount, file: any) => {
       const parseAction = mapParseType(account.parseType);
       return parseAction(dispatch, account.id, file.path);
-    }
-  }
+    },
+  };
 };
 
 export const NewRecordsContainer = connect(mapStateToProps, mapDispatchToProps)(NewRecords);

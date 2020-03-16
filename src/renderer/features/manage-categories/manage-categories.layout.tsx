@@ -5,9 +5,9 @@ import './manage-categories.layout.scss';
 
 export const ManageCategoryLayout = () => {
   return (
-    <div className="manage-categories">
+    <div className='manage-categories'>
       <NewCategoryContainer />
       <CategoriesContainer />
     </div>
   );
-}
+};

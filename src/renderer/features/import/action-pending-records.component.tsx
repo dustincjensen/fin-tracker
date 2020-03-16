@@ -3,46 +3,36 @@ import { IRecord } from '../../store/records/record.interface';
 import { Button, Pane, majorScale } from 'evergreen-ui';
 
 export interface IActionPendingRecordsStateProps {
-    startingBalance: number;
-    newRecords: IRecord[];
-    existingRecords: IRecord[];
+  startingBalance: number;
+  newRecords: IRecord[];
+  existingRecords: IRecord[];
 }
 export interface IActionPendingRecordsDispatchProps {
-    accept: (startingBalance: number, newRecords: IRecord[], existingRecords: IRecord[]) => void;
-    clear: () => void;
+  accept: (startingBalance: number, newRecords: IRecord[], existingRecords: IRecord[]) => void;
+  clear: () => void;
 }
-export interface IActionPendingRecordsProps extends IActionPendingRecordsStateProps, IActionPendingRecordsDispatchProps { }
+export interface IActionPendingRecordsProps
+  extends IActionPendingRecordsStateProps,
+    IActionPendingRecordsDispatchProps {}
 
 export class ActionPendingRecords extends React.Component<IActionPendingRecordsProps> {
-    public render() {
-        const {
-            startingBalance,
-            newRecords,
-            existingRecords,
-            accept,
-            clear
-        } = this.props;
-        return (
-            <Pane display="flex" justifyContent='space-around'>
-                <Button 
-                    appearance="primary"
-                    intent="success"
-                    iconBefore="tick"
-                    height={majorScale(5)}
-                    onClick={() => accept(startingBalance, newRecords, existingRecords)}
-                >
-                    Accept Records
-                </Button>
-                <Button
-                    appearance="primary"
-                    intent="danger"
-                    iconBefore="cross"
-                    height={majorScale(5)}
-                    onClick={() => clear()}
-                >
-                    Clear Records
-                </Button>
-            </Pane>
-        );
-    }
+  public render() {
+    const { startingBalance, newRecords, existingRecords, accept, clear } = this.props;
+    return (
+      <Pane display='flex' justifyContent='space-around'>
+        <Button
+          appearance='primary'
+          intent='success'
+          iconBefore='tick'
+          height={majorScale(5)}
+          onClick={() => accept(startingBalance, newRecords, existingRecords)}
+        >
+          Accept Records
+        </Button>
+        <Button appearance='primary' intent='danger' iconBefore='cross' height={majorScale(5)} onClick={() => clear()}>
+          Clear Records
+        </Button>
+      </Pane>
+    );
+  }
 }

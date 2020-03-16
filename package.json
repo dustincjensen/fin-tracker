@@ -8,7 +8,9 @@
     "build:background": "node ./src/background/background.config.js",
     "build:renderer": "node ./src/renderer/renderer.config.js",
     "build": "tsc && concurrently \"npm run build:renderer\" \"npm run build:background\"",
-    "dev": "electron ./dist/main.js"
+    "dev": "electron ./dist/main.js",
+    "prettier": "prettier --write src/**/*.{ts,tsx,scss,html,js}",
+    "precommit": "npm run prettier"
   },
   "author": "Dustin Jensen",
   "license": "ISC",
@@ -35,6 +37,7 @@
     "concurrently": "^3.5.1",
     "node-sass": "^4.9.0",
     "parcel-bundler": "^1.12.4",
+    "prettier": "1.19.1",
     "rimraf": "^2.6.2",
     "typescript": "^3.8.3"
   }

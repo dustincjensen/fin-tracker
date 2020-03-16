@@ -6,12 +6,7 @@ import { Button } from 'evergreen-ui';
 export const AccountLink = (props: IAccount) => {
   const { id, name } = props;
   return (
-    <Button 
-      is={Link}
-      appearance="minimal"
-      iconBefore="dollar"
-      to={`/account/${id}`}
-    >
+    <Button is={Link} appearance='minimal' iconBefore='dollar' to={`/account/${id}`}>
       {name}
     </Button>
   );

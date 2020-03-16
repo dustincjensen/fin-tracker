@@ -6,7 +6,7 @@ const initialState: { [id: string]: ICategory } = {};
 
 export const CategoryReducer = produce((state, action) => {
   switch (action.type) {
-    case categoryActions.SAVE_NEW_CATEGORY:{
+    case categoryActions.SAVE_NEW_CATEGORY: {
       saveNewCategory(state, action);
       break;
     }

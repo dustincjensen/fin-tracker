@@ -32,8 +32,7 @@ export function isInYearMonth(date: string, targetYearMonth: string): boolean {
  * @param target the date to get the year and month from.
  */
 function isInYearMonthMoment(date: Moment, target: Moment): boolean {
-  return date.year() === target.year()
-    && date.month() === target.month();
+  return date.year() === target.year() && date.month() === target.month();
 }
 
 /**
@@ -49,5 +48,7 @@ export function formatDate(date: string): string {
  * @param date the date to find the previous month of.
  */
 export function getPreviousMonth(date: string): string {
-  return moment(date).subtract(1, 'months').toISOString();
+  return moment(date)
+    .subtract(1, 'months')
+    .toISOString();
 }

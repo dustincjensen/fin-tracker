@@ -12,7 +12,7 @@ export function sortRecordsByDate(records: Record[]): Record[] {
 export function sortAndCalculateBalance(
   startingBalance: number,
   newRecords: Record[],
-  previousRecords: Record[],
+  previousRecords: Record[]
 ): Record[] {
   const allRecords = [...(newRecords || []), ...(previousRecords || [])];
   allRecords.sort(sortByDate);

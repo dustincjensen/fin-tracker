@@ -10,7 +10,4 @@ export interface INewAccountState {
   parseType: ParseType;
 }
 
-type ParseType =
-  'ScotiabankChequing' |
-  'ScotiabankSavings' |
-  'ScotiabankVisa';
+type ParseType = 'ScotiabankChequing' | 'ScotiabankSavings' | 'ScotiabankVisa';

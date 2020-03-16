@@ -8,5 +8,5 @@ export const rootReducer = combineReducers({
   accounts: AccountReducer,
   categories: CategoryReducer,
   pendingRecords: PendingRecordsReducer,
-  records: RecordsReducer
+  records: RecordsReducer,
 });

@@ -10,14 +10,14 @@ const mapStateToProps = (state: IStore): IAccountStateProps => {
   const accounts: IAccount[] = Object.keys(state.accounts).map(id => state.accounts[id]);
 
   return {
-    accounts
+    accounts,
   };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IAccountDispatchProps => {
   return {
-    deleteAccount: (accountId: string) => dispatch(DeleteAccount(accountId))
+    deleteAccount: (accountId: string) => dispatch(DeleteAccount(accountId)),
   };
-}
+};
 
 export const AccountsContainer = connect(mapStateToProps, mapDispatchToProps)(Accounts);

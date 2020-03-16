@@ -11,15 +11,15 @@ import './root.layout.scss';
 export class RootLayout extends React.Component {
   render() {
     return (
-      <div className="root">
+      <div className='root'>
         <SidebarLayout />
-        <div className="main-content scroll-bar-styled">
+        <div className='main-content scroll-bar-styled'>
           <Switch>
-            <Route exact path="/" component={HomeLayout} />
-            <Route exact path="/accounts" component={ManageAccountLayout} />
-            <Route exact path="/categories" component={ManageCategoryLayout} />
-            <Route exact path="/account/:accountId" component={AccountLayout} />
-            <Route exact path="/import" component={ImportContainer} />
+            <Route exact path='/' component={HomeLayout} />
+            <Route exact path='/accounts' component={ManageAccountLayout} />
+            <Route exact path='/categories' component={ManageCategoryLayout} />
+            <Route exact path='/account/:accountId' component={AccountLayout} />
+            <Route exact path='/import' component={ImportContainer} />
           </Switch>
         </div>
       </div>

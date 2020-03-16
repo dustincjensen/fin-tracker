@@ -1,4 +1,1 @@
-export type ParseType =
-  'ScotiabankChequing' |
-  'ScotiabankSavings' |
-  'ScotiabankVisa';
+export type ParseType = 'ScotiabankChequing' | 'ScotiabankSavings' | 'ScotiabankVisa';

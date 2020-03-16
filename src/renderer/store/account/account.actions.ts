@@ -1,4 +1,4 @@
-import { IAccount } from "./account.interface";
+import { IAccount } from './account.interface';
 
 // Action constants
 export const SAVE_NEW_ACCOUNT = 'SAVE_NEW_ACCOUNT';
@@ -8,13 +8,13 @@ export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
 export function SaveNewAccount(account: IAccount) {
   return {
     type: SAVE_NEW_ACCOUNT,
-    payload: account
+    payload: account,
   };
 }
 
 export function DeleteAccount(id: string) {
   return {
     type: DELETE_ACCOUNT,
-    payload: id
+    payload: id,
   };
 }

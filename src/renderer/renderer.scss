@@ -16,9 +16,9 @@ body {
 
 .scroll-bar-styled {
   &::-webkit-scrollbar {
-      width: 12px;
+    width: 12px;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background-color: lighten($scrollbarColor, 10%);
     outline: 1px solid lighten($scrollbarColor, 5%);

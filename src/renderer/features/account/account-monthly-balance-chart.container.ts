@@ -12,8 +12,9 @@ interface IAccountMonthlyOwnProps {
 
 const mapStateToProps = (state: IStore, ownProps: IAccountMonthlyOwnProps) => {
   return {
-    records: ownProps.stateSelector(state, ownProps.accountId, ownProps.date)
-      .map(r => ({ ...r, date: formatDate(r.date) }))
+    records: ownProps
+      .stateSelector(state, ownProps.accountId, ownProps.date)
+      .map(r => ({ ...r, date: formatDate(r.date) })),
   };
 };
 

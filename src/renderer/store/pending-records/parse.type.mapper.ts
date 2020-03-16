@@ -3,7 +3,7 @@ import { ImportRecordsFunc } from './import-records.type';
 import {
   NewScotiabankChequingFileSelected,
   NewScotiabankSavingsFileSelected,
-  NewScotiabankVisaFileSelected
+  NewScotiabankVisaFileSelected,
 } from './pending-records.actions';
 
 /**
@@ -15,8 +15,8 @@ type ParseLookup = { [P in ParseType]: ImportRecordsFunc };
 const parseTypeLookup: ParseLookup = {
   ScotiabankChequing: NewScotiabankChequingFileSelected,
   ScotiabankSavings: NewScotiabankSavingsFileSelected,
-  ScotiabankVisa: NewScotiabankVisaFileSelected
-}
+  ScotiabankVisa: NewScotiabankVisaFileSelected,
+};
 
 /**
  * Maps a ParseType to an ImportRecordsFunc.

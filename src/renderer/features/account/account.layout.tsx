@@ -14,14 +14,14 @@ class AccountLayoutClass extends React.Component<any, any> {
     this.state = {
       tabs: monthNamesShort(),
       date: '2018-05-01',
-      selectedIndex: 4
+      selectedIndex: 4,
     };
   }
 
   selectTabFunc = (tab: string, index: number) => {
     this.setState({
       date: `1 ${tab} 2018`,
-      selectedIndex: index
+      selectedIndex: index,
     });
   };
 
@@ -30,35 +30,27 @@ class AccountLayoutClass extends React.Component<any, any> {
     const { date } = this.state;
 
     return (
-      <Pane >
-        <AccountMonthlyBalanceChartContainer
-          accountId={accountId}
-          date={date}
-          stateSelector={ByAccountIdAndDate}
-        />
-        <Pane display="grid">
-        <AccountMonthsComparisonContainer accountId={accountId} date={date} />
-        <Tablist display="flex" justifyContent="space-around" marginBottom={2}>
-          {this.state.tabs.map((tab, index) => (
-            <Tab
-              key={tab}
-              id={tab}
-              onSelect={() => this.selectTabFunc(tab, index)}
-              isSelected={index === this.state.selectedIndex}
-              width="100%"
-            >
-              {tab}
-            </Tab>
-          ))}
-        </Tablist>
-        <AccountMonthlyContainer
-          accountId={accountId}
-          date={date}
-          stateSelector={ByAccountIdAndDate}
-        />
+      <Pane>
+        <AccountMonthlyBalanceChartContainer accountId={accountId} date={date} stateSelector={ByAccountIdAndDate} />
+        <Pane display='grid'>
+          <AccountMonthsComparisonContainer accountId={accountId} date={date} />
+          <Tablist display='flex' justifyContent='space-around' marginBottom={2}>
+            {this.state.tabs.map((tab, index) => (
+              <Tab
+                key={tab}
+                id={tab}
+                onSelect={() => this.selectTabFunc(tab, index)}
+                isSelected={index === this.state.selectedIndex}
+                width='100%'
+              >
+                {tab}
+              </Tab>
+            ))}
+          </Tablist>
+          <AccountMonthlyContainer accountId={accountId} date={date} stateSelector={ByAccountIdAndDate} />
         </Pane>
       </Pane>
-    )
+    );
   }
 }
 

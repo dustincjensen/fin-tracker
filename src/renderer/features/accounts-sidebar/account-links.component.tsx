@@ -12,7 +12,7 @@ export const AccountLinks = (props: IAccountProps) => {
   });
 
   return (
-    <Pane display='flex' flexDirection="column">
+    <Pane display='flex' flexDirection='column'>
       {links}
     </Pane>
   );

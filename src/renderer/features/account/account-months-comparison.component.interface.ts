@@ -3,4 +3,4 @@ export interface IAccountMonthsComparisonStateProps {
   currentMonthEndBalance: string;
 }
 
-export interface IAccountMonthsComparisonProps extends IAccountMonthsComparisonStateProps { }
+export interface IAccountMonthsComparisonProps extends IAccountMonthsComparisonStateProps {}

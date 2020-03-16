@@ -6,7 +6,7 @@ import './manage-accounts.layout.scss';
 
 const ManageAccount = ({ history }) => {
   return (
-    <div className="manage-accounts">
+    <div className='manage-accounts'>
       <NewAccountContainer />
       <AccountsContainer />
     </div>

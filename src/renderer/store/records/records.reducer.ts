@@ -19,15 +19,10 @@ export function RecordsReducer(state = initialState, action): IRecord[] {
       // out those records when updating our state.
       const excludeAccountId = records[0] && records[0].accountId;
       const otherAccountsRecords = state.filter(r => r.accountId !== excludeAccountId);
-      return [
-        ...(otherAccountsRecords || []),
-        ...records
-      ];
+      return [...(otherAccountsRecords || []), ...records];
     case accountActions.DELETE_ACCOUNT:
       const accountId = action.payload;
-      return [
-        ...state.filter(r => r.accountId !== accountId)
-      ];
+      return [...state.filter(r => r.accountId !== accountId)];
   }
   return state;
 }
