@@ -1,8 +1,6 @@
 import * as React from 'react';
-import { FilePicker } from '../../components/file-picker/file-picker.component';
 import { IAccount } from '../../store/account/account.interface';
-import { IRecord } from '../../store/records/record.interface';
-import './new-records.component.scss';
+import { FilePicker, SelectField, Pane, Button, Heading, Icon, majorScale, FormField } from 'evergreen-ui';
 
 export interface INewRecordsStateProps {
     accounts: IAccount[];
@@ -27,25 +25,39 @@ export class NewRecords extends React.Component<INewRecordsStateProps & INewReco
     }
 
     render() {
-        const { selectedAccountId, selectedFile } = this.state;
+        const { selectedAccountId } = this.state;
 
         return (
-            <div className="new-records-background">
-                <div className="new-records-header">Upload Records</div>
+            <Pane border padding={20} background="tint1" borderRadius={5}>
+                <Pane borderBottom display='flex' alignItems='center' marginBottom={20} paddingBottom={10}>
+                    <Icon icon="upload" size={25} marginRight={10} color="default" />
+                    <Heading size={700}>Upload</Heading>
+                </Pane>
+                
                 <form onSubmit={this.handleSubmit}>
-                    <div className="form-layout">
-                        <FilePicker buttonText="Select File" fileSelected={this.handleFileSelected} />
-                        <input type="text" disabled value={selectedFile && selectedFile.name || ''} />
-                        <label>Accounts</label>
-                        <select value={selectedAccountId} onChange={this.handleAccountChange}>
+                    <Pane>
+                        <FormField label="File" description="Select a file that contains records for new months.">
+                            <FilePicker 
+                                width={350}
+                                name="upload-file-picker"
+                                marginBottom={20} 
+                                onChange={this.handleFileSelected}/>
+                        </FormField>
+                        <SelectField 
+                            width={350}
+                            label="Account"
+                            description="The account to upload the new records to."
+                            value={selectedAccountId}
+                            onChange={this.handleAccountChange}
+                        >
                             {this.getAccountOptions()}
-                        </select>
-                    </div>
-                    <div className="new-records-footer">
-                        <button className="btn btn-primary btn-lg">Upload</button>
-                    </div>
+                        </SelectField>
+                    </Pane>
+                    <Pane display='flex' justifyContent="flex-end" borderTop paddingTop={10}>
+                        <Button appearance="primary" height={majorScale(5)}>Upload File</Button>
+                    </Pane>
                 </form>
-            </div>
+            </Pane>
         );
     }
 
@@ -55,14 +67,14 @@ export class NewRecords extends React.Component<INewRecordsStateProps & INewReco
         });
     };
 
-    handleFileSelected = (file: File) => {
-        this.setState({ selectedFile: file });
+    handleFileSelected = (files: FileList) => {
+        if (files) {
+            this.setState({ selectedFile: files[0] });
+        }
     };
 
     handleAccountChange = (evt) => {
-        const { target } = evt;
-        const { value } = target;
-        this.setState({ selectedAccountId: value });
+        this.setState({ selectedAccountId: evt.target.value });
     };
 
     handleSubmit = (evt) => {

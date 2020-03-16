@@ -1,13 +1,5 @@
-@import '../../scss/colors.scss';
-
 .sidebar {
   display: grid;
-  grid-template-rows: auto auto auto 1fr auto;
-  grid-gap: 10px;
-  background: $gray-900;
+  grid-template-rows: auto 1fr auto auto auto;
   padding: 20px;
-}
-
-.sidebar-btn-width {
-  width: 100px;
 }

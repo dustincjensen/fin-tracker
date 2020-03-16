@@ -1,7 +1,4 @@
-@import './scss/colors.scss';
-@import './scss/buttons.scss';
-
-$scrollbarColor: $gray-700;
+$scrollbarColor: #495057;
 
 * {
   padding: 0;
@@ -11,15 +8,10 @@ $scrollbarColor: $gray-700;
 
 html {
   height: 100%;
-  background: $gray-1000;
 }
 
 body {
   height: 100%;
-}
-
-button {
-  cursor: pointer;
 }
 
 .scroll-bar-styled {

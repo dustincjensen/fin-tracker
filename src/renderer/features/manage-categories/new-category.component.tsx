@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { INewCategoryProps, INewCategoryState } from './new-category.component.interface';
 import { newGuid } from '../../utils/guid.util';
-import './new-category.component.scss';
+import { Button, majorScale, Pane, Icon, Heading, TextInputField } from 'evergreen-ui';
 
 export class NewCategory extends React.Component<INewCategoryProps, INewCategoryState> {
   constructor(props) {
@@ -11,18 +11,35 @@ export class NewCategory extends React.Component<INewCategoryProps, INewCategory
 
   render() {
     return (
-      <div className="new-category-background">
-        <div className="new-category-header">New Category</div>
+      <Pane border padding={20} background="tint1" borderRadius={5}>
+        <Pane borderBottom display='flex' alignItems='center' marginBottom={20} paddingBottom={10}>
+          <Icon icon="group-objects" size={25} marginRight={10} color="default" />
+          <Heading size={700}>New Category</Heading>
+        </Pane>
+
         <form onSubmit={this.handleSubmit}>
-          <div className="form-layout">
-            <label>Name</label>
-            <input type="text" name="name" placeholder="Name" value={this.state.name} onChange={this.handleChange} required />
-          </div>
-          <div className="new-category-footer">
-            <button className="btn btn-primary btn-lg">Save</button>
-          </div>
+          <Pane>
+            <TextInputField
+              width={350}
+              label="Name"
+              value={this.state.name}
+              onChange={this.handleChange}
+              required
+              //isInvalid={this.state.name === ''}
+              //validationMessage='Please enter a category name.'
+            />
+          </Pane>
+          <Pane display='flex' justifyContent="flex-end" borderTop paddingTop={10}>
+            <Button
+              appearance="primary"
+              iconBefore="floppy-disk"
+              height={majorScale(5)}
+            >
+              Save Category
+            </Button>
+          </Pane>
         </form>
-      </div>
+      </Pane>
     );
   }
 

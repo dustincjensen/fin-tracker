@@ -1,15 +1,18 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { IAccount } from './account-links.component.interface';
-import './account-link.component.scss';
+import { Button } from 'evergreen-ui';
 
 export const AccountLink = (props: IAccount) => {
   const { id, name } = props;
   return (
-    <Link
+    <Button 
+      is={Link}
+      appearance="minimal"
+      iconBefore="dollar"
       to={`/account/${id}`}
-      className="btn btn-primary account-link">
+    >
       {name}
-    </Link>
+    </Button>
   );
 };

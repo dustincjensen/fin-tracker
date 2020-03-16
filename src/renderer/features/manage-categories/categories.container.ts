@@ -1,37 +1,23 @@
-import { connect, Dispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { IStore } from '../../store/store.interface';
 import { ICategory } from '../../store/category/category.interface';
 import { DeleteCategory } from '../../store/category/category.actions';
-import { Table } from '../../components/table/table.component';
-import { ITableStateProps, ITableDispatchProps } from '../../components/table/table.component.interface';
+import { ICategoriesStateProps, ICategoriesDispatchProps } from './categories.props.interface';
+import { Categories } from './categories.component';
+import { Dispatch } from 'redux';
 
-const mapStateToProps = (state: IStore): ITableStateProps<ICategory> => {
+const mapStateToProps = (state: IStore): ICategoriesStateProps => {
+  const categories: ICategory[] = Object.keys(state.categories).map(key => {
+    return state.categories[key];
+  });
+
   return {
-    tableHeader: [
-      { description: '', gridWidth: 'auto' },
-      { description: 'Name', gridWidth: 'minmax(100px, 1fr)' },
-      { description: '', gridWidth: 'auto' }
-    ],
-    dataKeys: [
-      'rowNumber', 'name'
-    ],
-    rowData: Object.keys(state.categories).map(key => {
-      return state.categories[key];
-    })
+    categories
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): ITableDispatchProps => {
-  return {
-    actions: [
-      {
-        type: 'button',
-        text: 'Delete',
-        classes: 'btn btn-danger btn-sm',
-        event: (category: ICategory) => dispatch(DeleteCategory(category.id))
-      }
-    ]
-  };
-}
+const mapDispatchToProps = (dispatch: Dispatch): ICategoriesDispatchProps => ({
+  deleteCategory: (categoryId: string) => dispatch(DeleteCategory(categoryId))
+});
 
-export const CategoriesContainer = connect(mapStateToProps, mapDispatchToProps)(Table);
+export const CategoriesContainer = connect(mapStateToProps, mapDispatchToProps)(Categories);

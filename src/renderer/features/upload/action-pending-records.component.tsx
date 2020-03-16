@@ -1,6 +1,6 @@
 import * as React from 'react';
-// TODO remove dependency
 import { IRecord } from '../../store/records/record.interface';
+import { Button, Pane, majorScale } from 'evergreen-ui';
 
 export interface IActionPendingRecordsStateProps {
     startingBalance: number;
@@ -23,10 +23,26 @@ export class ActionPendingRecords extends React.Component<IActionPendingRecordsP
             clear
         } = this.props;
         return (
-            <div>
-                <button className="btn btn-primary" onClick={() => accept(startingBalance, newRecords, existingRecords)}>Accept</button>
-                <button className="btn btn-danger" onClick={() => clear()}>Clear</button>
-            </div>
+            <Pane display="flex" justifyContent='space-around'>
+                <Button 
+                    appearance="primary"
+                    intent="success"
+                    iconBefore="tick"
+                    height={majorScale(5)}
+                    onClick={() => accept(startingBalance, newRecords, existingRecords)}
+                >
+                    Accept Records
+                </Button>
+                <Button
+                    appearance="primary"
+                    intent="danger"
+                    iconBefore="cross"
+                    height={majorScale(5)}
+                    onClick={() => clear()}
+                >
+                    Clear Records
+                </Button>
+            </Pane>
         );
     }
 }

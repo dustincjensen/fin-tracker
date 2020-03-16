@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IAccountProps, IAccount } from './account-links.component.interface';
 import { AccountLink } from './account-link.component';
-import './account-links.component.scss';
+import { Pane } from 'evergreen-ui';
 
 export const AccountLinks = (props: IAccountProps) => {
   const { accounts } = props;
@@ -12,10 +12,8 @@ export const AccountLinks = (props: IAccountProps) => {
   });
 
   return (
-    <div className="account-links">
-      <div>Accounts</div>
-      <hr />
+    <Pane display='flex' flexDirection="column">
       {links}
-    </div>
+    </Pane>
   );
 };

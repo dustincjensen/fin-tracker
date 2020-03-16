@@ -58,8 +58,7 @@ export class MainElectron {
       width: 1600,
       minWidth: 300,
       height: 900,
-      minHeight: 300,
-      backgroundColor: '#333333'
+      minHeight: 300
     };
 
     // if (MainElectron.__DARWIN__) {

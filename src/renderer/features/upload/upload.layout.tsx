@@ -16,11 +16,8 @@ export class UploadLayout extends React.Component<IUploadLayoutProps> {
     return (
       <div className="uploads">
         {!hasPendingRecords && <NewRecordsContainer />}
-        {hasPendingRecords && [
-          // This is causing a unique key React error.
-          <ActionPendingRecordsContainer />,
-          <PendingRecordsContainer />
-        ]}
+        {hasPendingRecords && <ActionPendingRecordsContainer />}
+        {hasPendingRecords && <PendingRecordsContainer />}
       </div>
     );
   }

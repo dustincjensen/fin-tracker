@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Button, Pane } from 'evergreen-ui';
 import { Link } from 'react-router-dom';
 import { AccountsSidebarLayout } from '../accounts-sidebar/accounts-sidebar.layout';
 import './sidebar.layout.scss';
@@ -6,13 +7,13 @@ import './sidebar.layout.scss';
 export class SidebarLayout extends React.Component {
   render() {
     return (
-      <div className="sidebar">
-        <Link className="btn btn-primary sidebar-btn-width" to="/">Home</Link>
-        <Link className="btn btn-success sidebar-btn-width" to="/accounts">Accounts</Link>
-        <Link className="btn btn-success sidebar-btn-width" to="/categories">Categories</Link>
+      <Pane background="tint1" className="sidebar" borderRight>
+        <Button is={Link} appearance="minimal" to="/" iconBefore="home">Home</Button>
         <AccountsSidebarLayout />
-        <Link className="btn btn-success sidebar-btn-width" to="/upload">Upload</Link>
-      </div>
+        <Button is={Link} appearance="minimal" to="/accounts" iconBefore="bank-account">Accounts</Button>
+        <Button is={Link} appearance="minimal" to="/categories" iconBefore="group-objects">Categories</Button>
+        <Button is={Link} appearance="minimal" to="/upload" iconBefore="upload">Upload</Button>
+      </Pane>
     );
   }
 }
