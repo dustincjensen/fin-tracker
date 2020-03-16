@@ -10,7 +10,7 @@ const initialState: PendingRecords = {
 
 export const PendingRecordsReducer = produce((state: PendingRecords, action) => {
     switch (action.type) {
-        case pendingRecordsActions.NEW_RECORDS_UPLOADED:
+        case pendingRecordsActions.NEW_RECORDS_IMPORTED:
             // Get the records and check if there were any returned.
             const records = action.payload;
             if (!records || records.length === 0) {
@@ -22,7 +22,7 @@ export const PendingRecordsReducer = produce((state: PendingRecords, action) => 
             state.accountId = accountId;
             state.records = records;
             break;
-        case pendingRecordsActions.CLEAR_RECORDS_UPLOADED:
+        case pendingRecordsActions.CLEAR_RECORDS_IMPORTED:
         case recordsActions.SAVE_NEW_RECORDS:
             state.accountId = undefined;
             state.records = [];

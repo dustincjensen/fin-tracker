@@ -1,9 +1,7 @@
-import { app, BrowserWindow, ipcMain, Notification } from 'electron';
+import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
-import * as ChildProcess from 'child_process';
 import { Intercommunication } from './intercommunication';
-
 // import { Squirrel } from './ipcMain/squirrel';
 
 export class MainElectron {
@@ -11,8 +9,8 @@ export class MainElectron {
   // Keep a reference to the window object, if you don't, the 
   // window will be closed automatically when the Javascript
   // object is garbage collected.
-  public static renderer: Electron.BrowserWindow;
-  public static background: Electron.BrowserWindow;
+  public static renderer: BrowserWindow;
+  public static background: BrowserWindow;
 
   public static start() {
     // if (Squirrel.HandleSquirrelEvent(app)) {
@@ -27,6 +25,8 @@ export class MainElectron {
     // This method will be called when Electron has finished
     // initialization and is ready to create browser windows.
     // Some APIs can only be used after this event occurs.
+    app.allowRendererProcessReuse = true;
+
     app.on('ready', MainElectron._createWindow);
 
     // This handles window activation, like in macOS.
@@ -58,7 +58,11 @@ export class MainElectron {
       width: 1600,
       minWidth: 300,
       height: 900,
-      minHeight: 300
+      minHeight: 300,
+      backgroundColor: '#fff',
+      webPreferences: {
+        nodeIntegration: true
+      }
     };
 
     // if (MainElectron.__DARWIN__) {

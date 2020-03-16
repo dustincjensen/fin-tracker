@@ -12,7 +12,7 @@ export class SidebarLayout extends React.Component {
         <AccountsSidebarLayout />
         <Button is={Link} appearance="minimal" to="/accounts" iconBefore="bank-account">Accounts</Button>
         <Button is={Link} appearance="minimal" to="/categories" iconBefore="group-objects">Categories</Button>
-        <Button is={Link} appearance="minimal" to="/upload" iconBefore="upload">Upload</Button>
+        <Button is={Link} appearance="minimal" to="/import" iconBefore="import">Import</Button>
       </Pane>
     );
   }

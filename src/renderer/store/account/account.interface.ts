@@ -39,7 +39,7 @@ export interface IAccount {
   endMonth?: number;
 
   /**
-   * The method to parse file that are uploaded to this account.
+   * The method to parse file that are imported to this account.
    */
   parseType: ParseType;
 }

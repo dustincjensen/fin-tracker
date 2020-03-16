@@ -106,7 +106,6 @@ export class NewAccount extends React.Component<INewAccountProps, INewAccountSta
 
   handleChange = (evt) => {
     const { value, name } = evt.target;
-    console.log('Change', value, name);
     this.setState({ [name]: value } as any);
   };
 

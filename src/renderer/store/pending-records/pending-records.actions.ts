@@ -23,20 +23,20 @@ export const NewScotiabankVisaFileSelected: ImportRecordsFunc = (
 ) => sender(dispatch, 'IPC_NEW_SCOTIABANK_VISA_RECORDS_SELECTED', accountId, filePath);
 
 // Action constants
-export const NEW_RECORDS_UPLOADED = 'NEW_RECORDS_UPLOADED';
-export const CLEAR_RECORDS_UPLOADED = 'CLEAR_RECORDS_UPLOADED';
+export const NEW_RECORDS_IMPORTED = 'NEW_RECORDS_IMPORTED';
+export const CLEAR_RECORDS_IMPORTED = 'CLEAR_RECORDS_IMPORTED';
 
 // Action Creators
-export function UploadNewRecords(records: IRecord[]) {
+export function ImportNewRecords(records: IRecord[]) {
     return {
-        type: NEW_RECORDS_UPLOADED,
+        type: NEW_RECORDS_IMPORTED,
         payload: records
     };
 }
 
-export function ClearUploadedRecords() {
+export function ClearImportedRecords() {
     return {
-        type: CLEAR_RECORDS_UPLOADED,
+        type: CLEAR_RECORDS_IMPORTED,
         payload: null
     };
 }

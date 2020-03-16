@@ -7,7 +7,7 @@ export interface INewRecordsStateProps {
 }
 
 export interface INewRecordsDispatchProps {
-    uploadAction: (account: IAccount, file: File) => void;
+    importAction: (account: IAccount, file: File) => void;
 }
 
 interface INewRecordsState {
@@ -30,8 +30,8 @@ export class NewRecords extends React.Component<INewRecordsStateProps & INewReco
         return (
             <Pane border padding={20} background="tint1" borderRadius={5}>
                 <Pane borderBottom display='flex' alignItems='center' marginBottom={20} paddingBottom={10}>
-                    <Icon icon="upload" size={25} marginRight={10} color="default" />
-                    <Heading size={700}>Upload</Heading>
+                    <Icon icon="import" size={25} marginRight={10} color="default" />
+                    <Heading size={700}>Import</Heading>
                 </Pane>
                 
                 <form onSubmit={this.handleSubmit}>
@@ -39,14 +39,14 @@ export class NewRecords extends React.Component<INewRecordsStateProps & INewReco
                         <FormField label="File" description="Select a file that contains records for new months.">
                             <FilePicker 
                                 width={350}
-                                name="upload-file-picker"
+                                name="import-file-picker"
                                 marginBottom={20} 
                                 onChange={this.handleFileSelected}/>
                         </FormField>
                         <SelectField 
                             width={350}
                             label="Account"
-                            description="The account to upload the new records to."
+                            description="The account to import the new records to."
                             value={selectedAccountId}
                             onChange={this.handleAccountChange}
                         >
@@ -54,7 +54,13 @@ export class NewRecords extends React.Component<INewRecordsStateProps & INewReco
                         </SelectField>
                     </Pane>
                     <Pane display='flex' justifyContent="flex-end" borderTop paddingTop={10}>
-                        <Button appearance="primary" height={majorScale(5)}>Upload File</Button>
+                        <Button 
+                            appearance="primary"
+                            height={majorScale(5)}
+                            iconBefore="import"
+                        >
+                            Import
+                        </Button>
                     </Pane>
                 </form>
             </Pane>
@@ -89,7 +95,7 @@ export class NewRecords extends React.Component<INewRecordsStateProps & INewReco
         const { accounts } = this.props;
         const selectedAccount = accounts.filter(a => a.id === selectedAccountId)[0];
 
-        this.props.uploadAction(selectedAccount, selectedFile);
+        this.props.importAction(selectedAccount, selectedFile);
         this.setState({ selectedFile: null });
     };
 }
