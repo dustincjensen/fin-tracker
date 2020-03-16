@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { BrowserWindow, BrowserWindowConstructorOptions, app } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 import { Intercommunication } from './intercommunication';
@@ -52,7 +52,7 @@ export class MainElectron {
   }
 
   private static _createWindow(): void {
-    let windowOptions: Electron.BrowserWindowConstructorOptions = {
+    const windowOptions: BrowserWindowConstructorOptions = {
       title: 'fin-tracker',
       width: 1600,
       minWidth: 300,
@@ -103,7 +103,13 @@ export class MainElectron {
     });
 
     // Create the background window to handle work for us.
-    MainElectron.background = new BrowserWindow({ show: false });
+    MainElectron.background = new BrowserWindow({ 
+      show: true,
+      webPreferences: {
+        nodeIntegration: true,
+      }
+    });
+    
     MainElectron.background.loadURL(
       url.format({
         pathname: path.join(__dirname, './background.html'),
