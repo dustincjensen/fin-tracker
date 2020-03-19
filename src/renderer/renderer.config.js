@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const Bundler = require('parcel-bundler');
 const Path = require('path');
 
@@ -27,4 +28,4 @@ const bundler = new Bundler(file, options);
 
 // Run the bundler, this returns the main bundle
 // Use the events if you're using watch mode as this promise will only trigger once and not for every rebuild
-const bundle = bundler.bundle();
+bundler.bundle();

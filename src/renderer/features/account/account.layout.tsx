@@ -6,9 +6,11 @@ import { AccountMonthlyBalanceChartContainer } from './account-monthly-balance-c
 import { ByAccountIdAndDate } from '../../store/records/records.selectors';
 import { AccountMonthsComparisonContainer } from './account-months-comparison.container';
 import { Tablist, Pane, Tab } from 'evergreen-ui';
+import { IAccountProps } from './account.props.interface';
+import { IAccountState } from './account.state.interface';
 
 // TODO props and state interfaces
-class AccountLayoutClass extends React.Component<any, any> {
+class AccountLayoutClass extends React.Component<IAccountProps, IAccountState> {
   constructor(props) {
     super(props);
     this.state = {

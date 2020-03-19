@@ -1,4 +1,4 @@
 export interface IProcessedEvent {
   type: string;
-  args: any[];
+  args: unknown[];
 }

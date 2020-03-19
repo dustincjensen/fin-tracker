@@ -1,15 +1,8 @@
 import * as React from 'react';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
+import { IAccountBalanceLineChartProps } from './account-balance-line-chart.props.interface';
 
-export interface IAccountBalanceLineChartProps {
-  records: any[];
-}
-
-// TODO
-// - make this not ANY.
-// - move props into interface file.
-// - clean up the graph a bit more.
-
+// TODO clean up the graph a bit more.
 export class AccountBalanceLineChart extends React.Component<IAccountBalanceLineChartProps> {
   render() {
     const { records } = this.props;
@@ -20,7 +13,7 @@ export class AccountBalanceLineChart extends React.Component<IAccountBalanceLine
           <Line type='monotone' dataKey='balance' stroke='#008800' dot={false} />
           <CartesianGrid stroke='#222' strokeDasharray='5 5' />
           {/* <XAxis dataKey="date" interval={5} ticks={[records.map(r => '')]} /> */}
-          <XAxis dataKey='date' ticks={[records.map(r => '')]} />
+          <XAxis dataKey='date' ticks={[records.map(() => '')]} />
           <YAxis />
           <Tooltip />
           {dipsBelowZero && <ReferenceLine y={0} stroke='#ff5500' strokeDasharray='5 5' />}

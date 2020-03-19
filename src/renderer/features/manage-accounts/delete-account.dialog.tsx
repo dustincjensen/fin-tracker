@@ -24,7 +24,8 @@ export const DeleteAccountDialog: React.FC<IDeleteAccountProps> = props => {
       title='Delete Account?'
       onConfirm={confirm}
     >
-      Are you sure you want to delete the <b>"{account.name}"</b> account? All associated records will also be deleted.
+      Are you sure you want to delete the <b>&quot;{account.name}&quot;</b> account? All associated records will also be
+      deleted.
     </Dialog>
   );
 };

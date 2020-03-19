@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { INewCategoryProps, INewCategoryState } from './new-category.component.interface';
+import { INewCategoryProps } from './new-category.component.interface';
+import { INewCategoryState } from './new-category.state.interface';
 import { newGuid } from '../../utils/guid.util';
 import { Button, majorScale, Pane, Icon, Heading, TextInputField } from 'evergreen-ui';
 

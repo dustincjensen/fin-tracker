@@ -103,13 +103,13 @@ export class MainElectron {
     });
 
     // Create the background window to handle work for us.
-    MainElectron.background = new BrowserWindow({ 
+    MainElectron.background = new BrowserWindow({
       show: true,
       webPreferences: {
         nodeIntegration: true,
-      }
+      },
     });
-    
+
     MainElectron.background.loadURL(
       url.format({
         pathname: path.join(__dirname, './background.html'),

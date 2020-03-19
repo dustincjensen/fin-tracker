@@ -1,7 +1,7 @@
 import moment from 'moment';
-import { Record } from './record.interface';
+import { IRecord } from './record.interface';
 
-export function sortRecordsByDate(records: Record[]): Record[] {
+export function sortRecordsByDate(records: IRecord[]): IRecord[] {
   records.sort(sortByDate);
   return records;
 }
@@ -11,9 +11,9 @@ export function sortRecordsByDate(records: Record[]): Record[] {
 // then you don't need to recalculate those balances.
 export function sortAndCalculateBalance(
   startingBalance: number,
-  newRecords: Record[],
-  previousRecords: Record[]
-): Record[] {
+  newRecords: IRecord[],
+  previousRecords: IRecord[]
+): IRecord[] {
   const allRecords = [...(newRecords || []), ...(previousRecords || [])];
   allRecords.sort(sortByDate);
 
@@ -27,7 +27,7 @@ export function sortAndCalculateBalance(
   return allRecords;
 }
 
-function sortByDate(a: Record, b: Record): number {
+function sortByDate(a: IRecord, b: IRecord): number {
   // TODO moment complains about the date format provided if not ISO, but it works...
   const aDate = moment(a.date);
   const bDate = moment(b.date);

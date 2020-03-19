@@ -1,6 +1,6 @@
-import { ICategory } from './category.interface';
-import * as categoryActions from './category.actions';
 import produce from 'immer';
+import * as categoryActions from './category.actions';
+import { ICategory } from './category.interface';
 
 const initialState: { [id: string]: ICategory } = {};
 
@@ -17,11 +17,11 @@ export const CategoryReducer = produce((state, action) => {
   }
 }, initialState);
 
-const saveNewCategory = (state, action) => {
+function saveNewCategory(state, action) {
   const { id } = action.payload;
   state[id] = action.payload;
-};
+}
 
-const deleteCategory = (state, action) => {
+function deleteCategory(state, action) {
   delete state[action.payload];
-};
+}

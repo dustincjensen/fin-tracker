@@ -6,6 +6,6 @@ const lookup: { [type: string]: Function } = {
   ['IPC_NEW_RECORDS_MERGED']: recordsActions.SaveNewRecords,
 };
 
-export function ipcHandler(event, ipcType, ...args: any[]) {
+export function ipcHandler(_event, ipcType, ...args: unknown[]) {
   return lookup[ipcType](...args);
 }

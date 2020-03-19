@@ -1,7 +1,3 @@
-export interface INewAccountProps {
-  saveNewAccount: (account: any) => void;
-}
-
 export interface INewAccountState {
   name: string;
   startYear: number;

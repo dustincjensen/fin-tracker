@@ -3,12 +3,7 @@ import { NewRecordsContainer } from './new-records.container';
 import { PendingRecordsContainer } from './pending-records.container';
 import { ActionPendingRecordsContainer } from './action-pending-records.container';
 import './import.layout.scss';
-
-export interface IImportLayoutStateProps {
-  hasPendingRecords: boolean;
-}
-
-export interface IImportLayoutProps extends IImportLayoutStateProps {}
+import { IImportLayoutProps } from './import.props.interface';
 
 export class ImportLayout extends React.Component<IImportLayoutProps> {
   public render() {

@@ -1,4 +1,4 @@
-export interface Record {
+export interface IRecord {
   id: number;
   date: string;
   description: string;

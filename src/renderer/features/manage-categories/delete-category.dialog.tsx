@@ -24,8 +24,8 @@ export const DeleteCategoryDialog: React.FC<IDeleteCategoryProps> = props => {
       title='Delete Category?'
       onConfirm={confirm}
     >
-      Are you sure you want to delete the <b>"{category.name}"</b> category? Records will be kept, but you will need to
-      re-associate them with a new category.
+      Are you sure you want to delete the <b>&quot;{category.name}&quot;</b> category? Records will be kept, but you
+      will need to re-associate them with a new category.
     </Dialog>
   );
 };

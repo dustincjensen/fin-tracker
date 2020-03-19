@@ -1,11 +1,13 @@
-import { connect, Dispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { NewAccount } from './new-account.component';
-import { INewAccountProps } from './new-account.component.interface';
+import { INewAccountDispatchProps } from './new-account.props.interface';
 import { SaveNewAccount } from '../../store/account/account.actions';
+import { Dispatch } from 'redux';
+import { IAccount } from '../../store/account/account.interface';
 
-const mapDispatchToProps = (dispatch: Dispatch): INewAccountProps => {
+const mapDispatchToProps = (dispatch: Dispatch): INewAccountDispatchProps => {
   return {
-    saveNewAccount: (account: any) => dispatch(SaveNewAccount(account)),
+    saveNewAccount: (account: IAccount) => dispatch(SaveNewAccount(account)),
   };
 };
 

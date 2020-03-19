@@ -1,17 +1,8 @@
 import * as React from 'react';
-import { INewAccountProps, INewAccountState } from './new-account.component.interface';
+import { INewAccountProps } from './new-account.props.interface';
+import { INewAccountState } from './new-account.state.interface';
 import { newGuid } from '../../utils/guid.util';
-import {
-  Button,
-  majorScale,
-  Pane,
-  Icon,
-  Heading,
-  TextInputField,
-  TextInput,
-  SelectField,
-  OptionsList,
-} from 'evergreen-ui';
+import { Button, majorScale, Pane, Icon, Heading, TextInputField, SelectField } from 'evergreen-ui';
 
 // TODO do we need the account type from finance? so we know credit or debit is up/down?
 export class NewAccount extends React.Component<INewAccountProps, INewAccountState> {
@@ -80,7 +71,7 @@ export class NewAccount extends React.Component<INewAccountProps, INewAccountSta
             <TextInputField
               width={350}
               label='Starting Balance'
-              nmae='startingBalance'
+              name='startingBalance'
               type='number'
               value={this.state.startingBalance}
               onChange={this.handleChange}
@@ -112,7 +103,7 @@ export class NewAccount extends React.Component<INewAccountProps, INewAccountSta
 
   handleChange = evt => {
     const { value, name } = evt.target;
-    this.setState({ [name]: value } as any);
+    this.setState({ [name]: value } as never);
   };
 
   handleSubmit = evt => {

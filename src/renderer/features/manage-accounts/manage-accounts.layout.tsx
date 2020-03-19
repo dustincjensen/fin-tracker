@@ -4,7 +4,7 @@ import { NewAccountContainer } from './new-account.container';
 import { AccountsContainer } from './accounts.container';
 import './manage-accounts.layout.scss';
 
-const ManageAccount = ({ history }) => {
+const ManageAccount = () => {
   return (
     <div className='manage-accounts'>
       <NewAccountContainer />

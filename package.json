@@ -9,8 +9,9 @@
     "build:renderer": "node ./src/renderer/renderer.config.js",
     "build": "tsc && concurrently \"npm run build:renderer\" \"npm run build:background\"",
     "dev": "electron ./dist/main.js",
-    "prettier": "prettier --write src/**/*.{ts,tsx,scss,html,js}",
-    "precommit": "npm run prettier"
+    "prettier": "prettier --write src/**/*.{ts,tsx,js,jsx}",
+    "eslint": "eslint src/**/*.{ts,tsx,js,jsx}",
+    "precommit": "npm run prettier && npm run eslint"
   },
   "author": "Dustin Jensen",
   "license": "ISC",
@@ -34,7 +35,11 @@
     "@types/react-dom": "^16.9.5",
     "@types/react-redux": "^7.1.7",
     "@types/react-router-dom": "^5.1.3",
+    "@typescript-eslint/eslint-plugin": "^2.23.0",
+    "@typescript-eslint/parser": "^2.23.0",
     "concurrently": "^3.5.1",
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.19.0",
     "node-sass": "^4.9.0",
     "parcel-bundler": "^1.12.4",
     "prettier": "1.19.1",

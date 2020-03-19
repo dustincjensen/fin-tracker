@@ -1,14 +1,14 @@
-import { PendingRecords } from './pending-records.interface';
+import { IPendingRecords } from './pending-records.interface';
 import * as recordsActions from '../records/records.actions';
 import * as pendingRecordsActions from './pending-records.actions';
 import produce from 'immer';
 
-const initialState: PendingRecords = {
+const initialState: IPendingRecords = {
   accountId: undefined,
   records: [],
 };
 
-export const PendingRecordsReducer = produce((state: PendingRecords, action) => {
+export const PendingRecordsReducer = produce((state: IPendingRecords, action) => {
   switch (action.type) {
     case pendingRecordsActions.NEW_RECORDS_IMPORTED:
       // Get the records and check if there were any returned.

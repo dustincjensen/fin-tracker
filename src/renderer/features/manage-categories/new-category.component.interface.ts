@@ -1,7 +1,10 @@
-export interface INewCategoryProps {
-  saveNewCategory: (category: any) => void;
-}
+import { ICategory } from '../../store/category/category.interface';
 
-export interface INewCategoryState {
-  name: string;
+export interface INewCategoryProps extends INewCategoryDispatchProps {}
+
+export interface INewCategoryDispatchProps {
+  /**
+   * Action to save a new category.
+   */
+  saveNewCategory: (category: ICategory) => void;
 }

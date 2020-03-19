@@ -15,7 +15,7 @@ const mapStateToProps = (store: IStore): INewRecordsStateProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): INewRecordsDispatchProps => {
   return {
-    importAction: (account: IAccount, file: any) => {
+    importAction: (account: IAccount, file: File) => {
       const parseAction = mapParseType(account.parseType);
       return parseAction(dispatch, account.id, file.path);
     },

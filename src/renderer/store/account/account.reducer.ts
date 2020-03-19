@@ -17,11 +17,11 @@ export const AccountReducer = produce((state, action) => {
   }
 }, initialState);
 
-const saveNewAccount = (state, action) => {
+function saveNewAccount(state, action) {
   const { id } = action.payload;
   state[id] = action.payload;
-};
+}
 
-const deleteAccount = (state, action) => {
+function deleteAccount(state, action) {
   delete state[action.payload];
-};
+}
