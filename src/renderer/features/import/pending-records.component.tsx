@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { Table } from 'evergreen-ui';
+import * as React from 'react';
 import { IPendingRecordsProps } from './pending-records.props.interface';
 
 // Controls the width of the date, debit and credit fields.

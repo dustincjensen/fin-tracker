@@ -1,6 +1,6 @@
+import { Pane, Strong, Text } from 'evergreen-ui';
 import * as React from 'react';
 import { IAccountMonthsComparisonProps } from './account-months-comparison.component.interface';
-import { Pane, Text, Strong } from 'evergreen-ui';
 
 export class AccountMonthsComparison extends React.Component<IAccountMonthsComparisonProps> {
   public render() {

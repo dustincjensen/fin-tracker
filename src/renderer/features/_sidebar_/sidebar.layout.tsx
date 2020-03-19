@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { Button, Pane } from 'evergreen-ui';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { AccountsSidebarLayout } from '../accounts-sidebar/accounts-sidebar.layout';
 import './sidebar.layout.scss';

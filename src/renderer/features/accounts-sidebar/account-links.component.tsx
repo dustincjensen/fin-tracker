@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { IAccountProps, IAccount } from './account-links.component.interface';
-import { AccountLink } from './account-link.component';
 import { Pane } from 'evergreen-ui';
+import * as React from 'react';
+import { AccountLink } from './account-link.component';
+import { IAccount, IAccountProps } from './account-links.component.interface';
 
 export const AccountLinks = (props: IAccountProps) => {
   const { accounts } = props;

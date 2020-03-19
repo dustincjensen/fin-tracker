@@ -1,5 +1,5 @@
-import { IStore } from '../../store/store.interface';
 import { IRecord } from '../../store/records/record.interface';
+import { IStore } from '../../store/store.interface';
 import { IAccountMonthlyRecord } from './account-monthly-record.interface';
 
 export interface IAccountMonthlyProps

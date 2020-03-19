@@ -1,8 +1,8 @@
+import { Button, Table } from 'evergreen-ui';
 import * as React from 'react';
-import { Table, Button } from 'evergreen-ui';
 import { ICategory } from '../../store/category/category.interface';
-import { DeleteCategoryDialog } from './delete-category.dialog';
 import { ICategoriesProps } from './categories.props.interface';
+import { DeleteCategoryDialog } from './delete-category.dialog';
 
 export const Categories: React.FC<ICategoriesProps> = props => {
   const { deleteCategory } = props;

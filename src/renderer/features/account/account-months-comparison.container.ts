@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
+import { GetCurrentMonthEndBalance, GetPreviousMonthEndBalance } from '../../store/records/records.selectors';
 import { IStore } from '../../store/store.interface';
 import { AccountMonthsComparison } from './account-months-comparison.component';
 import { IAccountMonthsComparisonStateProps } from './account-months-comparison.component.interface';
-import { GetPreviousMonthEndBalance, GetCurrentMonthEndBalance } from '../../store/records/records.selectors';
 
 interface IAccountMonthsComparisonOwnProps {
   accountId: string;

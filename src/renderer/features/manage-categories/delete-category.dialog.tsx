@@ -1,6 +1,6 @@
+import { Dialog } from 'evergreen-ui';
 import * as React from 'react';
 import { IDeleteCategoryProps } from './delete-category.props.interface';
-import { Dialog } from 'evergreen-ui';
 
 export const DeleteCategoryDialog: React.FC<IDeleteCategoryProps> = props => {
   const { category, onClose, onConfirm, deleteCategory } = props;

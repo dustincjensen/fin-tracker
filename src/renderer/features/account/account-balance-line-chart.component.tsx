@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
+import { CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { IAccountBalanceLineChartProps } from './account-balance-line-chart.props.interface';
 
 // TODO clean up the graph a bit more.

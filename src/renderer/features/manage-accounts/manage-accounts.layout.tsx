@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { withRouter } from 'react-router';
-import { NewAccountContainer } from './new-account.container';
+import { withRouter } from 'react-router-dom';
 import { AccountsContainer } from './accounts.container';
+import { NewAccountContainer } from './new-account.container';
 import './manage-accounts.layout.scss';
 
 const ManageAccount = () => {

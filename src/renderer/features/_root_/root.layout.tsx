@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router';
-import { SidebarLayout } from '../_sidebar_/sidebar.layout';
 import { HomeLayout } from '../_home_/home.layout';
-import { ManageAccountLayout } from '../manage-accounts/manage-accounts.layout';
-import { ManageCategoryLayout } from '../manage-categories/manage-categories.layout';
+import { SidebarLayout } from '../_sidebar_/sidebar.layout';
 import { AccountLayout } from '../account/account.layout';
 import { ImportContainer } from '../import/import.container';
+import { ManageAccountLayout } from '../manage-accounts/manage-accounts.layout';
+import { ManageCategoryLayout } from '../manage-categories/manage-categories.layout';
 import './root.layout.scss';
 
 export class RootLayout extends React.Component {

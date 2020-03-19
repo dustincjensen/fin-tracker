@@ -1,7 +1,7 @@
-import { IPendingRecords } from './pending-records.interface';
+import { produce } from 'immer';
 import * as recordsActions from '../records/records.actions';
 import * as pendingRecordsActions from './pending-records.actions';
-import produce from 'immer';
+import { IPendingRecords } from './pending-records.interface';
 
 const initialState: IPendingRecords = {
   accountId: undefined,

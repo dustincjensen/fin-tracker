@@ -1,8 +1,7 @@
-import { parse as chequingParse } from '../business/bank/scotiabank/chequing';
-import { parse as savingsParse } from '../business/bank/scotiabank/chequing';
+import { IRecord } from '../business/bank/record.interface';
+import { parse as chequingParse, parse as savingsParse } from '../business/bank/scotiabank/chequing';
 import { parse as visaParse } from '../business/bank/scotiabank/visa';
 import { sortRecordsByDate } from '../business/bank/util';
-import { IRecord } from '../business/bank/record.interface';
 
 export function parseScotiabankChequingToRecords(accountId: string, filePath: string) {
   return parse(chequingParse, accountId, filePath);

@@ -1,6 +1,6 @@
+import { Dialog } from 'evergreen-ui';
 import * as React from 'react';
 import { IDeleteAccountProps } from './delete-account.props.interface';
-import { Dialog } from 'evergreen-ui';
 
 export const DeleteAccountDialog: React.FC<IDeleteAccountProps> = props => {
   const { account, onClose, onConfirm, deleteAccount } = props;

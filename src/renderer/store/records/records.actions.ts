@@ -1,7 +1,7 @@
-import { IRecord } from './record.interface';
 import { Dispatch } from 'redux';
 import { sender } from '../ipc.send';
 import { MergeRecordsFunc } from './merge-records.type';
+import { IRecord } from './record.interface';
 
 // IPC Actions
 export const PendingRecordsMerged: MergeRecordsFunc = (

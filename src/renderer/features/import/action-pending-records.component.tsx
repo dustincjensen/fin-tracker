@@ -1,6 +1,6 @@
+import { Button, majorScale, Pane } from 'evergreen-ui';
 import * as React from 'react';
 import { IRecord } from '../../store/records/record.interface';
-import { Button, Pane, majorScale } from 'evergreen-ui';
 
 export interface IActionPendingRecordsStateProps {
   startingBalance: number;

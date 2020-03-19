@@ -11,6 +11,7 @@
     "dev": "electron ./dist/main.js",
     "prettier": "prettier --write src/**/*.{ts,tsx,js,jsx}",
     "eslint": "eslint src/**/*.{ts,tsx,js,jsx}",
+    "eslint:fix": "eslint src/**/*.{ts,tsx,js,jsx} --fix",
     "precommit": "npm run prettier && npm run eslint"
   },
   "author": "Dustin Jensen",
@@ -39,6 +40,7 @@
     "@typescript-eslint/parser": "^2.23.0",
     "concurrently": "^3.5.1",
     "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-react": "^7.19.0",
     "node-sass": "^4.9.0",
     "parcel-bundler": "^1.12.4",

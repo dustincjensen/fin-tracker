@@ -1,11 +1,11 @@
+import { Pane, Tab, Tablist } from 'evergreen-ui';
 import * as React from 'react';
 import { withRouter } from 'react-router';
-import { monthNamesShort } from '../../utils/date.util';
-import { AccountMonthlyContainer } from './account-monthly.container';
-import { AccountMonthlyBalanceChartContainer } from './account-monthly-balance-chart.container';
 import { ByAccountIdAndDate } from '../../store/records/records.selectors';
+import { monthNamesShort } from '../../utils/date.util';
+import { AccountMonthlyBalanceChartContainer } from './account-monthly-balance-chart.container';
+import { AccountMonthlyContainer } from './account-monthly.container';
 import { AccountMonthsComparisonContainer } from './account-months-comparison.container';
-import { Tablist, Pane, Tab } from 'evergreen-ui';
 import { IAccountProps } from './account.props.interface';
 import { IAccountState } from './account.state.interface';
 

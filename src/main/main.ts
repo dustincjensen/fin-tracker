@@ -1,6 +1,6 @@
-import { BrowserWindow, BrowserWindowConstructorOptions, app } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
+import { app, BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
 import { Intercommunication } from './intercommunication';
 // import { Squirrel } from './ipcMain/squirrel';
 

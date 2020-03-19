@@ -1,5 +1,5 @@
-import { ParseType } from './parse.type';
 import { ImportRecordsFunc } from './import-records.type';
+import { ParseType } from './parse.type';
 import {
   NewScotiabankChequingFileSelected,
   NewScotiabankSavingsFileSelected,

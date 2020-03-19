@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
 import { HashRouter } from 'react-router-dom';
-import { rootReducer } from './store/store';
-import { ipcReceive } from './store/ipc';
+import { applyMiddleware, createStore } from 'redux';
 import { RootLayout } from './features/_root_/root.layout';
+import { ipcReceive } from './store/ipc';
+import { rootReducer } from './store/store';
 import './renderer.scss';
 
 // TODO change implementation of initial state.

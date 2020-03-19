@@ -1,5 +1,5 @@
+import { getPreviousMonth, isInYearMonth } from '../../utils/date.util';
 import { IStore } from '../store.interface';
-import { isInYearMonth, getPreviousMonth } from '../../utils/date.util';
 
 export function ByAccountId(store: IStore, accountId: string) {
   if (accountId) {

@@ -1,6 +1,6 @@
-import { IProcessedEvent } from './ipc.interface';
-import * as parseFileRoutes from '../routes/parse-file.routes';
 import * as mergeFileRoutes from '../routes/merge-file.routes';
+import * as parseFileRoutes from '../routes/parse-file.routes';
+import { IProcessedEvent } from './ipc.interface';
 
 export const eventLookup: { [type: string]: (...args: unknown[]) => IProcessedEvent } = {
   IPC_NEW_SCOTIABANK_CHEQUING_RECORDS_SELECTED: parseFileRoutes.parseScotiabankChequingToRecords,

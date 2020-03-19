@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import { NewRecords, INewRecordsStateProps, INewRecordsDispatchProps } from './new-records.component';
-import { IStore } from '../../store/store.interface';
+import { Dispatch } from 'redux';
 import { IAccount } from '../../store/account/account.interface';
 import { mapParseType } from '../../store/pending-records/parse.type.mapper';
-import { Dispatch } from 'redux';
+import { IStore } from '../../store/store.interface';
+import { INewRecordsDispatchProps, INewRecordsStateProps, NewRecords } from './new-records.component';
 
 const mapStateToProps = (store: IStore): INewRecordsStateProps => {
   return {

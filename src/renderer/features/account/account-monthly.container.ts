@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { IStore } from '../../store/store.interface';
 import { formatDate } from '../../utils/date.util';
+import { IAccountMonthlyRecord } from './account-monthly-record.interface';
 import { AccountMonthly } from './account-monthly.component';
 import { IAccountMonthlyOwnProps, IAccountMonthlyStateProps } from './account-monthly.props.interface';
-import { IAccountMonthlyRecord } from './account-monthly-record.interface';
 
 const mapStateToProps = (state: IStore, ownProps: IAccountMonthlyOwnProps): IAccountMonthlyStateProps => {
   const data: IAccountMonthlyRecord[] = ownProps.stateSelector(state, ownProps.accountId, ownProps.date).map(r => ({

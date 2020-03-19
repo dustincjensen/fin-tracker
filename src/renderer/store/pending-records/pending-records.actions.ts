@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { sender } from '../ipc.send';
-import { ImportRecordsFunc } from './import-records.type';
 import { IRecord } from '../records/record.interface';
+import { ImportRecordsFunc } from './import-records.type';
 
 // IPC dispatch actions
 export const NewScotiabankChequingFileSelected: ImportRecordsFunc = (

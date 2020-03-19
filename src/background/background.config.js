@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const Bundler = require('parcel-bundler');
 const Path = require('path');
+const Bundler = require('parcel-bundler');
 
 // Entrypoint file location
 const file = Path.join(__dirname, './background.html');

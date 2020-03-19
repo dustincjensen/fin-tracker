@@ -1,6 +1,6 @@
+import * as accountActions from '../account/account.actions';
 import { IRecord } from './record.interface';
 import * as recordsActions from './records.actions';
-import * as accountActions from '../account/account.actions';
 
 const initialState: IRecord[] = [];
 

@@ -1,9 +1,9 @@
 import * as React from 'react';
+import { ActionPendingRecordsContainer } from './action-pending-records.container';
+import { IImportLayoutProps } from './import.props.interface';
 import { NewRecordsContainer } from './new-records.container';
 import { PendingRecordsContainer } from './pending-records.container';
-import { ActionPendingRecordsContainer } from './action-pending-records.container';
 import './import.layout.scss';
-import { IImportLayoutProps } from './import.props.interface';
 
 export class ImportLayout extends React.Component<IImportLayoutProps> {
   public render() {

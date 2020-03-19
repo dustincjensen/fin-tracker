@@ -1,8 +1,8 @@
+import { Button, Heading, Icon, majorScale, Pane, SelectField, TextInputField } from 'evergreen-ui';
 import * as React from 'react';
+import { newGuid } from '../../utils/guid.util';
 import { INewAccountProps } from './new-account.props.interface';
 import { INewAccountState } from './new-account.state.interface';
-import { newGuid } from '../../utils/guid.util';
-import { Button, majorScale, Pane, Icon, Heading, TextInputField, SelectField } from 'evergreen-ui';
 
 // TODO do we need the account type from finance? so we know credit or debit is up/down?
 export class NewAccount extends React.Component<INewAccountProps, INewAccountState> {

@@ -1,8 +1,8 @@
+import { Button, Table } from 'evergreen-ui';
 import * as React from 'react';
-import { Table, Button } from 'evergreen-ui';
 import { IAccount } from '../../store/account/account.interface';
-import { DeleteAccountDialog } from './delete-account.dialog';
 import { IAccountProps } from './accounts.props.interface';
+import { DeleteAccountDialog } from './delete-account.dialog';
 
 export const Accounts: React.FC<IAccountProps> = props => {
   const { deleteAccount } = props;

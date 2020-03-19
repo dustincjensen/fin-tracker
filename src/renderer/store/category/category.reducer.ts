@@ -1,4 +1,4 @@
-import produce from 'immer';
+import { produce } from 'immer';
 import * as categoryActions from './category.actions';
 import { ICategory } from './category.interface';
 

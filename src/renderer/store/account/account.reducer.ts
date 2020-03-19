@@ -1,6 +1,6 @@
-import produce from 'immer';
-import { IAccount } from './account.interface';
+import { produce } from 'immer';
 import * as accountActions from './account.actions';
+import { IAccount } from './account.interface';
 
 const initialState: { [id: string]: IAccount } = {};
 

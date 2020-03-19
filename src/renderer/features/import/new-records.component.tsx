@@ -1,6 +1,6 @@
+import { Button, FilePicker, FormField, Heading, Icon, majorScale, Pane, SelectField } from 'evergreen-ui';
 import * as React from 'react';
 import { IAccount } from '../../store/account/account.interface';
-import { FilePicker, SelectField, Pane, Button, Heading, Icon, majorScale, FormField } from 'evergreen-ui';
 
 export interface INewRecordsStateProps {
   accounts: IAccount[];
