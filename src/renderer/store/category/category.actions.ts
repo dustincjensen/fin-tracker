@@ -1,18 +1,16 @@
 import { ICategory } from './category.interface';
 
-export const SAVE_NEW_CATEGORY = 'SAVE_NEW_CATEGORY';
-export const DELETE_CATEGORY = 'DELETE_CATEGORY';
+export class CategoryActions {
+  public static SAVE_NEW_CATEGORY = 'SAVE_NEW_CATEGORY';
+  public static DELETE_CATEGORY = 'DELETE_CATEGORY';
 
-export function SaveNewCategory(category: ICategory) {
-  return {
-    type: SAVE_NEW_CATEGORY,
+  public static saveNewCategory = (category: ICategory) => ({
+    type: CategoryActions.SAVE_NEW_CATEGORY,
     payload: category,
-  };
-}
+  });
 
-export function DeleteCategory(id: string) {
-  return {
-    type: DELETE_CATEGORY,
+  public static deleteCategory = (id: string) => ({
+    type: CategoryActions.DELETE_CATEGORY,
     payload: id,
-  };
+  });
 }

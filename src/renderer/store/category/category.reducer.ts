@@ -1,27 +1,24 @@
-import { produce } from 'immer';
-import * as categoryActions from './category.actions';
+import { Draft } from 'immer';
+import { createDraftReducer } from '../draft.reducer';
+import { CategoryActions } from './category.actions';
 import { ICategory } from './category.interface';
+import { ICategoryStore } from './category.store.interface';
 
-const initialState: { [id: string]: ICategory } = {};
+const initialState: ICategoryStore = { categories: {} };
 
-export const CategoryReducer = produce((state, action) => {
-  switch (action.type) {
-    case categoryActions.SAVE_NEW_CATEGORY: {
-      saveNewCategory(state, action);
-      break;
-    }
-    case categoryActions.DELETE_CATEGORY: {
-      deleteCategory(state, action);
-      break;
-    }
-  }
-}, initialState);
+export const CategoryReducer = createDraftReducer(
+  {
+    [CategoryActions.SAVE_NEW_CATEGORY]: saveNewCategory,
+    [CategoryActions.DELETE_CATEGORY]: deleteCategory,
+  },
+  initialState
+);
 
-function saveNewCategory(state, action) {
-  const { id } = action.payload;
-  state[id] = action.payload;
+function saveNewCategory(draft: Draft<ICategoryStore>, newCategory: ICategory) {
+  const { id } = newCategory;
+  draft.categories[id] = newCategory;
 }
 
-function deleteCategory(state, action) {
-  delete state[action.payload];
+function deleteCategory(draft: Draft<ICategoryStore>, id: string) {
+  delete draft.categories[id];
 }

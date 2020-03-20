@@ -1,11 +1,11 @@
-import { IAccount } from './account/account.interface';
-import { ICategory } from './category/category.interface';
-import { IPendingRecords } from './pending-records/pending-records.interface';
-import { IRecord } from './records/record.interface';
+import { IAccountStore } from './account/account.store.interface';
+import { ICategoryStore } from './category/category.store.interface';
+import { IPendingRecordStore } from './pending-record/pending-record.store.interface';
+import { IRecordStore } from './record/record.store.interface';
 
 export interface IStore {
-  accounts: { [id: string]: IAccount };
-  categories: ICategory[];
-  pendingRecords: IPendingRecords;
-  records: IRecord[];
+  accounts: IAccountStore;
+  categories: ICategoryStore;
+  pendingRecords: IPendingRecordStore;
+  records: IRecordStore;
 }

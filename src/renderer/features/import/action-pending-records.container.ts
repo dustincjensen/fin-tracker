@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { ClearImportedRecords } from '../../store/pending-records/pending-records.actions';
-import { IRecord } from '../../store/records/record.interface';
-import { PendingRecordsMerged } from '../../store/records/records.actions';
-import { ByAccountId } from '../../store/records/records.selectors';
+import { PendingRecordActions } from '../../store/pending-record/pending-record.actions';
+import { RecordActions } from '../../store/record/record.actions';
+import { IRecord } from '../../store/record/record.interface';
+import { RecordSelectors } from '../../store/record/record.selectors';
 import { IStore } from '../../store/store.interface';
 import {
   ActionPendingRecords,
@@ -11,22 +11,21 @@ import {
   IActionPendingRecordsStateProps,
 } from './action-pending-records.component';
 
-function mapStateToProps(store: IStore): IActionPendingRecordsStateProps {
-  const { accountId, records } = store.pendingRecords;
-  const account = store.accounts[accountId];
+function mapStateToProps(state: IStore): IActionPendingRecordsStateProps {
+  const { accountId, records } = state.pendingRecords;
+  const account = state.accounts.accounts[accountId];
   return {
     startingBalance: account.startingBalance,
     newRecords: records,
-    existingRecords: ByAccountId(store, accountId),
+    existingRecords: RecordSelectors.records(state, accountId),
   };
 }
 
 function mapDispatchToProps(dispatch: Dispatch): IActionPendingRecordsDispatchProps {
   return {
-    accept: (startingBalance: number, newRecords: IRecord[], existingRecords: IRecord[]) => {
-      PendingRecordsMerged(dispatch, startingBalance, newRecords, existingRecords);
-    },
-    clear: () => dispatch(ClearImportedRecords()),
+    accept: (startingBalance: number, newRecords: IRecord[], existingRecords: IRecord[]) =>
+      RecordActions.pendingRecordsMerged(dispatch, startingBalance, newRecords, existingRecords),
+    clear: () => dispatch(PendingRecordActions.clearImportedRecords()),
   };
 }
 

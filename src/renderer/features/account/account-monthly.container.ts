@@ -6,7 +6,7 @@ import { AccountMonthly } from './account-monthly.component';
 import { IAccountMonthlyOwnProps, IAccountMonthlyStateProps } from './account-monthly.props.interface';
 
 const mapStateToProps = (state: IStore, ownProps: IAccountMonthlyOwnProps): IAccountMonthlyStateProps => {
-  const data: IAccountMonthlyRecord[] = ownProps.stateSelector(state, ownProps.accountId, ownProps.date).map(r => ({
+  const data: IAccountMonthlyRecord[] = ownProps.stateSelector(state, ownProps.accountId, ownProps.date)?.map(r => ({
     ...r,
     date: formatDate(r.date),
     debit: `${(r.debit && r.debit.toFixed(2)) || ''}`,

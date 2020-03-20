@@ -34,6 +34,7 @@ module.exports = {
       'alphabetize': { 'order': 'asc', 'caseInsensitive': true }
     }],
     'import/newline-after-import': ['error', { 'count': 1 }],
+    "import/named": "off",
     'semi': 'error',
   },
   settings: {

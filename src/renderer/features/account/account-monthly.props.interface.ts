@@ -1,4 +1,4 @@
-import { IRecord } from '../../store/records/record.interface';
+import { IRecord } from '../../store/record/record.interface';
 import { IStore } from '../../store/store.interface';
 import { IAccountMonthlyRecord } from './account-monthly-record.interface';
 

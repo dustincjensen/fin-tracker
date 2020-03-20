@@ -1,7 +1,7 @@
 import { Pane, Tab, Tablist } from 'evergreen-ui';
 import * as React from 'react';
 import { withRouter } from 'react-router';
-import { ByAccountIdAndDate } from '../../store/records/records.selectors';
+import { RecordSelectors } from '../../store/record/record.selectors';
 import { monthNamesShort } from '../../utils/date.util';
 import { AccountMonthlyBalanceChartContainer } from './account-monthly-balance-chart.container';
 import { AccountMonthlyContainer } from './account-monthly.container';
@@ -33,7 +33,11 @@ class AccountLayoutClass extends React.Component<IAccountProps, IAccountState> {
 
     return (
       <Pane>
-        <AccountMonthlyBalanceChartContainer accountId={accountId} date={date} stateSelector={ByAccountIdAndDate} />
+        <AccountMonthlyBalanceChartContainer
+          accountId={accountId}
+          date={date}
+          stateSelector={RecordSelectors.recordsByDate}
+        />
         <Pane display='grid'>
           <AccountMonthsComparisonContainer accountId={accountId} date={date} />
           <Tablist display='flex' justifyContent='space-around' marginBottom={2}>
@@ -49,7 +53,7 @@ class AccountLayoutClass extends React.Component<IAccountProps, IAccountState> {
               </Tab>
             ))}
           </Tablist>
-          <AccountMonthlyContainer accountId={accountId} date={date} stateSelector={ByAccountIdAndDate} />
+          <AccountMonthlyContainer accountId={accountId} date={date} stateSelector={RecordSelectors.recordsByDate} />
         </Pane>
       </Pane>
     );

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { IRecord } from '../../store/records/record.interface';
+import { IRecord } from '../../store/record/record.interface';
 import { IStore } from '../../store/store.interface';
 import { formatDate } from '../../utils/date.util';
 import { AccountBalanceLineChart } from './account-balance-line-chart.component';
@@ -11,10 +11,9 @@ interface IAccountMonthlyOwnProps {
 }
 
 const mapStateToProps = (state: IStore, ownProps: IAccountMonthlyOwnProps) => {
+  const records = ownProps.stateSelector(state, ownProps.accountId, ownProps.date);
   return {
-    records: ownProps
-      .stateSelector(state, ownProps.accountId, ownProps.date)
-      .map(r => ({ ...r, date: formatDate(r.date) })),
+    records: records?.map(r => ({ ...r, date: formatDate(r.date) })),
   };
 };
 

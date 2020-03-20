@@ -22,7 +22,7 @@ export const AccountMonthly: React.FC<IAccountMonthlyProps> = props => {
         <Table.TextHeaderCell {...cellDetails}>Balance</Table.TextHeaderCell>
       </Table.Head>
       <Table.Body>
-        {records.map(record => {
+        {records?.map(record => {
           return (
             <Table.Row key={record.id}>
               <Table.TextCell {...cellDetails}>{record.date}</Table.TextCell>

@@ -1,23 +1,21 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { DeleteAccount } from '../../store/account/account.actions';
+import { AccountActions } from '../../store/account/account.actions';
 import { IAccount } from '../../store/account/account.interface';
 import { IStore } from '../../store/store.interface';
 import { Accounts } from './accounts.component';
 import { IAccountDispatchProps, IAccountStateProps } from './accounts.props.interface';
 
 const mapStateToProps = (state: IStore): IAccountStateProps => {
-  const accounts: IAccount[] = Object.keys(state.accounts).map(id => state.accounts[id]);
+  const accounts: IAccount[] = Object.keys(state.accounts.accounts).map(id => state.accounts.accounts[id]);
 
   return {
     accounts,
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): IAccountDispatchProps => {
-  return {
-    deleteAccount: (accountId: string) => dispatch(DeleteAccount(accountId)),
-  };
-};
+const mapDispatchToProps = (dispatch: Dispatch): IAccountDispatchProps => ({
+  deleteAccount: (accountId: string) => dispatch(AccountActions.deleteAccount(accountId)),
+});
 
 export const AccountsContainer = connect(mapStateToProps, mapDispatchToProps)(Accounts);

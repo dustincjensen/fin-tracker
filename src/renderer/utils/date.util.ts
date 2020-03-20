@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/named
 import moment, { Moment } from 'moment';
 
 /**

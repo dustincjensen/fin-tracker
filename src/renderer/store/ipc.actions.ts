@@ -1,16 +1,16 @@
 import { IpcRendererEvent } from 'electron';
-import * as pendingRecordsActions from './pending-records/pending-records.actions';
-import * as recordsActions from './records/records.actions';
+import { PendingRecordActions } from './pending-record/pending-record.actions';
+import { RecordActions } from './record/record.actions';
 
 const lookup: { [type: string]: Function } = {
-  ['IPC_NEW_RECORDS_PARSED']: pendingRecordsActions.ImportNewRecords,
-  ['IPC_NEW_RECORDS_MERGED']: recordsActions.SaveNewRecords,
+  ['IPC_NEW_RECORDS_PARSED']: PendingRecordActions.importNewRecords,
+  ['IPC_NEW_RECORDS_MERGED']: RecordActions.saveNewRecords,
 };
 
 /**
  * Handles the incoming communication from the main process.
  * Looks up an action and triggers it based on the type from the background process.
- * 
+ *
  * @param _event    The renderer event.
  * @param ipcType   The type to lookup to trigger the necessary action.
  * @param args      The arguments to pass to the action.

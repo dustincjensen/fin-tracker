@@ -1,27 +1,24 @@
-import { produce } from 'immer';
-import * as accountActions from './account.actions';
+import { Draft } from 'immer';
+import { createDraftReducer } from '../draft.reducer';
+import { AccountActions } from './account.actions';
 import { IAccount } from './account.interface';
+import { IAccountStore } from './account.store.interface';
 
-const initialState: { [id: string]: IAccount } = {};
+const initialState: IAccountStore = { accounts: {} };
 
-export const AccountReducer = produce((state, action) => {
-  switch (action.type) {
-    case accountActions.SAVE_NEW_ACCOUNT: {
-      saveNewAccount(state, action);
-      break;
-    }
-    case accountActions.DELETE_ACCOUNT: {
-      deleteAccount(state, action);
-      break;
-    }
-  }
-}, initialState);
+export const AccountReducer = createDraftReducer(
+  {
+    [AccountActions.SAVE_NEW_ACCOUNT]: saveNewAccount,
+    [AccountActions.DELETE_ACCOUNT]: deleteAccount,
+  },
+  initialState
+);
 
-function saveNewAccount(state, action) {
-  const { id } = action.payload;
-  state[id] = action.payload;
+function saveNewAccount(draft: Draft<IAccountStore>, newAccount: IAccount) {
+  const { id } = newAccount;
+  draft.accounts[id] = newAccount;
 }
 
-function deleteAccount(state, action) {
-  delete state[action.payload];
+function deleteAccount(draft: Draft<IAccountStore>, id: string) {
+  delete draft.accounts[id];
 }

@@ -1,4 +1,4 @@
-import { IRecord } from '../../store/records/record.interface';
+import { IRecord } from '../../store/record/record.interface';
 
 export interface IPendingRecordsProps extends IPendingRecordsStateProps, IPendingRecordsDispatchProps {}
 

@@ -7,7 +7,7 @@ export interface INewRecordsStateProps {
 }
 
 export interface INewRecordsDispatchProps {
-  importAction: (account: IAccount, file: File) => void;
+  importAction: (account: IAccount, file) => void;
 }
 
 interface INewRecordsState {

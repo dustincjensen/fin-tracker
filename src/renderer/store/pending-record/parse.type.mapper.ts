@@ -1,10 +1,6 @@
 import { ImportRecordsFunc } from './import-records.type';
 import { ParseType } from './parse.type';
-import {
-  NewScotiabankChequingFileSelected,
-  NewScotiabankSavingsFileSelected,
-  NewScotiabankVisaFileSelected,
-} from './pending-records.actions';
+import { PendingRecordActions } from './pending-record.actions';
 
 /**
  * Defines a type that requires the parseTypeLookup
@@ -13,9 +9,9 @@ import {
 type ParseLookup = { [P in ParseType]: ImportRecordsFunc };
 
 const parseTypeLookup: ParseLookup = {
-  ScotiabankChequing: NewScotiabankChequingFileSelected,
-  ScotiabankSavings: NewScotiabankSavingsFileSelected,
-  ScotiabankVisa: NewScotiabankVisaFileSelected,
+  ScotiabankChequing: PendingRecordActions.newScotiabankChequingFileSelected,
+  ScotiabankSavings: PendingRecordActions.newScotiabankSavingsFileSelected,
+  ScotiabankVisa: PendingRecordActions.newScotiabankVisaFileSelected,
 };
 
 /**

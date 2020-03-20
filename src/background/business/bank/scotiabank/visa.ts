@@ -25,8 +25,8 @@ export function parse(accountId, filePath): IRecord[] {
         id: i,
         accountId,
         date,
-        debit,
-        credit,
+        debit: debit || undefined,
+        credit: credit || undefined,
         description,
       };
     })
