@@ -1,25 +1,13 @@
 import { Button, FilePicker, FormField, Heading, Icon, majorScale, Pane, SelectField } from 'evergreen-ui';
 import * as React from 'react';
-import { IAccount } from '../../store/account/account.interface';
+import { INewRecordsProps } from './new-records.props.interface';
+import { INewRecordsState } from './new-records.state.interface';
 
-export interface INewRecordsStateProps {
-  accounts: IAccount[];
-}
-
-export interface INewRecordsDispatchProps {
-  importAction: (account: IAccount, file) => void;
-}
-
-interface INewRecordsState {
-  selectedFile?: File;
-  selectedAccountId?: string;
-}
-
-export class NewRecords extends React.Component<INewRecordsStateProps & INewRecordsDispatchProps, INewRecordsState> {
+export class NewRecords extends React.Component<INewRecordsProps, INewRecordsState> {
   constructor(props) {
     super(props);
     this.state = {
-      selectedAccountId: (props.accounts && props.accounts[0] && props.accounts[0].id) || '',
+      selectedAccountId: props.accountId || props.accounts?.[0]?.id || '',
       selectedFile: null,
     };
   }

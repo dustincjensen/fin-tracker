@@ -36,11 +36,19 @@ function isInYearMonthMoment(date: Moment, target: Moment): boolean {
 }
 
 /**
- * Returns the date formatted as following 'June 16th, 2018'.
+ * Returns the date formatted as following 'Jun 16th'.
  * @param date the date to be formatted.
  */
 export function formatDate(date: string): string {
-  return moment(date).format('MMM Do');
+  return moment(date).format('MMM D');
+}
+
+/**
+ * Returns the date formatted as following 'June 16th, 2018'.
+ * @param date the date to be formatted.
+ */
+export function formatDateFull(date: string): string {
+  return moment(date).format('LL');
 }
 
 /**

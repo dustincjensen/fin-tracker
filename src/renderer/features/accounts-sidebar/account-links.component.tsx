@@ -1,14 +1,22 @@
-import { Pane } from 'evergreen-ui';
+import { Pane, IconName } from 'evergreen-ui';
 import * as React from 'react';
 import { AccountLink } from './account-link.component';
-import { IAccount, IAccountProps } from './account-links.component.interface';
+import { IAccountProps } from './account-links.component.interface';
+
+// TODO replace this with a better implementation...
+// Maybe let the account pick their icon?
+const parseTypeToIconName: { [type: string]: IconName } = {
+  ['ScotiabankChequing']: 'bank-account',
+  ['ScotiabankSavings']: 'bank-account',
+  ['ScotiabankVisa']: 'credit-card',
+};
 
 export const AccountLinks = (props: IAccountProps) => {
   const { accounts } = props;
 
   const links = Object.keys(accounts).map((accountId: string) => {
-    const a: IAccount = accounts[accountId];
-    return <AccountLink key={a.id} id={a.id} name={a.name} />;
+    const acc = accounts[accountId];
+    return <AccountLink key={acc.id} id={acc.id} name={acc.name} iconName={parseTypeToIconName[acc.parseType]} />;
   });
 
   return (

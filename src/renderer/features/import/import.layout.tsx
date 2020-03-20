@@ -8,9 +8,11 @@ import './import.layout.scss';
 export class ImportLayout extends React.Component<IImportLayoutProps> {
   public render() {
     const { hasPendingRecords } = this.props;
+    const { accountId } = this.props.match.params;
+
     return (
       <div className='imports'>
-        {!hasPendingRecords && <NewRecordsContainer />}
+        {!hasPendingRecords && <NewRecordsContainer accountId={accountId} />}
         {hasPendingRecords && <ActionPendingRecordsContainer />}
         {hasPendingRecords && <PendingRecordsContainer />}
       </div>

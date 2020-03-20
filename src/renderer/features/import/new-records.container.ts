@@ -3,7 +3,8 @@ import { Dispatch } from 'redux';
 import { IAccount } from '../../store/account/account.interface';
 import { mapParseType } from '../../store/pending-record/parse.type.mapper';
 import { IStore } from '../../store/store.interface';
-import { INewRecordsDispatchProps, INewRecordsStateProps, NewRecords } from './new-records.component';
+import { NewRecords } from './new-records.component';
+import { INewRecordsStateProps, INewRecordsDispatchProps } from './new-records.props.interface';
 
 const mapStateToProps = (state: IStore): INewRecordsStateProps => {
   return {
