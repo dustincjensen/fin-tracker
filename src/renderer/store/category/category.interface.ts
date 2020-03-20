@@ -8,4 +8,7 @@ export interface ICategory {
    * The name of the category.
    */
   name: string;
+
+  // TODO color for the category.
+  // npm install react-color --save
 }
