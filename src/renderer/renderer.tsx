@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 import { applyMiddleware, createStore } from 'redux';
-import { RootLayout } from './features/_root_/root.layout';
+import { RootLayout } from './features/root/root.layout';
 import { ipcReceive } from './store/ipc';
 import { rootReducer } from './store/store';
 import './renderer.scss';
