@@ -1,4 +1,3 @@
-import { ICategory } from '../../store/category/category.interface';
 import { IRecord } from '../../store/record/record.interface';
 import { IStore } from '../../store/store.interface';
 
@@ -7,7 +6,12 @@ export interface IAccountMonthlyProps
     IAccountMonthlyDispatchProps,
     IAccountMonthlyOwnProps {}
 
-type RecordType = IRecord & { category: ICategory };
+type RecordType = IRecord & {
+  category: {
+    label: string;
+    value: string;
+  };
+};
 
 export interface IAccountMonthlyStateProps {
   /**
@@ -18,7 +22,10 @@ export interface IAccountMonthlyStateProps {
   /**
    * The list of categories to choose from for each record.
    */
-  categories: ICategory[];
+  categories: Array<{
+    label: string;
+    value: string;
+  }>;
 }
 
 export interface IAccountMonthlyDispatchProps {

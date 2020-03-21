@@ -1,5 +1,6 @@
-import { Table, Combobox } from 'evergreen-ui';
+import { Table } from 'evergreen-ui';
 import * as React from 'react';
+import { CategorySelect } from '../../components/category-select/category-select.component';
 import { formatDate } from '../../utils/date.util';
 import { IAccountMonthlyProps } from './account-monthly.props.interface';
 
@@ -36,16 +37,9 @@ export const AccountMonthly: React.FC<IAccountMonthlyProps> = props => {
             <Table.Row key={record.id}>
               <Table.TextCell {...cellDetails}>{formatDate(record.date)}</Table.TextCell>
               <Table.TextCell>{record.description}</Table.TextCell>
-              <Table.Cell {...editableCellDetails}>
-                <Combobox
-                  items={categories}
-                  itemToString={item => (item ? String(item.name) : '')}
-                  onChange={selectedCategory => updateCategory(record.id, selectedCategory?.id)}
-                  selectedItem={record.category || ''}
-                  placeholder='Choose category...'
-                  width={170}
-                />
-              </Table.Cell>
+              <Table.TextCell {...editableCellDetails}>
+                <CategorySelect record={record} categories={categories} updateCategory={updateCategory} />
+              </Table.TextCell>
               <Table.TextCell isNumber textAlign='right' {...cellDetails}>
                 {record.debit?.toFixed(2) || ''}
               </Table.TextCell>

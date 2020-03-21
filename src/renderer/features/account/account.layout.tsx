@@ -9,13 +9,12 @@ import { AccountMonthsComparisonContainer } from './account-months-comparison.co
 import { IAccountProps } from './account.props.interface';
 import { IAccountState } from './account.state.interface';
 
-// TODO props and state interfaces
 class AccountLayoutClass extends React.Component<IAccountProps, IAccountState> {
   constructor(props) {
     super(props);
     this.state = {
       tabs: monthNamesShort(),
-      date: '2018-05-01',
+      date: '2018-01-01',
       selectedIndex: 4,
     };
   }
