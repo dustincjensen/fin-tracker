@@ -15,7 +15,7 @@ class AccountLayoutClass extends React.Component<IAccountProps, IAccountState> {
     this.state = {
       tabs: monthNamesShort(),
       date: '2018-01-01',
-      selectedIndex: 4,
+      selectedIndex: 0,
     };
   }
 

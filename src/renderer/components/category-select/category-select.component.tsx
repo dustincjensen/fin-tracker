@@ -49,7 +49,7 @@ export const CategorySelect: React.FC<ICategorySelectProps> = props => {
         <Pane
           display='flex'
           alignItems='center'
-          background='orangered'
+          background={record.category.color || '#333'}
           padding={5}
           paddingRight={5}
           paddingLeft={10}

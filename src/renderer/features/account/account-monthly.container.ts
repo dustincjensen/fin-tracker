@@ -11,6 +11,7 @@ const mapStateToProps = (state: IStore, ownProps: IAccountMonthlyOwnProps): IAcc
       const category = state.categories.categories[id];
       return {
         label: category.name,
+        color: category.color,
         value: category.id,
       };
     })

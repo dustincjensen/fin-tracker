@@ -5,6 +5,7 @@ export interface ICategorySelectProps {
   record: {
     id: string;
     category: {
+      color: string;
       label: string;
       value: string;
     };
@@ -14,6 +15,7 @@ export interface ICategorySelectProps {
    * The categories to choose from.
    */
   categories: Array<{
+    color: string;
     label: string;
     value: string;
   }>;

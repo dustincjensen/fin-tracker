@@ -8,6 +8,7 @@ export interface IAccountMonthlyProps
 
 type RecordType = IRecord & {
   category: {
+    color: string;
     label: string;
     value: string;
   };
