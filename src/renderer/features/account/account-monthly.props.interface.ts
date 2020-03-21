@@ -1,20 +1,32 @@
+import { ICategory } from '../../store/category/category.interface';
 import { IRecord } from '../../store/record/record.interface';
 import { IStore } from '../../store/store.interface';
-import { IAccountMonthlyRecord } from './account-monthly-record.interface';
 
 export interface IAccountMonthlyProps
   extends IAccountMonthlyStateProps,
     IAccountMonthlyDispatchProps,
     IAccountMonthlyOwnProps {}
 
+type RecordType = IRecord & { category: ICategory };
+
 export interface IAccountMonthlyStateProps {
   /**
    * The records to display.
    */
-  records: IAccountMonthlyRecord[];
+  records: RecordType[];
+
+  /**
+   * The list of categories to choose from for each record.
+   */
+  categories: ICategory[];
 }
 
-export interface IAccountMonthlyDispatchProps {}
+export interface IAccountMonthlyDispatchProps {
+  /**
+   * Function to update a category in state.
+   */
+  updateCategory: (recordId: string, categoryId: string) => void;
+}
 
 export interface IAccountMonthlyOwnProps {
   /**

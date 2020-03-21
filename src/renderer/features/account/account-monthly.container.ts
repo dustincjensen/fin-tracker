@@ -1,22 +1,34 @@
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { RecordActions } from '../../store/record/record.actions';
 import { IStore } from '../../store/store.interface';
-import { formatDate } from '../../utils/date.util';
-import { IAccountMonthlyRecord } from './account-monthly-record.interface';
 import { AccountMonthly } from './account-monthly.component';
 import { IAccountMonthlyOwnProps, IAccountMonthlyStateProps } from './account-monthly.props.interface';
 
 const mapStateToProps = (state: IStore, ownProps: IAccountMonthlyOwnProps): IAccountMonthlyStateProps => {
-  const data: IAccountMonthlyRecord[] = ownProps.stateSelector(state, ownProps.accountId, ownProps.date)?.map(r => ({
-    ...r,
-    date: formatDate(r.date),
-    debit: `${(r.debit && r.debit.toFixed(2)) || ''}`,
-    credit: `${(r.credit && r.credit.toFixed(2)) || ''}`,
-    balance: `${(r.balance && r.balance.toFixed(2)) || ''}`,
-  }));
+  const categories = Object.keys(state.categories.categories).map(id => {
+    return state.categories.categories[id];
+  });
+
+  const records = ownProps.stateSelector(state, ownProps.accountId, ownProps.date).map(r => {
+    return {
+      ...r,
+      category: categories.find(c => c.id === r.categoryId),
+    };
+  });
 
   return {
-    records: data,
+    records,
+    categories,
   };
 };
 
-export const AccountMonthlyContainer = connect(mapStateToProps)(AccountMonthly);
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: IAccountMonthlyOwnProps) => {
+  const { accountId } = ownProps;
+  return {
+    updateCategory: (recordId: string, categoryId: string) =>
+      dispatch(RecordActions.setRecordCategory(accountId, recordId, categoryId)),
+  };
+};
+
+export const AccountMonthlyContainer = connect(mapStateToProps, mapDispatchToProps)(AccountMonthly);

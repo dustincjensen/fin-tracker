@@ -20,6 +20,11 @@ export interface IRecord {
   description: string;
 
   /**
+   * The ID of the category for this record.
+   */
+  categoryId?: string;
+
+  /**
    * The debit of the record.
    */
   debit?: number;
