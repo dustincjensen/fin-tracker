@@ -1,6 +1,6 @@
 import { ICategory } from '../../store/category/category.interface';
 
-export interface ICategoriesProps extends ICategoriesStateProps, ICategoriesDispatchProps {}
+export interface ICategoriesProps extends ICategoriesStateProps, ICategoriesDispatchProps, ICategoriesOwnProps {}
 
 export interface ICategoriesStateProps {
   /**
@@ -14,4 +14,11 @@ export interface ICategoriesDispatchProps {
    * Action to delete a category.
    */
   deleteCategory: (categoryId: string) => void;
+}
+
+export interface ICategoriesOwnProps {
+  /**
+   * The category filter.
+   */
+  categoryFilter: string;
 }

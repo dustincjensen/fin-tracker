@@ -12,7 +12,7 @@ import {
 import * as React from 'react';
 import { CirclePicker } from 'react-color';
 import { newGuid } from '../../utils/guid.util';
-import { INewCategoryProps } from './new-category.component.interface';
+import { INewCategoryProps } from './new-category.props.interface';
 import { INewCategoryState } from './new-category.state.interface';
 
 export class NewCategory extends React.Component<INewCategoryProps, INewCategoryState> {
@@ -65,6 +65,7 @@ export class NewCategory extends React.Component<INewCategoryProps, INewCategory
                     style={{ border: '1px solid black', background: this.state.color, width: '40px', height: '26px' }}
                   >
                     <input
+                      tabIndex={-1}
                       defaultValue={this.state.color}
                       required
                       style={{ width: '1px', height: '1px', opacity: 0 }}
@@ -75,6 +76,15 @@ export class NewCategory extends React.Component<INewCategoryProps, INewCategory
             </Pane>
           </Pane>
           <Pane display='flex' justifyContent='flex-end' borderTop paddingTop={10}>
+            <Button
+              type='button'
+              iconBefore='ban-circle'
+              height={majorScale(5)}
+              marginRight={10}
+              onClick={this.handleClose}
+            >
+              Cancel
+            </Button>
             <Button appearance='primary' iconBefore='floppy-disk' height={majorScale(5)}>
               Save Category
             </Button>
@@ -98,5 +108,9 @@ export class NewCategory extends React.Component<INewCategoryProps, INewCategory
 
     this.props.saveNewCategory(newCategory);
     this.setState({ name: '', color: '' });
+
+    this.props.close();
   };
+
+  handleClose = () => this.props.close();
 }
