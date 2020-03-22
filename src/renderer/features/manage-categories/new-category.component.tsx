@@ -84,16 +84,9 @@ export class NewCategory extends React.Component<INewCategoryProps, INewCategory
     );
   }
 
-  handleChange = evt => {
-    const { target } = evt;
-    const { value } = target;
-    this.setState({ name: value });
-  };
+  handleChange = evt => this.setState({ name: evt.target.value });
 
-  handleColorChange = color => {
-    console.log(color.hex);
-    this.setState({ color: color.hex });
-  };
+  handleColorChange = color => this.setState({ color: color.hex });
 
   handleSubmit = evt => {
     evt.preventDefault();

@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import { RecordSelectors } from '../../store/record/record.selectors';
 import { monthNamesShort } from '../../utils/date.util';
 import { AccountMonthlyBalanceChartContainer } from './account-monthly-balance-chart.container';
+import { AccountMonthlyCategoryTotalsChartContainer } from './account-monthly-category-totals-chart.container';
 import { AccountMonthlyContainer } from './account-monthly.container';
 import { AccountMonthsComparisonContainer } from './account-months-comparison.container';
 import { IAccountProps } from './account.props.interface';
@@ -32,11 +33,18 @@ class AccountLayoutClass extends React.Component<IAccountProps, IAccountState> {
 
     return (
       <Pane>
-        <AccountMonthlyBalanceChartContainer
-          accountId={accountId}
-          date={date}
-          stateSelector={RecordSelectors.recordsByDate}
-        />
+        <Pane display='flex'>
+          <AccountMonthlyBalanceChartContainer
+            accountId={accountId}
+            date={date}
+            stateSelector={RecordSelectors.recordsByDate}
+          />
+          <AccountMonthlyCategoryTotalsChartContainer
+            accountId={accountId}
+            date={date}
+            stateSelector={RecordSelectors.recordsByDate}
+          />
+        </Pane>
         <Pane display='grid'>
           <AccountMonthsComparisonContainer accountId={accountId} date={date} />
           <Tablist display='flex' justifyContent='space-around' marginBottom={2}>
