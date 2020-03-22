@@ -7,14 +7,14 @@ export class AccountCategoryTotalsChart extends React.Component<IAccountCategory
   render() {
     const { records, categories } = this.props;
 
-    let data = categories.map(c => ({ categoryId: c.id, color: c.color, name: c.name, total: 0.0 }));
+    let data = categories?.map(c => ({ categoryId: c.id, color: c.color, name: c.name, total: 0.0 }));
     for (const category of data) {
       const categoryId = category.categoryId;
       const total = records
-        .filter(r => r.categoryId === categoryId)
+        ?.filter(r => r.categoryId === categoryId)
         .map(r => r.credit || r.debit)
         .reduce((accumulator, currentValue) => (accumulator += currentValue), 0.0);
-      category.total = parseFloat(total.toFixed(2));
+      category.total = parseFloat(total?.toFixed(2) || '0.0');
     }
 
     // Don't display empty categories.

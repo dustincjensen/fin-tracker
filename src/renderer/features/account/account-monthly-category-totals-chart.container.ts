@@ -12,7 +12,7 @@ interface IAccountMonthlyOwnProps {
 const mapStateToProps = (state: IStore, ownProps: IAccountMonthlyOwnProps) => {
   const records = ownProps.stateSelector(state, ownProps.accountId, ownProps.date);
   const categories = Object.keys(state.categories.categories)
-    .map(id => state.categories.categories[id])
+    ?.map(id => state.categories.categories[id])
     .sort((c1, c2) => {
       return c1.name < c2.name ? -1 : c1.name > c2.name ? 1 : 0;
     });

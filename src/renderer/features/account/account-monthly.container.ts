@@ -19,7 +19,7 @@ const mapStateToProps = (state: IStore, ownProps: IAccountMonthlyOwnProps): IAcc
       return c1.label < c2.label ? -1 : c1.label > c2.label ? 1 : 0;
     });
 
-  const records = ownProps.stateSelector(state, ownProps.accountId, ownProps.date).map(r => {
+  const records = ownProps.stateSelector(state, ownProps.accountId, ownProps.date)?.map(r => {
     return {
       ...r,
       category: categories.find(c => c.value === r.categoryId),
