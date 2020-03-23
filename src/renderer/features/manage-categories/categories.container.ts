@@ -11,7 +11,11 @@ const mapStateToProps = (state: IStore, ownProps: ICategoriesOwnProps): ICategor
 
   const categories: ICategory[] = Object.keys(state.categories.categories)
     .map(key => state.categories.categories[key])
-    .sort((c1, c2) => (c1.name < c2.name ? -1 : c1.name > c2.name ? 1 : 0));
+    .sort((c1, c2) => {
+      const c1Name = c1.name.toLowerCase();
+      const c2Name = c2.name.toLowerCase();
+      return c1Name < c2Name ? -1 : c1Name > c2Name ? 1 : 0;
+    });
 
   const filteredCategories =
     categoryFilter && categoryFilter.length > 0

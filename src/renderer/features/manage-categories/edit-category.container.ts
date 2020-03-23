@@ -6,12 +6,11 @@ import { EditCategory } from './edit-category.component';
 import { IEditCategoryDispatchProps, IEditCategoryStateProps } from './edit-category.props.interface';
 
 const mapStateToProps = (): IEditCategoryStateProps => ({
-  headerText: 'New Category',
-  saveButtonText: 'Save Category',
+  saveButtonText: 'Update Category',
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): IEditCategoryDispatchProps => ({
-  saveCategory: (category: ICategory) => dispatch(CategoryActions.saveNewCategory(category)),
+  saveCategory: (category: ICategory) => dispatch(CategoryActions.updateCategory(category)),
 });
 
-export const NewCategoryContainer = connect(mapStateToProps, mapDispatchToProps)(EditCategory);
+export const EditCategoryContainer = connect(mapStateToProps, mapDispatchToProps)(EditCategory);

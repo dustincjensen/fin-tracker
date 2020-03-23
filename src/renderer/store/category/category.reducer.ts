@@ -9,6 +9,7 @@ const initialState: ICategoryStore = { categories: {} };
 export const CategoryReducer = createDraftReducer(
   {
     [CategoryActions.SAVE_NEW_CATEGORY]: saveNewCategory,
+    [CategoryActions.UPDATE_CATEGORY]: updateCategory,
     [CategoryActions.DELETE_CATEGORY]: deleteCategory,
   },
   initialState
@@ -17,6 +18,14 @@ export const CategoryReducer = createDraftReducer(
 function saveNewCategory(draft: Draft<ICategoryStore>, newCategory: ICategory) {
   const { id } = newCategory;
   draft.categories[id] = newCategory;
+}
+
+function updateCategory(draft: Draft<ICategoryStore>, updatedCategory: ICategory) {
+  const { id } = updatedCategory;
+  if (!draft.categories[id]) {
+    throw Error('Category does not exist.');
+  }
+  draft.categories[id] = updatedCategory;
 }
 
 function deleteCategory(draft: Draft<ICategoryStore>, id: string) {

@@ -16,7 +16,9 @@ const mapStateToProps = (state: IStore, ownProps: IAccountMonthlyOwnProps): IAcc
       };
     })
     .sort((c1, c2) => {
-      return c1.label < c2.label ? -1 : c1.label > c2.label ? 1 : 0;
+      const c1Label = c1.label.toLowerCase();
+      const c2Label = c2.label.toLowerCase();
+      return c1Label < c2Label ? -1 : c1Label > c2Label ? 1 : 0;
     });
 
   const records = ownProps.stateSelector(state, ownProps.accountId, ownProps.date)?.map(r => {
