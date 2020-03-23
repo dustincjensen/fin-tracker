@@ -32,7 +32,7 @@ export const EditCategory: React.FC<IEditCategoryProps> = ({
     evt.preventDefault();
 
     const updatedCategory: ICategory = {
-      id: category.id || newGuid(),
+      id: category?.id || newGuid(),
       name,
       color,
     };
