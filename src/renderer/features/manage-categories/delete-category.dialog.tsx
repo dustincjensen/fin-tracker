@@ -10,7 +10,7 @@ export const DeleteCategoryDialog: React.FC<IDeleteCategoryProps> = props => {
   }
 
   const confirm = () => {
-    deleteCategory(category.id);
+    deleteCategory(category);
     onConfirm();
   };
 

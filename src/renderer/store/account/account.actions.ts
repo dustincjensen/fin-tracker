@@ -15,8 +15,8 @@ export class AccountActions {
     payload: account,
   });
 
-  public static deleteAccount = (id: string) => ({
+  public static deleteAccount = (account: IAccount) => ({
     type: AccountActions.DELETE_ACCOUNT,
-    payload: id,
+    payload: account,
   });
 }

@@ -10,7 +10,7 @@ export const DeleteAccountDialog: React.FC<IDeleteAccountProps> = props => {
   }
 
   const confirm = () => {
-    deleteAccount(account.id);
+    deleteAccount(account);
     onConfirm();
   };
 

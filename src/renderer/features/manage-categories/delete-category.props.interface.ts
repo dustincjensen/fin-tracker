@@ -19,5 +19,5 @@ export interface IDeleteCategoryProps {
   /**
    * Action to delete the category.
    */
-  deleteCategory: (categoryId: string) => void;
+  deleteCategory: (category: ICategory) => void;
 }

@@ -28,6 +28,6 @@ function updateCategory(draft: Draft<ICategoryStore>, updatedCategory: ICategory
   draft.categories[id] = updatedCategory;
 }
 
-function deleteCategory(draft: Draft<ICategoryStore>, id: string) {
-  delete draft.categories[id];
+function deleteCategory(draft: Draft<ICategoryStore>, deletedCategory: ICategory) {
+  delete draft.categories[deletedCategory.id];
 }

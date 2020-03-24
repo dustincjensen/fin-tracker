@@ -28,7 +28,7 @@ const mapStateToProps = (state: IStore, ownProps: ICategoriesOwnProps): ICategor
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): ICategoriesDispatchProps => ({
-  deleteCategory: (categoryId: string) => dispatch(CategoryActions.deleteCategory(categoryId)),
+  deleteCategory: (category: ICategory) => dispatch(CategoryActions.deleteCategory(category)),
 });
 
 export const CategoriesContainer = connect(mapStateToProps, mapDispatchToProps)(Categories);

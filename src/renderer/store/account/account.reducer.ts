@@ -28,6 +28,6 @@ function updateAccount(draft: Draft<IAccountStore>, updatedAccount: IAccount) {
   draft.accounts[id] = updatedAccount;
 }
 
-function deleteAccount(draft: Draft<IAccountStore>, id: string) {
-  delete draft.accounts[id];
+function deleteAccount(draft: Draft<IAccountStore>, deletedAccount: IAccount) {
+  delete draft.accounts[deletedAccount.id];
 }

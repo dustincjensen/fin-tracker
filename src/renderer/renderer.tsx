@@ -5,12 +5,13 @@ import { HashRouter } from 'react-router-dom';
 import { applyMiddleware, createStore } from 'redux';
 import { RootLayout } from './features/root/root.layout';
 import { ipcReceive } from './store/ipc';
+import { toastMiddleware } from './store/middleware/toast.middleware';
 import { rootReducer } from './store/store';
 import './renderer.scss';
 
 // TODO change implementation of initial state.
 const initialState = JSON.parse(localStorage.getItem('reduxStore'));
-const store = createStore(rootReducer, initialState || {}, applyMiddleware(ipcReceive));
+const store = createStore(rootReducer, initialState || {}, applyMiddleware(ipcReceive, toastMiddleware));
 
 store.subscribe(() => {
   // TODO We shouldn't set local storage so quickly, subscribe gets called often.

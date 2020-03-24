@@ -15,7 +15,7 @@ const mapStateToProps = (state: IStore): IAccountStateProps => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IAccountDispatchProps => ({
-  deleteAccount: (accountId: string) => dispatch(AccountActions.deleteAccount(accountId)),
+  deleteAccount: (account: IAccount) => dispatch(AccountActions.deleteAccount(account)),
 });
 
 export const AccountsContainer = connect(mapStateToProps, mapDispatchToProps)(Accounts);

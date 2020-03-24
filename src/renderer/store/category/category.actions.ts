@@ -15,8 +15,8 @@ export class CategoryActions {
     payload: category,
   });
 
-  public static deleteCategory = (id: string) => ({
+  public static deleteCategory = (category: ICategory) => ({
     type: CategoryActions.DELETE_CATEGORY,
-    payload: id,
+    payload: category,
   });
 }

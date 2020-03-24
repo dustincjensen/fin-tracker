@@ -19,5 +19,5 @@ export interface IDeleteAccountProps {
   /**
    * Action to delete the account.
    */
-  deleteAccount: (accountId: string) => void;
+  deleteAccount: (account: IAccount) => void;
 }

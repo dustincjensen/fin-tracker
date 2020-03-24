@@ -13,7 +13,7 @@ export interface ICategoriesDispatchProps {
   /**
    * Action to delete a category.
    */
-  deleteCategory: (categoryId: string) => void;
+  deleteCategory: (category: ICategory) => void;
 }
 
 export interface ICategoriesOwnProps {
