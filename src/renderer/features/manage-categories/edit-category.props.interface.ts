@@ -14,7 +14,7 @@ export interface IEditCategoryStateProps {
   /**
    * The text for the save button.
    */
-  saveButtonText?: string;
+  saveButtonText: string;
 }
 
 export interface IEditCategoryDispatchProps {

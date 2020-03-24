@@ -1,35 +1,12 @@
-How to structure the app.
-- Create Account
-  - Name of Account
-  - Starting Month/Year
-  - Starting Balance
-  - How to parse the records?
-    - Scotiabank
-      - chequing
-      - savings
-      - visa
-  - Completing this will give the Account an ID.
-- The data store can be an array of accounts
-  - Each account will have records for months/years underneath it.
-  - When you load a month/year you ask all accounts, do you have records for this month, or was the account started by this month then 
-    don't even show the account.
+TODO
 
-// Sample for calculating balance.
-account.newBalance = account.startingBalance
-  - records.map(r => r.debit || 0).reduce((a, b) => a + b)
-  + records.map(r => r.credit || 0).reduce((a, b) => a + b);
-
-Instead of uploading files on a monthly basis,
-allow the user to upload a file that contains records
-and update them based on date. That way if a user uploads
-a file that contains half of may and half of june, they
-don't need to separate out the records. Records uploaded
-a 2nd time that match, date, description, credit, debit
-will flagged as duplicates.
-- How does the data structure look then?
--- accounts (base account info)
--- records (object with key of account id)
-  -- contains all records?
-    -- would this mean getting december of 2017 would require parsing?
-
--- CSS is not component specific
+- When editing a record have the option to apply the description / category change to 
+  - all records
+  - all records in the future
+  - single instance
+  - This will create a background record (possibly invisible) that will be associated with all
+    future records of that description, and will be given the same category.
+- Improve importing to flag duplicate records on the account.
+- Improve editing of accounts that have records imported already
+- Allow for archiving accounts
+- Home Page graphs covering multiple accounts

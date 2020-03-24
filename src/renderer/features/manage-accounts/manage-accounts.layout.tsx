@@ -1,15 +1,17 @@
+import { Pane } from 'evergreen-ui';
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import { AccountsContainer } from './accounts.container';
 import { NewAccountContainer } from './new-account.container';
-import './manage-accounts.layout.scss';
 
 const ManageAccount = () => {
   return (
-    <div className='manage-accounts'>
-      <NewAccountContainer />
+    <Pane display='grid'>
+      <Pane marginBottom={20}>
+        <NewAccountContainer />
+      </Pane>
       <AccountsContainer />
-    </div>
+    </Pane>
   );
 };
 
