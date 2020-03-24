@@ -10,6 +10,15 @@ export const Categories: React.FC<ICategoriesProps> = props => {
   const [categoryToDelete, setCategoryToDelete] = React.useState<ICategory>(null);
   const [isEditing, setIsEditing] = React.useState<string>(undefined);
 
+  React.useEffect(() => {
+    // If the record we are editing is removed from the list
+    // of categories we are displaying, either by deletion, or
+    // by filtering, unset the editing flag.
+    if (isEditing && !categories.find(c => c.id === isEditing)) {
+      setIsEditing(undefined);
+    }
+  }, [categories]);
+
   return (
     <Table>
       <Table.Head paddingRight={0}>

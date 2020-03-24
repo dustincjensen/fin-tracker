@@ -6,9 +6,18 @@ import { DeleteAccountDialog } from './delete-account.dialog';
 import { EditAccountContainer } from './edit-account.container';
 
 export const Accounts: React.FC<IAccountProps> = props => {
-  const { deleteAccount } = props;
+  const { accounts, deleteAccount } = props;
   const [accountToDelete, setAccountToDelete] = React.useState<IAccount>(null);
   const [isEditing, setIsEditing] = React.useState<string>(undefined);
+
+  React.useEffect(() => {
+    // If the record we are editing is removed from the list
+    // of accounts we are displaying, either by deletion, or
+    // by filtering, unset the editing flag.
+    if (isEditing && !accounts.find(c => c.id === isEditing)) {
+      setIsEditing(undefined);
+    }
+  }, [accounts]);
 
   return (
     <Table>
@@ -17,7 +26,7 @@ export const Accounts: React.FC<IAccountProps> = props => {
         <Table.HeaderCell flex='none' width={100}></Table.HeaderCell>
       </Table.Head>
       <Table.Body>
-        {props.accounts.map(account => {
+        {accounts.map(account => {
           return (
             <Pane key={account.id}>
               <Table.Row>
