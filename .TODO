@@ -10,3 +10,4 @@ TODO
 - Improve editing of accounts that have records imported already
 - Allow for archiving accounts
 - Home Page graphs covering multiple accounts
+- Sorting order accounts by user input? (https://github.com/clauderic/react-sortable-hoc perhaps?)

@@ -1,5 +1,6 @@
 import { Pane } from 'evergreen-ui';
 import * as React from 'react';
+import { ErrorBoundary } from '../../components/error-boundary/error-boundary.component';
 import { CategoriesFilter } from './categories-filter.component';
 import { CategoriesContainer } from './categories.container';
 import { NewCategoryContainer } from './new-category.container';
@@ -12,20 +13,22 @@ export const ManageCategoryLayout = () => {
   const closeNewCategory = () => setShowNewCategory(false);
 
   return (
-    <Pane display='grid'>
-      {showNewCategory && (
-        <Pane marginBottom={20}>
-          <NewCategoryContainer close={closeNewCategory} />
+    <ErrorBoundary>
+      <Pane display='grid'>
+        {showNewCategory && (
+          <Pane marginBottom={20}>
+            <NewCategoryContainer close={closeNewCategory} />
+          </Pane>
+        )}
+        <Pane marginBottom={10}>
+          <CategoriesFilter
+            openNewCategory={openNewCategory}
+            categoryFilter={categoryFilter}
+            setCategoryFilter={setCategoryFilter}
+          />
         </Pane>
-      )}
-      <Pane marginBottom={10}>
-        <CategoriesFilter
-          openNewCategory={openNewCategory}
-          categoryFilter={categoryFilter}
-          setCategoryFilter={setCategoryFilter}
-        />
+        <CategoriesContainer categoryFilter={categoryFilter} />
       </Pane>
-      <CategoriesContainer categoryFilter={categoryFilter} />
-    </Pane>
+    </ErrorBoundary>
   );
 };
