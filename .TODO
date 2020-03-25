@@ -11,3 +11,7 @@ TODO
 - Allow for archiving accounts
 - Home Page graphs covering multiple accounts
 - Sorting order accounts by user input? (https://github.com/clauderic/react-sortable-hoc perhaps?)
+- Error Boundary HOC?
+  - Right now if one of the account views breaks, you can't visit another account until you
+    visit another route first. Being able to wrap all components in a error boundary HOC would
+    be cool!
