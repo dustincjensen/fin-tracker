@@ -1,10 +1,42 @@
-import { Button, Heading, Icon, majorScale, Pane, SelectField, TextInputField, Alert } from 'evergreen-ui';
+import {
+  Text,
+  Button,
+  Heading,
+  Icon,
+  majorScale,
+  Pane,
+  SelectField,
+  TextInputField,
+  Alert,
+  FormField,
+} from 'evergreen-ui';
 import * as React from 'react';
 import { IAccount } from '../../store/account/account.interface';
 import { newGuid } from '../../utils/guid.util';
 import { IEditAccountProps } from './edit-account.props.interface';
 
 type ParseType = 'ScotiabankChequing' | 'ScotiabankSavings' | 'ScotiabankVisa';
+
+const months = [
+  { value: '0', month: 'January' },
+  { value: '1', month: 'February' },
+  { value: '2', month: 'March' },
+  { value: '3', month: 'April' },
+  { value: '4', month: 'May' },
+  { value: '5', month: 'June' },
+  { value: '6', month: 'July' },
+  { value: '7', month: 'August' },
+  { value: '8', month: 'September' },
+  { value: '9', month: 'October' },
+  { value: '10', month: 'November' },
+  { value: '11', month: 'December' },
+];
+
+const parseTypes = [
+  { value: 'ScotiabankChequing', name: 'Scotiabank Chequing' },
+  { value: 'ScotiabankSavings', name: 'Scotiabank Savings' },
+  { value: 'ScotiabankVisa', name: 'Scotiabank Visa' },
+];
 
 export const EditAccount: React.FC<IEditAccountProps> = ({
   close,
@@ -97,18 +129,11 @@ export const EditAccount: React.FC<IEditAccountProps> = ({
                 value={startMonth}
                 onChange={handleStartMonthChange}
               >
-                <option value='0'>January</option>
-                <option value='1'>February</option>
-                <option value='2'>March</option>
-                <option value='3'>April</option>
-                <option value='4'>May</option>
-                <option value='5'>June</option>
-                <option value='6'>July</option>
-                <option value='7'>August</option>
-                <option value='8'>September</option>
-                <option value='9'>October</option>
-                <option value='10'>November</option>
-                <option value='11'>December</option>
+                {months.map(m => (
+                  <option key={m.value} value={m.value}>
+                    {m.month}
+                  </option>
+                ))}
               </SelectField>
               <TextInputField
                 width={350}
@@ -128,10 +153,32 @@ export const EditAccount: React.FC<IEditAccountProps> = ({
                 value={parseType}
                 onChange={handleParseTypeChange}
               >
-                <option value='ScotiabankChequing'>Scotiabank Chequing</option>
-                <option value='ScotiabankSavings'>Scotiabank Savings</option>
-                <option value='ScotiabankVisa'>Scotiabank Visa</option>
+                {parseTypes.map(p => (
+                  <option key={p.value} value={p.value}>
+                    {p.name}
+                  </option>
+                ))}
               </SelectField>
+            </>
+          )}
+          {!canEditComplexFields && (
+            <>
+              <FormField label='Start Year' marginBottom={majorScale(3)}>
+                <Text>{startYear}</Text>
+              </FormField>
+              <FormField label='Starting Month' marginBottom={majorScale(3)}>
+                {/* TODO fix the typing of the options from '0' to 0 */}
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                <Text>{months.find(m => (m.value as any) == startMonth).month}</Text>
+              </FormField>
+              <FormField label='Starting Balance' marginBottom={majorScale(3)}>
+                {/* TODO fix number/string typing and parsing? */}
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                <Text>{parseFloat(startingBalance as any).toFixed(2)}</Text>
+              </FormField>
+              <FormField label='Account Type' marginBottom={majorScale(3)}>
+                <Text>{parseTypes.find(p => p.value == parseType).name}</Text>
+              </FormField>
             </>
           )}
         </Pane>
