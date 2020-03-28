@@ -13,10 +13,16 @@ export class ImportLayout extends React.Component<IImportLayoutProps> {
 
     return (
       <ErrorBoundary>
-        <Pane display='grid' gridGap={20}>
+        <Pane height='100%'>
           {!hasPendingRecords && <NewRecordsContainer accountId={accountId} />}
-          {hasPendingRecords && <ActionPendingRecordsContainer />}
-          {hasPendingRecords && <PendingRecordsContainer />}
+          {hasPendingRecords && (
+            <>
+              <Pane marginBottom={20}>
+                <ActionPendingRecordsContainer />
+              </Pane>
+              <PendingRecordsContainer />
+            </>
+          )}
         </Pane>
       </ErrorBoundary>
     );

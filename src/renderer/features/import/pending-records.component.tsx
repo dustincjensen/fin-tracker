@@ -1,6 +1,7 @@
 import { Table } from 'evergreen-ui';
 import * as React from 'react';
 import { IPendingRecordsProps } from './pending-records.props.interface';
+import './pending-records.module.scss';
 
 // Controls the width of the date, debit and credit fields.
 const cellDetails = {
@@ -13,14 +14,14 @@ export const PendingRecords: React.FC<IPendingRecordsProps> = props => {
   const { records } = props;
 
   return (
-    <Table>
+    <Table display='flex' flexDirection='column' className='pending_records_wrapper'>
       <Table.Head>
         <Table.TextHeaderCell {...cellDetails}>Date</Table.TextHeaderCell>
         <Table.TextHeaderCell>Description</Table.TextHeaderCell>
         <Table.TextHeaderCell {...cellDetails}>Debit</Table.TextHeaderCell>
         <Table.TextHeaderCell {...cellDetails}>Credit</Table.TextHeaderCell>
       </Table.Head>
-      <Table.Body>
+      <Table.VirtualBody>
         {records.map(record => {
           return (
             <Table.Row key={record.id}>
@@ -35,7 +36,7 @@ export const PendingRecords: React.FC<IPendingRecordsProps> = props => {
             </Table.Row>
           );
         })}
-      </Table.Body>
+      </Table.VirtualBody>
     </Table>
   );
 };
