@@ -1,4 +1,5 @@
 import { IAccount } from '../../store/account/account.interface';
+import { ParseType } from '../../store/pending-record/parse.type';
 
 export interface INewRecordsProps extends INewRecordsStateProps, INewRecordsDispatchProps, INewRecordsOwnProps {}
 
@@ -15,5 +16,5 @@ export interface INewRecordsStateProps {
 }
 
 export interface INewRecordsDispatchProps {
-  importAction: (account: IAccount, file) => void;
+  importAction: (account: IAccount, file, importMethod: ParseType) => void;
 }

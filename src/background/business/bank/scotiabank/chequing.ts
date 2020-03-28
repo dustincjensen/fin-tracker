@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import { newGuid } from '../guid.util';
 import { IRecord } from '../record.interface';
 
 // https://stackoverflow.com/questions/23582276/split-string-by-comma-but-ignore-commas-inside-quotes/23582323
@@ -11,7 +12,7 @@ export function parse(accountId, filePath): IRecord[] {
   const data = fs.readFileSync(filePath, { encoding: 'utf-8' });
   const separated = data
     .split('\n')
-    .map((r, i) => {
+    .map(r => {
       if (r.length === 0) return null;
 
       const rowSplit = r.split(csvCommaSplitIgnoreCommaInQuotes);
@@ -22,11 +23,11 @@ export function parse(accountId, filePath): IRecord[] {
         .replace(stringRemoveExtraneousSpaces, ' ')
         .trim();
       return {
-        id: i,
+        id: newGuid(),
         accountId,
         date,
-        debit: amount < 0 ? amount * -1 : null,
-        credit: amount >= 0 ? amount : null,
+        debit: amount <= 0 ? amount * -1 : null,
+        credit: amount > 0 ? amount : null,
         description,
       };
     })

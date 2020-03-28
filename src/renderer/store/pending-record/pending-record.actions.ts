@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux';
+import { AccountType } from '../account/account.type';
 import { sender } from '../ipc.send';
 import { IRecord } from '../record/record.interface';
 import { ImportRecordsFunc } from './import-records.type';
@@ -24,6 +25,20 @@ export class PendingRecordActions {
     accountId: string,
     filePath: string
   ) => sender(dispatch, 'IPC_NEW_SCOTIABANK_VISA_RECORDS_SELECTED', accountId, filePath);
+
+  public static newQuickenFileSelected: ImportRecordsFunc = (
+    dispatch: Dispatch,
+    accountId: string,
+    filePath: string,
+    accountType: AccountType
+  ) => sender(dispatch, 'IPC_NEW_QUICKEN_RECORDS_SELECTED', accountId, filePath, accountType);
+
+  public static newQfxFileSelected: ImportRecordsFunc = (
+    dispatch: Dispatch,
+    accountId: string,
+    filePath: string,
+    accountType: AccountType
+  ) => sender(dispatch, 'IPC_NEW_QFX_RECORDS_SELECTED', accountId, filePath, accountType);
 
   public static importNewRecords = (records: IRecord[]) => ({
     type: PendingRecordActions.NEW_RECORDS_IMPORTED,

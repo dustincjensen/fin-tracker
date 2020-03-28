@@ -10,7 +10,7 @@ import { rootReducer } from './store/store';
 import './renderer.scss';
 
 // TODO change implementation of initial state.
-const initialState = JSON.parse(localStorage.getItem('reduxStore'));
+const initialState = JSON.parse(localStorage.getItem('reduxStore') || '{}');
 const store = createStore(rootReducer, initialState || {}, applyMiddleware(ipcReceive, toastMiddleware));
 
 store.subscribe(() => {

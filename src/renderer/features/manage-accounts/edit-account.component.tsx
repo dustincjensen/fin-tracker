@@ -12,31 +12,11 @@ import {
 } from 'evergreen-ui';
 import * as React from 'react';
 import { IAccount } from '../../store/account/account.interface';
+import { AccountType } from '../../store/account/account.type';
+import { accountTypeNameValuePairs, accountTypeLabels } from '../../utils/account.utils';
+import { monthValues, monthNamesLong } from '../../utils/date.util';
 import { newGuid } from '../../utils/guid.util';
 import { IEditAccountProps } from './edit-account.props.interface';
-
-type ParseType = 'ScotiabankChequing' | 'ScotiabankSavings' | 'ScotiabankVisa';
-
-const months = [
-  { value: '0', month: 'January' },
-  { value: '1', month: 'February' },
-  { value: '2', month: 'March' },
-  { value: '3', month: 'April' },
-  { value: '4', month: 'May' },
-  { value: '5', month: 'June' },
-  { value: '6', month: 'July' },
-  { value: '7', month: 'August' },
-  { value: '8', month: 'September' },
-  { value: '9', month: 'October' },
-  { value: '10', month: 'November' },
-  { value: '11', month: 'December' },
-];
-
-const parseTypes = [
-  { value: 'ScotiabankChequing', name: 'Scotiabank Chequing' },
-  { value: 'ScotiabankSavings', name: 'Scotiabank Savings' },
-  { value: 'ScotiabankVisa', name: 'Scotiabank Visa' },
-];
 
 export const EditAccount: React.FC<IEditAccountProps> = ({
   close,
@@ -50,13 +30,13 @@ export const EditAccount: React.FC<IEditAccountProps> = ({
   const [startYear, setStartYear] = React.useState<number>(account?.startYear || new Date().getFullYear());
   const [startMonth, setStartMonth] = React.useState<number>(account?.startMonth || new Date().getMonth());
   const [startingBalance, setStartingBalance] = React.useState<number>(account?.startingBalance || 0.0);
-  const [parseType, setParseType] = React.useState<ParseType>(account?.parseType || 'ScotiabankChequing');
+  const [accountType, setAccountType] = React.useState<AccountType | ''>(account?.accountType || '');
 
   const handleNameChange = evt => setName(evt.target.value);
   const handleStartYearChange = evt => setStartYear(evt.target.value);
   const handleStartMonthChange = evt => setStartMonth(evt.target.value);
   const handleStartingBalanceChange = evt => setStartingBalance(evt.target.value);
-  const handleParseTypeChange = evt => setParseType(evt.target.value);
+  const handleAccountTypeChange = evt => setAccountType(evt.target.value);
 
   const handleSubmit = evt => {
     evt.preventDefault();
@@ -67,7 +47,8 @@ export const EditAccount: React.FC<IEditAccountProps> = ({
       startYear,
       startMonth,
       startingBalance,
-      parseType,
+      // Todo fix typing
+      accountType: accountType as AccountType,
     };
 
     saveAccount(updatedAccount);
@@ -78,7 +59,7 @@ export const EditAccount: React.FC<IEditAccountProps> = ({
       setStartYear(new Date().getFullYear());
       setStartMonth(new Date().getMonth());
       setStartingBalance(0.0);
-      setParseType('ScotiabankChequing');
+      setAccountType('');
     }
   };
 
@@ -111,6 +92,21 @@ export const EditAccount: React.FC<IEditAccountProps> = ({
           />
           {canEditComplexFields && (
             <>
+              <SelectField
+                width={350}
+                label='Account Type'
+                name='accountType'
+                value={accountType}
+                onChange={handleAccountTypeChange}
+                required
+              >
+                <option value={undefined}></option>
+                {accountTypeNameValuePairs.map(a => (
+                  <option key={a.value} value={a.value}>
+                    {a.name}
+                  </option>
+                ))}
+              </SelectField>
               <TextInputField
                 width={350}
                 label='Starting Year'
@@ -129,7 +125,7 @@ export const EditAccount: React.FC<IEditAccountProps> = ({
                 value={startMonth}
                 onChange={handleStartMonthChange}
               >
-                {months.map(m => (
+                {monthValues.map(m => (
                   <option key={m.value} value={m.value}>
                     {m.month}
                   </option>
@@ -142,42 +138,28 @@ export const EditAccount: React.FC<IEditAccountProps> = ({
                 type='number'
                 value={startingBalance}
                 onChange={handleStartingBalanceChange}
-                min={0}
                 step={0.01}
                 required
               />
-              <SelectField
-                width={350}
-                label='Account Type'
-                name='parseType'
-                value={parseType}
-                onChange={handleParseTypeChange}
-              >
-                {parseTypes.map(p => (
-                  <option key={p.value} value={p.value}>
-                    {p.name}
-                  </option>
-                ))}
-              </SelectField>
             </>
           )}
           {!canEditComplexFields && (
             <>
+              <FormField label='Account Type' marginBottom={majorScale(3)}>
+                <Text>{accountTypeLabels[accountType]}</Text>
+              </FormField>
               <FormField label='Start Year' marginBottom={majorScale(3)}>
                 <Text>{startYear}</Text>
               </FormField>
               <FormField label='Starting Month' marginBottom={majorScale(3)}>
                 {/* TODO fix the typing of the options from '0' to 0 */}
                 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                <Text>{months.find(m => (m.value as any) == startMonth).month}</Text>
+                <Text>{monthNamesLong()[startMonth]}</Text>
               </FormField>
               <FormField label='Starting Balance' marginBottom={majorScale(3)}>
                 {/* TODO fix number/string typing and parsing? */}
                 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                 <Text>{parseFloat(startingBalance as any).toFixed(2)}</Text>
-              </FormField>
-              <FormField label='Account Type' marginBottom={majorScale(3)}>
-                <Text>{parseTypes.find(p => p.value == parseType).name}</Text>
               </FormField>
             </>
           )}

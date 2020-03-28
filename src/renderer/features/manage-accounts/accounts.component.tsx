@@ -1,6 +1,7 @@
 import { Table, Tooltip, IconButton, Pane } from 'evergreen-ui';
 import * as React from 'react';
 import { IAccount } from '../../store/account/account.interface';
+import { accountTypeLabels } from '../../utils/account.utils';
 import { IAccountProps } from './accounts.props.interface';
 import { DeleteAccountDialog } from './delete-account.dialog';
 import { EditAccountContainer } from './edit-account.container';
@@ -23,6 +24,7 @@ export const Accounts: React.FC<IAccountProps> = props => {
     <Table>
       <Table.Head paddingRight={0}>
         <Table.TextHeaderCell>Name</Table.TextHeaderCell>
+        <Table.TextHeaderCell>Account Type</Table.TextHeaderCell>
         <Table.HeaderCell flex='none' width={100}></Table.HeaderCell>
       </Table.Head>
       <Table.Body>
@@ -31,6 +33,7 @@ export const Accounts: React.FC<IAccountProps> = props => {
             <Pane key={account.id}>
               <Table.Row>
                 <Table.TextCell>{account.name}</Table.TextCell>
+                <Table.TextCell>{account.accountType && accountTypeLabels[account.accountType]}</Table.TextCell>
                 <Table.Cell flex='none' justifyContent='flex-end' width={100}>
                   <Tooltip content='Edit Account' hideDelay={0}>
                     <IconButton

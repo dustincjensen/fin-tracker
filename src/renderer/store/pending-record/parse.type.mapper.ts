@@ -12,6 +12,8 @@ const parseTypeLookup: ParseLookup = {
   ScotiabankChequing: PendingRecordActions.newScotiabankChequingFileSelected,
   ScotiabankSavings: PendingRecordActions.newScotiabankSavingsFileSelected,
   ScotiabankVisa: PendingRecordActions.newScotiabankVisaFileSelected,
+  Quicken: PendingRecordActions.newQuickenFileSelected,
+  QFX: PendingRecordActions.newQfxFileSelected,
 };
 
 /**

@@ -1,4 +1,4 @@
-import { ParseType } from '../pending-record/parse.type';
+import { AccountType } from './account.type';
 
 export interface IAccount {
   /**
@@ -39,7 +39,7 @@ export interface IAccount {
   endMonth?: number;
 
   /**
-   * The method to parse file that are imported to this account.
+   * The type of the account.
    */
-  parseType: ParseType;
+  accountType: AccountType;
 }

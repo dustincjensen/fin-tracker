@@ -1,5 +1,5 @@
 export interface IRecord {
-  id: number;
+  id: string;
   date: string;
   description: string;
   debit: number;

@@ -1,3 +1,5 @@
+import { parse as qfxParse } from '../business/bank/qfx';
+import { parse as quickenParse } from '../business/bank/quicken';
 import { IRecord } from '../business/bank/record.interface';
 import { parse as chequingParse, parse as savingsParse } from '../business/bank/scotiabank/chequing';
 import { parse as visaParse } from '../business/bank/scotiabank/visa';
@@ -15,8 +17,29 @@ export function parseScotiabankVisaToRecords(accountId: string, filePath: string
   return parse(visaParse, accountId, filePath);
 }
 
-function parse(method: (accountId: string, filePath: string) => IRecord[], accountId: string, filePath: string) {
-  const parsedFileRecords = method(accountId, filePath);
+export function parseQuickenToRecords(
+  accountId: string,
+  filePath: string,
+  accountType: 'Chequing' | 'Savings' | 'CreditCard'
+) {
+  return parse(quickenParse, accountId, filePath, accountType);
+}
+
+export function parseQfxToRecords(
+  accountId: string,
+  filePath: string,
+  accountType: 'Chequing' | 'Savings' | 'CreditCard'
+) {
+  return parse(qfxParse, accountId, filePath, accountType);
+}
+
+function parse(
+  method: (accountId: string, filePath: string, accountType?: 'Chequing' | 'Savings' | 'CreditCard') => IRecord[],
+  accountId: string,
+  filePath: string,
+  accountType?: 'Chequing' | 'Savings' | 'CreditCard'
+) {
+  const parsedFileRecords = method(accountId, filePath, accountType);
   const sorted = sortRecordsByDate(parsedFileRecords);
   return {
     type: 'IPC_NEW_RECORDS_PARSED',

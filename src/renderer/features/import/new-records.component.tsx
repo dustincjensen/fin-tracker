@@ -9,11 +9,12 @@ export class NewRecords extends React.Component<INewRecordsProps, INewRecordsSta
     this.state = {
       selectedAccountId: props.accountId || props.accounts?.[0]?.id || '',
       selectedFile: null,
+      importMethod: 'QFX',
     };
   }
 
   render() {
-    const { selectedAccountId } = this.state;
+    const { selectedAccountId, importMethod } = this.state;
 
     return (
       <Pane border padding={20} background='tint1' borderRadius={5}>
@@ -36,6 +37,15 @@ export class NewRecords extends React.Component<INewRecordsProps, INewRecordsSta
             >
               {this.getAccountOptions()}
             </SelectField>
+            <SelectField
+              width={350}
+              label='Import Type'
+              description='The method used to import the records. This should match the file type downloaded.'
+              value={importMethod}
+              onChange={this.handleImportMethodChange}
+            >
+              {this.getImportOptions()}
+            </SelectField>
           </Pane>
           <Pane display='flex' justifyContent='flex-end' borderTop paddingTop={10}>
             <Button appearance='primary' height={majorScale(5)} iconBefore='import'>
@@ -57,6 +67,28 @@ export class NewRecords extends React.Component<INewRecordsProps, INewRecordsSta
     });
   };
 
+  getImportOptions = () => {
+    return (
+      <>
+        <option key='sbc' value='ScotiabankChequing'>
+          Scotiabank Chequing
+        </option>
+        <option key='sbs' value='ScotiabankSavings'>
+          Scotiabank Savings
+        </option>
+        <option key='sbv' value='ScotiabankVisa'>
+          Scotiabank Visa
+        </option>
+        <option key='quicken' value='Quicken'>
+          Quicken (*.qif)
+        </option>
+        <option key='qfx' value='QFX'>
+          Quicken (*.qfx)
+        </option>
+      </>
+    );
+  };
+
   handleFileSelected = (files: FileList) => {
     if (files) {
       this.setState({ selectedFile: files[0] });
@@ -67,9 +99,11 @@ export class NewRecords extends React.Component<INewRecordsProps, INewRecordsSta
     this.setState({ selectedAccountId: evt.target.value });
   };
 
+  handleImportMethodChange = evt => this.setState({ importMethod: evt.target.value });
+
   handleSubmit = evt => {
     evt.preventDefault();
-    const { selectedFile, selectedAccountId } = this.state;
+    const { selectedFile, selectedAccountId, importMethod } = this.state;
 
     // Don't do anything if the form isn't properly filled out.
     if (selectedFile === null || selectedAccountId === '') {
@@ -79,7 +113,7 @@ export class NewRecords extends React.Component<INewRecordsProps, INewRecordsSta
     const { accounts } = this.props;
     const selectedAccount = accounts.filter(a => a.id === selectedAccountId)[0];
 
-    this.props.importAction(selectedAccount, selectedFile);
+    this.props.importAction(selectedAccount, selectedFile, importMethod);
     this.setState({ selectedFile: null });
   };
 }
