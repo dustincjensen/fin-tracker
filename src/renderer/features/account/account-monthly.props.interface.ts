@@ -24,6 +24,7 @@ export interface IAccountMonthlyStateProps {
    * The list of categories to choose from for each record.
    */
   categories: Array<{
+    color: string;
     label: string;
     value: string;
   }>;

@@ -1,6 +1,7 @@
 import { Pane, Card, Heading, Text, Strong, IconButton, Icon, Tooltip } from 'evergreen-ui';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { isNullOrUndefined } from '../../utils/object.utils';
 import { IAccountSummaryProps } from './account-summary.props.interface';
 
 export const AccountSummary: React.FC<IAccountSummaryProps> = props => {
@@ -21,7 +22,7 @@ export const AccountSummary: React.FC<IAccountSummaryProps> = props => {
           <Icon icon={iconName} marginRight={5} color='default' />
           <Heading>{name}</Heading>
         </Pane>
-        {balance && (
+        {!isNullOrUndefined(balance) && (
           <Pane marginBottom={10}>
             <Pane display='flex' alignItems='center'>
               <Pane width={105}>
@@ -38,7 +39,7 @@ export const AccountSummary: React.FC<IAccountSummaryProps> = props => {
             </Pane>
           </Pane>
         )}
-        {!balance && (
+        {isNullOrUndefined(balance) && (
           <Pane marginBottom={10} padding={10} display='flex' justifyContent='center'>
             <Text color='muted'>
               Empty! Import records{' '}
