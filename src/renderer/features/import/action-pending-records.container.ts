@@ -5,16 +5,20 @@ import { RecordActions } from '../../store/record/record.actions';
 import { IRecord } from '../../store/record/record.interface';
 import { RecordSelectors } from '../../store/record/record.selectors';
 import { IStore } from '../../store/store.interface';
+import { ActionPendingRecords } from './action-pending-records.component';
 import {
-  ActionPendingRecords,
-  IActionPendingRecordsDispatchProps,
   IActionPendingRecordsStateProps,
-} from './action-pending-records.component';
+  IActionPendingRecordsDispatchProps,
+} from './action-pending-records.props.interface';
 
 function mapStateToProps(state: IStore): IActionPendingRecordsStateProps {
-  const { accountId, records } = state.pendingRecords;
+  const { accountId, filePath, fileName, records } = state.pendingRecords;
   const account = state.accounts.accounts[accountId];
   return {
+    accountName: account.name,
+    accountType: account.accountType,
+    filePath,
+    fileName,
     startingBalance: account.startingBalance,
     newRecords: records,
     existingRecords: RecordSelectors.records(state, accountId),

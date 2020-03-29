@@ -7,6 +7,8 @@ import { IPendingRecordStore } from './pending-record.store.interface';
 
 const initialState: IPendingRecordStore = {
   accountId: undefined,
+  filePath: undefined,
+  fileName: undefined,
   records: [],
 };
 
@@ -25,13 +27,25 @@ export const PendingRecordReducer = createDraftReducer(
  * @param draft     The draft state.
  * @param records   The records to review for importing.
  */
-function importRecords(draft: Draft<IPendingRecordStore>, records: IRecord[]) {
+function importRecords(
+  draft: Draft<IPendingRecordStore>,
+  payload: {
+    records: IRecord[];
+    accountId: string;
+    filePath: string;
+    fileName: string;
+  }
+) {
+  const { records, accountId, filePath, fileName } = payload;
+
   if (records && records.length > 0) {
-    const { accountId } = records[0];
     draft.accountId = accountId;
+    draft.filePath = filePath;
+    draft.fileName = fileName;
     draft.records = records;
   } else {
     draft.accountId = undefined;
+    draft.filePath = undefined;
     draft.records = [];
   }
 }
@@ -44,5 +58,7 @@ function importRecords(draft: Draft<IPendingRecordStore>, records: IRecord[]) {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function clearRecords(draft: Draft<IPendingRecordStore>) {
   draft.accountId = undefined;
+  draft.filePath = undefined;
+  draft.fileName = undefined;
   draft.records = [];
 }

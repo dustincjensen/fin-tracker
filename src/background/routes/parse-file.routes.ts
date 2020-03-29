@@ -1,3 +1,4 @@
+import * as path from 'path';
 import { parse as qfxParse } from '../business/bank/qfx';
 import { parse as quickenParse } from '../business/bank/quicken';
 import { IRecord } from '../business/bank/record.interface';
@@ -41,8 +42,9 @@ function parse(
 ) {
   const parsedFileRecords = method(accountId, filePath, accountType);
   const sorted = sortRecordsByDate(parsedFileRecords);
+  const fileName = path.basename(filePath);
   return {
     type: 'IPC_NEW_RECORDS_PARSED',
-    args: [sorted],
+    args: [sorted, accountId, filePath, fileName],
   };
 }

@@ -7,6 +7,16 @@ export interface IPendingRecordStore {
   accountId: string;
 
   /**
+   * The file path of the imported file.
+   */
+  filePath: string;
+
+  /**
+   * The file name of the imported file.
+   */
+  fileName: string;
+
+  /**
    * Pending records to be uploaded.
    */
   records: IRecord[];

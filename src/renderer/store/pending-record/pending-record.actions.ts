@@ -40,9 +40,14 @@ export class PendingRecordActions {
     accountType: AccountType
   ) => sender(dispatch, 'IPC_NEW_QFX_RECORDS_SELECTED', accountId, filePath, accountType);
 
-  public static importNewRecords = (records: IRecord[]) => ({
+  public static importNewRecords = (records: IRecord[], accountId: string, filePath: string, fileName: string) => ({
     type: PendingRecordActions.NEW_RECORDS_IMPORTED,
-    payload: records,
+    payload: {
+      records,
+      accountId,
+      filePath,
+      fileName,
+    },
   });
 
   public static clearImportedRecords = () => ({
