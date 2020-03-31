@@ -23,10 +23,9 @@ export class AccountCategoryTotalsChart extends React.Component<IAccountCategory
     // Get the colors for the remaining categories.
     const colors = data.map(c => c.color || '#333');
 
-    // TODO this should have a min width maybe? if possible?
     return (
       <BarChart
-        width={100 * data.length}
+        width={100 * (data.length > 3 ? data.length : 3)}
         height={300}
         data={data}
         margin={{

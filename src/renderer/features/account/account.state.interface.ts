@@ -1,8 +1,13 @@
 export interface IAccountState {
   /**
-   * The list of tabs (month names) to display.
+   * The list of month tabs (month names) to display.
    */
-  tabs: string[];
+  months: string[];
+
+  /**
+   * The list of year tabs (year numbers) to display.
+   */
+  years: string[];
 
   /**
    * The date of the current month to display.
@@ -10,7 +15,12 @@ export interface IAccountState {
   date: string;
 
   /**
-   * The selected tab index.
+   * The selected month tab index.
    */
-  selectedIndex: number;
+  selectedMonthIndex: number;
+
+  /**
+   * The selected year tab index.
+   */
+  selectedYearIndex: number;
 }
