@@ -58,7 +58,7 @@ export const CategorySelect: React.FC<ICategorySelectProps> = props => {
           <Text color='white' paddingRight={10}>
             {record.category.label}
           </Text>
-          <Button height={minorScale(4)} padding={0} margin={0} appearance='minimal' onClick={onClear}>
+          <Button type='button' height={minorScale(4)} padding={0} margin={0} appearance='minimal' onClick={onClear}>
             <Icon icon='small-cross' color='white' />
           </Button>
         </Pane>
@@ -76,7 +76,7 @@ export const CategorySelect: React.FC<ICategorySelectProps> = props => {
       onClose={onSelectMenuClosed}
       closeOnSelect
     >
-      <Button>Select category...</Button>
+      <Button type='button'>Select category...</Button>
     </SelectMenu>
   );
 };

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { RecordActions } from '../../store/record/record.actions';
+import { ISplitRecord } from '../../store/record/split-record.interface';
 import { IStore } from '../../store/store.interface';
 import { AccountMonthly } from './account-monthly.component';
 import { IAccountMonthlyOwnProps, IAccountMonthlyStateProps } from './account-monthly.props.interface';
@@ -21,10 +22,16 @@ const mapStateToProps = (state: IStore, ownProps: IAccountMonthlyOwnProps): IAcc
       return c1Label < c2Label ? -1 : c1Label > c2Label ? 1 : 0;
     });
 
-  const records = ownProps.stateSelector(state, ownProps.accountId, ownProps.date)?.map(r => {
+  const records = ownProps.stateSelector(state, ownProps.accountId, ownProps.date)?.map(record => {
     return {
-      ...r,
-      category: categories.find(c => c.value === r.categoryId),
+      ...record,
+      category: categories.find(c => c.value === record.categoryId),
+      splitRecords: record.splitRecords?.map(splitRecord => {
+        return {
+          ...splitRecord,
+          category: categories.find(c => c.value === splitRecord.categoryId),
+        };
+      }),
     };
   });
 
@@ -39,6 +46,10 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: IAccountMonthlyOwnProp
   return {
     updateCategory: (recordId: string, categoryId: string) =>
       dispatch(RecordActions.setRecordCategory(accountId, recordId, categoryId)),
+    updateSplitRecordCategory: (recordId: string, splitRecordId: string, categoryId: string) =>
+      dispatch(RecordActions.setSplitRecordCategory(accountId, recordId, splitRecordId, categoryId)),
+    updateRecordWithSplits: (recordId: string, splitRecords: ISplitRecord[]) =>
+      dispatch(RecordActions.setSplitRecords(accountId, recordId, splitRecords)),
   };
 };
 

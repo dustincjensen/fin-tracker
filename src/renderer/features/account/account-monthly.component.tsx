@@ -1,8 +1,10 @@
-import { Table } from 'evergreen-ui';
+import { Table, Popover, Position, Menu, Pane, Tooltip, IconButton } from 'evergreen-ui';
 import * as React from 'react';
 import { CategorySelect } from '../../components/category-select/category-select.component';
 import { formatDate } from '../../utils/date.util';
 import { IAccountMonthlyProps } from './account-monthly.props.interface';
+import { EditSplitRecords } from './edit-split-records.component';
+import { SplitRecords } from './split-records.component';
 
 // Controls the width of the date, debit and credit fields.
 const cellDetails = {
@@ -18,7 +20,8 @@ const editableCellDetails = {
 };
 
 export const AccountMonthly: React.FC<IAccountMonthlyProps> = props => {
-  const { records, categories, updateCategory } = props;
+  const { records, categories, updateCategory, updateSplitRecordCategory, updateRecordWithSplits } = props;
+  const [isSplittingTransaction, setIsSplittingTransaction] = React.useState<string>(undefined);
 
   return (
     <Table>
@@ -30,26 +33,98 @@ export const AccountMonthly: React.FC<IAccountMonthlyProps> = props => {
         <Table.TextHeaderCell {...cellDetails}>Debit</Table.TextHeaderCell>
         <Table.TextHeaderCell {...cellDetails}>Credit</Table.TextHeaderCell>
         <Table.TextHeaderCell {...cellDetails}>Balance</Table.TextHeaderCell>
+        <Table.HeaderCell flex='none' width={54}></Table.HeaderCell>
       </Table.Head>
       <Table.Body>
         {records?.map(record => {
           return (
-            <Table.Row key={record.id}>
-              <Table.TextCell {...cellDetails}>{formatDate(record.date)}</Table.TextCell>
-              <Table.TextCell>{record.description}</Table.TextCell>
-              <Table.TextCell {...editableCellDetails}>
-                <CategorySelect record={record} categories={categories} updateCategory={updateCategory} />
-              </Table.TextCell>
-              <Table.TextCell isNumber textAlign='right' {...cellDetails}>
-                {record.debit?.toFixed(2) || ''}
-              </Table.TextCell>
-              <Table.TextCell isNumber textAlign='right' {...cellDetails}>
-                {record.credit?.toFixed(2) || ''}
-              </Table.TextCell>
-              <Table.TextCell isNumber textAlign='right' {...cellDetails}>
-                {record.balance?.toFixed(2) || ''}
-              </Table.TextCell>
-            </Table.Row>
+            <Pane key={record.id}>
+              <Table.Row isSelectable>
+                <Table.TextCell {...cellDetails}>{formatDate(record.date)}</Table.TextCell>
+                <Table.TextCell>{record.description}</Table.TextCell>
+                <Table.TextCell {...editableCellDetails}>
+                  {!record.splitRecords && (
+                    <CategorySelect record={record} categories={categories} updateCategory={updateCategory} />
+                  )}
+                </Table.TextCell>
+                <Table.TextCell isNumber textAlign='right' {...cellDetails}>
+                  {record.debit?.toFixed(2) || ''}
+                </Table.TextCell>
+                <Table.TextCell isNumber textAlign='right' {...cellDetails}>
+                  {record.credit?.toFixed(2) || ''}
+                </Table.TextCell>
+                <Table.TextCell isNumber textAlign='right' {...cellDetails}>
+                  {record.balance?.toFixed(2) || ''}
+                </Table.TextCell>
+                <Table.Cell flex='none' justifyContent='flex-end' width={54}>
+                  <Popover
+                    position={Position.BOTTOM_RIGHT}
+                    content={({ close }) => (
+                      <Menu>
+                        <Menu.Group>
+                          <Menu.Item
+                            icon='fork'
+                            onSelect={() => {
+                              setIsSplittingTransaction(record.id);
+                              close();
+                            }}
+                          >
+                            {record.splitRecords ? 'Edit Split Transactions' : 'Split Transaction'}
+                          </Menu.Item>
+                        </Menu.Group>
+                        {record.splitRecords && (
+                          <>
+                            <Menu.Divider />
+                            <Menu.Group>
+                              <Menu.Item
+                                icon='trash'
+                                intent='danger'
+                                onSelect={() => {
+                                  // TODO prompt the delete
+                                  close();
+                                }}
+                              >
+                                Delete Split Transactions
+                              </Menu.Item>
+                            </Menu.Group>
+                          </>
+                        )}
+                      </Menu>
+                    )}
+                  >
+                    <Tooltip content='Options' hideDelay={0}>
+                      <IconButton
+                        icon='more'
+                        appearance='minimal'
+                        disabled={
+                          (isSplittingTransaction && isSplittingTransaction !== record.id) ||
+                          (!record.credit && !record.debit)
+                        }
+                      />
+                    </Tooltip>
+                  </Popover>
+                </Table.Cell>
+              </Table.Row>
+              {isSplittingTransaction === record.id && (
+                <Pane background='tint1' borderLeft borderRight borderBottom>
+                  <EditSplitRecords
+                    record={record}
+                    categories={categories}
+                    updateRecordWithSplits={updateRecordWithSplits}
+                    close={() => setIsSplittingTransaction(undefined)}
+                  />
+                </Pane>
+              )}
+              {record.splitRecords?.length > 0 && isSplittingTransaction !== record.id && (
+                <SplitRecords
+                  records={record.splitRecords}
+                  categories={categories}
+                  updateCategory={(splitRecordId: string, categoryId: string) =>
+                    updateSplitRecordCategory(record.id, splitRecordId, categoryId)
+                  }
+                />
+              )}
+            </Pane>
           );
         })}
       </Table.Body>
