@@ -14,6 +14,7 @@ export const RecordReducer = createDraftReducer(
     [RecordActions.SET_RECORD_CATEGORY]: setRecordCategory,
     [RecordActions.SET_SPLIT_RECORD_CATEGORY]: setSplitRecordCategory,
     [RecordActions.SET_SPLIT_RECORDS]: setSplitRecords,
+    [RecordActions.DELETE_SPLIT_RECORDS]: deleteSplitRecords,
     [AccountActions.DELETE_ACCOUNT]: deleteRecords,
   },
   initialState
@@ -76,6 +77,18 @@ function setSplitRecords(
   const record = draft.records[accountId].find(record => record.id === recordId);
   record.categoryId = undefined;
   record.splitRecords = splitRecords;
+}
+
+/**
+ * Deletes the split records on a record.
+ *
+ * @param draft     The draft state.
+ * @param payload   The payload containing the account and record to delete the split records from.
+ */
+function deleteSplitRecords(draft: Draft<IRecordStore>, payload: { accountId: string; recordId: string }) {
+  const { accountId, recordId } = payload;
+  const record = draft.records[accountId].find(record => record.id === recordId);
+  delete record.splitRecords;
 }
 
 /**

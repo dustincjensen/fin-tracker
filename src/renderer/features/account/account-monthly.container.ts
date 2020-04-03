@@ -1,10 +1,15 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { RecordActions } from '../../store/record/record.actions';
+import { IRecord } from '../../store/record/record.interface';
 import { ISplitRecord } from '../../store/record/split-record.interface';
 import { IStore } from '../../store/store.interface';
 import { AccountMonthly } from './account-monthly.component';
-import { IAccountMonthlyOwnProps, IAccountMonthlyStateProps } from './account-monthly.props.interface';
+import {
+  IAccountMonthlyOwnProps,
+  IAccountMonthlyStateProps,
+  IAccountMonthlyDispatchProps,
+} from './account-monthly.props.interface';
 
 const mapStateToProps = (state: IStore, ownProps: IAccountMonthlyOwnProps): IAccountMonthlyStateProps => {
   const categories = Object.keys(state.categories.categories)
@@ -41,7 +46,7 @@ const mapStateToProps = (state: IStore, ownProps: IAccountMonthlyOwnProps): IAcc
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch, ownProps: IAccountMonthlyOwnProps) => {
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: IAccountMonthlyOwnProps): IAccountMonthlyDispatchProps => {
   const { accountId } = ownProps;
   return {
     updateCategory: (recordId: string, categoryId: string) =>
@@ -50,6 +55,7 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: IAccountMonthlyOwnProp
       dispatch(RecordActions.setSplitRecordCategory(accountId, recordId, splitRecordId, categoryId)),
     updateRecordWithSplits: (recordId: string, splitRecords: ISplitRecord[]) =>
       dispatch(RecordActions.setSplitRecords(accountId, recordId, splitRecords)),
+    deleteRecordSplitRecords: (record: IRecord) => dispatch(RecordActions.deleteSplitRecords(accountId, record.id)),
   };
 };
 

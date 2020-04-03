@@ -9,6 +9,7 @@ export class RecordActions {
   public static SET_RECORD_CATEGORY = 'SET_RECORD_CATEGORY';
   public static SET_SPLIT_RECORD_CATEGORY = 'SET_SPLIT_RECORD_CATEGORY';
   public static SET_SPLIT_RECORDS = 'SET_SPLIT_RECORDS';
+  public static DELETE_SPLIT_RECORDS = 'DELETE_SPLIT_RECORDS';
 
   public static pendingRecordsMerged: MergeRecordsFunc = (
     dispatch: Dispatch,
@@ -52,6 +53,14 @@ export class RecordActions {
       accountId,
       recordId,
       splitRecords,
+    },
+  });
+
+  public static deleteSplitRecords = (accountId: string, recordId: string) => ({
+    type: RecordActions.DELETE_SPLIT_RECORDS,
+    payload: {
+      accountId,
+      recordId,
     },
   });
 }

@@ -1,8 +1,10 @@
 import { Table, Popover, Position, Menu, Pane, Tooltip, IconButton } from 'evergreen-ui';
 import * as React from 'react';
 import { CategorySelect } from '../../components/category-select/category-select.component';
+import { IRecord } from '../../store/record/record.interface';
 import { formatDate } from '../../utils/date.util';
 import { IAccountMonthlyProps } from './account-monthly.props.interface';
+import { DeleteSplitRecordsDialog } from './delete-split-records.dialog';
 import { EditSplitRecords } from './edit-split-records.component';
 import { SplitRecords } from './split-records.component';
 
@@ -20,7 +22,15 @@ const editableCellDetails = {
 };
 
 export const AccountMonthly: React.FC<IAccountMonthlyProps> = props => {
-  const { records, categories, updateCategory, updateSplitRecordCategory, updateRecordWithSplits } = props;
+  const {
+    records,
+    categories,
+    updateCategory,
+    updateSplitRecordCategory,
+    updateRecordWithSplits,
+    deleteRecordSplitRecords,
+  } = props;
+  const [recordToDeleteFrom, setRecordToDeleteFrom] = React.useState<IRecord>(null);
   const [isSplittingTransaction, setIsSplittingTransaction] = React.useState<string>(undefined);
 
   return (
@@ -80,7 +90,7 @@ export const AccountMonthly: React.FC<IAccountMonthlyProps> = props => {
                                 icon='trash'
                                 intent='danger'
                                 onSelect={() => {
-                                  // TODO prompt the delete
+                                  setRecordToDeleteFrom(record);
                                   close();
                                 }}
                               >
@@ -128,6 +138,13 @@ export const AccountMonthly: React.FC<IAccountMonthlyProps> = props => {
           );
         })}
       </Table.Body>
+
+      <DeleteSplitRecordsDialog
+        record={recordToDeleteFrom}
+        onClose={() => setRecordToDeleteFrom(null)}
+        onConfirm={() => setRecordToDeleteFrom(null)}
+        deleteRecordSplitRecords={deleteRecordSplitRecords}
+      />
     </Table>
   );
 };

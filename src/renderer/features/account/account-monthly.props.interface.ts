@@ -39,6 +39,11 @@ export interface IAccountMonthlyDispatchProps {
    * Function to update record with splits in state.
    */
   updateRecordWithSplits: (recordId: string, splitRecords: ISplitRecord[]) => void;
+
+  /**
+   * Function to delete split records from a record in state.
+   */
+  deleteRecordSplitRecords: (record: IRecord) => void;
 }
 
 export interface IAccountMonthlyOwnProps {
