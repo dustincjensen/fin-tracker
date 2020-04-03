@@ -1,4 +1,4 @@
-import { Pane, Button, majorScale, InlineAlert, Table, TextInput, IconButton } from 'evergreen-ui';
+import { Pane, Button, majorScale, InlineAlert, Table, TextInput, IconButton, Icon, Strong } from 'evergreen-ui';
 import * as React from 'react';
 import { CategorySelect } from '../../components/category-select/category-select.component';
 import { round } from '../../utils/currency.util';
@@ -25,6 +25,18 @@ function createSplitRecord(): SplitRecordType {
   return { id: newGuid(), description: '', categoryId: undefined, credit: 0.0, debit: 0.0, category: undefined };
 }
 
+function getTotal(splitRecords: SplitRecordType[], mapFunc: (value: SplitRecordType) => number): number {
+  return splitRecords.map(mapFunc).reduce((sum, d) => round(sum + d), 0.0);
+}
+
+function getDebitTotal(splitRecords: SplitRecordType[]): number {
+  return getTotal(splitRecords, (value: SplitRecordType) => value.debit);
+}
+
+function getCreditTotal(splitRecords: SplitRecordType[]): number {
+  return getTotal(splitRecords, (value: SplitRecordType) => value.credit);
+}
+
 export const EditSplitRecords: React.FC<IEditSplitRecordsProps> = props => {
   const { record, categories, updateRecordWithSplits, close } = props;
   const [splitRecords, setSplitRecords] = React.useState<SplitRecordType[]>(
@@ -38,13 +50,13 @@ export const EditSplitRecords: React.FC<IEditSplitRecordsProps> = props => {
     const { debit, credit } = record;
 
     const newErrors: string[] = [];
-    if (debit && splitRecords.map(sr => sr.debit).reduce((sum, d) => round(sum + d), 0.0) !== debit) {
+    if (debit && getDebitTotal(splitRecords) !== debit) {
       newErrors.push('Debits total must match original record.');
     }
     if (debit && splitRecords.some(sr => sr.debit === 0.0)) {
       newErrors.push('All debit values must not be $0.00');
     }
-    if (credit && splitRecords.map(sr => sr.credit).reduce((sum, d) => round(sum + d), 0.0) !== credit) {
+    if (credit && getCreditTotal(splitRecords) !== credit) {
       newErrors.push('Credits total must match original record.');
     }
     if (credit && splitRecords.some(sr => sr.credit === 0.0)) {
@@ -111,6 +123,7 @@ export const EditSplitRecords: React.FC<IEditSplitRecordsProps> = props => {
     });
 
   const canRemoveRow = splitRecords && splitRecords.length > 2;
+  const total = record.debit ? getDebitTotal(splitRecords) : record.credit ? getCreditTotal(splitRecords) : 0.0;
 
   return (
     <Pane>
@@ -127,6 +140,7 @@ export const EditSplitRecords: React.FC<IEditSplitRecordsProps> = props => {
           </Pane>
         )}
         <Pane>
+          {/* Render a "fake" header for the table. */}
           <Table.Row height={30} alignItems='flex-end' borderBottom='none'>
             <Table.TextHeaderCell {...cellDetails}></Table.TextHeaderCell>
             <Table.TextHeaderCell>Description</Table.TextHeaderCell>
@@ -161,7 +175,7 @@ export const EditSplitRecords: React.FC<IEditSplitRecordsProps> = props => {
                 <Table.Cell {...cellDetails}>
                   {!!record.debit && (
                     <TextInput
-                      width={88}
+                      width={76}
                       type='number'
                       step={0.01}
                       min={0}
@@ -173,7 +187,7 @@ export const EditSplitRecords: React.FC<IEditSplitRecordsProps> = props => {
                 <Table.Cell {...cellDetails}>
                   {!!record.credit && (
                     <TextInput
-                      width={88}
+                      width={76}
                       type='number'
                       step={0.01}
                       min={0}
@@ -187,18 +201,40 @@ export const EditSplitRecords: React.FC<IEditSplitRecordsProps> = props => {
               </Table.Row>
             );
           })}
-          <Pane marginTop={7.5} marginLeft={cellDetails.flexBasis + tableColumnPadding} marginBottom={majorScale(3)}>
-            <Button type='button' iconBefore='fork' appearance='primary' onClick={addSplit}>
-              Add Split
-            </Button>
-          </Pane>
+          {/* Render row for add split and debit/credit total. */}
+          <Table.Row borderBottom='none' marginBottom={majorScale(3)}>
+            <Table.Cell {...cellDetails}></Table.Cell>
+            <Table.Cell>
+              <Button type='button' iconBefore='fork' appearance='primary' onClick={addSplit}>
+                Add Split
+              </Button>
+            </Table.Cell>
+            <Table.Cell {...editableCellDetails}></Table.Cell>
+            {!!record.credit && <Table.Cell {...cellDetails}></Table.Cell>}
+            <Table.Cell justifyContent='space-between' borderTop {...cellDetails}>
+              <Icon icon='dollar' size={14} />
+              <Strong size={400}>{total?.toFixed(2)}</Strong>
+            </Table.Cell>
+            {!!record.debit && <Table.Cell {...cellDetails}></Table.Cell>}
+            <Table.Cell {...cellDetails}></Table.Cell>
+            <Table.Cell flex='none' width={54}></Table.Cell>
+          </Table.Row>
         </Pane>
-        <Pane display='flex' justifyContent='flex-end' borderTop padding={20} paddingTop={10}>
+        {/* Render section for cancel and save */}
+        <Pane
+          display='flex'
+          justifyContent='flex-end'
+          borderTop
+          marginLeft={20}
+          marginBottom={20}
+          marginRight={20}
+          paddingTop={10}
+        >
           <Button type='button' iconBefore='ban-circle' height={majorScale(5)} marginRight={10} onClick={close}>
             Cancel
           </Button>
           <Button appearance='primary' iconBefore='floppy-disk' height={majorScale(5)}>
-            Save
+            Save Splits
           </Button>
         </Pane>
       </form>
