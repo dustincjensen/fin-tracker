@@ -5,6 +5,7 @@ import { IRecord } from '../../store/record/record.interface';
 import { formatDate } from '../../utils/date.util';
 import { IAccountMonthlyProps } from './account-monthly.props.interface';
 import { DeleteSplitRecordsDialog } from './delete-split-records.dialog';
+import { EditAutoCategoryDialog } from './edit-auto-category.dialog';
 import { EditSplitRecords } from './edit-split-records.component';
 import { SplitRecords } from './split-records.component';
 
@@ -29,8 +30,10 @@ export const AccountMonthly: React.FC<IAccountMonthlyProps> = props => {
     updateSplitRecordCategory,
     updateRecordWithSplits,
     deleteRecordSplitRecords,
+    autoCategorizeRecords
   } = props;
   const [recordToDeleteFrom, setRecordToDeleteFrom] = React.useState<IRecord>(null);
+  const [recordToAutoCategorize, setRecordToAutoCategorize] = React.useState<IRecord>(null);
   const [isSplittingTransaction, setIsSplittingTransaction] = React.useState<string>(undefined);
 
   return (
@@ -81,6 +84,16 @@ export const AccountMonthly: React.FC<IAccountMonthlyProps> = props => {
                           >
                             {record.splitRecords ? 'Edit Split Transactions' : 'Split Transaction'}
                           </Menu.Item>
+                          {!record.splitRecords && (
+                            <Menu.Item
+                              icon='automatic-updates'
+                              onSelect={() => {
+                                setRecordToAutoCategorize(record);
+                                close();
+                              }}>
+                                Setup Auto Category
+                            </Menu.Item>
+                          )}
                         </Menu.Group>
                         {record.splitRecords && (
                           <>
@@ -144,6 +157,14 @@ export const AccountMonthly: React.FC<IAccountMonthlyProps> = props => {
         onClose={() => setRecordToDeleteFrom(null)}
         onConfirm={() => setRecordToDeleteFrom(null)}
         deleteRecordSplitRecords={deleteRecordSplitRecords}
+      />
+
+      <EditAutoCategoryDialog
+        record={recordToAutoCategorize}
+        categories={categories}
+        onClose={() => setRecordToAutoCategorize(null)}
+        onConfirm={() => setRecordToAutoCategorize(null)}
+        autoCategorizeRecords={autoCategorizeRecords}
       />
     </Table>
   );

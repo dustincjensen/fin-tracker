@@ -32,6 +32,12 @@ export interface IRecord {
   categoryId?: string;
 
   /**
+   * The ID of the category this was automatically assigned.
+   * This will be ignored if the record has splitRecords.
+   */
+  autoCategoryId?: string;
+
+  /**
    * The debit of the record.
    */
   debit?: number;

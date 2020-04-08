@@ -7,6 +7,7 @@ import { ISplitRecord } from './split-record.interface';
 export class RecordActions {
   public static SAVE_NEW_RECORDS = 'SAVE_NEW_RECORDS';
   public static SET_RECORD_CATEGORY = 'SET_RECORD_CATEGORY';
+  public static SET_RECORD_AUTO_CATEGORY = 'SET_RECORD_AUTO_CATEGORY';
   public static SET_SPLIT_RECORD_CATEGORY = 'SET_SPLIT_RECORD_CATEGORY';
   public static SET_SPLIT_RECORDS = 'SET_SPLIT_RECORDS';
   public static DELETE_SPLIT_RECORDS = 'DELETE_SPLIT_RECORDS';
@@ -30,6 +31,17 @@ export class RecordActions {
       recordId,
       categoryId,
     },
+  });
+
+  public static setRecordsAutoCategory = (accountId: string, autoCategoryId: string, categoryId: string, description: string, overwriteExisting: boolean) => ({
+    type: RecordActions.SET_RECORD_AUTO_CATEGORY,
+    payload: {
+      accountId,
+      autoCategoryId,
+      categoryId,
+      description,
+      overwriteExisting
+    }
   });
 
   public static setSplitRecordCategory = (

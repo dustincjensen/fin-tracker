@@ -1,5 +1,7 @@
 import { Draft } from 'immer';
 import { AccountActions } from '../account/account.actions';
+import { AutoCategoryActions } from '../auto-category/auto-category.actions';
+import { IAutoCategory } from '../auto-category/auto-category.interface';
 import { createDraftReducer } from '../draft.reducer';
 import { RecordActions } from './record.actions';
 import { IRecord } from './record.interface';
@@ -12,10 +14,12 @@ export const RecordReducer = createDraftReducer(
   {
     [RecordActions.SAVE_NEW_RECORDS]: saveNewRecords,
     [RecordActions.SET_RECORD_CATEGORY]: setRecordCategory,
+    [RecordActions.SET_RECORD_AUTO_CATEGORY]: setRecordAutoCategory,
     [RecordActions.SET_SPLIT_RECORD_CATEGORY]: setSplitRecordCategory,
     [RecordActions.SET_SPLIT_RECORDS]: setSplitRecords,
     [RecordActions.DELETE_SPLIT_RECORDS]: deleteSplitRecords,
     [AccountActions.DELETE_ACCOUNT]: deleteRecords,
+    [AutoCategoryActions.DELETE_AUTO_CATEGORY]: removeRecordAutoCategory,
   },
   initialState
 );
@@ -44,7 +48,50 @@ function setRecordCategory(
   payload: { accountId: string; recordId: string; categoryId: string }
 ) {
   const { accountId, recordId, categoryId } = payload;
-  draft.records[accountId].find(record => record.id === recordId).categoryId = categoryId;
+  const record = draft.records[accountId].find(record => record.id === recordId);
+  record.categoryId = categoryId;
+  record.autoCategoryId = undefined;
+}
+
+/**
+ * Sets the category automatically for records based on the matching description.
+ * 
+ * @param draft     The draft state.
+ * @param payload   The action payload.
+ */
+function setRecordAutoCategory(
+  draft: Draft<IRecordStore>,
+  payload: { autoCategoryId: string; accountId: string; categoryId: string; description: string; overwriteExisting: boolean }
+) {
+  const { autoCategoryId, accountId, categoryId, description, overwriteExisting } = payload;
+  
+  const recordsThatMatchDescription = draft.records[accountId].filter(r => 
+    !r.splitRecords &&
+    (!r.categoryId || (r.categoryId && r.autoCategoryId) || overwriteExisting) &&
+    r.description.startsWith(description)
+  );
+
+  for (const matchedRecord of recordsThatMatchDescription) {
+    matchedRecord.autoCategoryId = autoCategoryId;
+    matchedRecord.categoryId = categoryId;
+  }
+}
+
+/**
+ * Removes the auto category id from records that use it.
+ * 
+ * @param draft         The draft state.
+ * @param autoCategory  The auto category that was removed.
+ */
+function removeRecordAutoCategory(draft: Draft<IRecordStore>, autoCategory: IAutoCategory) {
+  const { accountId, id } = autoCategory;
+  const records = draft.records[accountId];
+  for (const record of records) {
+    if (record.autoCategoryId === id) {
+      record.autoCategoryId = undefined;
+      record.categoryId = undefined;
+    }
+  }
 }
 
 /**
@@ -98,5 +145,6 @@ function deleteSplitRecords(draft: Draft<IRecordStore>, payload: { accountId: st
  * @param accountId   The account id to delete records for.
  */
 function deleteRecords(draft: Draft<IRecordStore>, accountId: string) {
+  // TODO this doesn't seem to be removing the old records.
   delete draft.records[accountId];
 }

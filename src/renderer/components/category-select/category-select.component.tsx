@@ -1,5 +1,6 @@
-import { Pane, Text, Button, Icon, minorScale, SelectMenu, SelectMenuItem } from 'evergreen-ui';
+import { Button, SelectMenu, SelectMenuItem } from 'evergreen-ui';
 import * as React from 'react';
+import { CategoryTag } from '../category-tag/category-tag.component';
 import { ICategorySelectProps } from './category-select.props.interface';
 
 export const CategorySelect: React.FC<ICategorySelectProps> = props => {
@@ -44,26 +45,7 @@ export const CategorySelect: React.FC<ICategorySelectProps> = props => {
   };
 
   if (record?.category) {
-    return (
-      <Pane display='inline-block'>
-        <Pane
-          display='flex'
-          alignItems='center'
-          background={record.category.color || '#333'}
-          padding={5}
-          paddingRight={5}
-          paddingLeft={10}
-          borderRadius={3}
-        >
-          <Text color='white' paddingRight={10}>
-            {record.category.label}
-          </Text>
-          <Button type='button' height={minorScale(4)} padding={0} margin={0} appearance='minimal' onClick={onClear}>
-            <Icon icon='small-cross' color='white' />
-          </Button>
-        </Pane>
-      </Pane>
-    );
+    return <CategoryTag category={record.category} onClear={onClear} />;
   }
 
   return (

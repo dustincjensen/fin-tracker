@@ -64,7 +64,7 @@ export const EditCategory: React.FC<IEditCategoryProps> = ({
           <Pane marginBottom={majorScale(3)}>
             <FormFieldLabel>Color *</FormFieldLabel>
             <FormFieldDescription>
-              Color will be used when displaying the category on records and in graphs.
+              Color will be used when displaying the category on transactions and in graphs.
             </FormFieldDescription>
             <Popover
               content={

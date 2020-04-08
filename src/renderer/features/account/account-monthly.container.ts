@@ -30,7 +30,7 @@ const mapStateToProps = (state: IStore, ownProps: IAccountMonthlyOwnProps): IAcc
   const records = ownProps.stateSelector(state, ownProps.accountId, ownProps.date)?.map(record => {
     return {
       ...record,
-      category: categories.find(c => c.value === record.categoryId),
+      category: categories.find(c => c.value === record.autoCategoryId || c.value === record.categoryId),
       splitRecords: record.splitRecords?.map(splitRecord => {
         return {
           ...splitRecord,
@@ -56,6 +56,7 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: IAccountMonthlyOwnProp
     updateRecordWithSplits: (recordId: string, splitRecords: ISplitRecord[]) =>
       dispatch(RecordActions.setSplitRecords(accountId, recordId, splitRecords)),
     deleteRecordSplitRecords: (record: IRecord) => dispatch(RecordActions.deleteSplitRecords(accountId, record.id)),
+    autoCategorizeRecords: (autoCategoryId: string, categoryId: string, description: string, overWriteExisting: boolean) => dispatch(RecordActions.setRecordsAutoCategory(accountId, autoCategoryId, categoryId, description, overWriteExisting))
   };
 };
 
