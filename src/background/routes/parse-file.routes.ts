@@ -40,11 +40,23 @@ function parse(
   filePath: string,
   accountType?: 'Chequing' | 'Savings' | 'CreditCard'
 ) {
-  const parsedFileRecords = method(accountId, filePath, accountType);
-  const sorted = sortRecordsByDate(parsedFileRecords);
-  const fileName = path.basename(filePath);
-  return {
-    type: 'IPC_NEW_RECORDS_PARSED',
-    args: [sorted, accountId, filePath, fileName],
-  };
+  try {
+    const parsedFileRecords = method(accountId, filePath, accountType);
+    if (!parsedFileRecords || parsedFileRecords.length === 0) {
+      throw new Error("Unable to parse transactions from file.");
+    }
+
+    const sorted = sortRecordsByDate(parsedFileRecords);
+    const fileName = path.basename(filePath);
+    return {
+      type: 'IPC_NEW_RECORDS_PARSED',
+      args: [sorted, accountId, filePath, fileName],
+    };
+  } catch (error) {
+    const fileName = path.basename(filePath);
+    return {
+      type: 'IPC_NEW_RECORDS_ERROR',
+      args: [error.message, filePath, fileName]
+    };
+  }
 }

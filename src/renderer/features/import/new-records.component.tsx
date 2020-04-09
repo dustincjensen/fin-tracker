@@ -1,4 +1,4 @@
-import { Button, FilePicker, FormField, Heading, Icon, majorScale, Pane, SelectField } from 'evergreen-ui';
+import { Button, FilePicker, FormField, Heading, Icon, majorScale, Pane, SelectField, Alert } from 'evergreen-ui';
 import * as React from 'react';
 import { INewRecordsProps } from './new-records.props.interface';
 import { INewRecordsState } from './new-records.state.interface';
@@ -14,7 +14,8 @@ export class NewRecords extends React.Component<INewRecordsProps, INewRecordsSta
   }
 
   render() {
-    const { selectedAccountId, importMethod } = this.state;
+    const { error } = this.props;
+    const { selectedAccountId, importMethod, formError } = this.state;
 
     return (
       <Pane border padding={20} background='tint1' borderRadius={5}>
@@ -47,11 +48,16 @@ export class NewRecords extends React.Component<INewRecordsProps, INewRecordsSta
               {this.getImportOptions()}
             </SelectField>
           </Pane>
-          <Pane display='flex' justifyContent='flex-end' borderTop paddingTop={10}>
+          <Pane borderTop paddingTop={10}>
+          {(formError || error) && <Pane>
+            <Alert intent="danger" title={formError || error} />
+          </Pane>}
+          <Pane display='flex' justifyContent='flex-end' paddingTop={10}>
             <Button appearance='primary' height={majorScale(5)} iconBefore='import'>
               Import
             </Button>
           </Pane>
+          </Pane>         
         </form>
       </Pane>
     );
@@ -107,6 +113,7 @@ export class NewRecords extends React.Component<INewRecordsProps, INewRecordsSta
 
     // Don't do anything if the form isn't properly filled out.
     if (selectedFile === null || selectedAccountId === '') {
+      this.setState({ formError: 'Please select a file to import.' });
       return;
     }
 
@@ -114,6 +121,6 @@ export class NewRecords extends React.Component<INewRecordsProps, INewRecordsSta
     const selectedAccount = accounts.filter(a => a.id === selectedAccountId)[0];
 
     this.props.importAction(selectedAccount, selectedFile, importMethod);
-    this.setState({ selectedFile: null });
+    this.setState({ formError: undefined });
   };
 }

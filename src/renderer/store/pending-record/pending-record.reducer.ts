@@ -10,11 +10,14 @@ const initialState: IPendingRecordStore = {
   filePath: undefined,
   fileName: undefined,
   records: [],
+  error: undefined,
 };
 
 export const PendingRecordReducer = createDraftReducer(
   {
     [PendingRecordActions.NEW_RECORDS_IMPORTED]: importRecords,
+    [PendingRecordActions.NEW_RECORDS_ERROR]: importError,
+    [PendingRecordActions.CLEAR_RECORDS_ERROR]: clearError,
     [PendingRecordActions.CLEAR_RECORDS_IMPORTED]: clearRecords,
     [RecordActions.SAVE_NEW_RECORDS]: clearRecords,
     // TODO delete account.
@@ -39,6 +42,8 @@ function importRecords(
 ) {
   const { records, accountId, filePath, fileName } = payload;
 
+  draft.error = undefined;
+
   if (records && records.length > 0) {
     draft.accountId = accountId;
     draft.filePath = filePath;
@@ -52,14 +57,36 @@ function importRecords(
 }
 
 /**
+ * Import error occurred.
+ * 
+ * @param draft     The draft state.
+ * @param payload   The details of the file that failed parsing.
+ */
+function importError(draft: Draft<IPendingRecordStore>, payload: { error: string; filePath: string; fileName: string }) {
+  const { error, fileName, filePath } = payload;
+  draft.error = error;
+  draft.fileName = fileName;
+  draft.filePath = filePath;
+}
+
+/**
+ * Clears the import error.
+ * 
+ * @param draft     The draft state.
+ */
+function clearError(draft: Draft<IPendingRecordStore>) {
+  draft.error = undefined;
+}
+
+/**
  * Clears the records and account id from state.
  *
- * @param draft       The draft state.
+ * @param draft     The draft state.
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function clearRecords(draft: Draft<IPendingRecordStore>) {
   draft.accountId = undefined;
   draft.filePath = undefined;
   draft.fileName = undefined;
   draft.records = [];
+  draft.error = undefined;
 }

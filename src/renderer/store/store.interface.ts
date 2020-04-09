@@ -6,8 +6,18 @@ import { IRecordStore } from './record/record.store.interface';
 
 export interface IStore {
   accounts: IAccountStore;
-  categories: ICategoryStore;
   autoCategories: IAutoCategoryStore;
+  categories: ICategoryStore;
   pendingRecords: IPendingRecordStore;
+  records: IRecordStore;
+}
+
+/**
+ * The store interface for what data should be persisted.
+ */
+export interface IPersistedStore {
+  accounts: IAccountStore;
+  autoCategories: IAutoCategoryStore;
+  categories: ICategoryStore;
   records: IRecordStore;
 }

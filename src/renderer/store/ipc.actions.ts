@@ -4,6 +4,7 @@ import { RecordActions } from './record/record.actions';
 
 const lookup: { [type: string]: Function } = {
   ['IPC_NEW_RECORDS_PARSED']: PendingRecordActions.importNewRecords,
+  ['IPC_NEW_RECORDS_ERROR']: PendingRecordActions.importError,
   ['IPC_NEW_RECORDS_MERGED']: RecordActions.saveNewRecords,
 };
 

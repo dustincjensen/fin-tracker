@@ -1,11 +1,5 @@
 TODO
 
-- When editing a record have the option to apply the description / category change to 
-  - all records
-  - all records in the future
-  - single instance
-  - This will create a background record (possibly invisible) that will be associated with all
-    future records of that description, and will be given the same category.
 - Improve importing to flag duplicate records on the account.
 - Give each imported record an import id and associate the import id to the account
   - Provide a list of import id's and file names you imported for each account.

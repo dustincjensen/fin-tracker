@@ -7,6 +7,7 @@ import { RootLayout } from './features/root/root.layout';
 import { ipcReceive } from './store/ipc';
 import { toastMiddleware } from './store/middleware/toast.middleware';
 import { rootReducer } from './store/store';
+import { IPersistedStore } from './store/store.interface';
 import './renderer.scss';
 
 // TODO change implementation of initial state.
@@ -15,7 +16,15 @@ const store = createStore(rootReducer, initialState || {}, applyMiddleware(ipcRe
 
 store.subscribe(() => {
   // TODO We shouldn't set local storage so quickly, subscribe gets called often.
-  localStorage.setItem('reduxStore', JSON.stringify(store.getState()));
+  const state = store.getState();
+  const persistedState: IPersistedStore = {
+    accounts: state.accounts,
+    autoCategories: state.autoCategories,
+    categories: state.categories,
+    records: state.records
+  };
+  const serializedState = JSON.stringify(persistedState);
+  localStorage.setItem('reduxStore', serializedState);
 });
 
 ReactDOM.render(

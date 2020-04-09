@@ -6,6 +6,8 @@ import { ImportRecordsFunc } from './import-records.type';
 
 export class PendingRecordActions {
   public static NEW_RECORDS_IMPORTED = 'NEW_RECORDS_IMPORTED';
+  public static NEW_RECORDS_ERROR = 'NEW_RECORDS_ERROR';
+  public static CLEAR_RECORDS_ERROR = 'CLEAR_RECORDS_ERROR';
   public static CLEAR_RECORDS_IMPORTED = 'CLEAR_RECORDS_IMPORTED';
 
   public static newScotiabankChequingFileSelected: ImportRecordsFunc = (
@@ -48,6 +50,19 @@ export class PendingRecordActions {
       filePath,
       fileName,
     },
+  });
+
+  public static importError = (error: string, filePath: string, fileName: string) => ({
+    type: PendingRecordActions.NEW_RECORDS_ERROR,
+    payload: {
+      error,
+      filePath,
+      fileName
+    }
+  });
+
+  public static clearError = () => ({
+    type: PendingRecordActions.CLEAR_RECORDS_ERROR
   });
 
   public static clearImportedRecords = () => ({

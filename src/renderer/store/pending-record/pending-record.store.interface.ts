@@ -20,4 +20,9 @@ export interface IPendingRecordStore {
    * Pending records to be uploaded.
    */
   records: IRecord[];
+
+  /**
+   * If the import had an error, the text of the error.
+   */
+  error: string;
 }

@@ -7,6 +7,11 @@ export interface INewRecordsState {
   selectedFile?: File;
 
   /**
+   * If the form hasn't been filled out correctly.
+   */
+  formError?: string;
+
+  /**
    * The account Id to import the records to.
    */
   selectedAccountId?: string;
