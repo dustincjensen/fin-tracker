@@ -24,8 +24,8 @@ export const DeleteAutoCategoryDialog: React.FC<IDeleteAutoCategoryProps> = prop
       title='Delete Auto Category?'
       onConfirm={confirm}
     >
-      Are you sure you want to delete the <b>&quot;{autoCategory.description}&quot;</b> auto category? Records will be kept, but you
-      will need to re-associate them with a new category.
+      Are you sure you want to delete the <b>&quot;{autoCategory.description}&quot;</b> auto category? Records will be
+      kept, but you will need to re-associate them with a new category.
     </Dialog>
   );
 };

@@ -57,12 +57,12 @@ export class PendingRecordActions {
     payload: {
       error,
       filePath,
-      fileName
-    }
+      fileName,
+    },
   });
 
   public static clearError = () => ({
-    type: PendingRecordActions.CLEAR_RECORDS_ERROR
+    type: PendingRecordActions.CLEAR_RECORDS_ERROR,
   });
 
   public static clearImportedRecords = () => ({

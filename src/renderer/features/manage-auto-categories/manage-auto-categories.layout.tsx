@@ -7,17 +7,14 @@ import { AutoCategoriesContainer } from './auto-categories.container';
 export const ManageAutoCategories = () => {
   const [autoCategoryFilter, setAutoCategoryFilter] = React.useState<string>('');
 
-    return (
-      <ErrorBoundary>
-        <Pane display='grid'>
-          <Pane marginBottom={10}>
-            <AutoCategoriesFilter
-              autoCategoryFilter={autoCategoryFilter}
-              setAutoCategoryFilter={setAutoCategoryFilter}
-            />
-          </Pane>
-          <AutoCategoriesContainer autoCategoryFilter={autoCategoryFilter}/>
+  return (
+    <ErrorBoundary>
+      <Pane display='grid'>
+        <Pane marginBottom={10}>
+          <AutoCategoriesFilter autoCategoryFilter={autoCategoryFilter} setAutoCategoryFilter={setAutoCategoryFilter} />
         </Pane>
-      </ErrorBoundary>
-    );
+        <AutoCategoriesContainer autoCategoryFilter={autoCategoryFilter} />
+      </Pane>
+    </ErrorBoundary>
+  );
 };

@@ -30,7 +30,7 @@ export const AccountMonthly: React.FC<IAccountMonthlyProps> = props => {
     updateSplitRecordCategory,
     updateRecordWithSplits,
     deleteRecordSplitRecords,
-    autoCategorizeRecords
+    autoCategorizeRecords,
   } = props;
   const [recordToDeleteFrom, setRecordToDeleteFrom] = React.useState<IRecord>(null);
   const [recordToAutoCategorize, setRecordToAutoCategorize] = React.useState<IRecord>(null);
@@ -90,8 +90,9 @@ export const AccountMonthly: React.FC<IAccountMonthlyProps> = props => {
                               onSelect={() => {
                                 setRecordToAutoCategorize(record);
                                 close();
-                              }}>
-                                Setup Auto Category
+                              }}
+                            >
+                              Setup Auto Category
                             </Menu.Item>
                           )}
                         </Menu.Group>

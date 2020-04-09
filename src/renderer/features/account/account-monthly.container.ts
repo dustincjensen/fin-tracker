@@ -56,7 +56,15 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: IAccountMonthlyOwnProp
     updateRecordWithSplits: (recordId: string, splitRecords: ISplitRecord[]) =>
       dispatch(RecordActions.setSplitRecords(accountId, recordId, splitRecords)),
     deleteRecordSplitRecords: (record: IRecord) => dispatch(RecordActions.deleteSplitRecords(accountId, record.id)),
-    autoCategorizeRecords: (autoCategoryId: string, categoryId: string, description: string, overWriteExisting: boolean) => dispatch(RecordActions.setRecordsAutoCategory(accountId, autoCategoryId, categoryId, description, overWriteExisting))
+    autoCategorizeRecords: (
+      autoCategoryId: string,
+      categoryId: string,
+      description: string,
+      overWriteExisting: boolean
+    ) =>
+      dispatch(
+        RecordActions.setRecordsAutoCategory(accountId, autoCategoryId, categoryId, description, overWriteExisting)
+      ),
   };
 };
 

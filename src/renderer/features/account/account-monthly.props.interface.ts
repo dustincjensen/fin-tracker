@@ -48,7 +48,12 @@ export interface IAccountMonthlyDispatchProps {
   /**
    * Function to automatically categorize records with a matching description.
    */
-  autoCategorizeRecords: (autoCategoryId: string, categoryId: string, description: string, overwriteExisting: boolean) => void;
+  autoCategorizeRecords: (
+    autoCategoryId: string,
+    categoryId: string,
+    description: string,
+    overwriteExisting: boolean
+  ) => void;
 }
 
 export interface IAccountMonthlyOwnProps {

@@ -49,15 +49,17 @@ export class NewRecords extends React.Component<INewRecordsProps, INewRecordsSta
             </SelectField>
           </Pane>
           <Pane borderTop paddingTop={10}>
-          {(formError || error) && <Pane>
-            <Alert intent="danger" title={formError || error} />
-          </Pane>}
-          <Pane display='flex' justifyContent='flex-end' paddingTop={10}>
-            <Button appearance='primary' height={majorScale(5)} iconBefore='import'>
-              Import
-            </Button>
+            {(formError || error) && (
+              <Pane>
+                <Alert intent='danger' title={formError || error} />
+              </Pane>
+            )}
+            <Pane display='flex' justifyContent='flex-end' paddingTop={10}>
+              <Button appearance='primary' height={majorScale(5)} iconBefore='import'>
+                Import
+              </Button>
+            </Pane>
           </Pane>
-          </Pane>         
         </form>
       </Pane>
     );

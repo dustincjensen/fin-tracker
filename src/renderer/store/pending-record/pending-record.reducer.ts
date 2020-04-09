@@ -58,11 +58,14 @@ function importRecords(
 
 /**
  * Import error occurred.
- * 
+ *
  * @param draft     The draft state.
  * @param payload   The details of the file that failed parsing.
  */
-function importError(draft: Draft<IPendingRecordStore>, payload: { error: string; filePath: string; fileName: string }) {
+function importError(
+  draft: Draft<IPendingRecordStore>,
+  payload: { error: string; filePath: string; fileName: string }
+) {
   const { error, fileName, filePath } = payload;
   draft.error = error;
   draft.fileName = fileName;
@@ -71,7 +74,7 @@ function importError(draft: Draft<IPendingRecordStore>, payload: { error: string
 
 /**
  * Clears the import error.
- * 
+ *
  * @param draft     The draft state.
  */
 function clearError(draft: Draft<IPendingRecordStore>) {

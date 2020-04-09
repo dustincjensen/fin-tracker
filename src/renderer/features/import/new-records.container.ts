@@ -13,7 +13,7 @@ const mapStateToProps = (state: IStore): INewRecordsStateProps => {
     accounts: Object.keys(state.accounts.accounts).map(accountId => {
       return state.accounts.accounts[accountId];
     }),
-    error: state.pendingRecords.error
+    error: state.pendingRecords.error,
   };
 };
 

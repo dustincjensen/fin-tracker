@@ -18,7 +18,7 @@ export class RootLayout extends React.Component {
           <Switch>
             <Route exact path='/' component={HomeLayout} />
             <Route exact path='/accounts' component={ManageAccountLayout} />
-            <Route exact path="/autoCategories" component={ManageAutoCategories} />
+            <Route exact path='/autoCategories' component={ManageAutoCategories} />
             <Route exact path='/categories' component={ManageCategoryLayout} />
             <Route exact path='/account/:accountId' component={AccountLayout} />
             <Route exact path='/import/:accountId?' component={ImportContainer} />

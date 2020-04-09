@@ -55,20 +55,27 @@ function setRecordCategory(
 
 /**
  * Sets the category automatically for records based on the matching description.
- * 
+ *
  * @param draft     The draft state.
  * @param payload   The action payload.
  */
 function setRecordAutoCategory(
   draft: Draft<IRecordStore>,
-  payload: { autoCategoryId: string; accountId: string; categoryId: string; description: string; overwriteExisting: boolean }
+  payload: {
+    autoCategoryId: string;
+    accountId: string;
+    categoryId: string;
+    description: string;
+    overwriteExisting: boolean;
+  }
 ) {
   const { autoCategoryId, accountId, categoryId, description, overwriteExisting } = payload;
-  
-  const recordsThatMatchDescription = draft.records[accountId].filter(r => 
-    !r.splitRecords &&
-    (!r.categoryId || (r.categoryId && r.autoCategoryId) || overwriteExisting) &&
-    r.description.startsWith(description)
+
+  const recordsThatMatchDescription = draft.records[accountId].filter(
+    r =>
+      !r.splitRecords &&
+      (!r.categoryId || (r.categoryId && r.autoCategoryId) || overwriteExisting) &&
+      r.description.startsWith(description)
   );
 
   for (const matchedRecord of recordsThatMatchDescription) {
@@ -79,7 +86,7 @@ function setRecordAutoCategory(
 
 /**
  * Removes the auto category id from records that use it.
- * 
+ *
  * @param draft         The draft state.
  * @param autoCategory  The auto category that was removed.
  */

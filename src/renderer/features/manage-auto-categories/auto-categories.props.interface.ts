@@ -1,22 +1,27 @@
-import { IAutoCategory } from "../../store/auto-category/auto-category.interface";
+import { IAutoCategory } from '../../store/auto-category/auto-category.interface';
 
-export interface IAutoCategoriesProps extends IAutoCategoriesStateProps, IAutoCategoriesDispatchProps, IAutoCategoriesOwnProps {}
+export interface IAutoCategoriesProps
+  extends IAutoCategoriesStateProps,
+    IAutoCategoriesDispatchProps,
+    IAutoCategoriesOwnProps {}
 
 export interface IAutoCategoriesStateProps {
   /**
    * The auto categories to display.
    */
-  autoCategories: Array<IAutoCategory & { 
-    category: {
-      color: string;
-      label: string;
-      value: string;
-    };
+  autoCategories: Array<
+    IAutoCategory & {
+      category: {
+        color: string;
+        label: string;
+        value: string;
+      };
 
-    accountName: string;
+      accountName: string;
 
-    numberOfRecords: number;
-  }>;
+      numberOfRecords: number;
+    }
+  >;
 }
 
 export interface IAutoCategoriesDispatchProps {

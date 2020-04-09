@@ -43,7 +43,7 @@ function parse(
   try {
     const parsedFileRecords = method(accountId, filePath, accountType);
     if (!parsedFileRecords || parsedFileRecords.length === 0) {
-      throw new Error("Unable to parse transactions from file.");
+      throw new Error('Unable to parse transactions from file.');
     }
 
     const sorted = sortRecordsByDate(parsedFileRecords);
@@ -56,7 +56,7 @@ function parse(
     const fileName = path.basename(filePath);
     return {
       type: 'IPC_NEW_RECORDS_ERROR',
-      args: [error.message, filePath, fileName]
+      args: [error.message, filePath, fileName],
     };
   }
 }

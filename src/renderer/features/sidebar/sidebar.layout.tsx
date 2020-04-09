@@ -18,7 +18,7 @@ export class SidebarLayout extends React.Component {
         <Button is={Link} appearance='minimal' to='/categories' iconBefore='group-objects'>
           Categories
         </Button>
-        <Button is={Link} appearance="minimal" to="/autoCategories" iconBefore="automatic-updates">
+        <Button is={Link} appearance='minimal' to='/autoCategories' iconBefore='automatic-updates'>
           Auto Categories
         </Button>
         <Button is={Link} appearance='minimal' to='/import' iconBefore='import'>

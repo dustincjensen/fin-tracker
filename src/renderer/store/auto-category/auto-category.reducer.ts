@@ -1,11 +1,11 @@
-import { Draft } from "immer";
-import { createDraftReducer } from "../draft.reducer";
+import { Draft } from 'immer';
+import { createDraftReducer } from '../draft.reducer';
 import { RecordActions } from '../record/record.actions';
-import { AutoCategoryActions } from "./auto-category.actions";
-import { IAutoCategory } from "./auto-category.interface";
+import { AutoCategoryActions } from './auto-category.actions';
+import { IAutoCategory } from './auto-category.interface';
 import { IAutoCategoryStore } from './auto-category.store.interface';
 
-const initialState: IAutoCategoryStore = {autoCategories: {}};
+const initialState: IAutoCategoryStore = { autoCategories: {} };
 
 export const AutoCategoryReducer = createDraftReducer(
   {
@@ -16,9 +16,16 @@ export const AutoCategoryReducer = createDraftReducer(
   initialState
 );
 
-function saveRecordAutoCategory(draft: Draft<IAutoCategoryStore>, payload: {
-  accountId: string; autoCategoryId: string; categoryId: string; description: string; overwriteExisting: boolean;
-}) {
+function saveRecordAutoCategory(
+  draft: Draft<IAutoCategoryStore>,
+  payload: {
+    accountId: string;
+    autoCategoryId: string;
+    categoryId: string;
+    description: string;
+    overwriteExisting: boolean;
+  }
+) {
   const { autoCategoryId, accountId, categoryId, description } = payload;
   const autoCategoriesForAccount: IAutoCategory[] = draft.autoCategories[accountId];
 
@@ -26,7 +33,7 @@ function saveRecordAutoCategory(draft: Draft<IAutoCategoryStore>, payload: {
     id: autoCategoryId,
     accountId,
     categoryId,
-    description
+    description,
   };
 
   if (!autoCategoriesForAccount) {

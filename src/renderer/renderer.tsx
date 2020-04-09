@@ -23,7 +23,7 @@ store.subscribe(() => {
     accounts: state.accounts,
     autoCategories: state.autoCategories,
     categories: state.categories,
-    records: state.records
+    records: state.records,
   };
   storage.set('state', persistedState);
 });

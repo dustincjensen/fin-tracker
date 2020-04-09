@@ -33,15 +33,21 @@ export class RecordActions {
     },
   });
 
-  public static setRecordsAutoCategory = (accountId: string, autoCategoryId: string, categoryId: string, description: string, overwriteExisting: boolean) => ({
+  public static setRecordsAutoCategory = (
+    accountId: string,
+    autoCategoryId: string,
+    categoryId: string,
+    description: string,
+    overwriteExisting: boolean
+  ) => ({
     type: RecordActions.SET_RECORD_AUTO_CATEGORY,
     payload: {
       accountId,
       autoCategoryId,
       categoryId,
       description,
-      overwriteExisting
-    }
+      overwriteExisting,
+    },
   });
 
   public static setSplitRecordCategory = (

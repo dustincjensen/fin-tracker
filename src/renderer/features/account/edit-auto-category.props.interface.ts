@@ -28,5 +28,10 @@ export interface IEditAutoCategoryProps {
   /**
    * Action to set up the auto categorization.
    */
-  autoCategorizeRecords: (autoCategoryId: string, categoryId: string, description: string, overwriteExisting: boolean) => void;
+  autoCategorizeRecords: (
+    autoCategoryId: string,
+    categoryId: string,
+    description: string,
+    overwriteExisting: boolean
+  ) => void;
 }

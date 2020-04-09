@@ -12,7 +12,7 @@ const w200 = createStaticWidthCell(200);
 
 export const AutoCategories: React.FC<IAutoCategoriesProps> = ({ autoCategories, deleteAutoCategory }) => {
   const [autoCategoryToDelete, setAutoCategoryToDelete] = React.useState<IAutoCategory>(null);
-  
+
   return (
     <Table>
       <Table.Head paddingRight={0}>
@@ -29,10 +29,12 @@ export const AutoCategories: React.FC<IAutoCategoriesProps> = ({ autoCategories,
               <Table.Row>
                 <Table.TextCell {...w150}>{autoCategory.accountName}</Table.TextCell>
                 <Table.TextCell>{autoCategory.description}</Table.TextCell>
-                <Table.Cell {...w200}><CategoryTag category={autoCategory.category}/></Table.Cell>
+                <Table.Cell {...w200}>
+                  <CategoryTag category={autoCategory.category} />
+                </Table.Cell>
                 <Table.TextCell {...w100}>{autoCategory.numberOfRecords}</Table.TextCell>
                 <Table.Cell {...w100} justifyContent='flex-end'>
-                  <Tooltip content='Delete Auto Category' hideDelay={0} position="bottom-right">
+                  <Tooltip content='Delete Auto Category' hideDelay={0} position='bottom-right'>
                     <IconButton
                       icon='trash'
                       appearance='minimal'
