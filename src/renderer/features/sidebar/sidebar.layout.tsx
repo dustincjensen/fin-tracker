@@ -1,8 +1,11 @@
-import { Button, Pane } from 'evergreen-ui';
+import { remote } from 'electron';
+import { Button, Pane, Text } from 'evergreen-ui';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { AccountsSidebarLayout } from '../accounts-sidebar/accounts-sidebar.layout';
 import './sidebar.layout.scss';
+
+const appVersion = remote.app.getVersion();
 
 export class SidebarLayout extends React.Component {
   render() {
@@ -24,6 +27,7 @@ export class SidebarLayout extends React.Component {
         <Button is={Link} appearance='minimal' to='/import' iconBefore='import'>
           Import
         </Button>
+        <Text paddingTop={20} size={300} textAlign="center">Version: {appVersion}</Text>
       </Pane>
     );
   }
