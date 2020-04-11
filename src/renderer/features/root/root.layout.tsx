@@ -1,3 +1,4 @@
+import { Pane } from 'evergreen-ui';
 import * as React from 'react';
 import { Route, Switch } from 'react-router';
 import { AccountLayout } from '../account/account.layout';
@@ -7,14 +8,13 @@ import { ManageAccountLayout } from '../manage-accounts/manage-accounts.layout';
 import { ManageAutoCategories } from '../manage-auto-categories/manage-auto-categories.layout';
 import { ManageCategoryLayout } from '../manage-categories/manage-categories.layout';
 import { SidebarLayout } from '../sidebar/sidebar.layout';
-import './root.layout.scss';
 
 export class RootLayout extends React.Component {
   render() {
     return (
-      <div className='root'>
+      <Pane height="100%" display="grid" gridTemplateColumns="auto 1fr" borderTop>
         <SidebarLayout />
-        <div className='main-content scroll-bar-styled'>
+        <Pane padding={20} overflowX="hidden" overflowY="auto" className='scroll-bar-styled'>
           <Switch>
             <Route exact path='/' component={HomeLayout} />
             <Route exact path='/accounts' component={ManageAccountLayout} />
@@ -23,8 +23,8 @@ export class RootLayout extends React.Component {
             <Route exact path='/account/:accountId' component={AccountLayout} />
             <Route exact path='/import/:accountId?' component={ImportContainer} />
           </Switch>
-        </div>
-      </div>
+        </Pane>
+      </Pane>
     );
   }
 }
