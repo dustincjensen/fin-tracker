@@ -31,7 +31,13 @@ export const Instructions: React.FC<IInstructionsProps> = ({
     localStorage.setItem(type, 'true');
   };
 
-  if (!showAccountsHint && !showRecordsHint && !showCategoriesHint && !showAutoCategoriesHint && !showSplitRecordsHint) {
+  if (
+    !showAccountsHint &&
+    !showRecordsHint &&
+    !showCategoriesHint &&
+    !showAutoCategoriesHint &&
+    !showSplitRecordsHint
+  ) {
     return null;
   }
 
@@ -60,14 +66,18 @@ export const Instructions: React.FC<IInstructionsProps> = ({
             <Button is={RouterLink} to='/accounts' appearance='primary' iconBefore='bank-account'>
               Create Account
             </Button>
-            <Button iconBefore='cross'  marginLeft={10} onClick={() => hideHint(setShowAccountsHint, ACCOUNTS_HINT)}>
+            <Button iconBefore='cross' marginLeft={10} onClick={() => hideHint(setShowAccountsHint, ACCOUNTS_HINT)}>
               Dismiss
             </Button>
           </Alert>
         )}
 
         {showRecordsHint && (
-          <Alert marginBottom={10} title='Import Transactions' intent={atLeastOneAccountHasRecords ? 'success' : 'none'}>
+          <Alert
+            marginBottom={10}
+            title='Import Transactions'
+            intent={atLeastOneAccountHasRecords ? 'success' : 'none'}
+          >
             <Pane marginBottom={5}>
               <Text color='muted'>
                 If you created an account, you might see that account now on the home page here. It shows a summary of

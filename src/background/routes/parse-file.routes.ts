@@ -38,7 +38,12 @@ export function parseQfxToRecords(
 }
 
 function parse(
-  method: (accountId: string, filePath: string, autoCategories: IAutoCategory[], accountType?: 'Chequing' | 'Savings' | 'CreditCard') => IRecord[],
+  method: (
+    accountId: string,
+    filePath: string,
+    autoCategories: IAutoCategory[],
+    accountType?: 'Chequing' | 'Savings' | 'CreditCard'
+  ) => IRecord[],
   accountId: string,
   filePath: string,
   autoCategories: IAutoCategory[],

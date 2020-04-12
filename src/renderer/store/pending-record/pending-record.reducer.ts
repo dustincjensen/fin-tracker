@@ -20,7 +20,7 @@ export const PendingRecordReducer = createDraftReducer(
     [PendingRecordActions.CLEAR_RECORDS_ERROR]: clearError,
     [PendingRecordActions.CLEAR_RECORDS_IMPORTED]: clearRecords,
     [RecordActions.SAVE_NEW_RECORDS]: clearRecords,
-    [PendingRecordActions.UPDATE_PENDING_RECORD_CATEGORY]: updatePendingRecordCategory
+    [PendingRecordActions.UPDATE_PENDING_RECORD_CATEGORY]: updatePendingRecordCategory,
   },
   initialState
 );
@@ -94,14 +94,16 @@ function clearRecords(draft: Draft<IPendingRecordStore>) {
   draft.error = undefined;
 }
 
-
 /**
  * Sets the category of a pending record.
- * 
+ *
  * @param draft     The draft state.
  * @param payload   The details of the new category.
  */
-function updatePendingRecordCategory(draft: Draft<IPendingRecordStore>, payload: { recordId: string; categoryId: string }) {
+function updatePendingRecordCategory(
+  draft: Draft<IPendingRecordStore>,
+  payload: { recordId: string; categoryId: string }
+) {
   const { recordId, categoryId } = payload;
   const record = draft.records.find(r => r.id === recordId);
   if (record) {

@@ -48,7 +48,12 @@ export const AccountMonthly: React.FC<IAccountMonthlyProps> = props => {
                 <Table.TextCell>{record.description}</Table.TextCell>
                 <Table.TextCell {...w200}>
                   {!record.splitRecords && (
-                    <CategorySelect record={record} categories={categories} updateCategory={updateCategory} disabled={isSplittingTransaction === record.id} />
+                    <CategorySelect
+                      record={record}
+                      categories={categories}
+                      updateCategory={updateCategory}
+                      disabled={isSplittingTransaction === record.id}
+                    />
                   )}
                 </Table.TextCell>
                 <Table.TextCell isNumber textAlign='right' {...w100}>

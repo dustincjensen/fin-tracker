@@ -9,11 +9,7 @@ const csvCommaSplitIgnoreCommaInQuotes = /,(?=(?:(?:[^"]*"){2})*[^"]*$)/;
 const stringRemoveExtraneousSpaces = /\s{2,}/g;
 const quotes = /"/g;
 
-export function parse(
-  accountId: string,
-  filePath: string,
-  autoCategories: IAutoCategory[],
-): IRecord[] {
+export function parse(accountId: string, filePath: string, autoCategories: IAutoCategory[]): IRecord[] {
   const data = fs.readFileSync(filePath, { encoding: 'utf-8' });
   const separated = data
     .split('\n')
@@ -28,7 +24,7 @@ export function parse(
         .replace(stringRemoveExtraneousSpaces, ' ')
         .trim();
       const autoCategoryMatch = autoCategories?.find(ac => description.startsWith(ac.description));
-      
+
       const record: IRecord = {
         id: newGuid(),
         accountId,

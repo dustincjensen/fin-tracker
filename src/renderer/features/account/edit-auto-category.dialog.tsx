@@ -32,16 +32,14 @@ export const EditAutoCategoryDialog: React.FC<IEditAutoCategoryProps> = props =>
     if (isNullOrWhitespace(description)) {
       hasError = true;
       setDescriptionError('Please enter a description.');
-    }
-    else {
+    } else {
       setDescriptionError('');
     }
 
     if (!categoryRecord?.category?.value) {
       hasError = true;
       setCategoryError('Please select a category.');
-    }
-    else {
+    } else {
       setCategoryError('');
     }
 
@@ -82,7 +80,12 @@ export const EditAutoCategoryDialog: React.FC<IEditAutoCategoryProps> = props =>
         required
         validationMessage={descriptionError || undefined}
       />
-      <FormField label='Category' marginBottom={majorScale(3)} isRequired validationMessage={categoryError || undefined}>
+      <FormField
+        label='Category'
+        marginBottom={majorScale(3)}
+        isRequired
+        validationMessage={categoryError || undefined}
+      >
         <CategorySelect record={categoryRecord} categories={categories} updateCategory={updateCategory} />
       </FormField>
       <FormField label='Overwrite Manual Transactions?' description='Re-assign manually categorized transactions.'>

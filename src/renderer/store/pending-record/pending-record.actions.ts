@@ -31,7 +31,7 @@ export class PendingRecordActions {
     dispatch: Dispatch,
     accountId: string,
     filePath: string,
-    autoCategories: IAutoCategory[],
+    autoCategories: IAutoCategory[]
   ) => sender(dispatch, 'IPC_NEW_SCOTIABANK_VISA_RECORDS_SELECTED', accountId, filePath, autoCategories);
 
   public static newQuickenFileSelected: ImportRecordsFunc = (
@@ -80,15 +80,14 @@ export class PendingRecordActions {
 
   public static deletePendingRecord = (recordId: string) => ({
     type: PendingRecordActions.DELETE_PENDING_RECORD,
-    payload: recordId
+    payload: recordId,
   });
 
   public static updatePendingRecordCategory = (recordId: string, categoryId: string) => ({
     type: PendingRecordActions.UPDATE_PENDING_RECORD_CATEGORY,
     payload: {
       recordId,
-      categoryId
-    }
+      categoryId,
+    },
   });
-
 }

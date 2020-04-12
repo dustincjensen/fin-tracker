@@ -58,7 +58,9 @@ export const CategorySelect: React.FC<ICategorySelectProps> = props => {
       onClose={onSelectMenuClosed}
       closeOnSelect
     >
-      <Button type='button' disabled={disabled}>Select category...</Button>
+      <Button type='button' disabled={disabled}>
+        Select category...
+      </Button>
     </SelectMenu>
   );
 };

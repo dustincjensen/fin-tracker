@@ -16,7 +16,7 @@ export const AutoCategoryReducer = createDraftReducer(
     [RecordActions.SET_RECORD_AUTO_CATEGORY]: saveRecordAutoCategory,
     [AutoCategoryActions.DELETE_AUTO_CATEGORY]: deleteAutoCategory,
     [CategoryActions.DELETE_CATEGORY]: deleteCategory,
-    [AccountActions.DELETE_ACCOUNT]: deleteAccount
+    [AccountActions.DELETE_ACCOUNT]: deleteAccount,
   },
   initialState
 );

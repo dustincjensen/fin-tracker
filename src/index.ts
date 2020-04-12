@@ -65,7 +65,7 @@ export class MainElectron {
       webPreferences: {
         nodeIntegration: true,
       },
-      autoHideMenuBar: !MainElectron.isDev()
+      autoHideMenuBar: !MainElectron.isDev(),
     };
 
     // if (MainElectron.__DARWIN__) {

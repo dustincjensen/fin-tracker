@@ -12,9 +12,9 @@ import { SidebarLayout } from '../sidebar/sidebar.layout';
 export class RootLayout extends React.Component {
   render() {
     return (
-      <Pane height="100%" display="grid" gridTemplateColumns="auto 1fr" borderTop>
+      <Pane height='100%' display='grid' gridTemplateColumns='auto 1fr' borderTop>
         <SidebarLayout />
-        <Pane padding={20} overflowX="hidden" overflowY="auto" className='scroll-bar-styled'>
+        <Pane padding={20} overflowX='hidden' overflowY='auto' className='scroll-bar-styled'>
           <Switch>
             <Route exact path='/' component={HomeLayout} />
             <Route exact path='/accounts' component={ManageAccountLayout} />

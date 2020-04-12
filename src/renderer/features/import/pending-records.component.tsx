@@ -27,9 +27,9 @@ export const PendingRecords: React.FC<IPendingRecordsProps> = props => {
             <Table.Row key={record.id}>
               <Table.TextCell {...w200}>{formatDateFull(record.date)}</Table.TextCell>
               <Table.TextCell>{record.description}</Table.TextCell>
-          <Table.Cell {...w200}>
-            <CategorySelect record={record} categories={categories} updateCategory={updatePendingRecordCategory} />
-          </Table.Cell>
+              <Table.Cell {...w200}>
+                <CategorySelect record={record} categories={categories} updateCategory={updatePendingRecordCategory} />
+              </Table.Cell>
               <Table.TextCell isNumber textAlign='right' {...w120}>
                 {record.debit?.toFixed(2) || ''}
               </Table.TextCell>

@@ -10,11 +10,7 @@ const stringRemoveExtraneousSpaces = /\s{2,}/g;
 const quotes = /"/g;
 const commas = /,/g;
 
-export function parse(
-  accountId: string,
-  filePath: string,
-  autoCategories: IAutoCategory[],
-): IRecord[] {
+export function parse(accountId: string, filePath: string, autoCategories: IAutoCategory[]): IRecord[] {
   const data = fs.readFileSync(filePath, { encoding: 'utf-8' });
   const separated = data
     .split('\n')

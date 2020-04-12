@@ -25,7 +25,7 @@ const mapStateToProps = (state: IStore): IPendingRecordsStateProps => {
     return {
       ...record,
       category: categories.find(c => c.value === record.categoryId),
-      splitRecords: undefined
+      splitRecords: undefined,
     };
   });
 
@@ -38,7 +38,8 @@ const mapStateToProps = (state: IStore): IPendingRecordsStateProps => {
 const mapDispatchToProps = (dispatch: Dispatch): IPendingRecordsDispatchProps => {
   return {
     // deletePendingRecord: (recordId: string) => dispatch(PendingRecordActions.deletePendingRecord(recordId)),
-    updatePendingRecordCategory: (recordId: string, categoryId: string) => dispatch(PendingRecordActions.updatePendingRecordCategory(recordId, categoryId))
+    updatePendingRecordCategory: (recordId: string, categoryId: string) =>
+      dispatch(PendingRecordActions.updatePendingRecordCategory(recordId, categoryId)),
   };
 };
 

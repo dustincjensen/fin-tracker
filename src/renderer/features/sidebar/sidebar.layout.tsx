@@ -27,7 +27,9 @@ export class SidebarLayout extends React.Component {
         <Button is={Link} appearance='minimal' to='/import' iconBefore='import'>
           Import
         </Button>
-        <Text paddingTop={20} size={300} textAlign="center">Version: {appVersion}</Text>
+        <Text paddingTop={20} size={300} textAlign='center'>
+          Version: {appVersion}
+        </Text>
       </Pane>
     );
   }
