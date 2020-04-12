@@ -1,5 +1,8 @@
 TODO
 
+- Create regular backups
+  - Let them access the folder where the backup/regular data is.
+  - Restore a backup.
 - Improve importing to flag duplicate records on the account.
 - Give each imported record an import id and associate the import id to the account
   - Provide a list of import id's and file names you imported for each account.

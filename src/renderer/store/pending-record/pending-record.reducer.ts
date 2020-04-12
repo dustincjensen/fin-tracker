@@ -20,7 +20,6 @@ export const PendingRecordReducer = createDraftReducer(
     [PendingRecordActions.CLEAR_RECORDS_ERROR]: clearError,
     [PendingRecordActions.CLEAR_RECORDS_IMPORTED]: clearRecords,
     [RecordActions.SAVE_NEW_RECORDS]: clearRecords,
-    // TODO delete account.
   },
   initialState
 );
