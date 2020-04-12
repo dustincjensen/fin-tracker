@@ -24,4 +24,9 @@ export interface ICategorySelectProps {
    * The function to update the record with a category id.
    */
   updateCategory: (recordId: string, categoryId: string) => void;
+
+  /**
+   * If true, the button selector will be disabled.
+   */
+  disabled?: boolean;
 }

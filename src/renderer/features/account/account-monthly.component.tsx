@@ -57,7 +57,7 @@ export const AccountMonthly: React.FC<IAccountMonthlyProps> = props => {
                 <Table.TextCell>{record.description}</Table.TextCell>
                 <Table.TextCell {...editableCellDetails}>
                   {!record.splitRecords && (
-                    <CategorySelect record={record} categories={categories} updateCategory={updateCategory} />
+                    <CategorySelect record={record} categories={categories} updateCategory={updateCategory} disabled={isSplittingTransaction === record.id} />
                   )}
                 </Table.TextCell>
                 <Table.TextCell isNumber textAlign='right' {...cellDetails}>
@@ -79,6 +79,7 @@ export const AccountMonthly: React.FC<IAccountMonthlyProps> = props => {
                             icon='fork'
                             onSelect={() => {
                               setIsSplittingTransaction(record.id);
+                              setRecordToAutoCategorize(undefined);
                               close();
                             }}
                           >
@@ -89,6 +90,7 @@ export const AccountMonthly: React.FC<IAccountMonthlyProps> = props => {
                               icon='automatic-updates'
                               onSelect={() => {
                                 setRecordToAutoCategorize(record);
+                                setIsSplittingTransaction(undefined);
                                 close();
                               }}
                             >

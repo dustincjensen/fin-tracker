@@ -26,7 +26,7 @@ export const CategorySelect: React.FC<ICategorySelectProps> = props => {
     }
   );
 
-  const { record, categories, updateCategory } = props;
+  const { record, categories, updateCategory, disabled } = props;
 
   React.useEffect(() => {
     // Don't update the category until the category id is set
@@ -58,7 +58,7 @@ export const CategorySelect: React.FC<ICategorySelectProps> = props => {
       onClose={onSelectMenuClosed}
       closeOnSelect
     >
-      <Button type='button'>Select category...</Button>
+      <Button type='button' disabled={disabled}>Select category...</Button>
     </SelectMenu>
   );
 };
