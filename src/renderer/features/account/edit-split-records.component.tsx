@@ -4,21 +4,12 @@ import { CategorySelect } from '../../components/category-select/category-select
 import { round } from '../../utils/currency.util';
 import { newGuid } from '../../utils/guid.util';
 import { isNullOrWhitespace } from '../../utils/object.utils';
+import { createStaticWidthCell } from '../../utils/table.utils';
 import { IEditSplitRecordsProps } from './edit-split-records.props.interface';
 import { SplitRecordType } from './split-record.type';
 
-const cellDetails = {
-  flexBasis: 100,
-  flexGrow: 0,
-  flexShrink: 0,
-};
-
-const editableCellDetails = {
-  flexBasis: 200,
-  flexGrow: 0,
-  flexShrink: 0,
-};
-
+const w100 = createStaticWidthCell(100);
+const w200 = createStaticWidthCell(200);
 const tableColumnPadding = 12;
 
 function createSplitRecord(): SplitRecordType {
@@ -129,7 +120,7 @@ export const EditSplitRecords: React.FC<IEditSplitRecordsProps> = props => {
     <Pane>
       <form onSubmit={handleSubmit}>
         {errors?.length > 0 && (
-          <Pane marginLeft={cellDetails.flexBasis + tableColumnPadding} paddingTop={20}>
+          <Pane marginLeft={w100.width + tableColumnPadding} paddingTop={20}>
             {errors.map(e => {
               return (
                 <InlineAlert key={e} intent='danger'>
@@ -142,18 +133,18 @@ export const EditSplitRecords: React.FC<IEditSplitRecordsProps> = props => {
         <Pane>
           {/* Render a "fake" header for the table. */}
           <Table.Row height={30} alignItems='flex-end' borderBottom='none'>
-            <Table.TextHeaderCell {...cellDetails}></Table.TextHeaderCell>
+            <Table.TextHeaderCell {...w100}></Table.TextHeaderCell>
             <Table.TextHeaderCell>Description</Table.TextHeaderCell>
-            <Table.TextHeaderCell {...editableCellDetails}>Category</Table.TextHeaderCell>
-            <Table.TextHeaderCell {...cellDetails}>{record.debit && 'Debit'}</Table.TextHeaderCell>
-            <Table.TextHeaderCell {...cellDetails}>{record.credit && 'Credit'}</Table.TextHeaderCell>
-            <Table.TextHeaderCell {...cellDetails}></Table.TextHeaderCell>
+            <Table.TextHeaderCell {...w200}>Category</Table.TextHeaderCell>
+            <Table.TextHeaderCell {...w100}>{record.debit && 'Debit'}</Table.TextHeaderCell>
+            <Table.TextHeaderCell {...w100}>{record.credit && 'Credit'}</Table.TextHeaderCell>
+            <Table.TextHeaderCell {...w100}></Table.TextHeaderCell>
             <Table.HeaderCell flex='none' width={54}></Table.HeaderCell>
           </Table.Row>
           {splitRecords.map(splitRecord => {
             return (
               <Table.Row key={splitRecord.id} borderBottom='none'>
-                <Table.Cell {...cellDetails} justifyContent='flex-end' paddingRight={3}>
+                <Table.Cell {...w100} justifyContent='flex-end' paddingRight={3}>
                   <IconButton
                     appearance='minimal'
                     icon='cross'
@@ -169,10 +160,10 @@ export const EditSplitRecords: React.FC<IEditSplitRecordsProps> = props => {
                     onChange={evt => onDescriptionChange(splitRecord.id, evt.target.value)}
                   />
                 </Table.Cell>
-                <Table.Cell {...editableCellDetails}>
+                <Table.Cell {...w200}>
                   <CategorySelect record={splitRecord} categories={categories} updateCategory={updateCategory} />
                 </Table.Cell>
-                <Table.Cell {...cellDetails}>
+                <Table.Cell {...w100}>
                   {!!record.debit && (
                     <TextInput
                       width={76}
@@ -184,7 +175,7 @@ export const EditSplitRecords: React.FC<IEditSplitRecordsProps> = props => {
                     />
                   )}
                 </Table.Cell>
-                <Table.Cell {...cellDetails}>
+                <Table.Cell {...w100}>
                   {!!record.credit && (
                     <TextInput
                       width={76}
@@ -196,27 +187,27 @@ export const EditSplitRecords: React.FC<IEditSplitRecordsProps> = props => {
                     />
                   )}
                 </Table.Cell>
-                <Table.Cell {...cellDetails}></Table.Cell>
+                <Table.Cell {...w100}></Table.Cell>
                 <Table.Cell flex='none' justifyContent='flex-end' width={54}></Table.Cell>
               </Table.Row>
             );
           })}
           {/* Render row for add split and debit/credit total. */}
           <Table.Row borderBottom='none' marginBottom={majorScale(3)}>
-            <Table.Cell {...cellDetails}></Table.Cell>
+            <Table.Cell {...w100}></Table.Cell>
             <Table.Cell>
               <Button type='button' iconBefore='fork' appearance='primary' onClick={addSplit}>
                 Add Split
               </Button>
             </Table.Cell>
-            <Table.Cell {...editableCellDetails}></Table.Cell>
-            {!!record.credit && <Table.Cell {...cellDetails}></Table.Cell>}
-            <Table.Cell justifyContent='space-between' borderTop {...cellDetails}>
+            <Table.Cell {...w200}></Table.Cell>
+            {!!record.credit && <Table.Cell {...w100}></Table.Cell>}
+            <Table.Cell justifyContent='space-between' borderTop {...w100}>
               <Icon icon='dollar' size={14} />
               <Strong size={400}>{total?.toFixed(2)}</Strong>
             </Table.Cell>
-            {!!record.debit && <Table.Cell {...cellDetails}></Table.Cell>}
-            <Table.Cell {...cellDetails}></Table.Cell>
+            {!!record.debit && <Table.Cell {...w100}></Table.Cell>}
+            <Table.Cell {...w100}></Table.Cell>
             <Table.Cell flex='none' width={54}></Table.Cell>
           </Table.Row>
         </Pane>

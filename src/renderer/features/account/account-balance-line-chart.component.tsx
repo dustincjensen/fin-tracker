@@ -2,7 +2,6 @@ import * as React from 'react';
 import { CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { IAccountBalanceLineChartProps } from './account-balance-line-chart.props.interface';
 
-// TODO clean up the graph a bit more.
 export class AccountBalanceLineChart extends React.Component<IAccountBalanceLineChartProps> {
   render() {
     const { records } = this.props;

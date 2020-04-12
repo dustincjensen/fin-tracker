@@ -91,7 +91,6 @@ export class MainElectron {
     }
 
     // Stop the window from changing it's title
-    // TODO remove when we have a custom title bar.
     MainElectron.renderer.on('page-title-updated', event => {
       event.preventDefault();
     });

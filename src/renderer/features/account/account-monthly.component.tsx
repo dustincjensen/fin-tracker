@@ -3,24 +3,15 @@ import * as React from 'react';
 import { CategorySelect } from '../../components/category-select/category-select.component';
 import { IRecord } from '../../store/record/record.interface';
 import { formatDate } from '../../utils/date.util';
+import { createStaticWidthCell } from '../../utils/table.utils';
 import { IAccountMonthlyProps } from './account-monthly.props.interface';
 import { DeleteSplitRecordsDialog } from './delete-split-records.dialog';
 import { EditAutoCategoryDialog } from './edit-auto-category.dialog';
 import { EditSplitRecords } from './edit-split-records.component';
 import { SplitRecords } from './split-records.component';
 
-// Controls the width of the date, debit and credit fields.
-const cellDetails = {
-  flexBasis: 100,
-  flexGrow: 0,
-  flexShrink: 0,
-};
-
-const editableCellDetails = {
-  flexBasis: 200,
-  flexGrow: 0,
-  flexShrink: 0,
-};
+const w100 = createStaticWidthCell(100);
+const w200 = createStaticWidthCell(200);
 
 export const AccountMonthly: React.FC<IAccountMonthlyProps> = props => {
   const {
@@ -40,12 +31,12 @@ export const AccountMonthly: React.FC<IAccountMonthlyProps> = props => {
     <Table>
       {/* Why is paddingRight={17} the default? */}
       <Table.Head paddingRight={0}>
-        <Table.TextHeaderCell {...cellDetails}>Date</Table.TextHeaderCell>
+        <Table.TextHeaderCell {...w100}>Date</Table.TextHeaderCell>
         <Table.TextHeaderCell>Description</Table.TextHeaderCell>
-        <Table.TextHeaderCell {...editableCellDetails}>Category</Table.TextHeaderCell>
-        <Table.TextHeaderCell {...cellDetails}>Debit</Table.TextHeaderCell>
-        <Table.TextHeaderCell {...cellDetails}>Credit</Table.TextHeaderCell>
-        <Table.TextHeaderCell {...cellDetails}>Balance</Table.TextHeaderCell>
+        <Table.TextHeaderCell {...w200}>Category</Table.TextHeaderCell>
+        <Table.TextHeaderCell {...w100}>Debit</Table.TextHeaderCell>
+        <Table.TextHeaderCell {...w100}>Credit</Table.TextHeaderCell>
+        <Table.TextHeaderCell {...w100}>Balance</Table.TextHeaderCell>
         <Table.HeaderCell flex='none' width={54}></Table.HeaderCell>
       </Table.Head>
       <Table.Body>
@@ -53,20 +44,20 @@ export const AccountMonthly: React.FC<IAccountMonthlyProps> = props => {
           return (
             <Pane key={record.id}>
               <Table.Row isSelectable>
-                <Table.TextCell {...cellDetails}>{formatDate(record.date)}</Table.TextCell>
+                <Table.TextCell {...w100}>{formatDate(record.date)}</Table.TextCell>
                 <Table.TextCell>{record.description}</Table.TextCell>
-                <Table.TextCell {...editableCellDetails}>
+                <Table.TextCell {...w200}>
                   {!record.splitRecords && (
                     <CategorySelect record={record} categories={categories} updateCategory={updateCategory} disabled={isSplittingTransaction === record.id} />
                   )}
                 </Table.TextCell>
-                <Table.TextCell isNumber textAlign='right' {...cellDetails}>
+                <Table.TextCell isNumber textAlign='right' {...w100}>
                   {record.debit?.toFixed(2) || ''}
                 </Table.TextCell>
-                <Table.TextCell isNumber textAlign='right' {...cellDetails}>
+                <Table.TextCell isNumber textAlign='right' {...w100}>
                   {record.credit?.toFixed(2) || ''}
                 </Table.TextCell>
-                <Table.TextCell isNumber textAlign='right' {...cellDetails}>
+                <Table.TextCell isNumber textAlign='right' {...w100}>
                   {record.balance?.toFixed(2) || ''}
                 </Table.TextCell>
                 <Table.Cell flex='none' justifyContent='flex-end' width={54}>

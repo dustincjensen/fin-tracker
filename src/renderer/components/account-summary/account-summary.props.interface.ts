@@ -21,11 +21,6 @@ export interface IAccountSummaryProps {
    */
   dateOfLastTransaction: string;
 
-  // TODO? balance threshold colors
-  // VISA < 0 = Green
-  // VISA > 0 < 500 = Regular
-  // VISA > 500 = Red?
-
   /**
    * The balance of the account.
    */

@@ -2,7 +2,6 @@ import * as React from 'react';
 import { CartesianGrid, BarChart, XAxis, YAxis, Bar, Cell } from 'recharts';
 import { IAccountCategoryTotalsChartProps } from './account-category-totals-chart.props.interface';
 
-// TODO clean up the graph a bit more.
 export class AccountCategoryTotalsChart extends React.Component<IAccountCategoryTotalsChartProps> {
   render() {
     const { records, categories } = this.props;
