@@ -2,7 +2,6 @@ import * as path from 'path';
 import * as url from 'url';
 import { app, BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
 import { Intercommunication } from './intercommunication';
-// import { Squirrel } from './ipcMain/squirrel';
 
 export class MainElectron {
   // Keep a reference to the window object, if you don't, the
@@ -12,12 +11,16 @@ export class MainElectron {
   public static background: BrowserWindow;
 
   public static start() {
-    // if (Squirrel.HandleSquirrelEvent(app)) {
-    //     return;
-    // }
+    if (require('electron-squirrel-startup')) {
+      app.quit();
+    }
 
     MainElectron._initializeElectron();
     Intercommunication.setupListeners();
+  }
+
+  private static isDev(): boolean {
+    return process.argv[2] === '--dev';
   }
 
   private static _initializeElectron(): void {
@@ -62,6 +65,7 @@ export class MainElectron {
       webPreferences: {
         nodeIntegration: true,
       },
+      autoHideMenuBar: !MainElectron.isDev()
     };
 
     // if (MainElectron.__DARWIN__) {
@@ -82,7 +86,9 @@ export class MainElectron {
     );
 
     // Open the DevTools.
-    MainElectron.renderer.webContents.openDevTools();
+    if (MainElectron.isDev()) {
+      MainElectron.renderer.webContents.openDevTools();
+    }
 
     // Stop the window from changing it's title
     // TODO remove when we have a custom title bar.
@@ -104,7 +110,7 @@ export class MainElectron {
 
     // Create the background window to handle work for us.
     MainElectron.background = new BrowserWindow({
-      show: true,
+      show: MainElectron.isDev(),
       webPreferences: {
         nodeIntegration: true,
       },
@@ -117,7 +123,10 @@ export class MainElectron {
         slashes: true,
       })
     );
-    MainElectron.background.webContents.openDevTools();
+
+    if (MainElectron.isDev()) {
+      MainElectron.background.webContents.openDevTools();
+    }
   }
 }
 

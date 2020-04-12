@@ -1,5 +1,5 @@
 import { ipcMain } from 'electron';
-import { MainElectron } from './main';
+import { MainElectron } from '.';
 
 export class Intercommunication {
   public static setupListeners(): void {

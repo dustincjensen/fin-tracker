@@ -10,6 +10,7 @@
   "exclude": [
     "src/renderer",
     "src/background",
+    "out",
     "node_modules"
   ]
 }
