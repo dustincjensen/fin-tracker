@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import { IAutoCategory } from './auto-category.interface';
 import { newGuid } from './guid.util';
 import { IRecord } from './record.interface';
 
@@ -7,9 +8,8 @@ const stringRemoveExtraneousSpaces = /\s{2,}/g;
 export function parse(
   accountId: string,
   filePath: string,
-  accountType: 'Chequing' | 'Savings' | 'CreditCard'
+  autoCategories: IAutoCategory[]
 ): IRecord[] {
-  console.log(accountId, filePath, accountType);
 
   const data = fs.readFileSync(filePath, { encoding: 'utf-8' });
   const separated = data
@@ -34,15 +34,20 @@ export function parse(
       const debit = amount <= 0 ? amount * -1 : undefined;
 
       const description = `${payee}${date ? ' ' + memo : ''}`.replace(stringRemoveExtraneousSpaces, ' ').trim();
+      const autoCategoryMatch = autoCategories?.find(ac => description.startsWith(ac.description));
 
-      return {
+      const record: IRecord = {
         id: newGuid(),
         accountId,
         date: date ? date : memo,
+        description,
+        autoCategoryId: autoCategoryMatch?.id,
+        categoryId: autoCategoryMatch?.categoryId,
         debit,
         credit,
-        description,
       };
+
+      return record;
     })
     .filter(r => r != null && r.date != null);
 

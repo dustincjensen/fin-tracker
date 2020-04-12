@@ -10,9 +10,9 @@ export class AccountCategoryTotalsChart extends React.Component<IAccountCategory
     for (const category of data) {
       const categoryId = category.categoryId;
       const total = records
-        ?.filter(r => r.categoryId || r.autoCategoryId || r.splitRecords)
+        ?.filter(r => r.categoryId || r.splitRecords)
         .flatMap(r => (r.splitRecords ? [r, ...r.splitRecords] : [r]))
-        .filter(r => r.categoryId === categoryId || r.autoCategoryId === categoryId)
+        .filter(r => r.categoryId === categoryId)
         // TODO do categories need expense or income tags so that we can change the credit or debit to be +/-?
         .map(r => (r.credit > 0 ? r.credit : r.debit > 0 ? -r.debit : 0.0))
         .reduce((sum, value) => (sum += value), 0.0);

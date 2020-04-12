@@ -119,10 +119,11 @@ export class NewRecords extends React.Component<INewRecordsProps, INewRecordsSta
       return;
     }
 
-    const { accounts } = this.props;
+    const { accounts, autoCategories } = this.props;
     const selectedAccount = accounts.filter(a => a.id === selectedAccountId)[0];
+    const selectedAutoCategories = autoCategories[selectedAccountId];
 
-    this.props.importAction(selectedAccount, selectedFile, importMethod);
+    this.props.importAction(selectedAccount, selectedAutoCategories, selectedFile, importMethod);
     this.setState({ formError: undefined });
   };
 }

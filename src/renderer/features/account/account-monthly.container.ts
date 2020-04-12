@@ -30,7 +30,7 @@ const mapStateToProps = (state: IStore, ownProps: IAccountMonthlyOwnProps): IAcc
   const records = ownProps.stateSelector(state, ownProps.accountId, ownProps.date)?.map(record => {
     return {
       ...record,
-      category: categories.find(c => c.value === record.autoCategoryId || c.value === record.categoryId),
+      category: categories.find(c => c.value === record.categoryId),
       splitRecords: record.splitRecords?.map(splitRecord => {
         return {
           ...splitRecord,
