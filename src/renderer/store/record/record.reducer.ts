@@ -1,5 +1,6 @@
 import { Draft } from 'immer';
 import { AccountActions } from '../account/account.actions';
+import { IAccount } from '../account/account.interface';
 import { AutoCategoryActions } from '../auto-category/auto-category.actions';
 import { IAutoCategory } from '../auto-category/auto-category.interface';
 import { createDraftReducer } from '../draft.reducer';
@@ -151,7 +152,6 @@ function deleteSplitRecords(draft: Draft<IRecordStore>, payload: { accountId: st
  * @param draft       The draft state.
  * @param accountId   The account id to delete records for.
  */
-function deleteRecords(draft: Draft<IRecordStore>, accountId: string) {
-  // TODO this doesn't seem to be removing the old records.
-  delete draft.records[accountId];
+function deleteRecords(draft: Draft<IRecordStore>, account: IAccount) {
+  delete draft.records[account.id];
 }
