@@ -46,6 +46,10 @@ const mapStateToProps = (state: IStore, ownProps: IAutoCategoriesOwnProps): IAut
     .flatMap(ac => ac)
     .map(ac => {
       const account = accounts.find(a => a.id === ac?.accountId);
+      if (!account) {
+        return undefined;
+      }
+
       return {
         ...ac,
         category: categories.find(c => c.value === ac.categoryId),
@@ -54,7 +58,8 @@ const mapStateToProps = (state: IStore, ownProps: IAutoCategoriesOwnProps): IAut
           .filter(r => r.accountId === account.id)?.[0]
           .records?.filter(r => r.autoCategoryId === ac.id).length,
       };
-    });
+    })
+    .filter(ac => ac);
 
   const { autoCategoryFilter } = ownProps;
   const filteredAutoCategories =
