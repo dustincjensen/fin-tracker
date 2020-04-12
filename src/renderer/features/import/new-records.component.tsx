@@ -78,7 +78,7 @@ export class NewRecords extends React.Component<INewRecordsProps, INewRecordsSta
   getImportOptions = () => {
     return (
       <>
-        <option key='sbc' value='ScotiabankChequing'>
+        {/* <option key='sbc' value='ScotiabankChequing'>
           Scotiabank Chequing
         </option>
         <option key='sbs' value='ScotiabankSavings'>
@@ -86,7 +86,7 @@ export class NewRecords extends React.Component<INewRecordsProps, INewRecordsSta
         </option>
         <option key='sbv' value='ScotiabankVisa'>
           Scotiabank Visa
-        </option>
+        </option> */}
         <option key='quicken' value='Quicken'>
           Quicken (*.qif)
         </option>
