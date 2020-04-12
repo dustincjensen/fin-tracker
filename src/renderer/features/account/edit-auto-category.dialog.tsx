@@ -11,7 +11,9 @@ type CategoryRecord = ICategorySelectProps['record'];
 export const EditAutoCategoryDialog: React.FC<IEditAutoCategoryProps> = props => {
   const { record, categories, onClose, onConfirm, autoCategorizeRecords } = props;
   const [description, setDescription] = React.useState<string>('');
+  const [descriptionError, setDescriptionError] = React.useState<string>('');
   const [categoryRecord, setCategoryRecord] = React.useState<CategoryRecord>({ id: undefined, category: undefined });
+  const [categoryError, setCategoryError] = React.useState<string>('');
   const [overwriteExisting, setOverwriteExisting] = React.useState<boolean>(false);
 
   React.useEffect(() => {
@@ -25,13 +27,25 @@ export const EditAutoCategoryDialog: React.FC<IEditAutoCategoryProps> = props =>
   }
 
   const confirm = () => {
+    let hasError = false;
+
     if (isNullOrWhitespace(description)) {
-      // todo error
-      return;
+      hasError = true;
+      setDescriptionError('Please enter a description.');
+    }
+    else {
+      setDescriptionError('');
     }
 
     if (!categoryRecord?.category?.value) {
-      // todo error
+      hasError = true;
+      setCategoryError('Please select a category.');
+    }
+    else {
+      setCategoryError('');
+    }
+
+    if (hasError) {
       return;
     }
 
@@ -65,8 +79,10 @@ export const EditAutoCategoryDialog: React.FC<IEditAutoCategoryProps> = props =>
         value={description}
         marginBottom={majorScale(3)}
         onChange={evt => setDescription(evt.target.value)}
+        required
+        validationMessage={descriptionError || undefined}
       />
-      <FormField label='Category' marginBottom={majorScale(3)}>
+      <FormField label='Category' marginBottom={majorScale(3)} isRequired validationMessage={categoryError || undefined}>
         <CategorySelect record={categoryRecord} categories={categories} updateCategory={updateCategory} />
       </FormField>
       <FormField label='Overwrite Manual Transactions?' description='Re-assign manually categorized transactions.'>
