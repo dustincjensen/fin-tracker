@@ -25,7 +25,7 @@ export const AutoCategories: React.FC<IAutoCategoriesProps> = ({ autoCategories,
       <Table.Body>
         {autoCategories.map(autoCategory => {
           return (
-            <Pane key={autoCategory.description}>
+            <Pane key={autoCategory.id}>
               <Table.Row>
                 <Table.TextCell {...w150}>{autoCategory.accountName}</Table.TextCell>
                 <Table.TextCell>{autoCategory.description}</Table.TextCell>
