@@ -1,12 +1,10 @@
+import { ICategory } from '../../store/category/category.interface';
+
 export interface ICategoryTagProps {
   /**
    * The category to display.
    */
-  category: {
-    color: string;
-    label: string;
-    value: string;
-  };
+  category: ICategory;
 
   /**
    * A function to invoke when the X is clicked on the category tag.

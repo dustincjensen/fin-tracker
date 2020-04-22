@@ -1,11 +1,12 @@
 import { connect } from 'react-redux';
+import { PendingRecordSelectors } from '../../store/pending-record/pending-record.selectors';
 import { IStore } from '../../store/store.interface';
 import { ImportLayout } from './import.layout';
 import { IImportLayoutStateProps } from './import.props.interface';
 
-function mapStateToProps(store: IStore): IImportLayoutStateProps {
+function mapStateToProps(state: IStore): IImportLayoutStateProps {
   return {
-    hasPendingRecords: store.pendingRecords.accountId != undefined,
+    hasPendingRecords: PendingRecordSelectors.pendingRecords(state).accountId != undefined,
   };
 }
 

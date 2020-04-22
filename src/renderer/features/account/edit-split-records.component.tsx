@@ -94,7 +94,7 @@ export const EditSplitRecords: React.FC<IEditSplitRecordsProps> = props => {
       const updatedRecord = {
         ...prev[index],
         categoryId: categoryId,
-        category: categoryId ? categories.find(c => c.value === categoryId) : undefined,
+        category: categoryId ? categories.find(c => c.id === categoryId) : undefined,
       };
 
       if (!categoryId) {

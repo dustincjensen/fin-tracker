@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { AccountSelectors } from '../../store/account/account.selectors';
 import { PendingRecordActions } from '../../store/pending-record/pending-record.actions';
+import { PendingRecordSelectors } from '../../store/pending-record/pending-record.selectors';
 import { RecordActions } from '../../store/record/record.actions';
 import { IRecord } from '../../store/record/record.interface';
 import { RecordSelectors } from '../../store/record/record.selectors';
@@ -12,16 +14,16 @@ import {
 } from './action-pending-records.props.interface';
 
 function mapStateToProps(state: IStore): IActionPendingRecordsStateProps {
-  const { accountId, filePath, fileName, records } = state.pendingRecords;
-  const account = state.accounts.accounts[accountId];
+  const { accountId, filePath, fileName, records } = PendingRecordSelectors.pendingRecords(state);
+  const { name, accountType, startingBalance } = AccountSelectors.account(state, accountId);
   return {
-    accountName: account.name,
-    accountType: account.accountType,
+    accountName: name,
+    accountType: accountType,
     filePath,
     fileName,
-    startingBalance: account.startingBalance,
+    startingBalance,
     newRecords: records,
-    existingRecords: RecordSelectors.records(state, accountId),
+    existingRecords: RecordSelectors.recordsByAccountId(state, accountId),
   };
 }
 

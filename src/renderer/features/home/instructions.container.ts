@@ -1,28 +1,35 @@
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import { AccountSelectors } from '../../store/account/account.selectors';
+import { AutoCategorySelectors } from '../../store/auto-category/auto-category.selectors';
+import { CategorySelectors } from '../../store/category/category.selectors';
+import { RecordSelectors } from '../../store/record/record.selectors';
 import { IStore } from '../../store/store.interface';
 import { Instructions } from './instructions.component';
 import { IInstructionsStateProps } from './instructions.props.interface';
 
-const mapStateToProps = (state: IStore): IInstructionsStateProps => {
-  const hasAccounts = Object.keys(state.accounts.accounts).length > 0;
-  const atLeastOneAccountHasRecords = Object.keys(state.records.records).some(
-    key => state.records.records[key]?.length > 0
-  );
-  const hasCategories = Object.keys(state.categories.categories).length > 0;
-  const hasAutoCategories = Object.keys(state.autoCategories.autoCategories).some(
-    key => state.autoCategories.autoCategories[key]?.length > 0
-  );
-  const hasSplitRecords = Object.keys(state.records.records).some(key =>
-    state.records.records[key].some(r => r.splitRecords?.length > 0)
-  );
+const hasAccounts = createSelector(AccountSelectors.accounts, accounts => Object.keys(accounts).length > 0);
 
-  return {
-    hasAccounts,
-    atLeastOneAccountHasRecords,
-    hasCategories,
-    hasAutoCategories,
-    hasSplitRecords,
-  };
-};
+const hasRecords = createSelector(RecordSelectors.records, records =>
+  Object.keys(records).some(key => records[key]?.length > 0)
+);
+
+const hasCategories = createSelector(CategorySelectors.categories, categories => Object.keys(categories).length > 0);
+
+const hasAutoCategory = createSelector(AutoCategorySelectors.autoCategories, autoCategories =>
+  Object.keys(autoCategories).some(key => autoCategories[key].length > 0)
+);
+
+const hasSplitRecords = createSelector(RecordSelectors.records, records =>
+  Object.keys(records).some(key => records[key].some(record => record.splitRecords?.length > 0))
+);
+
+const mapStateToProps = (state: IStore): IInstructionsStateProps => ({
+  hasAccounts: hasAccounts(state),
+  atLeastOneAccountHasRecords: hasRecords(state),
+  hasCategories: hasCategories(state),
+  hasAutoCategories: hasAutoCategory(state),
+  hasSplitRecords: hasSplitRecords(state),
+});
 
 export const InstructionsContainer = connect(mapStateToProps)(Instructions);

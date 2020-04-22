@@ -36,7 +36,7 @@ export const EditAutoCategoryDialog: React.FC<IEditAutoCategoryProps> = props =>
       setDescriptionError('');
     }
 
-    if (!categoryRecord?.category?.value) {
+    if (!categoryRecord?.category?.id) {
       hasError = true;
       setCategoryError('Please select a category.');
     } else {
@@ -47,7 +47,7 @@ export const EditAutoCategoryDialog: React.FC<IEditAutoCategoryProps> = props =>
       return;
     }
 
-    autoCategorizeRecords(newGuid(), categoryRecord.category.value, description, overwriteExisting);
+    autoCategorizeRecords(newGuid(), categoryRecord.category.id, description, overwriteExisting);
 
     onConfirm();
   };
@@ -55,7 +55,7 @@ export const EditAutoCategoryDialog: React.FC<IEditAutoCategoryProps> = props =>
   const updateCategory = (_: string, categoryId: string) => {
     setCategoryRecord({
       id: record.id,
-      category: categoryId ? categories.find(c => c.value === categoryId) : undefined,
+      category: categoryId ? categories.find(c => c.id === categoryId) : undefined,
     });
   };
 

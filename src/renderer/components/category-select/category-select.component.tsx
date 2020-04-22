@@ -1,7 +1,14 @@
 import { Button, SelectMenu, SelectMenuItem } from 'evergreen-ui';
 import * as React from 'react';
+import { createSelector } from 'reselect';
+import { ICategory } from '../../store/category/category.interface';
 import { CategoryTag } from '../category-tag/category-tag.component';
 import { ICategorySelectProps } from './category-select.props.interface';
+
+const selectOptions = createSelector(
+  (categories: ICategory[]) => categories,
+  categories => categories.map(category => ({ label: category.name, value: category.id }))
+);
 
 export const CategorySelect: React.FC<ICategorySelectProps> = props => {
   // TODO clean up reducer?
@@ -27,6 +34,7 @@ export const CategorySelect: React.FC<ICategorySelectProps> = props => {
   );
 
   const { record, categories, updateCategory, disabled } = props;
+  const options = selectOptions(categories);
 
   React.useEffect(() => {
     // Don't update the category until the category id is set
@@ -51,7 +59,7 @@ export const CategorySelect: React.FC<ICategorySelectProps> = props => {
   return (
     <SelectMenu
       title='Category'
-      options={categories}
+      options={options}
       selected={state.categoryId}
       onSelect={onSelect}
       onOpen={onSelectMenuOpened}

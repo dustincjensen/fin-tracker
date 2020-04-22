@@ -1,3 +1,4 @@
+import { ICategory } from '../../store/category/category.interface';
 import { IRecord } from '../../store/record/record.interface';
 import { ISplitRecord } from '../../store/record/split-record.interface';
 import { IStore } from '../../store/store.interface';
@@ -17,11 +18,7 @@ export interface IAccountMonthlyStateProps {
   /**
    * The list of categories to choose from for each record.
    */
-  categories: Array<{
-    color: string;
-    label: string;
-    value: string;
-  }>;
+  categories: Array<ICategory>;
 }
 
 export interface IAccountMonthlyDispatchProps {

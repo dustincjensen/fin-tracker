@@ -1,3 +1,4 @@
+import { ICategory } from '../../store/category/category.interface';
 import { RecordType } from '../account/record.type';
 
 export interface IPendingRecordsProps extends IPendingRecordsStateProps, IPendingRecordsDispatchProps {}
@@ -11,11 +12,7 @@ export interface IPendingRecordsStateProps {
   /**
    * The list of categories to choose from for each record.
    */
-  categories: Array<{
-    color: string;
-    label: string;
-    value: string;
-  }>;
+  categories: Array<ICategory>;
 }
 
 export interface IPendingRecordsDispatchProps {

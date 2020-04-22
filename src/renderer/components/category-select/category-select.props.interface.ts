@@ -1,24 +1,18 @@
+import { ICategory } from '../../store/category/category.interface';
+
 export interface ICategorySelectProps {
   /**
    * The record with category and id.
    */
   record: {
     id: string;
-    category: {
-      color: string;
-      label: string;
-      value: string;
-    };
+    category: ICategory;
   };
 
   /**
    * The categories to choose from.
    */
-  categories: Array<{
-    color: string;
-    label: string;
-    value: string;
-  }>;
+  categories: Array<ICategory>;
 
   /**
    * The function to update the record with a category id.

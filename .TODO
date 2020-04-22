@@ -1,5 +1,8 @@
 TODO
 
+- Bugs
+  - When you go between accounts that are on the same month/year it won't load the numbers on the category graph.
+
 - Create regular backups
   - Let them access the folder where the backup/regular data is.
   - Restore a backup.

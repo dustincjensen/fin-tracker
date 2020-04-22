@@ -1,39 +1,30 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { createSelector } from 'reselect';
+import { CategorySelectors } from '../../store/category/category.selectors';
 import { PendingRecordActions } from '../../store/pending-record/pending-record.actions';
+import { PendingRecordSelectors } from '../../store/pending-record/pending-record.selectors';
 import { IStore } from '../../store/store.interface';
 import { PendingRecords } from './pending-records.component';
 import { IPendingRecordsStateProps, IPendingRecordsDispatchProps } from './pending-records.props.interface';
 
-const mapStateToProps = (state: IStore): IPendingRecordsStateProps => {
-  const categories = Object.keys(state.categories.categories)
-    .map(id => {
-      const category = state.categories.categories[id];
+const recordSelector = createSelector(
+  PendingRecordSelectors.records,
+  CategorySelectors.selectCategories,
+  (records, categories) =>
+    records?.map(record => {
       return {
-        label: category.name,
-        color: category.color,
-        value: category.id,
+        ...record,
+        category: categories.find(c => c.id === record.categoryId),
+        splitRecords: undefined,
       };
     })
-    .sort((c1, c2) => {
-      const c1Label = c1.label.toLowerCase();
-      const c2Label = c2.label.toLowerCase();
-      return c1Label < c2Label ? -1 : c1Label > c2Label ? 1 : 0;
-    });
+);
 
-  const records = state.pendingRecords.records?.map(record => {
-    return {
-      ...record,
-      category: categories.find(c => c.value === record.categoryId),
-      splitRecords: undefined,
-    };
-  });
-
-  return {
-    categories,
-    records,
-  };
-};
+const mapStateToProps = (state: IStore): IPendingRecordsStateProps => ({
+  categories: CategorySelectors.selectCategories(state),
+  records: recordSelector(state),
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): IPendingRecordsDispatchProps => {
   return {

@@ -1,3 +1,4 @@
+import { ICategory } from '../../store/category/category.interface';
 import { ISplitRecord } from '../../store/record/split-record.interface';
 import { RecordType } from './record.type';
 
@@ -10,11 +11,7 @@ export interface IEditSplitRecordsProps {
   /**
    * The list of available categories to choose from.
    */
-  categories: Array<{
-    color: string;
-    label: string;
-    value: string;
-  }>;
+  categories: Array<ICategory>;
 
   /**
    * Function to update a record with split records.

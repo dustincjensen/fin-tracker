@@ -1,7 +1,12 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { createSelector } from 'reselect';
+import { AccountSelectors } from '../../store/account/account.selectors';
 import { AutoCategoryActions } from '../../store/auto-category/auto-category.actions';
 import { IAutoCategory } from '../../store/auto-category/auto-category.interface';
+import { AutoCategorySelectors } from '../../store/auto-category/auto-category.selectors';
+import { CategorySelectors } from '../../store/category/category.selectors';
+import { RecordSelectors } from '../../store/record/record.selectors';
 import { IStore } from '../../store/store.interface';
 import { AutoCategories } from './auto-categories.component';
 import {
@@ -10,63 +15,47 @@ import {
   IAutoCategoriesDispatchProps,
 } from './auto-categories.props.interface';
 
-const mapStateToProps = (state: IStore, ownProps: IAutoCategoriesOwnProps): IAutoCategoriesStateProps => {
-  const categories = Object.keys(state.categories.categories).map(id => {
-    const category = state.categories.categories[id];
-    return {
-      label: category.name,
-      color: category.color,
-      value: category.id,
-    };
-  });
+const autoCategorySelector = createSelector(
+  CategorySelectors.selectCategories,
+  AccountSelectors.selectAccountNames,
+  RecordSelectors.records,
+  AutoCategorySelectors.autoCategories,
+  (categories, accounts, records, autoCategories) => {
+    const mappedAutoCategories = Object.keys(autoCategories)
+      .map(key =>
+        [...autoCategories[key]].sort((ac1: IAutoCategory, ac2: IAutoCategory) => {
+          const ac1Description = ac1.description.toLowerCase();
+          const ac2Description = ac2.description.toLowerCase();
+          return ac1Description < ac2Description ? -1 : ac1Description > ac2Description ? 1 : 0;
+        })
+      )
+      .flatMap(ac => ac)
+      .map(ac => {
+        const account = accounts.find(a => a.id === ac?.accountId);
+        if (!account) {
+          return undefined;
+        }
 
-  const accounts = Object.keys(state.accounts.accounts).map(id => {
-    const account = state.accounts.accounts[id];
-    return {
-      id,
-      accountName: account.name,
-    };
-  });
-
-  const records = Object.keys(state.records.records).map(accountId => {
-    return {
-      accountId,
-      records: state.records.records[accountId],
-    };
-  });
-
-  const autoCategories = Object.keys(state.autoCategories.autoCategories)
-    .map(key =>
-      [...state.autoCategories.autoCategories[key]].sort((ac1: IAutoCategory, ac2: IAutoCategory) => {
-        const ac1Description = ac1.description.toLowerCase();
-        const ac2Description = ac2.description.toLowerCase();
-        return ac1Description < ac2Description ? -1 : ac1Description > ac2Description ? 1 : 0;
+        return {
+          ...ac,
+          category: categories.find(c => c.id === ac.categoryId),
+          accountName: account.accountName,
+          numberOfRecords: records[account.id]?.filter(r => r.autoCategoryId === ac.id).length,
+        };
       })
-    )
-    .flatMap(ac => ac)
-    .map(ac => {
-      const account = accounts.find(a => a.id === ac?.accountId);
-      if (!account) {
-        return undefined;
-      }
+      .filter(ac => ac);
 
-      return {
-        ...ac,
-        category: categories.find(c => c.value === ac.categoryId),
-        accountName: account?.accountName,
-        numberOfRecords: records
-          .filter(r => r.accountId === account.id)?.[0]
-          .records?.filter(r => r.autoCategoryId === ac.id).length,
-      };
-    })
-    .filter(ac => ac);
+    return mappedAutoCategories;
+  }
+);
 
+const mapStateToProps = (state: IStore, ownProps: IAutoCategoriesOwnProps): IAutoCategoriesStateProps => {
   const { autoCategoryFilter } = ownProps;
+  const autoCategories = autoCategorySelector(state);
   const filteredAutoCategories =
     autoCategoryFilter && autoCategoryFilter.length > 0
       ? autoCategories.filter(a => a.description.toLowerCase().indexOf(autoCategoryFilter.toLowerCase()) >= 0)
       : autoCategories;
-
   return {
     autoCategories: filteredAutoCategories,
   };

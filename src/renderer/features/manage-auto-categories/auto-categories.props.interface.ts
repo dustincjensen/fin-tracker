@@ -1,4 +1,5 @@
 import { IAutoCategory } from '../../store/auto-category/auto-category.interface';
+import { ICategory } from '../../store/category/category.interface';
 
 export interface IAutoCategoriesProps
   extends IAutoCategoriesStateProps,
@@ -11,11 +12,7 @@ export interface IAutoCategoriesStateProps {
    */
   autoCategories: Array<
     IAutoCategory & {
-      category: {
-        color: string;
-        label: string;
-        value: string;
-      };
+      category: ICategory;
 
       accountName: string;
 

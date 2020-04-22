@@ -15,7 +15,7 @@ export const CategoryTag: React.FC<ICategoryTagProps> = ({ category, onClear }) 
         borderRadius={3}
       >
         <Text color='white' paddingRight={onClear ? 10 : 5}>
-          {category.label}
+          {category.name}
         </Text>
         {onClear && (
           <Button type='button' height={minorScale(4)} padding={0} margin={0} appearance='minimal' onClick={onClear}>
