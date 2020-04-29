@@ -8,7 +8,19 @@
     <title>fin-tracker</title>
   </head>
   <body>
-    <div id="react-render-location" style="height:100%;"></div>
+    <div id="react-render-location" style="height:100%;">
+      
+      <!-- This will be removed by the renderer.tsx for when it mounts the react root component. -->
+      <div style="height: 100%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <div style="color: #234361; font-weight: bold;">
+          Fin-Tracker
+        </div>  
+        <div style="color: #425A70;">
+          Loading your data...
+        </div>
+      </div>
+      
+    </div>
     <script src="./renderer.tsx"></script>
   </body>
 </html>
