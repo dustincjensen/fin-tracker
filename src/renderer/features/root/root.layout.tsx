@@ -12,7 +12,7 @@ import { SidebarLayout } from '../sidebar/sidebar.layout';
 export class RootLayout extends React.Component {
   render() {
     return (
-      <Pane height='100%' display='grid' gridTemplateColumns='auto 1fr' borderTop className="app_fade_in">
+      <Pane height='100%' display='grid' gridTemplateColumns='auto 1fr' borderTop className='app_fade_in'>
         <SidebarLayout />
         <Pane padding={20} overflowX='hidden' overflowY='auto' className='scroll-bar-styled'>
           <Switch>
