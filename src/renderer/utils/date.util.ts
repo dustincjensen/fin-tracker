@@ -71,6 +71,15 @@ export function formatDateFull(date: string): string {
 }
 
 /**
+ * Returns the date formatted as following 'Jun 2018'.
+ *
+ * @param date  the date to be formatted.
+ */
+export function formatDateMonthYear(date: string): string {
+  return moment(date).format('MMM YYYY');
+}
+
+/**
  * Returns a string representing a date in the previous month.
  *
  * @param date  the date to find the previous month of.
@@ -107,4 +116,42 @@ export function getYearFromDate(date: string): number {
  */
 export function stringToString(date: string): string {
   return moment(date).format('D MMM YYYY');
+}
+
+/**
+ * Returns a list of date strings, one for each month betweem two dates.
+ * Start and end dates are inclusive.
+ *
+ * @param start   The start date.
+ * @param end     the end date.
+ */
+export function allMonthsBetweenDates(start: string | Moment, end: string | Moment): string[] {
+  const dateStart = moment(start);
+  const dateEnd = moment(end);
+  const timeValues = [];
+
+  while (dateEnd > dateStart || dateStart.format('M') === dateEnd.format('M')) {
+    timeValues.push(dateStart.format('YYYY-MM'));
+    dateStart.add(1, 'month');
+  }
+
+  return timeValues;
+}
+
+/**
+ * Returns the earliest date from a list of date strings.
+ *
+ * @param dates   the dates to check.
+ */
+export function getEarliestDate(dates: string[]) {
+  return moment.min(dates.map(d => moment(d)));
+}
+
+/**
+ * Returns the latest date from a list of date strings.
+ *
+ * @param dates   the dates to check.
+ */
+export function getLatestDate(dates: string[]) {
+  return moment.max(dates.map(d => moment(d)));
 }
