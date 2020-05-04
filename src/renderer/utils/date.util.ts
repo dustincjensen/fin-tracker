@@ -54,7 +54,7 @@ function isInYearMonthMoment(date: Moment, target: Moment): boolean {
 
 /**
  * True if the date falls within the target year; false otherwise.
- * 
+ *
  * @param date        the date to see if it occurs in the targetYear.
  * @param targetYear  the date to get the year from.
  */
@@ -65,7 +65,7 @@ export function isInYear(date: string, targetYear: string): boolean {
 /**
  * Private helper method for isInYear
  * Takes Moment formatted dates.
- * 
+ *
  * @param date    the date to see if it occurs in the same year as the target.
  * @param target  the date to get the year from.
  */
@@ -162,7 +162,7 @@ export function allMonthsBetweenDates(start: string | Moment, end: string | Mome
 /**
  * Returns a list of date strings, one for each year between two dates.
  * Start and end dates are inclusive.
- * 
+ *
  * @param start   The start date.
  * @param end     The end date.
  */

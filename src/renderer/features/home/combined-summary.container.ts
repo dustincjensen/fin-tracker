@@ -54,11 +54,8 @@ const displayYearDates = createSelector(AccountSelectors.accounts, RecordSelecto
   return allYearsBetweenDates(getEarliestDate(startingDates), getLatestDate(endDates));
 });
 
-const selectAccountBalances = (query: (date: string, date2: string) => boolean, dateSelector) => createSelector(
-  selectAccounts,
-  RecordSelectors.records,
-  dateSelector,
-  (accounts, records, dates: string[]) => {
+const selectAccountBalances = (query: (date: string, date2: string) => boolean, dateSelector) =>
+  createSelector(selectAccounts, RecordSelectors.records, dateSelector, (accounts, records, dates: string[]) => {
     const endAccountBalancesByDate = [];
     for (let index = 0; index < dates.length; index++) {
       const date = dates[index];
@@ -78,8 +75,7 @@ const selectAccountBalances = (query: (date: string, date2: string) => boolean, 
       endAccountBalancesByDate.push({ date, accountBalances, total: total || undefined });
     }
     return endAccountBalancesByDate;
-  }
-);
+  });
 
 const selectMonthBalances = selectAccountBalances((date1, date2) => isInYearMonth(date1, date2), displayMonthDates);
 const selectYearBalances = selectAccountBalances((date1, date2) => isInYear(date1, `${date2}-01-01`), displayYearDates);

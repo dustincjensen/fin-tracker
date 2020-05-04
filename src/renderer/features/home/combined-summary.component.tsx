@@ -80,9 +80,9 @@ export const CombinedSummary: React.FC<ICombinedSummaryProps> = props => {
         maxWidth={nameWidth}
       >
         <Pane marginBottom={35} width='100%'>
-          <Select defaultValue={byMonth} width="100%" paddingRight={5} onChange={setDisplayOption}>
-            <option value="monthly">Monthly</option>
-            <option value="yearly">Yearly</option>
+          <Select defaultValue={byMonth} width='100%' paddingRight={5} onChange={setDisplayOption}>
+            <option value='monthly'>Monthly</option>
+            <option value='yearly'>Yearly</option>
           </Select>
         </Pane>
         {accounts.map(ac => {
@@ -122,40 +122,48 @@ export const CombinedSummary: React.FC<ICombinedSummaryProps> = props => {
               flexDirection: 'row',
               overflowX: 'hidden',
               width: displayWidth * numberOfColumns,
-              minHeight: 400
+              minHeight: 400,
             }}
           >
             {endBalances.map((eb, index) => {
               return (
-                <Pane key={index} minWidth={displayWidth} borderLeft borderRadius={0} display="flex" flexDirection="column" justifyContent="space-between">
+                <Pane
+                  key={index}
+                  minWidth={displayWidth}
+                  borderLeft
+                  borderRadius={0}
+                  display='flex'
+                  flexDirection='column'
+                  justifyContent='space-between'
+                >
                   <Pane>
-                  <Pane
-                    display='flex'
-                    alignItems='center'
-                    justifyContent='center'
-                    background='tint1'
-                    borderBottom
-                    height={31}
-                  >
-                    <Heading>{byMonth === 'monthly' ? formatDateMonthYear(eb.date) : eb.date}</Heading>
-                  </Pane>
-                  <Pane>
-                    {Object.keys(eb.accountBalances).map(accountId => {
-                      const balance = eb.accountBalances[accountId];
-                      return (
-                        <Pane
-                          key={accountId}
-                          padding={10}
-                          borderBottom
-                          width='100%'
-                          display='flex'
-                          justifyContent='flex-end'
-                        >
-                          <Text>{isNullOrUndefined(balance) ? '-' : balance?.toFixed(2)}</Text>
-                        </Pane>
-                      );
-                    })}
-                  </Pane>
+                    <Pane
+                      display='flex'
+                      alignItems='center'
+                      justifyContent='center'
+                      background='tint1'
+                      borderBottom
+                      height={31}
+                    >
+                      <Heading>{byMonth === 'monthly' ? formatDateMonthYear(eb.date) : eb.date}</Heading>
+                    </Pane>
+                    <Pane>
+                      {Object.keys(eb.accountBalances).map(accountId => {
+                        const balance = eb.accountBalances[accountId];
+                        return (
+                          <Pane
+                            key={accountId}
+                            padding={10}
+                            borderBottom
+                            width='100%'
+                            display='flex'
+                            justifyContent='flex-end'
+                          >
+                            <Text>{isNullOrUndefined(balance) ? '-' : balance?.toFixed(2)}</Text>
+                          </Pane>
+                        );
+                      })}
+                    </Pane>
                   </Pane>
                   <Pane borderTop>
                     <Pane padding={10} width='100%' display='flex' justifyContent='flex-end'>
