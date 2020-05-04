@@ -70,7 +70,7 @@ export const CombinedSummary: React.FC<ICombinedSummaryProps> = props => {
   // }
 
   return (
-    <div ref={containerRef} style={{ display: 'flex', marginTop: '20px' }}>
+    <div ref={containerRef} style={{ display: 'flex' }}>
       <Pane
         display='flex'
         flexDirection='column'

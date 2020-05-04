@@ -11,7 +11,7 @@ export const AccountSummary: React.FC<IAccountSummaryProps> = props => {
       elevation={1}
       minWidth={300}
       background='tint1'
-      marginTop={20}
+      marginBottom={20}
       marginRight={20}
       padding={10}
       paddingBottom={5}
