@@ -8,7 +8,8 @@ import {
   getEarliestDate,
   getLatestDate,
   isInYearMonth,
-  getPreviousMonth,
+  allYearsBetweenDates,
+  isInYear,
 } from '../../utils/date.util';
 import { isNullOrUndefined } from '../../utils/object.utils';
 import { CombinedSummary } from './combined-summary.component';
@@ -23,7 +24,7 @@ const selectAccounts = createSelector(AccountSelectors.accounts, (accounts): ICo
   })
 );
 
-const displayDates = createSelector(AccountSelectors.accounts, RecordSelectors.records, (accounts, records) => {
+const displayMonthDates = createSelector(AccountSelectors.accounts, RecordSelectors.records, (accounts, records) => {
   const startingDates = Object.keys(accounts).map(id => {
     const { startYear, startMonth } = accounts[id];
     // TODO fix typing
@@ -39,40 +40,59 @@ const displayDates = createSelector(AccountSelectors.accounts, RecordSelectors.r
   return allMonthsBetweenDates(getEarliestDate(startingDates), getLatestDate(endDates));
 });
 
-const selectAccountEndOfMonthBalances = createSelector(
+const displayYearDates = createSelector(AccountSelectors.accounts, RecordSelectors.records, (accounts, records) => {
+  const startingDates = Object.keys(accounts).map(id => {
+    const { startYear } = accounts[id];
+    return `${startYear}-12-01`;
+  });
+
+  const endDates = Object.keys(accounts).map(id => {
+    const accountRecords = records[id];
+    return accountRecords?.[accountRecords.length - 1].date;
+  });
+
+  return allYearsBetweenDates(getEarliestDate(startingDates), getLatestDate(endDates));
+});
+
+const selectAccountBalances = (query: (date: string, date2: string) => boolean, dateSelector) => createSelector(
   selectAccounts,
   RecordSelectors.records,
-  displayDates,
-  (accounts, records, dates): ICombinedSummaryStateProps['endBalances'] => {
-    const endOfMonthAccountBalancesByDate: ICombinedSummaryStateProps['endBalances'] = [];
-    for (const date of dates) {
+  dateSelector,
+  (accounts, records, dates: string[]) => {
+    const endAccountBalancesByDate = [];
+    for (let index = 0; index < dates.length; index++) {
+      const date = dates[index];
       const accountBalances = {};
       let total = 0.0;
       for (const account of accounts) {
         const { accountId } = account;
-        let balance = records[accountId]?.filter(r => isInYearMonth(r.date, date)).pop()?.balance;
+        let balance = records[accountId]?.filter(r => query(r.date, date)).pop()?.balance;
 
-        if (isNullOrUndefined(balance)) {
-          const previousMonth = getPreviousMonth(date);
-          balance = records[accountId]?.filter(r => isInYearMonth(r.date, previousMonth))?.pop()?.balance;
+        if (isNullOrUndefined(balance) && index > 0) {
+          balance = endAccountBalancesByDate[index - 1].accountBalances[accountId];
         }
 
         accountBalances[accountId] = isNullOrUndefined(balance) ? undefined : balance;
         total += balance || 0.0;
       }
-      endOfMonthAccountBalancesByDate.push({ date, accountBalances, total: total || undefined });
+      endAccountBalancesByDate.push({ date, accountBalances, total: total || undefined });
     }
-    return endOfMonthAccountBalancesByDate;
+    return endAccountBalancesByDate;
   }
 );
 
+const selectMonthBalances = selectAccountBalances((date1, date2) => isInYearMonth(date1, date2), displayMonthDates);
+const selectYearBalances = selectAccountBalances((date1, date2) => isInYear(date1, `${date2}-01-01`), displayYearDates);
+
 function mapStateToProps(state: IStore): ICombinedSummaryStateProps {
   const selectedAccounts = selectAccounts(state);
-  const endBalances = selectAccountEndOfMonthBalances(state);
+  const endMonthBalances = selectMonthBalances(state);
+  const endYearBalances = selectYearBalances(state);
 
   return {
     accounts: selectedAccounts,
-    endBalances,
+    endMonthBalances,
+    endYearBalances,
   };
 }
 

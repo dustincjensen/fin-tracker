@@ -17,9 +17,31 @@ export interface ICombinedSummaryStateProps {
   }>;
 
   /**
-   * The array of end balances for each date.
+   * The array of end balances for each month.
    */
-  endBalances: Array<{
+  endMonthBalances: Array<{
+    /**
+     * The date the end balances are for.
+     */
+    date: string;
+
+    /**
+     * The object keyed by Account Id that contains
+     * balances for each account for the date.
+     */
+    accountBalances: Record<string, number>;
+
+    /**
+     * The total combined value of the account balances
+     * for this date.
+     */
+    total: number;
+  }>;
+
+  /**
+   * The array of end balances for each year.
+   */
+  endYearBalances: Array<{
     /**
      * The date the end balances are for.
      */

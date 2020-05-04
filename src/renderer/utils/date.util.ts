@@ -53,6 +53,27 @@ function isInYearMonthMoment(date: Moment, target: Moment): boolean {
 }
 
 /**
+ * True if the date falls within the target year; false otherwise.
+ * 
+ * @param date        the date to see if it occurs in the targetYear.
+ * @param targetYear  the date to get the year from.
+ */
+export function isInYear(date: string, targetYear: string): boolean {
+  return isInYearMoment(moment(date), moment(targetYear));
+}
+
+/**
+ * Private helper method for isInYear
+ * Takes Moment formatted dates.
+ * 
+ * @param date    the date to see if it occurs in the same year as the target.
+ * @param target  the date to get the year from.
+ */
+function isInYearMoment(date: Moment, target: Moment): boolean {
+  return date.year() === target.year();
+}
+
+/**
  * Returns the date formatted as following 'Jun 16th'.
  *
  * @param date  the date to be formatted.
@@ -119,7 +140,7 @@ export function stringToString(date: string): string {
 }
 
 /**
- * Returns a list of date strings, one for each month betweem two dates.
+ * Returns a list of date strings, one for each month between two dates.
  * Start and end dates are inclusive.
  *
  * @param start   The start date.
@@ -139,12 +160,32 @@ export function allMonthsBetweenDates(start: string | Moment, end: string | Mome
 }
 
 /**
+ * Returns a list of date strings, one for each year between two dates.
+ * Start and end dates are inclusive.
+ * 
+ * @param start   The start date.
+ * @param end     The end date.
+ */
+export function allYearsBetweenDates(start: string | Moment, end: string | Moment): string[] {
+  const dateStart = moment(start);
+  const dateEnd = moment(end);
+  const timeValues = [];
+
+  while (dateEnd > dateStart || dateStart.format('YYYY') === dateEnd.format('YYYY')) {
+    timeValues.push(dateStart.format('YYYY'));
+    dateStart.add(1, 'year');
+  }
+
+  return timeValues;
+}
+
+/**
  * Returns the earliest date from a list of date strings.
  *
  * @param dates   the dates to check.
  */
 export function getEarliestDate(dates: string[]) {
-  return moment.min(dates.map(d => moment(d)));
+  return moment.min(dates.filter(d => d).map(d => moment(d)));
 }
 
 /**
@@ -153,5 +194,5 @@ export function getEarliestDate(dates: string[]) {
  * @param dates   the dates to check.
  */
 export function getLatestDate(dates: string[]) {
-  return moment.max(dates.map(d => moment(d)));
+  return moment.max(dates.filter(d => d).map(d => moment(d)));
 }
