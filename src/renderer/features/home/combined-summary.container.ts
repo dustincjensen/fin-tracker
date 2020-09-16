@@ -15,15 +15,6 @@ import { isNullOrUndefined } from '../../utils/object.utils';
 import { CombinedSummary } from './combined-summary.component';
 import { ICombinedSummaryStateProps } from './combined-summary.props.interface';
 
-const selectAccounts = createSelector(AccountSelectors.accounts, (accounts): ICombinedSummaryStateProps['accounts'] =>
-  Object.keys(accounts).map(id => {
-    return {
-      accountId: id,
-      accountName: accounts[id].name,
-    };
-  })
-);
-
 const displayMonthDates = createSelector(AccountSelectors.accounts, RecordSelectors.records, (accounts, records) => {
   const startingDates = Object.keys(accounts).map(id => {
     const { startYear, startMonth } = accounts[id];
@@ -55,14 +46,14 @@ const displayYearDates = createSelector(AccountSelectors.accounts, RecordSelecto
 });
 
 const selectAccountBalances = (query: (date: string, date2: string) => boolean, dateSelector) =>
-  createSelector(selectAccounts, RecordSelectors.records, dateSelector, (accounts, records, dates: string[]) => {
+  createSelector(AccountSelectors.selectAccountNames, RecordSelectors.records, dateSelector, (accounts, records, dates: string[]) => {
     const endAccountBalancesByDate = [];
     for (let index = 0; index < dates.length; index++) {
       const date = dates[index];
       const accountBalances = {};
       let total = 0.0;
       for (const account of accounts) {
-        const { accountId } = account;
+        const { id: accountId } = account;
         let balance = records[accountId]?.filter(r => query(r.date, date)).pop()?.balance;
 
         if (isNullOrUndefined(balance) && index > 0) {
@@ -81,7 +72,7 @@ const selectMonthBalances = selectAccountBalances((date1, date2) => isInYearMont
 const selectYearBalances = selectAccountBalances((date1, date2) => isInYear(date1, `${date2}-01-01`), displayYearDates);
 
 function mapStateToProps(state: IStore): ICombinedSummaryStateProps {
-  const selectedAccounts = selectAccounts(state);
+  const selectedAccounts = AccountSelectors.selectAccountNames(state);
   const endMonthBalances = selectMonthBalances(state);
   const endYearBalances = selectYearBalances(state);
 

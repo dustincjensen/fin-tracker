@@ -8,7 +8,7 @@ export interface ICombinedSummaryStateProps {
     /**
      * The ID of the account.
      */
-    accountId: string;
+    id: string;
 
     /**
      * The account name.

@@ -86,7 +86,7 @@ export const CombinedSummary: React.FC<ICombinedSummaryProps> = props => {
           </Select>
         </Pane>
         {accounts.map(ac => {
-          const { accountId, accountName } = ac;
+          const { id: accountId, accountName } = ac;
           return (
             <Pane key={accountId} padding={10} borderBottom width='100%' display='flex' justifyContent='flex-start'>
               <Text whiteSpace='nowrap' overflow='hidden' textOverflow='ellipsis'>
