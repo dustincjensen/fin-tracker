@@ -1,8 +1,10 @@
-TODO
-
-- Bugs
+Bugs
+====
   - When you go between accounts that are on the same month/year it won't load the numbers on the category graph.
+  - Fix minor issue where the combined accounts summary goes off the page when getting put inside the edit home page view.
 
+Tasks
+=====
 - Create regular backups
   - Let them access the folder where the backup/regular data is.
   - Restore a backup.

@@ -3,22 +3,24 @@ import { Pane, Heading, IconButton, Tooltip } from 'evergreen-ui';
 import * as React from 'react';
 import { ErrorBoundary } from '../../components/error-boundary/error-boundary.component';
 import { AccountSummariesContainer } from './account-summaries.container';
+import { CombinedCategorySummaryContainer } from './combined-category-summary.container';
 import { CombinedSummaryContainer } from './combined-summary.container';
 import { InstructionsContainer } from './instructions.container';
 import { OptionalDisplay } from './optional-display.component';
 import { IOptionalDisplayProps } from './optional-display.props.interface';
 
 const homePageOrderLocalStorage = 'homePageOrder';
-const accountSummariesDisplayed = 'accountSummariesDisplayed';
-const combinedSummariesDisplayed = 'combinedSummariesDisplayed';
+const accountsSummaryTilesDisplayed = 'accountsSummaryTilesDisplayed';
+const accountsSummaryMonthlyYearlyDisplayed = 'accountsSummaryMonthlyYearlyDisplayed';
+const categoriesSummaryMonthlyYearlyDisplayed = 'categoriesSummaryMonthlyYearlyDisplayed';
 
-const defaultOrder = [accountSummariesDisplayed, combinedSummariesDisplayed];
+const defaultOrder = [accountsSummaryTilesDisplayed, accountsSummaryMonthlyYearlyDisplayed, categoriesSummaryMonthlyYearlyDisplayed];
 
 const renderAccountsSummaryTitle = (locked: boolean, updateOrder: IOptionalDisplayProps['updateOrder']) => (
   <OptionalDisplay
     locked={locked}
     title='Accounts Summary (Tiles)'
-    displayKey='accountSummariesDisplayed'
+    displayKey={accountsSummaryTilesDisplayed}
     updateOrder={updateOrder}
     component={AccountSummariesContainer}
   />
@@ -28,15 +30,26 @@ const renderAccountsSummaryMonthlyYearly = (locked: boolean, updateOrder: IOptio
   <OptionalDisplay
     locked={locked}
     title='Accounts Summary (Monthly/Yearly)'
-    displayKey='combinedSummariesDisplayed'
+    displayKey={accountsSummaryMonthlyYearlyDisplayed}
     updateOrder={updateOrder}
     component={CombinedSummaryContainer}
   />
 );
 
+const renderCategoriesSummaryMonthlyYearly = (locked: boolean, updateOrder: IOptionalDisplayProps['updateOrder']) => (
+  <OptionalDisplay
+    locked={locked}
+    title='Category Totals Chart (Monthly/Yearly)'
+    displayKey={categoriesSummaryMonthlyYearlyDisplayed}
+    updateOrder={updateOrder}
+    component={CombinedCategorySummaryContainer}
+  />
+);
+
 const keyToRenderMap = {
-  [accountSummariesDisplayed]: renderAccountsSummaryTitle,
-  [combinedSummariesDisplayed]: renderAccountsSummaryMonthlyYearly,
+  [accountsSummaryTilesDisplayed]: renderAccountsSummaryTitle,
+  [accountsSummaryMonthlyYearlyDisplayed]: renderAccountsSummaryMonthlyYearly,
+  [categoriesSummaryMonthlyYearlyDisplayed]: renderCategoriesSummaryMonthlyYearly
 };
 
 export const HomeLayout: React.FC = () => {
