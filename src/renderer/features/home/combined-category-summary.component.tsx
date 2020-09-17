@@ -28,15 +28,25 @@ const idsThatExistInCategories = (ids: string, categories: ICategory[]) => {
   return idArray.filter(id => categories.some(c => c.id === id));
 };
 
-export const CombinedCategorySummary: React.FC<ICombinedCategorySummaryProps> = ({ categories, categoryTotalsByMonth }) => {
+export const CombinedCategorySummary: React.FC<ICombinedCategorySummaryProps> = ({
+  categories,
+  categoryTotalsByMonth,
+}) => {
   const firstCategory = categories?.[0];
   const [selectedCategories, setSelectedCategories] = React.useState(() => {
     const ids = localStorage.getItem(combinedCategorySummaryDisplayOption);
-    return !isNullOrUndefined(ids) ? idsThatExistInCategories(ids, categories) : firstCategory?.id ? [firstCategory.id] : [];
+    return !isNullOrUndefined(ids)
+      ? idsThatExistInCategories(ids, categories)
+      : firstCategory?.id
+      ? [firstCategory.id]
+      : [];
   });
   const [selectedNames, setSelectedNames] = React.useState(() => {
     const ids = localStorage.getItem(combinedCategorySummaryDisplayOption);
-    return getSelectedName(!isNullOrUndefined(ids) ? idsThatExistInCategories(ids, categories) : firstCategory?.id ? [firstCategory.id] : [], categories);
+    return getSelectedName(
+      !isNullOrUndefined(ids) ? idsThatExistInCategories(ids, categories) : firstCategory?.id ? [firstCategory.id] : [],
+      categories
+    );
   });
   const [isStacked, setIsStacked] = useLocalStorage<boolean>(combinedCategorySummaryStackedOption);
 
@@ -57,7 +67,7 @@ export const CombinedCategorySummary: React.FC<ICombinedCategorySummaryProps> = 
   if (isStacked) {
     categoryBarStackId['stackId'] = 'groupA';
   }
-  
+
   const categoryBars = categories
     .filter(c => selectedCategories.some(s => s === c.id))
     .map(c => {
@@ -88,27 +98,24 @@ export const CombinedCategorySummary: React.FC<ICombinedCategorySummaryProps> = 
   return (
     <Pane>
       <Pane display='flex' alignItems='center' justifyContent='flex-end'>
-      <Checkbox label="Stacked?" checked={isStacked} onChange={onStackChange} marginRight={15} />
-      <SelectMenu
-        isMultiSelect
-        title='Select Categories'
-        options={categoryOptions}
-        selected={selectedCategories}
-        onSelect={onSelect}
-        onDeselect={onDeselect}
-      >
-        <Button minWidth={150} marginRight={3}>{selectedNames || 'Select Categories...'}</Button>
-      </SelectMenu>
-      <IconButton icon="cross" onClick={clearSelectedCategories} />
+        <Checkbox label='Stacked?' checked={isStacked} onChange={onStackChange} marginRight={15} />
+        <SelectMenu
+          isMultiSelect
+          title='Select Categories'
+          options={categoryOptions}
+          selected={selectedCategories}
+          onSelect={onSelect}
+          onDeselect={onDeselect}
+        >
+          <Button minWidth={150} marginRight={3}>
+            {selectedNames || 'Select Categories...'}
+          </Button>
+        </SelectMenu>
+        <IconButton icon='cross' onClick={clearSelectedCategories} />
       </Pane>
 
       <ResponsiveContainer width='100%' height={400}>
-        <BarChart
-          data={data}
-          margin={barChartMargins}
-          barGap={0}
-          stackOffset="sign"
-        >
+        <BarChart data={data} margin={barChartMargins} barGap={0} stackOffset='sign'>
           <CartesianGrid strokeDasharray='3 3' />
           <XAxis dataKey='name' />
           <YAxis />

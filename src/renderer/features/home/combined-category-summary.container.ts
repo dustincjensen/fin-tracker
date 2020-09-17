@@ -1,13 +1,13 @@
-import { connect } from "react-redux";
-import { createSelector } from "reselect";
-import { AccountSelectors } from "../../store/account/account.selectors";
-import { AutoCategorySelectors } from "../../store/auto-category/auto-category.selectors";
-import { CategorySelectors } from "../../store/category/category.selectors";
-import { RecordSelectors } from "../../store/record/record.selectors";
-import { IStore } from "../../store/store.interface";
-import { allMonthsBetweenDates, getEarliestDate, getLatestDate, isInYearMonth } from "../../utils/date.util";
-import { CombinedCategorySummary } from "./combined-category-summary.component";
-import { ICombinedCategorySummaryStateProps } from "./combined-category-summary.props.interface";
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import { AccountSelectors } from '../../store/account/account.selectors';
+import { AutoCategorySelectors } from '../../store/auto-category/auto-category.selectors';
+import { CategorySelectors } from '../../store/category/category.selectors';
+import { RecordSelectors } from '../../store/record/record.selectors';
+import { IStore } from '../../store/store.interface';
+import { allMonthsBetweenDates, getEarliestDate, getLatestDate, isInYearMonth } from '../../utils/date.util';
+import { CombinedCategorySummary } from './combined-category-summary.component';
+import { ICombinedCategorySummaryStateProps } from './combined-category-summary.props.interface';
 
 const selectAccounts = createSelector(AccountSelectors.accounts, accounts =>
   Object.keys(accounts).map(id => {
@@ -35,44 +35,55 @@ const displayMonthDates = createSelector(AccountSelectors.accounts, RecordSelect
 });
 
 const categorySummarySelector = (query: (date: string, date2: string) => boolean, dateSelector) =>
-  createSelector(selectAccounts, RecordSelectors.records, CategorySelectors.categories, AutoCategorySelectors.autoCategories, dateSelector, (accounts, records, categories, autoCategories, dates: string[]) => {
-    const categoryBalancesByDate = [];
+  createSelector(
+    selectAccounts,
+    RecordSelectors.records,
+    CategorySelectors.categories,
+    AutoCategorySelectors.autoCategories,
+    dateSelector,
+    (accounts, records, categories, autoCategories, dates: string[]) => {
+      const categoryBalancesByDate = [];
 
-    for (let index = 0; index < dates.length; index++) {
-      const date = dates[index];
-      const categoryBalances = {};
-      
-      for (const account of accounts) {
-        const { accountId } = account;
-        const accountsRecordsForDateRange = records[accountId]?.filter(r => query(r.date, date));
-        const autoCategoriesForAccount = autoCategories[accountId];
+      for (let index = 0; index < dates.length; index++) {
+        const date = dates[index];
+        const categoryBalances = {};
 
-        for (const record of accountsRecordsForDateRange) {
-          if (record.categoryId || record.autoCategoryId) {
-            const categoryId = record.categoryId || autoCategoriesForAccount.find(a => a.id === record.autoCategoryId).categoryId;
-            const balance = (record.credit || 0) - (record.debit || 0);
+        for (const account of accounts) {
+          const { accountId } = account;
+          const accountsRecordsForDateRange = records[accountId]?.filter(r => query(r.date, date));
+          const autoCategoriesForAccount = autoCategories[accountId];
 
-            if (categoryBalances[categoryId]) {
-              categoryBalances[categoryId] += balance;
-            } else {
-              categoryBalances[categoryId] = balance;
+          for (const record of accountsRecordsForDateRange) {
+            if (record.categoryId || record.autoCategoryId) {
+              const categoryId =
+                record.categoryId || autoCategoriesForAccount.find(a => a.id === record.autoCategoryId).categoryId;
+              const balance = (record.credit || 0) - (record.debit || 0);
+
+              if (categoryBalances[categoryId]) {
+                categoryBalances[categoryId] += balance;
+              } else {
+                categoryBalances[categoryId] = balance;
+              }
             }
           }
         }
+        categoryBalancesByDate.push({ date, categoryBalances: categoryBalances });
       }
-      categoryBalancesByDate.push({ date, categoryBalances: categoryBalances });
+
+      return categoryBalancesByDate;
     }
+  );
 
-    return categoryBalancesByDate;
-  });
-
-const selectCategoryTotalsByMonth = categorySummarySelector((date1, date2) => isInYearMonth(date1, date2), displayMonthDates);
+const selectCategoryTotalsByMonth = categorySummarySelector(
+  (date1, date2) => isInYearMonth(date1, date2),
+  displayMonthDates
+);
 
 function mapStateToProps(state: IStore): ICombinedCategorySummaryStateProps {
   const categoryTotalsByMonth = selectCategoryTotalsByMonth(state);
   return {
     categories: CategorySelectors.selectCategories(state),
-    categoryTotalsByMonth
+    categoryTotalsByMonth,
   };
 }
 

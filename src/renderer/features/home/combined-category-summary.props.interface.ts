@@ -1,4 +1,4 @@
-import { ICategory } from "../../store/category/category.interface";
+import { ICategory } from '../../store/category/category.interface';
 
 export interface ICombinedCategorySummaryProps extends ICombinedCategorySummaryStateProps {}
 

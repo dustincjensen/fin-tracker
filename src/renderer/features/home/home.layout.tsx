@@ -14,7 +14,11 @@ const accountsSummaryTilesDisplayed = 'accountsSummaryTilesDisplayed';
 const accountsSummaryMonthlyYearlyDisplayed = 'accountsSummaryMonthlyYearlyDisplayed';
 const categoriesSummaryMonthlyYearlyDisplayed = 'categoriesSummaryMonthlyYearlyDisplayed';
 
-const defaultOrder = [accountsSummaryTilesDisplayed, accountsSummaryMonthlyYearlyDisplayed, categoriesSummaryMonthlyYearlyDisplayed];
+const defaultOrder = [
+  accountsSummaryTilesDisplayed,
+  accountsSummaryMonthlyYearlyDisplayed,
+  categoriesSummaryMonthlyYearlyDisplayed,
+];
 
 const renderAccountsSummaryTitle = (locked: boolean, updateOrder: IOptionalDisplayProps['updateOrder']) => (
   <OptionalDisplay
@@ -49,7 +53,7 @@ const renderCategoriesSummaryMonthlyYearly = (locked: boolean, updateOrder: IOpt
 const keyToRenderMap = {
   [accountsSummaryTilesDisplayed]: renderAccountsSummaryTitle,
   [accountsSummaryMonthlyYearlyDisplayed]: renderAccountsSummaryMonthlyYearly,
-  [categoriesSummaryMonthlyYearlyDisplayed]: renderCategoriesSummaryMonthlyYearly
+  [categoriesSummaryMonthlyYearlyDisplayed]: renderCategoriesSummaryMonthlyYearly,
 };
 
 export const HomeLayout: React.FC = () => {

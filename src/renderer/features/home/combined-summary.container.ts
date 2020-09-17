@@ -46,27 +46,32 @@ const displayYearDates = createSelector(AccountSelectors.accounts, RecordSelecto
 });
 
 const selectAccountBalances = (query: (date: string, date2: string) => boolean, dateSelector) =>
-  createSelector(AccountSelectors.selectAccountNames, RecordSelectors.records, dateSelector, (accounts, records, dates: string[]) => {
-    const endAccountBalancesByDate = [];
-    for (let index = 0; index < dates.length; index++) {
-      const date = dates[index];
-      const accountBalances = {};
-      let total = 0.0;
-      for (const account of accounts) {
-        const { id: accountId } = account;
-        let balance = records[accountId]?.filter(r => query(r.date, date)).pop()?.balance;
+  createSelector(
+    AccountSelectors.selectAccountNames,
+    RecordSelectors.records,
+    dateSelector,
+    (accounts, records, dates: string[]) => {
+      const endAccountBalancesByDate = [];
+      for (let index = 0; index < dates.length; index++) {
+        const date = dates[index];
+        const accountBalances = {};
+        let total = 0.0;
+        for (const account of accounts) {
+          const { id: accountId } = account;
+          let balance = records[accountId]?.filter(r => query(r.date, date)).pop()?.balance;
 
-        if (isNullOrUndefined(balance) && index > 0) {
-          balance = endAccountBalancesByDate[index - 1].accountBalances[accountId];
+          if (isNullOrUndefined(balance) && index > 0) {
+            balance = endAccountBalancesByDate[index - 1].accountBalances[accountId];
+          }
+
+          accountBalances[accountId] = isNullOrUndefined(balance) ? undefined : balance;
+          total += balance || 0.0;
         }
-
-        accountBalances[accountId] = isNullOrUndefined(balance) ? undefined : balance;
-        total += balance || 0.0;
+        endAccountBalancesByDate.push({ date, accountBalances, total: total || undefined });
       }
-      endAccountBalancesByDate.push({ date, accountBalances, total: total || undefined });
+      return endAccountBalancesByDate;
     }
-    return endAccountBalancesByDate;
-  });
+  );
 
 const selectMonthBalances = selectAccountBalances((date1, date2) => isInYearMonth(date1, date2), displayMonthDates);
 const selectYearBalances = selectAccountBalances((date1, date2) => isInYear(date1, `${date2}-01-01`), displayYearDates);
