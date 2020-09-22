@@ -95,8 +95,13 @@ export const CombinedCategorySummary: React.FC<ICombinedCategorySummaryProps> = 
 
   const clearSelectedCategories = () => setNewState([]);
 
+  // Don't render anything if there are no months of data at all.
+  if (!data || data.flatMap(e => Object.values(e)).length === 0) {
+    return null;
+  }
+
   return (
-    <Pane>
+    <Pane marginLeft={-20}>
       <Pane display='flex' alignItems='center' justifyContent='flex-end'>
         <Checkbox label='Stacked?' checked={isStacked} onChange={onStackChange} marginRight={15} />
         <SelectMenu

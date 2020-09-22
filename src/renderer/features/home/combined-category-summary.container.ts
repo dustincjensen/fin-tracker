@@ -53,6 +53,10 @@ const categorySummarySelector = (query: (date: string, date2: string) => boolean
           const accountsRecordsForDateRange = records[accountId]?.filter(r => query(r.date, date));
           const autoCategoriesForAccount = autoCategories[accountId];
 
+          if (!accountsRecordsForDateRange) {
+            continue;
+          }
+
           for (const record of accountsRecordsForDateRange) {
             if (record.categoryId || record.autoCategoryId) {
               const categoryId =
