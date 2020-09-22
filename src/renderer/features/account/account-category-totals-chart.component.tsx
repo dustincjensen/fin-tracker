@@ -38,7 +38,7 @@ export class AccountCategoryTotalsChart extends React.Component<IAccountCategory
         <CartesianGrid strokeDasharray='3 3' />
         <XAxis dataKey='name' />
         <YAxis />
-        {data.length > 0 && <Tooltip /> }
+        {data.length > 0 && <Tooltip />}
         <ReferenceLine y={0} stroke='#000' />
         <Bar dataKey='Total' label={{ position: 'top' }}>
           {data.map((entry, index) => (

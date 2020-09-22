@@ -65,11 +65,7 @@ export const CombinedSummary: React.FC<ICombinedSummaryProps> = props => {
   };
 
   // Don't render anything if there are no end balances.
-  if (!endBalances || 
-    endBalances
-      .flatMap(e => Object.values(e.accountBalances))
-      .filter(e => e).length === 0
-  ) {
+  if (!endBalances || endBalances.flatMap(e => Object.values(e.accountBalances)).filter(e => e).length === 0) {
     return null;
   }
 

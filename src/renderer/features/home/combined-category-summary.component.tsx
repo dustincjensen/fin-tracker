@@ -1,7 +1,17 @@
 import useLocalStorage from '@rehooks/local-storage';
 import { Button, Checkbox, IconButton, Pane, SelectMenu, SelectMenuItem } from 'evergreen-ui';
 import * as React from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  ReferenceLine,
+} from 'recharts';
 import { ICategory } from '../../store/category/category.interface';
 import { formatDateMonthYear } from '../../utils/date.util';
 import { isNullOrUndefined } from '../../utils/object.utils';
