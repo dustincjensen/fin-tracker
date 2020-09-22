@@ -1,11 +1,12 @@
 import { Pane } from 'evergreen-ui';
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 import { AccountLink } from '../../components/account-link/account-link.component';
+import { AccountSelectors } from '../../store/account/account.selectors';
 import { accountTypeIconNames } from '../../utils/account.utils';
-import { IAccountsSidebarProps } from './accounts-sidebar.props.interface';
 
-export const AccountsSidebar = (props: IAccountsSidebarProps) => {
-  const { accounts } = props;
+export const AccountsSidebar = () => {
+  const accounts = useSelector(AccountSelectors.selectAccounts);
 
   return (
     <Pane display='flex' flexDirection='column'>

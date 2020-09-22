@@ -2,7 +2,7 @@ import { remote } from 'electron';
 import { Button, Pane, Text } from 'evergreen-ui';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { AccountsSidebarLayout } from '../accounts-sidebar/accounts-sidebar.layout';
+import { AccountsSidebar } from '../accounts-sidebar/accounts-sidebar.component';
 
 const appVersion = remote.app.getVersion();
 
@@ -13,7 +13,7 @@ export class SidebarLayout extends React.Component {
         <Button is={Link} appearance='minimal' to='/' iconBefore='home'>
           Home
         </Button>
-        <AccountsSidebarLayout />
+        <AccountsSidebar />
         <Button is={Link} appearance='minimal' to='/accounts' iconBefore='bank-account'>
           Accounts
         </Button>
