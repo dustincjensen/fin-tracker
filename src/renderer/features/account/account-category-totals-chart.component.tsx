@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { CartesianGrid, BarChart, XAxis, YAxis, Bar, Cell } from 'recharts';
+import { CartesianGrid, BarChart, XAxis, YAxis, Bar, Cell, Tooltip, ReferenceLine } from 'recharts';
 import { IAccountCategoryTotalsChartProps } from './account-category-totals-chart.props.interface';
 
 export class AccountCategoryTotalsChart extends React.Component<IAccountCategoryTotalsChartProps> {
   render() {
     const { records, categories } = this.props;
 
-    let data = categories?.map(c => ({ categoryId: c.id, color: c.color, name: c.name, total: 0.0 }));
+    let data = categories?.map(c => ({ categoryId: c.id, color: c.color, name: c.name, Total: 0.0 }));
     for (const category of data) {
       const categoryId = category.categoryId;
       const total = records
@@ -16,11 +16,11 @@ export class AccountCategoryTotalsChart extends React.Component<IAccountCategory
         // TODO do categories need expense or income tags so that we can change the credit or debit to be +/-?
         .map(r => (r.credit > 0 ? r.credit : r.debit > 0 ? -r.debit : 0.0))
         .reduce((sum, value) => (sum += value), 0.0);
-      category.total = parseFloat(Math.abs(total).toFixed(2) || '0.0');
+      category.Total = parseFloat(total.toFixed(2) || '0.0');
     }
 
     // Don't display empty categories.
-    data = data.filter(d => d.total > 0.0);
+    data = data.filter(d => d.Total !== 0.0);
 
     // Get the colors for the remaining categories.
     const colors = data.map(c => c.color || '#333');
@@ -38,7 +38,9 @@ export class AccountCategoryTotalsChart extends React.Component<IAccountCategory
         <CartesianGrid strokeDasharray='3 3' />
         <XAxis dataKey='name' />
         <YAxis />
-        <Bar dataKey='total' label={{ position: 'top' }}>
+        {data.length > 0 && <Tooltip />}
+        <ReferenceLine y={0} stroke='#000' />
+        <Bar dataKey='Total' label={{ position: 'top' }}>
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={colors[index]} />
           ))}

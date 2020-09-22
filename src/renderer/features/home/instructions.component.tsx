@@ -42,7 +42,7 @@ export const Instructions: React.FC<IInstructionsProps> = ({
   }
 
   return (
-    <Pane marginTop={20} border borderRadius={5} background='tint1'>
+    <Pane marginTop={20} marginBottom={20} border borderRadius={5} background='tint1'>
       <Pane paddingTop={20} paddingRight={20} paddingLeft={20} paddingBottom={10}>
         <Heading>Welcome to the Fin-Tracker Beta!</Heading>
         <Paragraph marginBottom={10}>
