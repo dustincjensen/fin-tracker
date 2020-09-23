@@ -3,8 +3,13 @@ import { IconButton, Pane, Heading, Tooltip, Text } from 'evergreen-ui';
 import * as React from 'react';
 import { IOptionalDisplayProps } from './optional-display.props.interface';
 
-export const OptionalDisplay: React.FC<IOptionalDisplayProps> = props => {
-  const { displayKey, title, locked, updateOrder, component: OptionalComponent } = props;
+export const OptionalDisplay = ({
+  displayKey,
+  title,
+  locked,
+  updateOrder,
+  component: OptionalComponent,
+}: IOptionalDisplayProps) => {
   const [displayed] = useLocalStorage<boolean>(displayKey, true);
 
   if (!displayed && locked) {

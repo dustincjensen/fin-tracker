@@ -10,7 +10,7 @@ const selectOptions = createSelector(
   categories => categories.map(category => ({ label: category.name, value: category.id }))
 );
 
-export const CategorySelect: React.FC<ICategorySelectProps> = props => {
+export const CategorySelect = ({ record, categories, updateCategory, disabled }: ICategorySelectProps) => {
   // TODO clean up reducer?
   const [state, dispatch] = React.useReducer(
     (state, action) => {
@@ -33,7 +33,6 @@ export const CategorySelect: React.FC<ICategorySelectProps> = props => {
     }
   );
 
-  const { record, categories, updateCategory, disabled } = props;
   const options = selectOptions(categories);
 
   React.useEffect(() => {

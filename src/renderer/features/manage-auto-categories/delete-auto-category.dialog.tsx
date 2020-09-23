@@ -2,9 +2,12 @@ import { Dialog } from 'evergreen-ui';
 import * as React from 'react';
 import { IDeleteAutoCategoryProps } from './delete-auto-category.props.interface';
 
-export const DeleteAutoCategoryDialog: React.FC<IDeleteAutoCategoryProps> = props => {
-  const { autoCategory, onClose, onConfirm, deleteAutoCategory } = props;
-
+export const DeleteAutoCategoryDialog = ({
+  autoCategory,
+  onClose,
+  onConfirm,
+  deleteAutoCategory,
+}: IDeleteAutoCategoryProps) => {
   if (!autoCategory) {
     return null;
   }

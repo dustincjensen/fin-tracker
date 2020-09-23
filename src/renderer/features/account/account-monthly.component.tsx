@@ -13,16 +13,15 @@ import { SplitRecords } from './split-records.component';
 const w100 = createStaticWidthCell(100);
 const w200 = createStaticWidthCell(200);
 
-export const AccountMonthly: React.FC<IAccountMonthlyProps> = props => {
-  const {
-    records,
-    categories,
-    updateCategory,
-    updateSplitRecordCategory,
-    updateRecordWithSplits,
-    deleteRecordSplitRecords,
-    autoCategorizeRecords,
-  } = props;
+export const AccountMonthly = ({
+  records,
+  categories,
+  updateCategory,
+  updateSplitRecordCategory,
+  updateRecordWithSplits,
+  deleteRecordSplitRecords,
+  autoCategorizeRecords,
+}: IAccountMonthlyProps) => {
   const [recordToDeleteFrom, setRecordToDeleteFrom] = React.useState<IRecord>(null);
   const [recordToAutoCategorize, setRecordToAutoCategorize] = React.useState<IRecord>(null);
   const [isSplittingTransaction, setIsSplittingTransaction] = React.useState<string>(undefined);

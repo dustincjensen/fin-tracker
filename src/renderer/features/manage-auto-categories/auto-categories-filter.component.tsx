@@ -2,9 +2,7 @@ import { Pane, SearchInput, majorScale } from 'evergreen-ui';
 import * as React from 'react';
 import { IAutoCategoriesFilterProps } from './auto-categories-filter.props.interface';
 
-export const AutoCategoriesFilter: React.FC<IAutoCategoriesFilterProps> = props => {
-  const { autoCategoryFilter, setAutoCategoryFilter } = props;
-
+export const AutoCategoriesFilter = ({ autoCategoryFilter, setAutoCategoryFilter }: IAutoCategoriesFilterProps) => {
   const onChange = evt => setAutoCategoryFilter(evt.target.value);
 
   return (

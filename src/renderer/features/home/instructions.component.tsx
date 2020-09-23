@@ -9,13 +9,13 @@ const CATEGORIES_HINT = 'categoriesHint';
 const AUTO_CATEGORIES_HINT = 'autoCategoriesHint';
 const SPLIT_RECORDS_HINT = 'splitRecordsHint';
 
-export const Instructions: React.FC<IInstructionsProps> = ({
+export const Instructions = ({
   atLeastOneAccountHasRecords,
   hasAccounts,
   hasCategories,
   hasAutoCategories,
   hasSplitRecords,
-}) => {
+}: IInstructionsProps) => {
   const [showAccountsHint, setShowAccountsHint] = React.useState<boolean>(!localStorage.getItem(ACCOUNTS_HINT));
   const [showRecordsHint, setShowRecordsHint] = React.useState<boolean>(!localStorage.getItem(RECORDS_HINT));
   const [showCategoriesHint, setShowCategoriesHint] = React.useState<boolean>(!localStorage.getItem(CATEGORIES_HINT));

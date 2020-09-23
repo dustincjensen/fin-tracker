@@ -28,8 +28,7 @@ function getCreditTotal(splitRecords: SplitRecordType[]): number {
   return getTotal(splitRecords, (value: SplitRecordType) => value.credit);
 }
 
-export const EditSplitRecords: React.FC<IEditSplitRecordsProps> = props => {
-  const { record, categories, updateRecordWithSplits, close } = props;
+export const EditSplitRecords = ({ record, categories, updateRecordWithSplits, close }: IEditSplitRecordsProps) => {
   const [splitRecords, setSplitRecords] = React.useState<SplitRecordType[]>(
     record?.splitRecords || [createSplitRecord(), createSplitRecord()]
   );

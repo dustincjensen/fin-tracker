@@ -2,7 +2,7 @@ import { Pane, Text, Button, Icon, minorScale } from 'evergreen-ui';
 import * as React from 'react';
 import { ICategoryTagProps } from './category-tag.props.interface';
 
-export const CategoryTag: React.FC<ICategoryTagProps> = ({ category, onClear }) => {
+export const CategoryTag = ({ category, onClear }: ICategoryTagProps) => {
   return (
     <Pane display='inline-block'>
       <Pane

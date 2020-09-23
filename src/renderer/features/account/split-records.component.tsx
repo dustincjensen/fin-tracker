@@ -7,9 +7,7 @@ import { ISplitRecordsProps } from './split-records.props.interface';
 const w100 = createStaticWidthCell(100);
 const w200 = createStaticWidthCell(200);
 
-export const SplitRecords: React.FC<ISplitRecordsProps> = props => {
-  const { records, categories, updateCategory } = props;
-
+export const SplitRecords = ({ records, categories, updateCategory }: ISplitRecordsProps) => {
   if (!records) {
     return null;
   }

@@ -8,8 +8,13 @@ import { IEditAutoCategoryProps } from './edit-auto-category.props.interface';
 
 type CategoryRecord = ICategorySelectProps['record'];
 
-export const EditAutoCategoryDialog: React.FC<IEditAutoCategoryProps> = props => {
-  const { record, categories, onClose, onConfirm, autoCategorizeRecords } = props;
+export const EditAutoCategoryDialog = ({
+  record,
+  categories,
+  onClose,
+  onConfirm,
+  autoCategorizeRecords,
+}: IEditAutoCategoryProps) => {
   const [description, setDescription] = React.useState<string>('');
   const [descriptionError, setDescriptionError] = React.useState<string>('');
   const [categoryRecord, setCategoryRecord] = React.useState<CategoryRecord>({ id: undefined, category: undefined });

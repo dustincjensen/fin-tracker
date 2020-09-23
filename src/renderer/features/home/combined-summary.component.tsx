@@ -10,8 +10,7 @@ const nameWidth = 150;
 const defaultNumberOfColumns = 1;
 const accountSummaryDisplayOption = 'accountSummaryDisplayOption';
 
-export const CombinedSummary: React.FC<ICombinedSummaryProps> = props => {
-  const { accounts, endMonthBalances, endYearBalances } = props;
+export const CombinedSummary = ({ accounts, endMonthBalances, endYearBalances }: ICombinedSummaryProps) => {
   const [numberOfColumns, setNumberOfColumns] = React.useState(defaultNumberOfColumns);
   const [byMonth, setByMonth] = React.useState<string>(localStorage.getItem(accountSummaryDisplayOption) || 'monthly');
   const containerRef = React.useRef<HTMLDivElement>();

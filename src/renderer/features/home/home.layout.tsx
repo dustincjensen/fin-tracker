@@ -56,7 +56,7 @@ const keyToRenderMap = {
   [categoriesSummaryMonthlyYearlyDisplayed]: renderCategoriesSummaryMonthlyYearly,
 };
 
-export const HomeLayout: React.FC = () => {
+export const HomeLayout = () => {
   const [locked, setLocked] = React.useState<boolean>(true);
   const updateLocked = () => setLocked(v => !v);
   const [homePageOrder] = useLocalStorage<string[]>(homePageOrderLocalStorage, defaultOrder);

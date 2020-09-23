@@ -3,7 +3,7 @@ import * as React from 'react';
 import { accountTypeLabels } from '../../utils/account.utils';
 import { IActionPendingRecordsProps } from './action-pending-records.props.interface';
 
-export const ActionPendingRecords: React.FC<IActionPendingRecordsProps> = ({
+export const ActionPendingRecords = ({
   accountName,
   accountType,
   fileName,
@@ -12,7 +12,7 @@ export const ActionPendingRecords: React.FC<IActionPendingRecordsProps> = ({
   existingRecords,
   accept,
   clear,
-}) => {
+}: IActionPendingRecordsProps) => {
   return (
     <Pane>
       <Pane display='flex' justifyContent='space-between' border padding={20} background='tint1' borderRadius={5}>

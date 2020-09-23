@@ -18,14 +18,14 @@ import { monthValues, monthNamesLong } from '../../utils/date.util';
 import { newGuid } from '../../utils/guid.util';
 import { IEditAccountProps } from './edit-account.props.interface';
 
-export const EditAccount: React.FC<IEditAccountProps> = ({
+export const EditAccount = ({
   close,
   saveAccount,
   saveButtonText,
   headerText,
   account,
   canEditComplexFields,
-}) => {
+}: IEditAccountProps) => {
   const [name, setName] = React.useState<string>(account?.name || '');
   const [startYear, setStartYear] = React.useState<number>(account?.startYear || new Date().getFullYear());
   const [startMonth, setStartMonth] = React.useState<number>(account?.startMonth || new Date().getMonth());

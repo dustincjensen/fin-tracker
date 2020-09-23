@@ -6,8 +6,7 @@ import { IAccountProps } from './accounts.props.interface';
 import { DeleteAccountDialog } from './delete-account.dialog';
 import { EditAccountContainer } from './edit-account.container';
 
-export const Accounts: React.FC<IAccountProps> = props => {
-  const { accounts, deleteAccount } = props;
+export const Accounts = ({ accounts, deleteAccount }: IAccountProps) => {
   const [accountToDelete, setAccountToDelete] = React.useState<IAccount>(null);
   const [isEditing, setIsEditing] = React.useState<string>(undefined);
 

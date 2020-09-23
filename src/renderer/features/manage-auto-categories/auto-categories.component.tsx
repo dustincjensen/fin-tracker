@@ -10,7 +10,7 @@ const w100 = createStaticWidthCell(100);
 const w150 = createStaticWidthCell(150);
 const w200 = createStaticWidthCell(200);
 
-export const AutoCategories: React.FC<IAutoCategoriesProps> = ({ autoCategories, deleteAutoCategory }) => {
+export const AutoCategories = ({ autoCategories, deleteAutoCategory }: IAutoCategoriesProps) => {
   const [autoCategoryToDelete, setAutoCategoryToDelete] = React.useState<IAutoCategory>(null);
 
   return (

@@ -2,9 +2,12 @@ import { Dialog } from 'evergreen-ui';
 import * as React from 'react';
 import { IDeleteSplitRecordsProps } from './delete-split-records.props.interface';
 
-export const DeleteSplitRecordsDialog: React.FC<IDeleteSplitRecordsProps> = props => {
-  const { record, onClose, onConfirm, deleteRecordSplitRecords } = props;
-
+export const DeleteSplitRecordsDialog = ({
+  record,
+  onClose,
+  onConfirm,
+  deleteRecordSplitRecords,
+}: IDeleteSplitRecordsProps) => {
   if (!record) {
     return null;
   }

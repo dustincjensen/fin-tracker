@@ -9,9 +9,7 @@ import './pending-records.module.scss';
 const w120 = createStaticWidthCell(120);
 const w200 = createStaticWidthCell(200);
 
-export const PendingRecords: React.FC<IPendingRecordsProps> = props => {
-  const { records, categories, updatePendingRecordCategory } = props;
-
+export const PendingRecords = ({ records, categories, updatePendingRecordCategory }: IPendingRecordsProps) => {
   return (
     <Table display='flex' flexDirection='column' className='pending_records_wrapper'>
       <Table.Head>

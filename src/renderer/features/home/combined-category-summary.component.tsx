@@ -38,10 +38,7 @@ const idsThatExistInCategories = (ids: string, categories: ICategory[]) => {
   return idArray.filter(id => categories.some(c => c.id === id));
 };
 
-export const CombinedCategorySummary: React.FC<ICombinedCategorySummaryProps> = ({
-  categories,
-  categoryTotalsByMonth,
-}) => {
+export const CombinedCategorySummary = ({ categories, categoryTotalsByMonth }: ICombinedCategorySummaryProps) => {
   const firstCategory = categories?.[0];
   const [selectedCategories, setSelectedCategories] = React.useState(() => {
     const ids = localStorage.getItem(combinedCategorySummaryDisplayOption);
