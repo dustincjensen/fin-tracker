@@ -7,7 +7,7 @@ import { CategorySelectors } from '../../../store/category/category.selectors';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
 import { AutoCategories } from './auto-categories.component';
-import { IAutoCategoriesProps} from './auto-categories.props.interface';
+import { IAutoCategoriesProps } from './auto-categories.props.interface';
 
 const autoCategorySelector = createSelector(
   CategorySelectors.selectCategories,
@@ -43,14 +43,17 @@ const autoCategorySelector = createSelector(
   }
 );
 
-const mapStateToProps = (state: IStore, {autoCategoryFilter}: Pick<IAutoCategoriesProps, 'autoCategoryFilter'>): Pick<IAutoCategoriesProps, 'autoCategories'> => {
+const mapStateToProps = (
+  state: IStore,
+  { autoCategoryFilter }: Pick<IAutoCategoriesProps, 'autoCategoryFilter'>
+): Pick<IAutoCategoriesProps, 'autoCategories'> => {
   const autoCategories = autoCategorySelector(state);
 
   const filteredAutoCategories =
     autoCategoryFilter && autoCategoryFilter.length > 0
       ? autoCategories.filter(a => a.description.toLowerCase().indexOf(autoCategoryFilter.toLowerCase()) >= 0)
       : autoCategories;
-  
+
   return {
     autoCategories: filteredAutoCategories,
   };

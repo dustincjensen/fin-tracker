@@ -1,8 +1,6 @@
-import { IAccount } from '../../store/account/account.interface';
+import { IAccount } from '../../../store/account/account.interface';
 
-export interface IEditAccountProps extends IEditAccountStateProps, IEditAccountDispatchProps, IEditAccountOwnProps {}
-
-export interface IEditAccountStateProps {
+export interface IEditAccountProps {
   /**
    * The optional text for the header.
    */
@@ -25,16 +23,12 @@ export interface IEditAccountStateProps {
    * editing is available.
    */
   canEditComplexFields: boolean;
-}
 
-export interface IEditAccountDispatchProps {
   /**
    * Action to save an account.
    */
   saveAccount: (account: IAccount) => void;
-}
 
-export interface IEditAccountOwnProps {
   /**
    * The existing account if available.
    */

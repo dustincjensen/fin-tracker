@@ -1,12 +1,12 @@
 import { Table, Tooltip, IconButton, Pane } from 'evergreen-ui';
 import * as React from 'react';
-import { IAccount } from '../../store/account/account.interface';
-import { accountTypeLabels } from '../../utils/account.utils';
+import { IAccount } from '../../../store/account/account.interface';
+import { accountTypeLabels } from '../../../utils/account.utils';
+import { DeleteAccountDialog } from '../delete-account/delete-account.dialog';
+import { EditAccountContainer } from '../edit-account/edit-account.container';
 import { IAccountProps } from './accounts.props.interface';
-import { DeleteAccountDialog } from './delete-account.dialog';
-import { EditAccountContainer } from './edit-account.container';
 
-export const Accounts = ({ accounts, deleteAccount }: IAccountProps) => {
+export const Accounts = ({ accounts }: IAccountProps) => {
   const [accountToDelete, setAccountToDelete] = React.useState<IAccount>(null);
   const [isEditing, setIsEditing] = React.useState<string>(undefined);
 
@@ -51,30 +51,6 @@ export const Accounts = ({ accounts, deleteAccount }: IAccountProps) => {
                       onClick={() => setAccountToDelete(account)}
                     />
                   </Tooltip>
-
-                  {/* Use this is window width is too small? */}
-                  {/* <Popover position={Position.BOTTOM_RIGHT} content={({close}) => (
-                      <Menu>
-                        <Menu.Group>
-                          <Menu.Item icon="edit" onSelect={() => {
-                            setIsEditing(category.id);
-                            close();
-                          }}>Edit</Menu.Item>
-                        </Menu.Group>
-                        <Menu.Divider />
-                        <Menu.Group>
-                          <Menu.Item icon="trash" intent="danger" onSelect={
-                            () => {setCategoryToDelete(category); close();}
-                            }>
-                            Delete
-                          </Menu.Item>
-                        </Menu.Group>
-                      </Menu>
-                    )}>
-                      <Tooltip content="Options" hideDelay={0}>
-                      <IconButton icon='more' appearance="minimal" />
-                      </Tooltip>
-                    </Popover> */}
                 </Table.Cell>
               </Table.Row>
               {isEditing === account.id && (
@@ -87,12 +63,7 @@ export const Accounts = ({ accounts, deleteAccount }: IAccountProps) => {
         })}
       </Table.Body>
 
-      <DeleteAccountDialog
-        account={accountToDelete}
-        onClose={() => setAccountToDelete(null)}
-        onConfirm={() => setAccountToDelete(null)}
-        deleteAccount={deleteAccount}
-      />
+      <DeleteAccountDialog account={accountToDelete} onClose={() => setAccountToDelete(null)} />
     </Table>
   );
 };
