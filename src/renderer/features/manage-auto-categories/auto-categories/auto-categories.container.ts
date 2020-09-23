@@ -1,19 +1,13 @@
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 import { createSelector } from 'reselect';
-import { AccountSelectors } from '../../store/account/account.selectors';
-import { AutoCategoryActions } from '../../store/auto-category/auto-category.actions';
-import { IAutoCategory } from '../../store/auto-category/auto-category.interface';
-import { AutoCategorySelectors } from '../../store/auto-category/auto-category.selectors';
-import { CategorySelectors } from '../../store/category/category.selectors';
-import { RecordSelectors } from '../../store/record/record.selectors';
-import { IStore } from '../../store/store.interface';
+import { AccountSelectors } from '../../../store/account/account.selectors';
+import { IAutoCategory } from '../../../store/auto-category/auto-category.interface';
+import { AutoCategorySelectors } from '../../../store/auto-category/auto-category.selectors';
+import { CategorySelectors } from '../../../store/category/category.selectors';
+import { RecordSelectors } from '../../../store/record/record.selectors';
+import { IStore } from '../../../store/store.interface';
 import { AutoCategories } from './auto-categories.component';
-import {
-  IAutoCategoriesStateProps,
-  IAutoCategoriesOwnProps,
-  IAutoCategoriesDispatchProps,
-} from './auto-categories.props.interface';
+import { IAutoCategoriesProps} from './auto-categories.props.interface';
 
 const autoCategorySelector = createSelector(
   CategorySelectors.selectCategories,
@@ -49,20 +43,17 @@ const autoCategorySelector = createSelector(
   }
 );
 
-const mapStateToProps = (state: IStore, ownProps: IAutoCategoriesOwnProps): IAutoCategoriesStateProps => {
-  const { autoCategoryFilter } = ownProps;
+const mapStateToProps = (state: IStore, {autoCategoryFilter}: Pick<IAutoCategoriesProps, 'autoCategoryFilter'>): Pick<IAutoCategoriesProps, 'autoCategories'> => {
   const autoCategories = autoCategorySelector(state);
+
   const filteredAutoCategories =
     autoCategoryFilter && autoCategoryFilter.length > 0
       ? autoCategories.filter(a => a.description.toLowerCase().indexOf(autoCategoryFilter.toLowerCase()) >= 0)
       : autoCategories;
+  
   return {
     autoCategories: filteredAutoCategories,
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): IAutoCategoriesDispatchProps => ({
-  deleteAutoCategory: (autoCategory: IAutoCategory) => dispatch(AutoCategoryActions.deleteAutoCategory(autoCategory)),
-});
-
-export const AutoCategoriesContainer = connect(mapStateToProps, mapDispatchToProps)(AutoCategories);
+export const AutoCategoriesContainer = connect(mapStateToProps)(AutoCategories);

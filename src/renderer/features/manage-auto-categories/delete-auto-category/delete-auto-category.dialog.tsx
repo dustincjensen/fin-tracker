@@ -1,20 +1,19 @@
 import { Dialog } from 'evergreen-ui';
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
+import { AutoCategoryActions } from '../../../store/auto-category/auto-category.actions';
 import { IDeleteAutoCategoryProps } from './delete-auto-category.props.interface';
 
-export const DeleteAutoCategoryDialog = ({
-  autoCategory,
-  onClose,
-  onConfirm,
-  deleteAutoCategory,
-}: IDeleteAutoCategoryProps) => {
+export const DeleteAutoCategoryDialog = ({ autoCategory, onClose }: IDeleteAutoCategoryProps) => {
+  const dispatch = useDispatch();
+
   if (!autoCategory) {
     return null;
   }
 
   const confirm = () => {
-    deleteAutoCategory(autoCategory);
-    onConfirm();
+    dispatch(AutoCategoryActions.deleteAutoCategory(autoCategory));
+    onClose();
   };
 
   return (
