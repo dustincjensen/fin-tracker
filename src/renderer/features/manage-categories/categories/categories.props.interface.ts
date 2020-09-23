@@ -1,7 +1,7 @@
-import { ICategory } from "../../../store/category/category.interface";
+import { ICategory } from '../../../store/category/category.interface';
 
 export interface ICategoriesProps {
-  /** 
+  /**
    * The list of categories to display.
    */
   categories: ICategory[];

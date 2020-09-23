@@ -6,25 +6,23 @@ import { IImportLayoutProps } from './import.props.interface';
 import { NewRecordsContainer } from './new-records.container';
 import { PendingRecordsContainer } from './pending-records.container';
 
-export class ImportLayout extends React.Component<IImportLayoutProps> {
-  public render() {
-    const { hasPendingRecords } = this.props;
-    const { accountId } = this.props.match.params;
+export const ImportLayout = (props: IImportLayoutProps) => {
+  const { hasPendingRecords } = props;
+  const { accountId } = props.match.params;
 
-    return (
-      <ErrorBoundary>
-        <Pane height='100%'>
-          {!hasPendingRecords && <NewRecordsContainer accountId={accountId} />}
-          {hasPendingRecords && (
-            <>
-              <Pane marginBottom={20}>
-                <ActionPendingRecordsContainer />
-              </Pane>
-              <PendingRecordsContainer />
-            </>
-          )}
-        </Pane>
-      </ErrorBoundary>
-    );
-  }
-}
+  return (
+    <ErrorBoundary>
+      <Pane height='100%'>
+        {!hasPendingRecords && <NewRecordsContainer accountId={accountId} />}
+        {hasPendingRecords && (
+          <>
+            <Pane marginBottom={20}>
+              <ActionPendingRecordsContainer />
+            </Pane>
+            <PendingRecordsContainer />
+          </>
+        )}
+      </Pane>
+    </ErrorBoundary>
+  );
+};

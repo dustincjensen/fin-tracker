@@ -69,10 +69,7 @@ export const Categories = ({ categories }: ICategoriesProps) => {
         })}
       </Table.Body>
 
-      <DeleteCategoryDialog
-        category={categoryToDelete}
-        onClose={() => setCategoryToDelete(null)}
-      />
+      <DeleteCategoryDialog category={categoryToDelete} onClose={() => setCategoryToDelete(null)} />
     </Table>
   );
 };

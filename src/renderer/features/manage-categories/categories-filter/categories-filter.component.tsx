@@ -2,7 +2,7 @@ import { Pane, SearchInput, Button, majorScale } from 'evergreen-ui';
 import * as React from 'react';
 import { ICategoriesFilterProps } from './categories-filter.props.interface';
 
-export const CategoriesFilter = ({categoryFilter, setCategoryFilter, openNewCategory}: ICategoriesFilterProps) => {
+export const CategoriesFilter = ({ categoryFilter, setCategoryFilter, openNewCategory }: ICategoriesFilterProps) => {
   const onChange = evt => setCategoryFilter(evt.target.value);
 
   return (
