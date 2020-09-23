@@ -78,15 +78,6 @@ export class NewRecords extends React.Component<INewRecordsProps, INewRecordsSta
   getImportOptions = () => {
     return (
       <>
-        {/* <option key='sbc' value='ScotiabankChequing'>
-          Scotiabank Chequing
-        </option>
-        <option key='sbs' value='ScotiabankSavings'>
-          Scotiabank Savings
-        </option>
-        <option key='sbv' value='ScotiabankVisa'>
-          Scotiabank Visa
-        </option> */}
         <option key='quicken' value='Quicken'>
           Quicken (*.qif)
         </option>
@@ -119,11 +110,11 @@ export class NewRecords extends React.Component<INewRecordsProps, INewRecordsSta
       return;
     }
 
-    const { accounts, autoCategories } = this.props;
+    const { accounts, autoCategories, importAction } = this.props;
     const selectedAccount = accounts.filter(a => a.id === selectedAccountId)[0];
     const selectedAutoCategories = autoCategories[selectedAccountId];
 
-    this.props.importAction(selectedAccount, selectedAutoCategories, selectedFile, importMethod);
+    importAction(selectedAccount, selectedAutoCategories, selectedFile, importMethod);
     this.setState({ formError: undefined });
   };
 }

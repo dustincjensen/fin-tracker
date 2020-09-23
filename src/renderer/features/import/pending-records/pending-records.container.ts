@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { createSelector } from 'reselect';
-import { CategorySelectors } from '../../store/category/category.selectors';
-import { PendingRecordActions } from '../../store/pending-record/pending-record.actions';
-import { PendingRecordSelectors } from '../../store/pending-record/pending-record.selectors';
-import { IStore } from '../../store/store.interface';
+import { CategorySelectors } from '../../../store/category/category.selectors';
+import { PendingRecordActions } from '../../../store/pending-record/pending-record.actions';
+import { PendingRecordSelectors } from '../../../store/pending-record/pending-record.selectors';
+import { IStore } from '../../../store/store.interface';
 import { PendingRecords } from './pending-records.component';
-import { IPendingRecordsStateProps, IPendingRecordsDispatchProps } from './pending-records.props.interface';
+import { IPendingRecordsProps } from './pending-records.props.interface';
 
 const recordSelector = createSelector(
   PendingRecordSelectors.records,
@@ -21,12 +21,12 @@ const recordSelector = createSelector(
     })
 );
 
-const mapStateToProps = (state: IStore): IPendingRecordsStateProps => ({
+const mapStateToProps = (state: IStore): Pick<IPendingRecordsProps, 'categories' | 'records'> => ({
   categories: CategorySelectors.selectCategories(state),
   records: recordSelector(state),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch): IPendingRecordsDispatchProps => {
+const mapDispatchToProps = (dispatch: Dispatch): Pick<IPendingRecordsProps, 'updatePendingRecordCategory'> => {
   return {
     // deletePendingRecord: (recordId: string) => dispatch(PendingRecordActions.deletePendingRecord(recordId)),
     updatePendingRecordCategory: (recordId: string, categoryId: string) =>

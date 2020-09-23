@@ -1,4 +1,4 @@
-import { ParseType } from '../../store/pending-record/parse.type';
+import { ParseType } from '../../../store/pending-record/parse.type';
 
 export interface INewRecordsState {
   /**

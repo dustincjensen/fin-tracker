@@ -1,6 +1,6 @@
 import { Button, majorScale, Pane, FormField, Text } from 'evergreen-ui';
 import * as React from 'react';
-import { accountTypeLabels } from '../../utils/account.utils';
+import { accountTypeLabels } from '../../../utils/account.utils';
 import { IActionPendingRecordsProps } from './action-pending-records.props.interface';
 
 export const ActionPendingRecords = ({

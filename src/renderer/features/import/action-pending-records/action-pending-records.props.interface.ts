@@ -1,11 +1,7 @@
-import { AccountType } from '../../store/account/account.type';
-import { IRecord } from '../../store/record/record.interface';
+import { AccountType } from '../../../store/account/account.type';
+import { IRecord } from '../../../store/record/record.interface';
 
-export interface IActionPendingRecordsProps
-  extends IActionPendingRecordsStateProps,
-    IActionPendingRecordsDispatchProps {}
-
-export interface IActionPendingRecordsStateProps {
+export interface IActionPendingRecordsProps {
   /**
    * The name of the account.
    */
@@ -40,9 +36,7 @@ export interface IActionPendingRecordsStateProps {
    * The existing records of the account.
    */
   existingRecords: IRecord[];
-}
 
-export interface IActionPendingRecordsDispatchProps {
   /**
    * An action to call when the user accepts the imported records.
    */

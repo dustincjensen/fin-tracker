@@ -1,8 +1,8 @@
 import { Table } from 'evergreen-ui';
 import * as React from 'react';
-import { CategorySelect } from '../../components/category-select/category-select.component';
-import { formatDateFull } from '../../utils/date.util';
-import { createStaticWidthCell } from '../../utils/table.utils';
+import { CategorySelect } from '../../../components/category-select/category-select.component';
+import { formatDateFull } from '../../../utils/date.util';
+import { createStaticWidthCell } from '../../../utils/table.utils';
 import { IPendingRecordsProps } from './pending-records.props.interface';
 import './pending-records.module.scss';
 
