@@ -11,17 +11,17 @@ import {
 } from 'evergreen-ui';
 import * as React from 'react';
 import { CirclePicker } from 'react-color';
-import { ICategory } from '../../store/category/category.interface';
-import { newGuid } from '../../utils/guid.util';
+import { ICategory } from '../../../store/category/category.interface';
+import { newGuid } from '../../../utils/guid.util';
 import { IEditCategoryProps } from './edit-category.props.interface';
 
-export const EditCategory: React.FC<IEditCategoryProps> = ({
+export const EditCategory = ({
   close,
   saveCategory,
   saveButtonText,
   headerText,
   category,
-}) => {
+}: IEditCategoryProps) => {
   const [name, setName] = React.useState<string>(category?.name || '');
   const [color, setColor] = React.useState<string>(category?.color || '');
 

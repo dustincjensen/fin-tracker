@@ -1,17 +1,19 @@
 import { Dialog } from 'evergreen-ui';
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
+import { CategoryActions } from '../../../store/category/category.actions';
 import { IDeleteCategoryProps } from './delete-category.props.interface';
 
-export const DeleteCategoryDialog: React.FC<IDeleteCategoryProps> = props => {
-  const { category, onClose, onConfirm, deleteCategory } = props;
+export const DeleteCategoryDialog = ({ category, onClose }: IDeleteCategoryProps) => {
+  const dispatch = useDispatch();
 
   if (!category) {
     return null;
   }
 
   const confirm = () => {
-    deleteCategory(category);
-    onConfirm();
+    dispatch(CategoryActions.deleteCategory(category));
+    onClose();
   };
 
   return (

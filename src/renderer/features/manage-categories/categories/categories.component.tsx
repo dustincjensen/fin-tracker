@@ -1,12 +1,11 @@
 import { Table, Text, Pane, IconButton, Tooltip } from 'evergreen-ui';
 import * as React from 'react';
-import { ICategory } from '../../store/category/category.interface';
+import { ICategory } from '../../../store/category/category.interface';
+import { DeleteCategoryDialog } from '../delete-category/delete-category.dialog';
+import { EditCategoryContainer } from '../edit-category/edit-category.container';
 import { ICategoriesProps } from './categories.props.interface';
-import { DeleteCategoryDialog } from './delete-category.dialog';
-import { EditCategoryContainer } from './edit-category.container';
 
-export const Categories: React.FC<ICategoriesProps> = props => {
-  const { categories, deleteCategory } = props;
+export const Categories = ({ categories }: ICategoriesProps) => {
   const [categoryToDelete, setCategoryToDelete] = React.useState<ICategory>(null);
   const [isEditing, setIsEditing] = React.useState<string>(undefined);
 
@@ -58,30 +57,6 @@ export const Categories: React.FC<ICategoriesProps> = props => {
                       onClick={() => setCategoryToDelete(category)}
                     />
                   </Tooltip>
-
-                  {/* Use this is window width is too small? */}
-                  {/* <Popover position={Position.BOTTOM_RIGHT} content={({close}) => (
-                      <Menu>
-                        <Menu.Group>
-                          <Menu.Item icon="edit" onSelect={() => {
-                            setIsEditing(category.id);
-                            close();
-                          }}>Edit</Menu.Item>
-                        </Menu.Group>
-                        <Menu.Divider />
-                        <Menu.Group>
-                          <Menu.Item icon="trash" intent="danger" onSelect={
-                            () => {setCategoryToDelete(category); close();}
-                            }>
-                            Delete
-                          </Menu.Item>
-                        </Menu.Group>
-                      </Menu>
-                    )}>
-                      <Tooltip content="Options" hideDelay={0}>
-                      <IconButton icon='more' appearance="minimal" />
-                      </Tooltip>
-                    </Popover> */}
                 </Table.Cell>
               </Table.Row>
               {isEditing === category.id && (
@@ -97,8 +72,6 @@ export const Categories: React.FC<ICategoriesProps> = props => {
       <DeleteCategoryDialog
         category={categoryToDelete}
         onClose={() => setCategoryToDelete(null)}
-        onConfirm={() => setCategoryToDelete(null)}
-        deleteCategory={deleteCategory}
       />
     </Table>
   );

@@ -1,11 +1,6 @@
-import { ICategory } from '../../store/category/category.interface';
+import { ICategory } from '../../../store/category/category.interface';
 
-export interface IEditCategoryProps
-  extends IEditCategoryStateProps,
-    IEditCategoryDispatchProps,
-    IEditCategoryOwnProps {}
-
-export interface IEditCategoryStateProps {
+export interface IEditCategoryProps {
   /**
    * The optional text for the header.
    */
@@ -15,16 +10,12 @@ export interface IEditCategoryStateProps {
    * The text for the save button.
    */
   saveButtonText: string;
-}
 
-export interface IEditCategoryDispatchProps {
   /**
    * Action to save a category.
    */
   saveCategory: (category: ICategory) => void;
-}
 
-export interface IEditCategoryOwnProps {
   /**
    * The existing category if available.
    */
