@@ -16,6 +16,6 @@ export interface IPendingRecordsProps {
    * Action to update the pending record category.
    */
   updatePendingRecordCategory: (recordId: string, categoryId: string) => void;
-  
+
   // deletePendingRecord: (recordId: string) => void;
 }

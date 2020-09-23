@@ -8,9 +8,7 @@ import { IRecord } from '../../../store/record/record.interface';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
 import { ActionPendingRecords } from './action-pending-records.component';
-import {
-  IActionPendingRecordsProps,
-} from './action-pending-records.props.interface';
+import { IActionPendingRecordsProps } from './action-pending-records.props.interface';
 
 function mapStateToProps(state: IStore): Omit<IActionPendingRecordsProps, 'accept' | 'clear'> {
   const pendingRecords = PendingRecordSelectors.pendingRecords(state);
