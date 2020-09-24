@@ -1,5 +1,5 @@
-import { IRecord } from '../business/bank/record.interface';
-import { sortAndCalculateBalance } from '../business/bank/util';
+import { sortAndCalculateBalance } from '../business/util';
+import { IRecord } from '../interfaces/record.interface';
 
 export function mergeRecords(startingBalance: number, newRecords: IRecord[], existingRecords: IRecord[]) {
   const sortedWithBalances = sortAndCalculateBalance(startingBalance, newRecords, existingRecords);

@@ -1,7 +1,7 @@
 import * as fs from 'fs';
-import { IAutoCategory } from './auto-category.interface';
-import { newGuid } from './guid.util';
-import { IRecord } from './record.interface';
+import { IAutoCategory } from '../interfaces/auto-category.interface';
+import { IRecord } from '../interfaces/record.interface';
+import { newGuid } from '../utils/guid.util';
 
 const stringRemoveExtraneousSpaces = /\s{2,}/g;
 

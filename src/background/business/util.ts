@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { IRecord } from './record.interface';
+import { IRecord } from '../interfaces/record.interface';
 
 export function sortRecordsByDate(records: IRecord[]): IRecord[] {
   records.sort(sortByDate);

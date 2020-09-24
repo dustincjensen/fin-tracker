@@ -13,27 +13,6 @@ export class PendingRecordActions {
   public static DELETE_PENDING_RECORD = 'DELETE_PENDING_RECORD';
   public static UPDATE_PENDING_RECORD_CATEGORY = 'UPDATE_PENDING_RECORD_CATEGORY';
 
-  public static newScotiabankChequingFileSelected: ImportRecordsFunc = (
-    dispatch: Dispatch,
-    accountId: string,
-    filePath: string,
-    autoCategories: IAutoCategory[]
-  ) => sender(dispatch, 'IPC_NEW_SCOTIABANK_CHEQUING_RECORDS_SELECTED', accountId, filePath, autoCategories);
-
-  public static newScotiabankSavingsFileSelected: ImportRecordsFunc = (
-    dispatch: Dispatch,
-    accountId: string,
-    filePath: string,
-    autoCategories: IAutoCategory[]
-  ) => sender(dispatch, 'IPC_NEW_SCOTIABANK_SAVINGS_RECORDS_SELECTED', accountId, filePath, autoCategories);
-
-  public static newScotiabankVisaFileSelected: ImportRecordsFunc = (
-    dispatch: Dispatch,
-    accountId: string,
-    filePath: string,
-    autoCategories: IAutoCategory[]
-  ) => sender(dispatch, 'IPC_NEW_SCOTIABANK_VISA_RECORDS_SELECTED', accountId, filePath, autoCategories);
-
   public static newQuickenFileSelected: ImportRecordsFunc = (
     dispatch: Dispatch,
     accountId: string,
