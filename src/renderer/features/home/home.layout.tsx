@@ -2,12 +2,12 @@ import { useLocalStorage, writeStorage } from '@rehooks/local-storage';
 import { Pane, Heading, IconButton, Tooltip } from 'evergreen-ui';
 import * as React from 'react';
 import { ErrorBoundary } from '../../components/error-boundary/error-boundary.component';
-import { AccountSummariesContainer } from './account-summaries.container';
-import { CombinedCategorySummaryContainer } from './combined-category-summary.container';
-import { CombinedSummaryContainer } from './combined-summary.container';
-import { InstructionsContainer } from './instructions.container';
-import { OptionalDisplay } from './optional-display.component';
-import { IOptionalDisplayProps } from './optional-display.props.interface';
+import { AccountSummariesContainer } from './account-summaries/account-summaries.container';
+import { CombinedCategorySummaryContainer } from './combined-category-summary/combined-category-summary.container';
+import { CombinedSummaryContainer } from './combined-summary/combined-summary.container';
+import { InstructionsContainer } from './instructions/instructions.container';
+import { OptionalDisplay } from './optional-display/optional-display.component';
+import { IOptionalDisplayProps } from './optional-display/optional-display.props.interface';
 
 const homePageOrderLocalStorage = 'homePageOrder';
 const accountsSummaryTilesDisplayed = 'accountsSummaryTilesDisplayed';
