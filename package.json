@@ -13,7 +13,7 @@
     "prettier": "prettier --write src/**/*.{ts,tsx,js,jsx}",
     "eslint": "eslint src/**/*.{ts,tsx,js,jsx}",
     "eslint:fix": "eslint src/**/*.{ts,tsx,js,jsx} --fix",
-    "precommit": "npm run prettier && npm run eslint",
+    "precommit": "npm run prettier && npm run eslint && npm test",
     "make": "electron-forge make",
     "test": "jest",
     "test:dev": "jest --watch"

@@ -1,7 +1,7 @@
 import { remote } from 'electron';
 import { Pane, Text } from 'evergreen-ui';
 import * as React from 'react';
-import {NavLink} from '../../components/nav-link/nav-link.component';
+import { NavLink } from '../../components/nav-link/nav-link.component';
 import { AccountsSidebar } from '../accounts-sidebar/accounts-sidebar.component';
 
 const appVersion = remote.app.getVersion();

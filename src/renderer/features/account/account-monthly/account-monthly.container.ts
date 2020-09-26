@@ -7,10 +7,7 @@ import { AccountMonthly } from './account-monthly.component';
 import { IAccountMonthlyProps } from './account-monthly.props.interface';
 
 type StateProps = Pick<IAccountMonthlyProps, 'records' | 'categories'>;
-type DispatchProps = Pick<
-  IAccountMonthlyProps,
-  'updateCategory' | 'updateSplitRecordCategory'
->;
+type DispatchProps = Pick<IAccountMonthlyProps, 'updateCategory' | 'updateSplitRecordCategory'>;
 type OwnProps = Pick<IAccountMonthlyProps, 'accountId' | 'date' | 'stateSelector'>;
 
 const mapStateToProps = (state: IStore, ownProps: OwnProps): StateProps => {

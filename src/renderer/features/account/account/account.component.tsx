@@ -22,9 +22,9 @@ export const Account = ({ accountId, hasRecords, startingDate, monthAndYears }: 
   }
 
   return (
-    <Pane display='grid' gridTemplateColumns='auto 1fr' height="100%">
-      <Pane padding={10} borderRight="1px solid #DDD">
-        <MonthYearList monthAndYears={monthAndYears} startingDate={startingDate} setDate={setDate}/>
+    <Pane display='grid' gridTemplateColumns='auto 1fr' height='100%'>
+      <Pane padding={10} borderRight='1px solid #DDD'>
+        <MonthYearList monthAndYears={monthAndYears} startingDate={startingDate} setDate={setDate} />
       </Pane>
 
       <Pane padding={20} overflowX='hidden' overflowY='auto' className='scroll-bar-styled'>
