@@ -10,9 +10,9 @@ export interface IAccountProps {
   startingDate: string;
 
   /**
-   * The years of records we have for this account.
+   * The month and years of records we have for this account.
    */
-  years: string[];
+  monthAndYears: number[][];
 
   /**
    * The account to load.

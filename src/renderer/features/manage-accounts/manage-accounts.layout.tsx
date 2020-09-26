@@ -7,7 +7,7 @@ import { NewAccountContainer } from './new-account/new-account.container';
 export const ManageAccountLayout = () => {
   return (
     <ErrorBoundary>
-      <Pane display='grid'>
+      <Pane display='grid' padding={20}>
         <Pane marginBottom={20}>
           <NewAccountContainer />
         </Pane>

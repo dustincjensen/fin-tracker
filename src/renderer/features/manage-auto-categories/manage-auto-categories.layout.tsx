@@ -9,7 +9,7 @@ export const ManageAutoCategoriesLayout = () => {
 
   return (
     <ErrorBoundary>
-      <Pane display='grid'>
+      <Pane display='grid' padding={20}>
         <Pane marginBottom={10}>
           <AutoCategoriesFilter autoCategoryFilter={autoCategoryFilter} setAutoCategoryFilter={setAutoCategoryFilter} />
         </Pane>

@@ -14,7 +14,7 @@ export const ManageCategoryLayout = () => {
 
   return (
     <ErrorBoundary>
-      <Pane display='grid'>
+      <Pane display='grid' padding={20}>
         {showNewCategory && (
           <Pane marginBottom={20}>
             <NewCategoryContainer close={closeNewCategory} />
