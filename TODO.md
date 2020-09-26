@@ -5,15 +5,20 @@ Bugs
 
 Tasks
 =====
+- Refactor selectors
+- Add Tests
+- Improve account monthly header
+- Add total wealth graph on home page
 - Create regular backups
   - Let them access the folder where the backup/regular data is.
   - Restore a backup.
 - Improve importing to flag duplicate records on the account.
+- Add transactions manually.
 - Give each imported record an import id and associate the import id to the account
   - Provide a list of import id's and file names you imported for each account.
+- Delete imports in case of accident (keep history of imports to manage this).
 - Improve editing of accounts that have records imported already
-- Allow for archiving accounts
-- Home Page graphs covering multiple accounts
+- Allow for archiving accounts (closing accounts)
 - Sorting order accounts by user input? (https://github.com/clauderic/react-sortable-hoc perhaps?)
 - Error Boundary HOC?
   - Right now if one of the account views breaks, you can't visit another account until you
