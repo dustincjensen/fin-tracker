@@ -36,21 +36,6 @@ export interface IAccountMonthlyDispatchProps {
    * Function to update record with splits in state.
    */
   updateRecordWithSplits: (recordId: string, splitRecords: ISplitRecord[]) => void;
-
-  /**
-   * Function to delete split records from a record in state.
-   */
-  deleteRecordSplitRecords: (record: IRecord) => void;
-
-  /**
-   * Function to automatically categorize records with a matching description.
-   */
-  autoCategorizeRecords: (
-    autoCategoryId: string,
-    categoryId: string,
-    description: string,
-    overwriteExisting: boolean
-  ) => void;
 }
 
 export interface IAccountMonthlyOwnProps {

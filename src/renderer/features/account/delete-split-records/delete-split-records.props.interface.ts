@@ -7,17 +7,7 @@ export interface IDeleteSplitRecordsProps {
   record: IRecord;
 
   /**
-   * Action to perform when the modal is closed without confirming.
+   * Action to call when the modal closes.
    */
   onClose: () => void;
-
-  /**
-   * Action to perform when the modal is closed after confirming.
-   */
-  onConfirm: () => void;
-
-  /**
-   * Action to delete the split records from the record.
-   */
-  deleteRecordSplitRecords: (record: IRecord) => void;
 }

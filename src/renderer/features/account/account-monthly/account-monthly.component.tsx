@@ -19,8 +19,6 @@ export const AccountMonthly = ({
   updateCategory,
   updateSplitRecordCategory,
   updateRecordWithSplits,
-  deleteRecordSplitRecords,
-  autoCategorizeRecords,
 }: IAccountMonthlyProps) => {
   const [recordToDeleteFrom, setRecordToDeleteFrom] = React.useState<IRecord>(null);
   const [recordToAutoCategorize, setRecordToAutoCategorize] = React.useState<IRecord>(null);
@@ -150,19 +148,12 @@ export const AccountMonthly = ({
         })}
       </Table.Body>
 
-      <DeleteSplitRecordsDialog
-        record={recordToDeleteFrom}
-        onClose={() => setRecordToDeleteFrom(null)}
-        onConfirm={() => setRecordToDeleteFrom(null)}
-        deleteRecordSplitRecords={deleteRecordSplitRecords}
-      />
+      <DeleteSplitRecordsDialog record={recordToDeleteFrom} onClose={() => setRecordToDeleteFrom(null)} />
 
       <EditAutoCategoryDialog
         record={recordToAutoCategorize}
         categories={categories}
         onClose={() => setRecordToAutoCategorize(null)}
-        onConfirm={() => setRecordToAutoCategorize(null)}
-        autoCategorizeRecords={autoCategorizeRecords}
       />
     </Table>
   );

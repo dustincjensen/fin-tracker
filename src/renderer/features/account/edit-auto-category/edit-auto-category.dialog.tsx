@@ -1,20 +1,17 @@
 import { Dialog, FormField, majorScale, Alert, TextInputField, Switch } from 'evergreen-ui';
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
 import { ICategorySelectProps } from '../../../components/category-select/category-select.props.interface';
+import { RecordActions } from '../../../store/record/record.actions';
 import { newGuid } from '../../../utils/guid.util';
 import { isNullOrWhitespace } from '../../../utils/object.utils';
 import { IEditAutoCategoryProps } from './edit-auto-category.props.interface';
 
 type CategoryRecord = ICategorySelectProps['record'];
 
-export const EditAutoCategoryDialog = ({
-  record,
-  categories,
-  onClose,
-  onConfirm,
-  autoCategorizeRecords,
-}: IEditAutoCategoryProps) => {
+export const EditAutoCategoryDialog = ({ record, categories, onClose }: IEditAutoCategoryProps) => {
+  const dispatch = useDispatch();
   const [description, setDescription] = React.useState<string>('');
   const [descriptionError, setDescriptionError] = React.useState<string>('');
   const [categoryRecord, setCategoryRecord] = React.useState<CategoryRecord>({ id: undefined, category: undefined });
@@ -52,9 +49,17 @@ export const EditAutoCategoryDialog = ({
       return;
     }
 
-    autoCategorizeRecords(newGuid(), categoryRecord.category.id, description, overwriteExisting);
+    dispatch(
+      RecordActions.setRecordsAutoCategory(
+        record.accountId,
+        newGuid(),
+        categoryRecord.category.id,
+        description,
+        overwriteExisting
+      )
+    );
 
-    onConfirm();
+    onClose();
   };
 
   const updateCategory = (_: string, categoryId: string) => {

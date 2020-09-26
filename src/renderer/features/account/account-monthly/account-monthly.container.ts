@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { CategorySelectors } from '../../../store/category/category.selectors';
 import { RecordActions } from '../../../store/record/record.actions';
-import { IRecord } from '../../../store/record/record.interface';
 import { ISplitRecord } from '../../../store/record/split-record.interface';
 import { IStore } from '../../../store/store.interface';
 import { AccountMonthly } from './account-monthly.component';
@@ -43,16 +42,6 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: IAccountMonthlyOwnProp
       dispatch(RecordActions.setSplitRecordCategory(accountId, recordId, splitRecordId, categoryId)),
     updateRecordWithSplits: (recordId: string, splitRecords: ISplitRecord[]) =>
       dispatch(RecordActions.setSplitRecords(accountId, recordId, splitRecords)),
-    deleteRecordSplitRecords: (record: IRecord) => dispatch(RecordActions.deleteSplitRecords(accountId, record.id)),
-    autoCategorizeRecords: (
-      autoCategoryId: string,
-      categoryId: string,
-      description: string,
-      overWriteExisting: boolean
-    ) =>
-      dispatch(
-        RecordActions.setRecordsAutoCategory(accountId, autoCategoryId, categoryId, description, overWriteExisting)
-      ),
   };
 };
 

@@ -13,22 +13,7 @@ export interface IEditAutoCategoryProps {
   categories: Array<ICategory>;
 
   /**
-   * Action to perform when the modal is closed without confirming.
+   * Action to call when the modal closes.
    */
   onClose: () => void;
-
-  /**
-   * Action to perform when the modal is closed after confirming.
-   */
-  onConfirm: () => void;
-
-  /**
-   * Action to set up the auto categorization.
-   */
-  autoCategorizeRecords: (
-    autoCategoryId: string,
-    categoryId: string,
-    description: string,
-    overwriteExisting: boolean
-  ) => void;
 }
