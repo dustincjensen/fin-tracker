@@ -1,6 +1,4 @@
-export interface IAccountProps extends IAccountStateProps, IAccountOwnProps {}
-
-export interface IAccountStateProps {
+export interface IAccountProps {
   /**
    * Whether or not the account has records.
    */
@@ -15,9 +13,7 @@ export interface IAccountStateProps {
    * The years of records we have for this account.
    */
   years: string[];
-}
 
-export interface IAccountOwnProps {
   /**
    * The account to load.
    */

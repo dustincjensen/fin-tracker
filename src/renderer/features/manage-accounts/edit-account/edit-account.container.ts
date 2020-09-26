@@ -7,10 +7,11 @@ import { IStore } from '../../../store/store.interface';
 import { EditAccount } from './edit-account.component';
 import { IEditAccountProps } from './edit-account.props.interface';
 
-const mapStateToProps = (
-  state: IStore,
-  ownProps: Pick<IEditAccountProps, 'account'>
-): Pick<IEditAccountProps, 'saveButtonText' | 'canEditComplexFields'> => {
+type StateProps = Pick<IEditAccountProps, 'saveButtonText' | 'canEditComplexFields'>;
+type DispatchProps = Pick<IEditAccountProps, 'saveAccount'>;
+type OwnProps = Pick<IEditAccountProps, 'account'>;
+
+const mapStateToProps = (state: IStore, ownProps: OwnProps): StateProps => {
   const records = RecordSelectors.recordsByAccountId(state, ownProps.account.id);
   return {
     saveButtonText: 'Update Account',
@@ -18,7 +19,7 @@ const mapStateToProps = (
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): Pick<IEditAccountProps, 'saveAccount'> => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   saveAccount: (account: IAccount) => dispatch(AccountActions.updateAccount(account)),
 });
 

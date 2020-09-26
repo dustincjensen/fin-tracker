@@ -5,11 +5,14 @@ import { ICategory } from '../../../store/category/category.interface';
 import { EditCategory } from './edit-category.component';
 import { IEditCategoryProps } from './edit-category.props.interface';
 
-const mapStateToProps = (): Pick<IEditCategoryProps, 'saveButtonText'> => ({
+type StateProps = Pick<IEditCategoryProps, 'saveButtonText'>;
+type DispatchProps = Pick<IEditCategoryProps, 'saveCategory'>;
+
+const mapStateToProps = (): StateProps => ({
   saveButtonText: 'Update Category',
 });
 
-const mapDispatchToProps = (dispatch: Dispatch): Pick<IEditCategoryProps, 'saveCategory'> => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   saveCategory: (category: ICategory) => dispatch(CategoryActions.updateCategory(category)),
 });
 

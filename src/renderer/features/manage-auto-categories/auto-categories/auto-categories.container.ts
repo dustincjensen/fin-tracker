@@ -9,6 +9,9 @@ import { IStore } from '../../../store/store.interface';
 import { AutoCategories } from './auto-categories.component';
 import { IAutoCategoriesProps } from './auto-categories.props.interface';
 
+type StateProps = Pick<IAutoCategoriesProps, 'autoCategories'>;
+type OwnProps = Pick<IAutoCategoriesProps, 'autoCategoryFilter'>;
+
 const autoCategorySelector = createSelector(
   CategorySelectors.selectCategories,
   AccountSelectors.selectAccountNames,
@@ -43,10 +46,7 @@ const autoCategorySelector = createSelector(
   }
 );
 
-const mapStateToProps = (
-  state: IStore,
-  { autoCategoryFilter }: Pick<IAutoCategoriesProps, 'autoCategoryFilter'>
-): Pick<IAutoCategoriesProps, 'autoCategories'> => {
+const mapStateToProps = (state: IStore, { autoCategoryFilter }: OwnProps): StateProps => {
   const autoCategories = autoCategorySelector(state);
 
   const filteredAutoCategories =

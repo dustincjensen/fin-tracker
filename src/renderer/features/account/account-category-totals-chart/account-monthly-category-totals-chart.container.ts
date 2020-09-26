@@ -1,21 +1,16 @@
 import { connect } from 'react-redux';
 import { CategorySelectors } from '../../../store/category/category.selectors';
-import { IRecord } from '../../../store/record/record.interface';
 import { IStore } from '../../../store/store.interface';
 import { AccountCategoryTotalsChart } from './account-category-totals-chart.component';
+import { IAccountCategoryTotalsChartProps } from './account-category-totals-chart.props.interface';
 
-interface IAccountMonthlyOwnProps {
-  accountId: string;
-  date: string;
-  stateSelector: (state: IStore, accountId: string, date: string) => IRecord[];
-}
+type StateProps = Pick<IAccountCategoryTotalsChartProps, 'records' | 'categories'>;
+type OwnProps = Pick<IAccountCategoryTotalsChartProps, 'stateSelector' | 'accountId' | 'date'>;
 
-const mapStateToProps = (state: IStore, ownProps: IAccountMonthlyOwnProps) => {
-  const records = ownProps.stateSelector(state, ownProps.accountId, ownProps.date);
-  const categories = CategorySelectors.selectCategories(state);
+const mapStateToProps = (state: IStore, { stateSelector, accountId, date }: OwnProps): StateProps => {
   return {
-    records,
-    categories,
+    records: stateSelector(state, accountId, date),
+    categories: CategorySelectors.selectCategories(state),
   };
 };
 

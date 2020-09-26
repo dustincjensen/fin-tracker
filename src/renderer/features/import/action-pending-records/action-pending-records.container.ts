@@ -10,7 +10,10 @@ import { IStore } from '../../../store/store.interface';
 import { ActionPendingRecords } from './action-pending-records.component';
 import { IActionPendingRecordsProps } from './action-pending-records.props.interface';
 
-function mapStateToProps(state: IStore): Omit<IActionPendingRecordsProps, 'accept' | 'clear'> {
+type StateProps = Omit<IActionPendingRecordsProps, 'accept' | 'clear'>;
+type DispatchProps = Pick<IActionPendingRecordsProps, 'accept' | 'clear'>;
+
+const mapStateToProps = (state: IStore): StateProps => {
   const pendingRecords = PendingRecordSelectors.pendingRecords(state);
   const account = AccountSelectors.account(state, pendingRecords?.accountId);
   return {
@@ -22,14 +25,14 @@ function mapStateToProps(state: IStore): Omit<IActionPendingRecordsProps, 'accep
     newRecords: pendingRecords?.records,
     existingRecords: RecordSelectors.recordsByAccountId(state, pendingRecords?.accountId),
   };
-}
+};
 
-function mapDispatchToProps(dispatch: Dispatch): Pick<IActionPendingRecordsProps, 'accept' | 'clear'> {
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
   return {
     accept: (startingBalance: number, newRecords: IRecord[], existingRecords: IRecord[]) =>
       RecordActions.pendingRecordsMerged(dispatch, startingBalance, newRecords, existingRecords),
     clear: () => dispatch(PendingRecordActions.clearImportedRecords()),
   };
-}
+};
 
 export const ActionPendingRecordsContainer = connect(mapStateToProps, mapDispatchToProps)(ActionPendingRecords);

@@ -8,6 +8,9 @@ import { IStore } from '../../../store/store.interface';
 import { PendingRecords } from './pending-records.component';
 import { IPendingRecordsProps } from './pending-records.props.interface';
 
+type StateProps = Pick<IPendingRecordsProps, 'categories' | 'records'>;
+type DispatchProps = Pick<IPendingRecordsProps, 'updatePendingRecordCategory'>;
+
 const recordSelector = createSelector(
   PendingRecordSelectors.records,
   CategorySelectors.selectCategories,
@@ -21,12 +24,12 @@ const recordSelector = createSelector(
     })
 );
 
-const mapStateToProps = (state: IStore): Pick<IPendingRecordsProps, 'categories' | 'records'> => ({
+const mapStateToProps = (state: IStore): StateProps => ({
   categories: CategorySelectors.selectCategories(state),
   records: recordSelector(state),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch): Pick<IPendingRecordsProps, 'updatePendingRecordCategory'> => {
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
   return {
     // deletePendingRecord: (recordId: string) => dispatch(PendingRecordActions.deletePendingRecord(recordId)),
     updatePendingRecordCategory: (recordId: string, categoryId: string) =>

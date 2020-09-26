@@ -4,10 +4,10 @@ import { IStore } from '../../../store/store.interface';
 import { Categories } from './categories.component';
 import { ICategoriesProps } from './categories.props.interface';
 
-const mapStateToProps = (
-  state: IStore,
-  { categoryFilter }: Pick<ICategoriesProps, 'categoryFilter'>
-): Pick<ICategoriesProps, 'categories'> => {
+type StateProps = Pick<ICategoriesProps, 'categories'>;
+type OwnProps = Pick<ICategoriesProps, 'categoryFilter'>;
+
+const mapStateToProps = (state: IStore, { categoryFilter }: OwnProps): StateProps => {
   const categories = CategorySelectors.selectCategories(state);
 
   const filteredCategories =

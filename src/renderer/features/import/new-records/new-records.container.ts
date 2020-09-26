@@ -12,13 +12,16 @@ import { IStore } from '../../../store/store.interface';
 import { NewRecords } from './new-records.component';
 import { INewRecordsProps } from './new-records.props.interface';
 
-const mapStateToProps = (state: IStore): Pick<INewRecordsProps, 'accounts' | 'autoCategories' | 'error'> => ({
+type StateProps = Pick<INewRecordsProps, 'accounts' | 'autoCategories' | 'error'>;
+type DispatchProps = Pick<INewRecordsProps, 'importAction'>;
+
+const mapStateToProps = (state: IStore): StateProps => ({
   accounts: AccountSelectors.selectAccounts(state),
   autoCategories: AutoCategorySelectors.autoCategories(state),
   error: PendingRecordSelectors.error(state),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch): Pick<INewRecordsProps, 'importAction'> => {
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
   return {
     importAction: (account: IAccount, autoCategories: IAutoCategory[], file, parseType: ParseType) => {
       dispatch(PendingRecordActions.clearError());

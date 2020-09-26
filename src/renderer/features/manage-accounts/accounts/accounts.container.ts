@@ -4,7 +4,9 @@ import { IStore } from '../../../store/store.interface';
 import { Accounts } from './accounts.component';
 import { IAccountProps } from './accounts.props.interface';
 
-const mapStateToProps = (state: IStore): Pick<IAccountProps, 'accounts'> => ({
+type StateProps = IAccountProps;
+
+const mapStateToProps = (state: IStore): StateProps => ({
   accounts: AccountSelectors.selectAccounts(state),
 });
 

@@ -15,6 +15,8 @@ import { isNullOrUndefined } from '../../../utils/object.utils';
 import { CombinedSummary } from './combined-summary.component';
 import { ICombinedSummaryProps } from './combined-summary.props.interface';
 
+type StateProps = ICombinedSummaryProps;
+
 const displayMonthDates = createSelector(AccountSelectors.accounts, RecordSelectors.records, (accounts, records) => {
   const startingDates = Object.keys(accounts).map(id => {
     const { startYear, startMonth } = accounts[id];
@@ -76,16 +78,12 @@ const selectAccountBalances = (query: (date: string, date2: string) => boolean, 
 const selectMonthBalances = selectAccountBalances((date1, date2) => isInYearMonth(date1, date2), displayMonthDates);
 const selectYearBalances = selectAccountBalances((date1, date2) => isInYear(date1, `${date2}-01-01`), displayYearDates);
 
-function mapStateToProps(state: IStore): ICombinedSummaryProps {
-  const selectedAccounts = AccountSelectors.selectAccountNames(state);
-  const endMonthBalances = selectMonthBalances(state);
-  const endYearBalances = selectYearBalances(state);
-
+const mapStateToProps = (state: IStore): StateProps => {
   return {
-    accounts: selectedAccounts,
-    endMonthBalances,
-    endYearBalances,
+    accounts: AccountSelectors.selectAccountNames(state),
+    endMonthBalances: selectMonthBalances(state),
+    endYearBalances: selectYearBalances(state),
   };
-}
+};
 
 export const CombinedSummaryContainer = connect(mapStateToProps)(CombinedSummary);

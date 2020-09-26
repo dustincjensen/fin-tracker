@@ -2,18 +2,12 @@ import { connect } from 'react-redux';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
 import { AccountMonthsComparison } from './account-months-comparison.component';
-import { IAccountMonthsComparisonStateProps } from './account-months-comparison.component.interface';
+import { IAccountMonthsComparisonProps } from './account-months-comparison.props.interface';
 
-interface IAccountMonthsComparisonOwnProps {
-  accountId: string;
-  date: string;
-}
+type StateProps = Pick<IAccountMonthsComparisonProps, 'previousMonthEndBalance' | 'currentMonthEndBalance'>;
+type OwnProps = Pick<IAccountMonthsComparisonProps, 'accountId' | 'date'>;
 
-const mapStateToProps = (
-  state: IStore,
-  ownProps: IAccountMonthsComparisonOwnProps
-): IAccountMonthsComparisonStateProps => {
-  const { accountId, date } = ownProps;
+const mapStateToProps = (state: IStore, { accountId, date }: OwnProps): StateProps => {
   const previousMonthEndBalance = RecordSelectors.previousMonthEndBalance(state, accountId, date);
   const currentMonthEndBalance = RecordSelectors.currentMonthEndBalance(state, accountId, date);
   return {

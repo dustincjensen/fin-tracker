@@ -1,17 +1,14 @@
 import { connect } from 'react-redux';
-import { IRecord } from '../../../store/record/record.interface';
 import { IStore } from '../../../store/store.interface';
 import { formatDate } from '../../../utils/date.util';
 import { AccountBalanceLineChart } from './account-balance-line-chart.component';
+import { IAccountBalanceLineChartProps } from './account-balance-line-chart.props.interface';
 
-interface IAccountMonthlyOwnProps {
-  accountId: string;
-  date: string;
-  stateSelector: (state: IStore, accountId: string, date: string) => IRecord[];
-}
+type StateProps = Pick<IAccountBalanceLineChartProps, 'records'>;
+type OwnProps = Pick<IAccountBalanceLineChartProps, 'stateSelector' | 'accountId' | 'date'>;
 
-const mapStateToProps = (state: IStore, ownProps: IAccountMonthlyOwnProps) => {
-  const records = ownProps.stateSelector(state, ownProps.accountId, ownProps.date);
+const mapStateToProps = (state: IStore, { stateSelector, accountId, date }: OwnProps): StateProps => {
+  const records = stateSelector(state, accountId, date);
   return {
     records: records?.map(r => ({ ...r, date: formatDate(r.date) })),
   };

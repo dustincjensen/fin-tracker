@@ -4,12 +4,7 @@ import { ISplitRecord } from '../../../store/record/split-record.interface';
 import { IStore } from '../../../store/store.interface';
 import { RecordType } from '../record.type';
 
-export interface IAccountMonthlyProps
-  extends IAccountMonthlyStateProps,
-    IAccountMonthlyDispatchProps,
-    IAccountMonthlyOwnProps {}
-
-export interface IAccountMonthlyStateProps {
+export interface IAccountMonthlyProps {
   /**
    * The records to display.
    */
@@ -19,9 +14,7 @@ export interface IAccountMonthlyStateProps {
    * The list of categories to choose from for each record.
    */
   categories: Array<ICategory>;
-}
 
-export interface IAccountMonthlyDispatchProps {
   /**
    * Function to update a category in state.
    */
@@ -36,9 +29,7 @@ export interface IAccountMonthlyDispatchProps {
    * Function to update record with splits in state.
    */
   updateRecordWithSplits: (recordId: string, splitRecords: ISplitRecord[]) => void;
-}
 
-export interface IAccountMonthlyOwnProps {
   /**
    * The ID of the account to display.
    */
@@ -51,7 +42,7 @@ export interface IAccountMonthlyOwnProps {
 
   /**
    * A selector to access the store to get the data
-   * for that specified month and account.
+   * for the specified month and account.
    */
   stateSelector: (state: IStore, accountId: string, date: string) => IRecord[];
 }

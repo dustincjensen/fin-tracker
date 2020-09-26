@@ -3,10 +3,12 @@ import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
 import { getYearFromDate, stringToString } from '../../../utils/date.util';
 import { Account } from './account.component';
-import { IAccountStateProps, IAccountOwnProps } from './account.props.interface';
+import { IAccountProps } from './account.props.interface';
 
-function mapStateToProps(state: IStore, ownProps: IAccountOwnProps): IAccountStateProps {
-  const { accountId } = ownProps;
+type StateProps = Pick<IAccountProps, 'hasRecords' | 'startingDate' | 'years'>;
+type OwnProps = Pick<IAccountProps, 'accountId'>;
+
+const mapStateToProps = (state: IStore, { accountId }: OwnProps): StateProps => {
   const records = RecordSelectors.recordsByAccountId(state, accountId);
   const years = Array.from(new Set(records?.map(r => getYearFromDate(r.date).toString())));
 
@@ -17,6 +19,6 @@ function mapStateToProps(state: IStore, ownProps: IAccountOwnProps): IAccountSta
     startingDate: newestTransactionDate ? stringToString(newestTransactionDate) : undefined,
     years,
   };
-}
+};
 
 export const AccountContainer = connect(mapStateToProps)(Account);

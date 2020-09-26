@@ -5,16 +5,20 @@ import { RecordActions } from '../../../store/record/record.actions';
 import { ISplitRecord } from '../../../store/record/split-record.interface';
 import { IStore } from '../../../store/store.interface';
 import { AccountMonthly } from './account-monthly.component';
-import {
-  IAccountMonthlyOwnProps,
-  IAccountMonthlyStateProps,
-  IAccountMonthlyDispatchProps,
-} from './account-monthly.props.interface';
+import { IAccountMonthlyProps } from './account-monthly.props.interface';
 
-const mapStateToProps = (state: IStore, ownProps: IAccountMonthlyOwnProps): IAccountMonthlyStateProps => {
+type StateProps = Pick<IAccountMonthlyProps, 'records' | 'categories'>;
+type DispatchProps = Pick<
+  IAccountMonthlyProps,
+  'updateCategory' | 'updateRecordWithSplits' | 'updateSplitRecordCategory'
+>;
+type OwnProps = Pick<IAccountMonthlyProps, 'accountId' | 'date' | 'stateSelector'>;
+
+const mapStateToProps = (state: IStore, ownProps: OwnProps): StateProps => {
+  const { stateSelector, accountId, date } = ownProps;
   const categories = CategorySelectors.selectCategories(state);
 
-  const records = ownProps.stateSelector(state, ownProps.accountId, ownProps.date)?.map(record => {
+  const records = stateSelector(state, accountId, date)?.map(record => {
     return {
       ...record,
       category: categories.find(c => c.id === record.categoryId),
@@ -33,7 +37,7 @@ const mapStateToProps = (state: IStore, ownProps: IAccountMonthlyOwnProps): IAcc
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch, ownProps: IAccountMonthlyOwnProps): IAccountMonthlyDispatchProps => {
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps): DispatchProps => {
   const { accountId } = ownProps;
   return {
     updateCategory: (recordId: string, categoryId: string) =>

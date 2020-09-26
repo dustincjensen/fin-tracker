@@ -5,12 +5,15 @@ import { ICategory } from '../../../store/category/category.interface';
 import { EditCategory } from '../edit-category/edit-category.component';
 import { IEditCategoryProps } from '../edit-category/edit-category.props.interface';
 
-const mapStateToProps = (): Pick<IEditCategoryProps, 'headerText' | 'saveButtonText'> => ({
+type StateProps = Pick<IEditCategoryProps, 'headerText' | 'saveButtonText'>;
+type DispatchProps = Pick<IEditCategoryProps, 'saveCategory'>;
+
+const mapStateToProps = (): StateProps => ({
   headerText: 'New Category',
   saveButtonText: 'Save Category',
 });
 
-const mapDispatchToProps = (dispatch: Dispatch): Pick<IEditCategoryProps, 'saveCategory'> => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   saveCategory: (category: ICategory) => dispatch(CategoryActions.saveNewCategory(category)),
 });
 

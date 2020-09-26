@@ -9,6 +9,8 @@ import { formatDateFull } from '../../../utils/date.util';
 import { AccountSummaries } from './account-summaries.component';
 import { IAccountSummariesProps } from './account-summaries.props.interface';
 
+type StateProps = IAccountSummariesProps;
+
 const accountSummarySelector = createSelector(AccountSelectors.accounts, RecordSelectors.records, (accounts, records) =>
   Object.keys(accounts).map(id => {
     const account = accounts[id];
@@ -24,8 +26,8 @@ const accountSummarySelector = createSelector(AccountSelectors.accounts, RecordS
   })
 );
 
-function mapStateToProps(state: IStore): IAccountSummariesProps {
+const mapStateToProps = (state: IStore): StateProps => {
   return { accounts: accountSummarySelector(state) };
-}
+};
 
 export const AccountSummariesContainer = connect(mapStateToProps)(AccountSummaries);

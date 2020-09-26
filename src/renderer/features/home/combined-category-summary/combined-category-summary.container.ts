@@ -9,6 +9,8 @@ import { allMonthsBetweenDates, getEarliestDate, getLatestDate, isInYearMonth } 
 import { CombinedCategorySummary } from './combined-category-summary.component';
 import { ICombinedCategorySummaryProps } from './combined-category-summary.props.interface';
 
+type StateProps = ICombinedCategorySummaryProps;
+
 const selectAccounts = createSelector(AccountSelectors.accounts, accounts =>
   Object.keys(accounts).map(id => {
     return {
@@ -83,12 +85,11 @@ const selectCategoryTotalsByMonth = categorySummarySelector(
   displayMonthDates
 );
 
-function mapStateToProps(state: IStore): ICombinedCategorySummaryProps {
-  const categoryTotalsByMonth = selectCategoryTotalsByMonth(state);
+const mapStateToProps = (state: IStore): StateProps => {
   return {
     categories: CategorySelectors.selectCategories(state),
-    categoryTotalsByMonth,
+    categoryTotalsByMonth: selectCategoryTotalsByMonth(state),
   };
-}
+};
 
 export const CombinedCategorySummaryContainer = connect(mapStateToProps)(CombinedCategorySummary);
