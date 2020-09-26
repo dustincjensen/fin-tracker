@@ -5,7 +5,8 @@
     "lib": [
       "ES2015",
       "DOM"
-    ]
+    ],
+    "jsx": "react"
   },
   "exclude": [
     "src/renderer",
