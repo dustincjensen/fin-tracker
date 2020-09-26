@@ -1,23 +1,9 @@
 import * as path from 'path';
-import { IAutoCategory } from '../business/bank/auto-category.interface';
-import { parse as qfxParse } from '../business/bank/qfx';
-import { parse as quickenParse } from '../business/bank/quicken';
-import { IRecord } from '../business/bank/record.interface';
-import { parse as chequingParse, parse as savingsParse } from '../business/bank/scotiabank/chequing';
-import { parse as visaParse } from '../business/bank/scotiabank/visa';
-import { sortRecordsByDate } from '../business/bank/util';
-
-export function parseScotiabankChequingToRecords(accountId: string, filePath: string, autoCategories: IAutoCategory[]) {
-  return parse(chequingParse, accountId, filePath, autoCategories);
-}
-
-export function parseScotiabankSavingsToRecords(accountId: string, filePath: string, autoCategories: IAutoCategory[]) {
-  return parse(savingsParse, accountId, filePath, autoCategories);
-}
-
-export function parseScotiabankVisaToRecords(accountId: string, filePath: string, autoCategories: IAutoCategory[]) {
-  return parse(visaParse, accountId, filePath, autoCategories);
-}
+import { parse as qfxParse } from '../business/qfx';
+import { parse as quickenParse } from '../business/quicken';
+import { sortRecordsByDate } from '../business/util';
+import { IAutoCategory } from '../interfaces/auto-category.interface';
+import { IRecord } from '../interfaces/record.interface';
 
 export function parseQuickenToRecords(
   accountId: string,

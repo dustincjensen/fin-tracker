@@ -1,9 +1,10 @@
 import { shell } from 'electron';
 import { Pane, Heading, Icon, majorScale, Paragraph, Button } from 'evergreen-ui';
 import * as React from 'react';
-import { IErrorBoundaryState } from './error-boundary.state.interface';
 
-export class ErrorBoundary extends React.Component<{}, IErrorBoundaryState> {
+type ErrorBoundaryState = {hasError: boolean};
+
+export class ErrorBoundary extends React.Component<{}, ErrorBoundaryState> {
   constructor(props: {}) {
     super(props);
     this.state = {

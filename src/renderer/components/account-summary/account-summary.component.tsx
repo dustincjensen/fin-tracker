@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import { isNullOrUndefined } from '../../utils/object.utils';
 import { IAccountSummaryProps } from './account-summary.props.interface';
 
-export const AccountSummary: React.FC<IAccountSummaryProps> = props => {
-  const { accountId, iconName, balance, name, dateOfLastTransaction } = props;
+export const AccountSummary = ({ accountId, iconName, balance, name, dateOfLastTransaction }: IAccountSummaryProps) => {
   return (
     <Card
       elevation={1}

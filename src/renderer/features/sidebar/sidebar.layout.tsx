@@ -1,35 +1,23 @@
 import { remote } from 'electron';
-import { Button, Pane, Text } from 'evergreen-ui';
+import { Pane, Text } from 'evergreen-ui';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { AccountsSidebarLayout } from '../accounts-sidebar/accounts-sidebar.layout';
+import {NavLink} from '../../components/nav-link/nav-link.component';
+import { AccountsSidebar } from '../accounts-sidebar/accounts-sidebar.component';
 
 const appVersion = remote.app.getVersion();
 
-export class SidebarLayout extends React.Component {
-  render() {
-    return (
-      <Pane background='tint1' display='grid' gridTemplateRows='auto 1fr auto auto auto' padding={20} borderRight>
-        <Button is={Link} appearance='minimal' to='/' iconBefore='home'>
-          Home
-        </Button>
-        <AccountsSidebarLayout />
-        <Button is={Link} appearance='minimal' to='/accounts' iconBefore='bank-account'>
-          Accounts
-        </Button>
-        <Button is={Link} appearance='minimal' to='/categories' iconBefore='group-objects'>
-          Categories
-        </Button>
-        <Button is={Link} appearance='minimal' to='/autoCategories' iconBefore='automatic-updates'>
-          Auto Categories
-        </Button>
-        <Button is={Link} appearance='minimal' to='/import' iconBefore='import'>
-          Import
-        </Button>
-        <Text paddingTop={20} size={300} textAlign='center'>
-          Version: {appVersion}
-        </Text>
-      </Pane>
-    );
-  }
-}
+export const SidebarLayout = () => {
+  return (
+    <Pane background='tint1' display='grid' gridTemplateRows='auto 1fr auto auto auto' padding={20} borderRight>
+      <NavLink to='/' iconBefore='home' text='Home' />
+      <AccountsSidebar />
+      <NavLink to='/accounts' iconBefore='bank-account' text='Accounts' />
+      <NavLink to='/categories' iconBefore='group-objects' text='Categories' />
+      <NavLink to='/autoCategories' iconBefore='automatic-updates' text='Auto Categories' />
+      <NavLink to='/import' iconBefore='import' text='Import' />
+      <Text paddingTop={20} size={300} textAlign='center'>
+        Version: {appVersion}
+      </Text>
+    </Pane>
+  );
+};

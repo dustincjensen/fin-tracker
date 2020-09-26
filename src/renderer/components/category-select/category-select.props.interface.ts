@@ -20,7 +20,7 @@ export interface ICategorySelectProps {
   updateCategory: (recordId: string, categoryId: string) => void;
 
   /**
-   * If true, the button selector will be disabled.
+   * If true, the button will be disabled.
    */
   disabled?: boolean;
 }
