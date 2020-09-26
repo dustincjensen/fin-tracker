@@ -18,7 +18,6 @@ export const AccountMonthly = ({
   categories,
   updateCategory,
   updateSplitRecordCategory,
-  updateRecordWithSplits,
 }: IAccountMonthlyProps) => {
   const [recordToDeleteFrom, setRecordToDeleteFrom] = React.useState<IRecord>(null);
   const [recordToAutoCategorize, setRecordToAutoCategorize] = React.useState<IRecord>(null);
@@ -129,8 +128,7 @@ export const AccountMonthly = ({
                   <EditSplitRecords
                     record={record}
                     categories={categories}
-                    updateRecordWithSplits={updateRecordWithSplits}
-                    close={() => setIsSplittingTransaction(undefined)}
+                    onClose={() => setIsSplittingTransaction(undefined)}
                   />
                 </Pane>
               )}

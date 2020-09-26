@@ -1,6 +1,8 @@
 import { Pane, Button, majorScale, InlineAlert, Table, TextInput, IconButton, Icon, Strong } from 'evergreen-ui';
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
+import { RecordActions } from '../../../store/record/record.actions';
 import { round } from '../../../utils/currency.util';
 import { newGuid } from '../../../utils/guid.util';
 import { isNullOrWhitespace } from '../../../utils/object.utils';
@@ -28,7 +30,8 @@ function getCreditTotal(splitRecords: SplitRecordType[]): number {
   return getTotal(splitRecords, (value: SplitRecordType) => value.credit);
 }
 
-export const EditSplitRecords = ({ record, categories, updateRecordWithSplits, close }: IEditSplitRecordsProps) => {
+export const EditSplitRecords = ({ record, categories, onClose }: IEditSplitRecordsProps) => {
+  const dispatch = useDispatch();
   const [splitRecords, setSplitRecords] = React.useState<SplitRecordType[]>(
     record?.splitRecords || [createSplitRecord(), createSplitRecord()]
   );
@@ -58,8 +61,8 @@ export const EditSplitRecords = ({ record, categories, updateRecordWithSplits, c
     setErrors(newErrors);
 
     if (newErrors.length === 0) {
-      updateRecordWithSplits(record.id, splitRecords);
-      close();
+      dispatch(RecordActions.setSplitRecords(record.accountId, record.id, splitRecords));
+      onClose();
     }
   };
 
@@ -220,7 +223,7 @@ export const EditSplitRecords = ({ record, categories, updateRecordWithSplits, c
           marginRight={20}
           paddingTop={10}
         >
-          <Button type='button' iconBefore='ban-circle' height={majorScale(5)} marginRight={10} onClick={close}>
+          <Button type='button' iconBefore='ban-circle' height={majorScale(5)} marginRight={10} onClick={onClose}>
             Cancel
           </Button>
           <Button appearance='primary' iconBefore='floppy-disk' height={majorScale(5)}>

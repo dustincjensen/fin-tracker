@@ -1,5 +1,4 @@
 import { ICategory } from '../../../store/category/category.interface';
-import { ISplitRecord } from '../../../store/record/split-record.interface';
 import { RecordType } from '../record.type';
 
 export interface IEditSplitRecordsProps {
@@ -14,12 +13,7 @@ export interface IEditSplitRecordsProps {
   categories: Array<ICategory>;
 
   /**
-   * Function to update a record with split records.
-   */
-  updateRecordWithSplits: (recordId: string, splitRecords: ISplitRecord[]) => void;
-
-  /**
    * Function to close the edit split record section.
    */
-  close: () => void;
+  onClose: () => void;
 }
