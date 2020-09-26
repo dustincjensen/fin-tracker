@@ -4,7 +4,7 @@ import { ErrorBoundary } from '../../components/error-boundary/error-boundary.co
 import { AutoCategoriesFilter } from './auto-categories-filter/auto-categories-filter.component';
 import { AutoCategoriesContainer } from './auto-categories/auto-categories.container';
 
-export const ManageAutoCategories = () => {
+export const ManageAutoCategoriesLayout = () => {
   const [autoCategoryFilter, setAutoCategoryFilter] = React.useState<string>('');
 
   return (

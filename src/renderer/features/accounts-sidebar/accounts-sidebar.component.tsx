@@ -1,7 +1,7 @@
 import { Pane } from 'evergreen-ui';
 import * as React from 'react';
 import { useSelector } from 'react-redux';
-import { AccountLink } from '../../components/account-link/account-link.component';
+import { NavLink } from '../../components/nav-link/nav-link.component';
 import { AccountSelectors } from '../../store/account/account.selectors';
 import { accountTypeIconNames } from '../../utils/account.utils';
 
@@ -12,7 +12,7 @@ export const AccountsSidebar = () => {
     <Pane display='flex' flexDirection='column'>
       {accounts.map(account => {
         const iconName = accountTypeIconNames[account.accountType];
-        return <AccountLink key={account.id} id={account.id} name={account.name} iconName={iconName} />;
+        return <NavLink key={account.id} to={`/account/${account.id}`} text={account.name} iconBefore={iconName} />;
       })}
     </Pane>
   );
