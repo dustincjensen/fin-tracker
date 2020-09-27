@@ -22,6 +22,11 @@ export interface IRecord {
   description: string;
 
   /**
+   * Custom details the user can add to explain the transaction in better detail.
+   */
+  details?: string;
+
+  /**
    * If this record needs to be split into multiple.
    */
   splitRecords?: ISplitRecord[];

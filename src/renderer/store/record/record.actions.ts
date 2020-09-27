@@ -6,6 +6,7 @@ import { ISplitRecord } from './split-record.interface';
 
 export class RecordActions {
   public static SAVE_NEW_RECORDS = 'SAVE_NEW_RECORDS';
+  public static SET_DETAILS = 'SET_DETAILS';
   public static SET_RECORD_CATEGORY = 'SET_RECORD_CATEGORY';
   public static SET_RECORD_AUTO_CATEGORY = 'SET_RECORD_AUTO_CATEGORY';
   public static SET_SPLIT_RECORD_CATEGORY = 'SET_SPLIT_RECORD_CATEGORY';
@@ -22,6 +23,15 @@ export class RecordActions {
   public static saveNewRecords = (records: IRecord[]) => ({
     type: RecordActions.SAVE_NEW_RECORDS,
     payload: records,
+  });
+
+  public static setDetails = (accountId: string, recordId: string, details: string) => ({
+    type: RecordActions.SET_DETAILS,
+    payload: {
+      accountId,
+      recordId,
+      details,
+    },
   });
 
   public static setRecordCategory = (accountId: string, recordId: string, categoryId: string) => ({

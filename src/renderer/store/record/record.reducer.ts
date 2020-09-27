@@ -14,6 +14,7 @@ const initialState: IRecordStore = { records: {} };
 export const RecordReducer = createDraftReducer(
   {
     [RecordActions.SAVE_NEW_RECORDS]: saveNewRecords,
+    [RecordActions.SET_DETAILS]: setDetails,
     [RecordActions.SET_RECORD_CATEGORY]: setRecordCategory,
     [RecordActions.SET_RECORD_AUTO_CATEGORY]: setRecordAutoCategory,
     [RecordActions.SET_SPLIT_RECORD_CATEGORY]: setSplitRecordCategory,
@@ -36,6 +37,18 @@ function saveNewRecords(draft: Draft<IRecordStore>, records: IRecord[]) {
     const accountId = records[0]?.accountId;
     draft.records[accountId] = records;
   }
+}
+
+/**
+ * Sets the details on a record.
+ *
+ * @param draft     The draft state.
+ * @param payload   The payload containing the account, record, and the details for the record.
+ */
+function setDetails(draft: Draft<IRecordStore>, payload: { accountId: string; recordId: string; details: string }) {
+  const { accountId, recordId, details } = payload;
+  const record = draft.records[accountId].find(record => record.id === recordId);
+  record.details = details;
 }
 
 /**
