@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
 import { RecordActions } from '../../../store/record/record.actions';
-import { round } from '../../../utils/currency.util';
+import { round } from '../../../utils/currency.utils';
 import { newGuid } from '../../../utils/guid.utils';
 import { isNullOrWhitespace } from '../../../utils/object.utils';
 import { createStaticWidthCell } from '../../../utils/table.utils';
