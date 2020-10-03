@@ -1,7 +1,7 @@
-import { shallow } from "enzyme";
+import { shallow } from 'enzyme';
 import * as React from 'react';
-import { AccountSummary } from "./account-summary.component";
-import { IAccountSummaryProps } from "./account-summary.props.interface";
+import { AccountSummary } from './account-summary.component';
+import { IAccountSummaryProps } from './account-summary.props.interface';
 
 describe('components', () => {
   describe('AccountSummary', () => {
@@ -13,7 +13,7 @@ describe('components', () => {
         balance: undefined,
         dateOfLastTransaction: undefined,
         iconName: 'bank-account',
-        name: 'Savings'
+        name: 'Savings',
       };
     });
 

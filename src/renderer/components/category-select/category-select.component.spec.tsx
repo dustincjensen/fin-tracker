@@ -1,9 +1,9 @@
-import { shallow } from "enzyme";
-import { SelectMenu } from "evergreen-ui";
+import { shallow } from 'enzyme';
+import { SelectMenu } from 'evergreen-ui';
 import * as React from 'react';
-import { CategoryTag } from "../category-tag/category-tag.component";
-import { CategorySelect } from "./category-select.component";
-import { ICategorySelectProps } from "./category-select.props.interface";
+import { CategoryTag } from '../category-tag/category-tag.component';
+import { CategorySelect } from './category-select.component';
+import { ICategorySelectProps } from './category-select.props.interface';
 
 describe('components', () => {
   describe('CategorySelect', () => {
@@ -15,15 +15,15 @@ describe('components', () => {
         updateCategory: jest.fn(),
         record: {
           id: 'id',
-          category: undefined
-        }
+          category: undefined,
+        },
       };
     });
 
     it('should render a SelectMenu when record has no category', () => {
       const record: ICategorySelectProps['record'] = {
         id: 'id',
-        category: undefined
+        category: undefined,
       };
       const component = shallow(<CategorySelect {...props} record={record} />);
       expect(component.find(SelectMenu).length).toBe(1);
@@ -35,8 +35,8 @@ describe('components', () => {
         category: {
           id: 'categoryId',
           color: '#333',
-          name: 'Grocery'
-        }
+          name: 'Grocery',
+        },
       };
       const component = shallow(<CategorySelect {...props} record={record} />);
       expect(component.find(CategoryTag).length).toBe(1);

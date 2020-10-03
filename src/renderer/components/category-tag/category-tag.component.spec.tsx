@@ -1,8 +1,8 @@
-import { shallow } from "enzyme";
-import { Button } from "evergreen-ui";
+import { shallow } from 'enzyme';
+import { Button } from 'evergreen-ui';
 import * as React from 'react';
-import { CategoryTag } from "./category-tag.component";
-import { ICategoryTagProps } from "./category-tag.props.interface";
+import { CategoryTag } from './category-tag.component';
+import { ICategoryTagProps } from './category-tag.props.interface';
 
 describe('components', () => {
   describe('CategoryTag', () => {
@@ -13,9 +13,9 @@ describe('components', () => {
         category: {
           id: 'categoryId',
           color: '#123456',
-          name: 'Grocery'
+          name: 'Grocery',
         },
-        onClear: jest.fn()
+        onClear: jest.fn(),
       };
     });
 
@@ -23,7 +23,7 @@ describe('components', () => {
       const category: ICategoryTagProps['category'] = {
         id: 'id',
         color: '#123456',
-        name: 'Grocery'
+        name: 'Grocery',
       };
       const component = shallow(<CategoryTag {...props} category={category} />);
       const paneBackground = component.find('[data-name="category-tag"]').props()['background'];
@@ -34,7 +34,7 @@ describe('components', () => {
       const category: ICategoryTagProps['category'] = {
         id: 'id',
         color: undefined,
-        name: 'Grocery'
+        name: 'Grocery',
       };
       const component = shallow(<CategoryTag {...props} category={category} />);
       const paneBackground = component.find('[data-name="category-tag"]').props()['background'];
