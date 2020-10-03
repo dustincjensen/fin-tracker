@@ -6,7 +6,8 @@
       "ES2015",
       "DOM"
     ],
-    "jsx": "react"
+    "jsx": "react",
+    "esModuleInterop": true
   },
   "exclude": [
     "src/renderer",

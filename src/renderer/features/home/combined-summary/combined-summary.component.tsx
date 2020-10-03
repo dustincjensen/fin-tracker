@@ -1,7 +1,7 @@
 import { Pane, Heading, IconButton, Text, Select } from 'evergreen-ui';
 import * as React from 'react';
 import { useWindowWidth } from '../../../hooks/use-window-width.hook';
-import { formatDateMonthYear } from '../../../utils/date.util';
+import { formatDateMonthYear } from '../../../utils/date.utils';
 import { isNullOrUndefined } from '../../../utils/object.utils';
 import { ICombinedSummaryProps } from './combined-summary.props.interface';
 

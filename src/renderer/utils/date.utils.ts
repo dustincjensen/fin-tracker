@@ -83,7 +83,7 @@ export function formatDate(date: string): string {
 }
 
 /**
- * Returns the date formatted as following 'June 16th, 2018'.
+ * Returns the date formatted as following 'June 16, 2018'.
  *
  * @param date  the date to be formatted.
  */

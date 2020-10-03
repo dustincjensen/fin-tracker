@@ -14,7 +14,7 @@ import * as React from 'react';
 import { IAccount } from '../../../store/account/account.interface';
 import { AccountType } from '../../../store/account/account.type';
 import { accountTypeNameValuePairs, accountTypeLabels } from '../../../utils/account.utils';
-import { monthValues, monthNamesLong } from '../../../utils/date.util';
+import { monthValues, monthNamesLong } from '../../../utils/date.utils';
 import { newGuid } from '../../../utils/guid.utils';
 import { IEditAccountProps } from './edit-account.props.interface';
 

@@ -10,7 +10,7 @@ import {
   isInYearMonth,
   allYearsBetweenDates,
   isInYear,
-} from '../../../utils/date.util';
+} from '../../../utils/date.utils';
 import { isNullOrUndefined } from '../../../utils/object.utils';
 import { CombinedSummary } from './combined-summary.component';
 import { ICombinedSummaryProps } from './combined-summary.props.interface';

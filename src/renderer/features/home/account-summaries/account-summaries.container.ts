@@ -5,7 +5,7 @@ import { AccountSelectors } from '../../../store/account/account.selectors';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
 import { accountTypeIconNames } from '../../../utils/account.utils';
-import { formatDateFull } from '../../../utils/date.util';
+import { formatDateFull } from '../../../utils/date.utils';
 import { AccountSummaries } from './account-summaries.component';
 import { IAccountSummariesProps } from './account-summaries.props.interface';
 

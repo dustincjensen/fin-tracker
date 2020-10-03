@@ -2,7 +2,7 @@ import { Table, Popover, Position, Menu, Pane, Tooltip, IconButton } from 'everg
 import * as React from 'react';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
 import { IRecord } from '../../../store/record/record.interface';
-import { formatDate } from '../../../utils/date.util';
+import { formatDate } from '../../../utils/date.utils';
 import { createStaticWidthCell } from '../../../utils/table.utils';
 import { DeleteSplitRecordsDialog } from '../delete-split-records/delete-split-records.dialog';
 import { EditAutoCategoryDialog } from '../edit-auto-category/edit-auto-category.dialog';

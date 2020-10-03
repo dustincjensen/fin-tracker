@@ -7,7 +7,7 @@ import {
   getLatestDate,
   getMonthAndYearFromDate,
   stringToString,
-} from '../../../utils/date.util';
+} from '../../../utils/date.utils';
 import { Account } from './account.component';
 import { IAccountProps } from './account.props.interface';
 
