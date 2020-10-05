@@ -41,8 +41,5 @@ describe('components', () => {
       const component = shallow(<CategorySelect {...props} record={record} />);
       expect(component.find(CategoryTag).length).toBe(1);
     });
-
-    // TODO test onClear
-    // TODO test useEffect
   });
 });

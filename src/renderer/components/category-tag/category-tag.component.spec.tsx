@@ -41,6 +41,11 @@ describe('components', () => {
       expect(paneBackground).toBe('#333');
     });
 
+    it('should not render a button when onClear is not provided', () => {
+      const component = shallow(<CategoryTag {...props} onClear={undefined} />);
+      expect(component.find(Button).length).toBe(0);
+    });
+
     it('should render a button when onClear is provided', () => {
       const onClear = jest.fn();
       const component = shallow(<CategoryTag {...props} onClear={onClear} />);
