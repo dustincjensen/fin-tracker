@@ -1,4 +1,4 @@
-import { getPreviousMonth, isInYearMonth } from '../../utils/date.util';
+import { getPreviousMonth, isInYearMonth } from '../../utils/date.utils';
 import { IStore } from '../store.interface';
 import { IRecord } from './record.interface';
 

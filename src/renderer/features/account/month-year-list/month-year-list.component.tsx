@@ -1,6 +1,6 @@
 import { Tablist, Pane, SidebarTab } from 'evergreen-ui';
 import * as React from 'react';
-import { getMonthAndYearFromDate, monthNamesShort } from '../../../utils/date.util';
+import { getMonthAndYearFromDate, monthNamesShort } from '../../../utils/date.utils';
 
 // Example for react spring
 // https://codesandbox.io/embed/lp80n9z7v9

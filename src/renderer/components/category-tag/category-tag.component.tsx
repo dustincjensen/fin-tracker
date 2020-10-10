@@ -6,6 +6,7 @@ export const CategoryTag = ({ category, onClear }: ICategoryTagProps) => {
   return (
     <Pane display='inline-block'>
       <Pane
+        data-name='category-tag'
         display='flex'
         alignItems='center'
         background={category.color || '#333'}

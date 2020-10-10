@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { IStore } from '../../../store/store.interface';
-import { formatDate } from '../../../utils/date.util';
+import { formatDate } from '../../../utils/date.utils';
 import { AccountBalanceLineChart } from './account-balance-line-chart.component';
 import { IAccountBalanceLineChartProps } from './account-balance-line-chart.props.interface';
 

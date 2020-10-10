@@ -5,7 +5,7 @@ import { AutoCategorySelectors } from '../../../store/auto-category/auto-categor
 import { CategorySelectors } from '../../../store/category/category.selectors';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
-import { allMonthsBetweenDates, getEarliestDate, getLatestDate, isInYearMonth } from '../../../utils/date.util';
+import { allMonthsBetweenDates, getEarliestDate, getLatestDate, isInYearMonth } from '../../../utils/date.utils';
 import { CombinedCategorySummary } from './combined-category-summary.component';
 import { ICombinedCategorySummaryProps } from './combined-category-summary.props.interface';
 

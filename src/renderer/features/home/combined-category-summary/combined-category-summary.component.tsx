@@ -13,7 +13,7 @@ import {
   ReferenceLine,
 } from 'recharts';
 import { ICategory } from '../../../store/category/category.interface';
-import { formatDateMonthYear } from '../../../utils/date.util';
+import { formatDateMonthYear } from '../../../utils/date.utils';
 import { isNullOrUndefined } from '../../../utils/object.utils';
 import { ICombinedCategorySummaryProps } from './combined-category-summary.props.interface';
 

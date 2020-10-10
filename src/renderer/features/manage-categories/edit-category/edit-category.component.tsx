@@ -12,7 +12,7 @@ import {
 import * as React from 'react';
 import { CirclePicker } from 'react-color';
 import { ICategory } from '../../../store/category/category.interface';
-import { newGuid } from '../../../utils/guid.util';
+import { newGuid } from '../../../utils/guid.utils';
 import { IEditCategoryProps } from './edit-category.props.interface';
 
 export const EditCategory = ({ close, saveCategory, saveButtonText, headerText, category }: IEditCategoryProps) => {

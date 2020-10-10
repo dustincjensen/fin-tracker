@@ -2,7 +2,7 @@ import { shell } from 'electron';
 import { Pane, Heading, Icon, majorScale, Paragraph, Button } from 'evergreen-ui';
 import * as React from 'react';
 
-type ErrorBoundaryState = {hasError: boolean};
+type ErrorBoundaryState = { hasError: boolean };
 
 export class ErrorBoundary extends React.Component<{}, ErrorBoundaryState> {
   constructor(props: {}) {

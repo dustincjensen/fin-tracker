@@ -22,7 +22,7 @@ export const AccountSummary = ({ accountId, iconName, balance, name, dateOfLastT
           <Heading>{name}</Heading>
         </Pane>
         {!isNullOrUndefined(balance) && (
-          <Pane marginBottom={10}>
+          <Pane data-name='account-details' marginBottom={10}>
             <Pane display='flex' alignItems='center'>
               <Pane width={105}>
                 <Text color='muted'>Balance:</Text>
@@ -39,7 +39,7 @@ export const AccountSummary = ({ accountId, iconName, balance, name, dateOfLastT
           </Pane>
         )}
         {isNullOrUndefined(balance) && (
-          <Pane marginBottom={10} padding={10} display='flex' justifyContent='center'>
+          <Pane data-name='empty-account' marginBottom={10} padding={10} display='flex' justifyContent='center'>
             <Text color='muted'>
               Empty! Import records{' '}
               <Text is={Link} to={`/import/${accountId}`}>

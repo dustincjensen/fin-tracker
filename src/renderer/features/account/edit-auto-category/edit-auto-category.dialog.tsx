@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
 import { ICategorySelectProps } from '../../../components/category-select/category-select.props.interface';
 import { RecordActions } from '../../../store/record/record.actions';
-import { newGuid } from '../../../utils/guid.util';
+import { newGuid } from '../../../utils/guid.utils';
 import { isNullOrWhitespace } from '../../../utils/object.utils';
 import { IEditAutoCategoryProps } from './edit-auto-category.props.interface';
 

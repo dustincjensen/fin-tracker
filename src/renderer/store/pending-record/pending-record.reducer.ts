@@ -52,6 +52,7 @@ function importRecords(
   } else {
     draft.accountId = undefined;
     draft.filePath = undefined;
+    // TODO why don't we clear file name here?
     draft.records = [];
   }
 }

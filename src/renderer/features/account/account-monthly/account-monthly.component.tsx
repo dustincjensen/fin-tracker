@@ -2,10 +2,11 @@ import { Table, Popover, Position, Menu, Pane, Tooltip, IconButton } from 'everg
 import * as React from 'react';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
 import { IRecord } from '../../../store/record/record.interface';
-import { formatDate } from '../../../utils/date.util';
+import { formatDate } from '../../../utils/date.utils';
 import { createStaticWidthCell } from '../../../utils/table.utils';
 import { DeleteSplitRecordsDialog } from '../delete-split-records/delete-split-records.dialog';
 import { EditAutoCategoryDialog } from '../edit-auto-category/edit-auto-category.dialog';
+import { EditDetailsDialog } from '../edit-details/edit-details.dialog';
 import { EditSplitRecords } from '../edit-split-records/edit-split-records.component';
 import { SplitRecords } from '../split-records/split-records.component';
 import { IAccountMonthlyProps } from './account-monthly.props.interface';
@@ -20,6 +21,7 @@ export const AccountMonthly = ({
   updateSplitRecordCategory,
 }: IAccountMonthlyProps) => {
   const [recordToDeleteFrom, setRecordToDeleteFrom] = React.useState<IRecord>(null);
+  const [recordToAddDetails, setRecordToAddDetails] = React.useState<IRecord>(null);
   const [recordToAutoCategorize, setRecordToAutoCategorize] = React.useState<IRecord>(null);
   const [isSplittingTransaction, setIsSplittingTransaction] = React.useState<string>(undefined);
 
@@ -41,7 +43,16 @@ export const AccountMonthly = ({
             <Pane key={record.id}>
               <Table.Row isSelectable>
                 <Table.TextCell {...w100}>{formatDate(record.date)}</Table.TextCell>
-                <Table.TextCell>{record.description}</Table.TextCell>
+                <Table.TextCell>
+                  <Pane>{record.description}</Pane>
+                  {record?.details && (
+                    <Tooltip content={record?.details} hideDelay={0}>
+                      <Pane maxWidth={350} whiteSpace='nowrap' overflow='hidden' textOverflow='ellipsis'>
+                        {record?.details}
+                      </Pane>
+                    </Tooltip>
+                  )}
+                </Table.TextCell>
                 <Table.TextCell {...w200}>
                   {!record.splitRecords && (
                     <CategorySelect
@@ -68,9 +79,21 @@ export const AccountMonthly = ({
                       <Menu>
                         <Menu.Group>
                           <Menu.Item
+                            icon='edit'
+                            onSelect={() => {
+                              setRecordToAddDetails(record);
+                              setRecordToAutoCategorize(undefined);
+                              setIsSplittingTransaction(undefined);
+                              close();
+                            }}
+                          >
+                            Edit Details
+                          </Menu.Item>
+                          <Menu.Item
                             icon='fork'
                             onSelect={() => {
                               setIsSplittingTransaction(record.id);
+                              setRecordToAddDetails(undefined);
                               setRecordToAutoCategorize(undefined);
                               close();
                             }}
@@ -82,6 +105,7 @@ export const AccountMonthly = ({
                               icon='automatic-updates'
                               onSelect={() => {
                                 setRecordToAutoCategorize(record);
+                                setRecordToAddDetails(undefined);
                                 setIsSplittingTransaction(undefined);
                                 close();
                               }}
@@ -147,6 +171,8 @@ export const AccountMonthly = ({
       </Table.Body>
 
       <DeleteSplitRecordsDialog record={recordToDeleteFrom} onClose={() => setRecordToDeleteFrom(null)} />
+
+      <EditDetailsDialog record={recordToAddDetails} onClose={() => setRecordToAddDetails(null)} />
 
       <EditAutoCategoryDialog
         record={recordToAutoCategorize}
