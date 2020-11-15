@@ -1,5 +1,8 @@
 Bugs
 ====
+  - Tooltip for descriptions is a bit off center
+  - Description width could be larger on bigger monitors... maybe use css breakpoints?
+
   - When you go between accounts that are on the same month/year it won't load the numbers on the category graph.
   - Fix minor issue where the combined accounts summary goes off the page when getting put inside the edit home page view.
 
