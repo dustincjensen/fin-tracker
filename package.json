@@ -1,6 +1,6 @@
 {
   "name": "fin-tracker",
-  "version": "1.0.0-beta",
+  "version": "1.0.1-beta",
   "description": "A financial tracker.",
   "main": "dist/index.js",
   "scripts": {
