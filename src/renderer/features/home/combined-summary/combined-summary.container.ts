@@ -79,6 +79,7 @@ const selectMonthBalances = selectAccountBalances((date1, date2) => isInYearMont
 const selectYearBalances = selectAccountBalances((date1, date2) => isInYear(date1, `${date2}-01-01`), displayYearDates);
 
 const mapStateToProps = (state: IStore): StateProps => {
+  // TODO: 1.7s to load all this data :/
   return {
     accounts: AccountSelectors.selectAccountNames(state),
     endMonthBalances: selectMonthBalances(state),

@@ -12,12 +12,16 @@ const accountSummaryDisplayOption = 'accountSummaryDisplayOption';
 
 export const CombinedSummary = ({ accounts, endMonthBalances, endYearBalances }: ICombinedSummaryProps) => {
   const [numberOfColumns, setNumberOfColumns] = React.useState(defaultNumberOfColumns);
+  const [startingColumnIndex, setStartingColumnIndex] = React.useState(0);
   const [byMonth, setByMonth] = React.useState<string>(localStorage.getItem(accountSummaryDisplayOption) || 'monthly');
   const containerRef = React.useRef<HTMLDivElement>();
-  const scrollRef = React.useRef<HTMLDivElement>();
   const windowWidth = useWindowWidth();
 
   const endBalances = byMonth === 'monthly' ? endMonthBalances : endYearBalances;
+  const displayableEndBalances = endBalances.slice(
+    endBalances.length - numberOfColumns - startingColumnIndex,
+    endBalances.length - startingColumnIndex
+  );
 
   React.useEffect(() => {
     if (!containerRef.current) {
@@ -34,31 +38,31 @@ export const CombinedSummary = ({ accounts, endMonthBalances, endYearBalances }:
 
     // Math.min(columns, 4)
     // If we want to limit the width of the component
-    setNumberOfColumns(Math.min(columns, endBalances.length));
+    const noc = Math.min(columns, endBalances.length);
+    setNumberOfColumns(noc);
+
+    // Have to adjust the starting column index since the window width sizing could affect
+    // the calculation of the displayable balance range.
+    setStartingColumnIndex(i => i >= endBalances.length - noc ? endBalances.length - noc : i);
   }, [windowWidth, byMonth]);
 
-  React.useEffect(() => {
-    if (!scrollRef.current) {
-      return;
-    }
-
-    scrollRef.current.scrollLeft = endBalances.length * displayWidth;
-  }, [byMonth]);
-
-  const fullLeftClick = () => {
-    scrollRef.current.scrollLeft = 0;
-  };
+  const fullLeftClick = () => setStartingColumnIndex(endBalances.length - numberOfColumns);
   const onLeftClick = () => {
-    scrollRef.current.scrollLeft = scrollRef.current.scrollLeft - displayWidth;
+    if (startingColumnIndex < endBalances.length - numberOfColumns) {
+      setStartingColumnIndex(i => i + 1);
+    }
   };
-  const fullRightClick = () => {
-    scrollRef.current.scrollLeft = endBalances.length * displayWidth;
-  };
+  const fullRightClick = () => setStartingColumnIndex(0);
   const onRightClick = () => {
-    scrollRef.current.scrollLeft = scrollRef.current.scrollLeft + displayWidth;
+    if (startingColumnIndex > 0) {
+      setStartingColumnIndex(i => i - 1);
+    }
   };
 
   const setDisplayOption = evt => {
+    // Set the index back to the start when toggling between month and year since one chart might
+    // have significantly more or less columns.
+    setStartingColumnIndex(0);
     setByMonth(evt.target.value);
     localStorage.setItem(accountSummaryDisplayOption, evt.target.value);
   };
@@ -115,7 +119,6 @@ export const CombinedSummary = ({ accounts, endMonthBalances, endYearBalances }:
         </Pane>
         <Pane border borderRadius={0}>
           <div
-            ref={scrollRef}
             style={{
               display: 'flex',
               flexDirection: 'row',
@@ -124,10 +127,10 @@ export const CombinedSummary = ({ accounts, endMonthBalances, endYearBalances }:
               minHeight: 400,
             }}
           >
-            {endBalances.map((eb, index) => {
+            {displayableEndBalances.map(eb => {
               return (
                 <Pane
-                  key={index}
+                  key={eb.date}
                   minWidth={displayWidth}
                   borderLeft
                   borderRadius={0}
