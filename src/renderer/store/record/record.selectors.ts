@@ -32,7 +32,8 @@ export class RecordSelectors {
    */
   public static recordsByDate(state: IStore, accountId: string, date: string): IRecord[] {
     const records = state.records.records[accountId];
-    return records?.filter(r => isInYearMonth(r.date, date));
+    const targetDate = createDate(date);
+    return records?.filter(r => isInYearMonth(targetDate, createDate(r.date)));
   }
 
   /**

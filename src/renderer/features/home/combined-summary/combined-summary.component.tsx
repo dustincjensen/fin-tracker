@@ -43,7 +43,7 @@ export const CombinedSummary = ({ accounts, endMonthBalances, endYearBalances }:
 
     // Have to adjust the starting column index since the window width sizing could affect
     // the calculation of the displayable balance range.
-    setStartingColumnIndex(i => i >= endBalances.length - noc ? endBalances.length - noc : i);
+    setStartingColumnIndex(i => (i >= endBalances.length - noc ? endBalances.length - noc : i));
   }, [windowWidth, byMonth]);
 
   const fullLeftClick = () => setStartingColumnIndex(endBalances.length - numberOfColumns);

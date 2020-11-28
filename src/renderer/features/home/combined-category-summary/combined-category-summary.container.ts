@@ -5,7 +5,7 @@ import { AutoCategorySelectors } from '../../../store/auto-category/auto-categor
 import { CategorySelectors } from '../../../store/category/category.selectors';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
-import { allMonthsBetweenDates, getEarliestDate, getLatestDate, isInYearMonth } from '../../../utils/date.utils';
+import { DateCurriedQuery, displayMonthDates, queryByIsInYearAndMonth } from '../combined.utils';
 import { CombinedCategorySummary } from './combined-category-summary.component';
 import { ICombinedCategorySummaryProps } from './combined-category-summary.props.interface';
 
@@ -20,39 +20,25 @@ const selectAccounts = createSelector(AccountSelectors.accounts, accounts =>
   })
 );
 
-const displayMonthDates = createSelector(AccountSelectors.accounts, RecordSelectors.records, (accounts, records) => {
-  const startingDates = Object.keys(accounts).map(id => {
-    const { startYear, startMonth } = accounts[id];
-    // TODO fix typing
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return `${startYear}-${parseInt(startMonth as any) + 1}`;
-  });
-
-  const endDates = Object.keys(accounts).map(id => {
-    const accountRecords = records[id];
-    return accountRecords?.[accountRecords.length - 1].date;
-  });
-
-  return allMonthsBetweenDates(getEarliestDate(startingDates), getLatestDate(endDates));
-});
-
-const categorySummarySelector = (query: (date: string, date2: string) => boolean, dateSelector) =>
+const categorySummarySelector = (query: DateCurriedQuery, dateSelector) =>
   createSelector(
     selectAccounts,
     RecordSelectors.records,
-    CategorySelectors.categories,
     AutoCategorySelectors.autoCategories,
     dateSelector,
-    (accounts, records, categories, autoCategories, dates: string[]) => {
+    (accounts, records, autoCategories, dates: string[]) => {
       const categoryBalancesByDate = [];
 
       for (let index = 0; index < dates.length; index++) {
         const date = dates[index];
         const categoryBalances = {};
 
+        // Only need to create this date once for each check against the accounts records.
+        const curriedQuery = query(date);
+
         for (const account of accounts) {
           const { accountId } = account;
-          const accountsRecordsForDateRange = records[accountId]?.filter(r => query(r.date, date));
+          const accountsRecordsForDateRange = records[accountId]?.filter(r => curriedQuery(r.date));
           const autoCategoriesForAccount = autoCategories[accountId];
 
           if (!accountsRecordsForDateRange) {
@@ -80,10 +66,7 @@ const categorySummarySelector = (query: (date: string, date2: string) => boolean
     }
   );
 
-const selectCategoryTotalsByMonth = categorySummarySelector(
-  (date1, date2) => isInYearMonth(date1, date2),
-  displayMonthDates
-);
+const selectCategoryTotalsByMonth = categorySummarySelector(queryByIsInYearAndMonth, displayMonthDates);
 
 const mapStateToProps = (state: IStore): StateProps => {
   return {
