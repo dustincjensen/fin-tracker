@@ -14,15 +14,16 @@ import {
 
 type DateQuery = (target: IDate, date: IDate) => boolean;
 export type DateCurriedQuery = (target: string) => (date: string) => boolean;
+type TargetConverter = (targetDate: string) => string;
 
 /**
  * Returns a curried function to compare 2 dates.
  * 
  * @param fn  The function call with the 2 dates.
  */
-const queryBy: (fn: DateQuery) => DateCurriedQuery = (fn: DateQuery) => {
+const queryBy: (fn: DateQuery, tc: TargetConverter) => DateCurriedQuery = (fn: DateQuery, tc: TargetConverter) => {
   return target => {
-    const ct = createDate(target);
+    const ct = createDate(tc(target));
     return date => {
       const cd = createDate(date);
       return fn(cd, ct);
@@ -32,13 +33,15 @@ const queryBy: (fn: DateQuery) => DateCurriedQuery = (fn: DateQuery) => {
 
 /**
  * Returns true when the 2 dates are in the same year and month.
+ * We receive the target date in format `2019-01` so we append `-01` to get `2019-01-01`.
  */
-export const queryByIsInYearAndMonth = queryBy(isInYearMonth);
+export const queryByIsInYearAndMonth = queryBy(isInYearMonth, t => `${t}-01`);
 
 /**
  * Returns true when the 2 dates are in the same year.
+ * We receive the target date in the format `2019` so we append `-01-01` to get `2019-01-01`.
  */
-export const queryByIsInYear = queryBy(isInYear);
+export const queryByIsInYear = queryBy(isInYear, t => `${t}-01-01`);
 
 /**
  * Gets the displayable months for a set of accounts and records.
