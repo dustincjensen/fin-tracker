@@ -1,4 +1,4 @@
-import { getPreviousMonth, isInYearMonth } from '../../utils/date.utils';
+import { createDate, getPreviousMonth, isInYearMonth } from '../../utils/date.utils';
 import { IStore } from '../store.interface';
 import { IRecord } from './record.interface';
 
@@ -46,7 +46,7 @@ export class RecordSelectors {
   public static previousMonthEndBalance(state: IStore, accountId: string, date: string): number {
     const previousMonth = getPreviousMonth(date);
     const previousMonthRecords = RecordSelectors.recordsByDate(state, accountId, previousMonth);
-    return previousMonthRecords?.pop()?.balance;
+    return previousMonthRecords[previousMonthRecords.length - 1]?.balance;
   }
 
   /**
@@ -58,6 +58,6 @@ export class RecordSelectors {
    */
   public static currentMonthEndBalance(state: IStore, accountId: string, date: string): number {
     const monthsRecords = RecordSelectors.recordsByDate(state, accountId, date);
-    return monthsRecords?.pop()?.balance;
+    return monthsRecords[monthsRecords.length - 1]?.balance;
   }
 }
