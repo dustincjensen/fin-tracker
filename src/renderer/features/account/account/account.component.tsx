@@ -1,6 +1,5 @@
 import { Pane } from 'evergreen-ui';
 import * as React from 'react';
-import { RecordSelectors } from '../../../store/record/record.selectors';
 import { AccountMonthlyBalanceChartContainer } from '../account-balance-line-chart/account-monthly-balance-chart.container';
 import { AccountMonthlyCategoryTotalsChartContainer } from '../account-category-totals-chart/account-monthly-category-totals-chart.container';
 import { AccountMonthlyContainer } from '../account-monthly/account-monthly.container';
@@ -29,20 +28,12 @@ export const Account = ({ accountId, hasRecords, startingDate, monthAndYears }: 
 
       <Pane padding={20} overflowX='hidden' overflowY='auto' className='scroll-bar-styled'>
         <Pane display='flex'>
-          <AccountMonthlyBalanceChartContainer
-            accountId={accountId}
-            date={date}
-            stateSelector={RecordSelectors.recordsByDate}
-          />
-          <AccountMonthlyCategoryTotalsChartContainer
-            accountId={accountId}
-            date={date}
-            stateSelector={RecordSelectors.recordsByDate}
-          />
+          <AccountMonthlyBalanceChartContainer accountId={accountId} date={date} />
+          <AccountMonthlyCategoryTotalsChartContainer accountId={accountId} date={date} />
         </Pane>
         <Pane display='grid'>
           <AccountMonthsComparisonContainer accountId={accountId} date={date} />
-          <AccountMonthlyContainer accountId={accountId} date={date} stateSelector={RecordSelectors.recordsByDate} />
+          <AccountMonthlyContainer accountId={accountId} date={date} />
         </Pane>
       </Pane>
     </Pane>

@@ -4,7 +4,13 @@ import { AccountSelectors } from '../../../store/account/account.selectors';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
 import { isNullOrUndefined } from '../../../utils/object.utils';
-import { DateCurriedQuery, displayMonthDates, displayYearDates, queryByIsInYear, queryByIsInYearAndMonth } from '../combined.utils';
+import {
+  DateCurriedQuery,
+  displayMonthDates,
+  displayYearDates,
+  queryByIsInYear,
+  queryByIsInYearAndMonth,
+} from '../combined.utils';
 import { CombinedSummary } from './combined-summary.component';
 import { ICombinedSummaryProps } from './combined-summary.props.interface';
 
@@ -28,7 +34,7 @@ const selectAccountBalances = (query: DateCurriedQuery, dateSelector) =>
         for (const account of accounts) {
           const { id: accountId } = account;
           let balance = records[accountId]?.filter(r => curriedQuery(r.date)).pop()?.balance;
-          
+
           // Get the balance from the previous date if the current date had no entries.
           if (isNullOrUndefined(balance) && index > 0) {
             balance = endAccountBalancesByDate[index - 1].accountBalances[accountId];

@@ -22,7 +22,7 @@ export const monthValues = [
 
 /**
  * Creates a new IDate.
- * 
+ *
  * @param date  The date to create.
  */
 export function createDate(date: string): IDate {

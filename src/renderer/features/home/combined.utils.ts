@@ -18,7 +18,7 @@ type TargetConverter = (targetDate: string) => string;
 
 /**
  * Returns a curried function to compare 2 dates.
- * 
+ *
  * @param fn  The function call with the 2 dates.
  */
 const queryBy: (fn: DateQuery, tc: TargetConverter) => DateCurriedQuery = (fn: DateQuery, tc: TargetConverter) => {
