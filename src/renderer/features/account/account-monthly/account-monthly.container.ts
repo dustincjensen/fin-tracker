@@ -2,19 +2,20 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { CategorySelectors } from '../../../store/category/category.selectors';
 import { RecordActions } from '../../../store/record/record.actions';
+import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
 import { AccountMonthly } from './account-monthly.component';
 import { IAccountMonthlyProps } from './account-monthly.props.interface';
 
 type StateProps = Pick<IAccountMonthlyProps, 'records' | 'categories'>;
 type DispatchProps = Pick<IAccountMonthlyProps, 'updateCategory' | 'updateSplitRecordCategory'>;
-type OwnProps = Pick<IAccountMonthlyProps, 'accountId' | 'date' | 'stateSelector'>;
+type OwnProps = Pick<IAccountMonthlyProps, 'accountId' | 'date'>;
 
 const mapStateToProps = (state: IStore, ownProps: OwnProps): StateProps => {
-  const { stateSelector, accountId, date } = ownProps;
+  const { accountId, date } = ownProps;
   const categories = CategorySelectors.selectCategories(state);
 
-  const records = stateSelector(state, accountId, date)?.map(record => {
+  const records = RecordSelectors.recordsByDate(state, accountId, date)?.map(record => {
     return {
       ...record,
       category: categories.find(c => c.id === record.categoryId),

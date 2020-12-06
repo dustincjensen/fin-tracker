@@ -1,6 +1,5 @@
 import { Pane } from 'evergreen-ui';
 import * as React from 'react';
-import { RecordSelectors } from '../../../store/record/record.selectors';
 import { AccountMonthlyBalanceChartContainer } from '../account-balance-line-chart/account-monthly-balance-chart.container';
 import { AccountMonthlyCategoryTotalsChartContainer } from '../account-category-totals-chart/account-monthly-category-totals-chart.container';
 import { AccountMonthlyContainer } from '../account-monthly/account-monthly.container';
@@ -24,25 +23,19 @@ export const Account = ({ accountId, hasRecords, startingDate, monthAndYears }: 
   return (
     <Pane display='grid' gridTemplateColumns='auto 1fr' height='100%'>
       <Pane padding={10} borderRight='1px solid #DDD'>
-        <MonthYearList monthAndYears={monthAndYears} startingDate={startingDate} setDate={setDate} />
+        {/* MonthYearList doesn't re-render if 2 accounts have the same starting date and monthAndYears. */}
+        {/* Use the accountId as the key to reset the component. */}
+        <MonthYearList key={accountId} monthAndYears={monthAndYears} startingDate={startingDate} setDate={setDate} />
       </Pane>
 
       <Pane padding={20} overflowX='hidden' overflowY='auto' className='scroll-bar-styled'>
         <Pane display='flex'>
-          <AccountMonthlyBalanceChartContainer
-            accountId={accountId}
-            date={date}
-            stateSelector={RecordSelectors.recordsByDate}
-          />
-          <AccountMonthlyCategoryTotalsChartContainer
-            accountId={accountId}
-            date={date}
-            stateSelector={RecordSelectors.recordsByDate}
-          />
+          <AccountMonthlyBalanceChartContainer accountId={accountId} date={date} />
+          <AccountMonthlyCategoryTotalsChartContainer accountId={accountId} date={date} />
         </Pane>
         <Pane display='grid'>
           <AccountMonthsComparisonContainer accountId={accountId} date={date} />
-          <AccountMonthlyContainer accountId={accountId} date={date} stateSelector={RecordSelectors.recordsByDate} />
+          <AccountMonthlyContainer accountId={accountId} date={date} />
         </Pane>
       </Pane>
     </Pane>

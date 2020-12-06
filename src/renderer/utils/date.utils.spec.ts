@@ -1,6 +1,7 @@
 import {
   allMonthsBetweenDates,
   allYearsBetweenDates,
+  createDate,
   formatDate,
   formatDateFull,
   formatDateMonthYear,
@@ -68,7 +69,7 @@ describe('utils', () => {
 
     describe('isInYearMonth', () => {
       const assertIsInYearMonth = (date: string, targetYearMonth: string, expected: boolean) => {
-        expect(isInYearMonth(date, targetYearMonth)).toBe(expected);
+        expect(isInYearMonth(createDate(date), createDate(targetYearMonth))).toBe(expected);
       };
 
       it('should return true when 2020-10-31 and 2020-10-01', () =>
@@ -81,7 +82,7 @@ describe('utils', () => {
 
     describe('isInYear', () => {
       const assertIsInYear = (date: string, targetYear: string, expected: boolean) => {
-        expect(isInYear(date, targetYear)).toBe(expected);
+        expect(isInYear(createDate(date), createDate(targetYear))).toBe(expected);
       };
 
       it('should return true when 2020-10-31 and 2020-01-01', () => assertIsInYear('2020-10-31', '2020-01-01', true));

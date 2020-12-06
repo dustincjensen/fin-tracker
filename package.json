@@ -8,6 +8,7 @@
     "build:background": "node ./src/background/background.config.js",
     "build:renderer": "node ./src/renderer/renderer.config.js",
     "build": "tsc && concurrently \"npm run build:renderer\" \"npm run build:background\"",
+    "start": "concurrently \"npm run build:renderer\" \"electron ./dist/index.js --dev\"",
     "dev": "electron ./dist/index.js --dev",
     "prod": "electron .",
     "prettier": "prettier --write src/**/*.{ts,tsx,js,jsx}",

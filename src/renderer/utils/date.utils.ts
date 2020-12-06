@@ -1,5 +1,10 @@
 import moment, { Moment } from 'moment';
 
+export interface IDate {
+  year: () => number;
+  month: () => number;
+}
+
 export const monthValues = [
   { value: '0', month: 'January' },
   { value: '1', month: 'February' },
@@ -14,6 +19,15 @@ export const monthValues = [
   { value: '10', month: 'November' },
   { value: '11', month: 'December' },
 ];
+
+/**
+ * Creates a new IDate.
+ *
+ * @param date  The date to create.
+ */
+export function createDate(date: string): IDate {
+  return moment(date);
+}
 
 /**
  * Get the long month names.
@@ -34,42 +48,20 @@ export function monthNamesShort() {
 /**
  * True if the date falls within the target year and month; false otherwise.
  *
- * @param date              the date to see if it occurs in the targetYearMonth.
- * @param targetYearMonth   the date to get the year and month from.
- */
-export function isInYearMonth(date: string, targetYearMonth: string): boolean {
-  return isInYearMonthMoment(moment(date), moment(targetYearMonth));
-}
-
-/**
- * Private helper method for isInYearMonth
- * Takes Moment formatted dates.
- *
- * @param date    the date to see if it occurs in the same year/month as the target.
  * @param target  the date to get the year and month from.
+ * @param date    the date to see if it occurs in the same year/month as the target.
  */
-function isInYearMonthMoment(date: Moment, target: Moment): boolean {
+export function isInYearMonth(target: IDate, date: IDate): boolean {
   return date.year() === target.year() && date.month() === target.month();
 }
 
 /**
  * True if the date falls within the target year; false otherwise.
  *
- * @param date        the date to see if it occurs in the targetYear.
- * @param targetYear  the date to get the year from.
- */
-export function isInYear(date: string, targetYear: string): boolean {
-  return isInYearMoment(moment(date), moment(targetYear));
-}
-
-/**
- * Private helper method for isInYear
- * Takes Moment formatted dates.
- *
- * @param date    the date to see if it occurs in the same year as the target.
  * @param target  the date to get the year from.
+ * @param date    the date to see if it occurs in the same year as the target.
  */
-function isInYearMoment(date: Moment, target: Moment): boolean {
+export function isInYear(target: IDate, date: IDate): boolean {
   return date.year() === target.year();
 }
 
