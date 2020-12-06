@@ -1,6 +1,7 @@
 import { ICategory } from './category.interface';
 
 export class CategoryActions {
+  public static LOAD_CATEGORIES = 'LOAD_CATEGORIES';
   public static SAVE_NEW_CATEGORY = 'SAVE_NEW_CATEGORY';
   public static UPDATE_CATEGORY = 'UPDATE_CATEGORY';
   public static DELETE_CATEGORY = 'DELETE_CATEGORY';

@@ -23,6 +23,7 @@
   "license": "ISC",
   "dependencies": {
     "@rehooks/local-storage": "2.4.0",
+    "dexie": "3.0.3",
     "electron-squirrel-startup": "1.0.0",
     "electron-store": "5.1.1",
     "evergreen-ui": "4.23.3",
@@ -38,6 +39,7 @@
     "recharts": "1.8.5",
     "redux": "4.0.0",
     "redux-electron-ipc": "1.1.12",
+    "redux-thunk": "2.3.0",
     "reselect": "4.0.0"
   },
   "devDependencies": {

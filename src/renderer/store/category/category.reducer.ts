@@ -8,12 +8,19 @@ const initialState: ICategoryStore = { categories: {} };
 
 export const CategoryReducer = createDraftReducer(
   {
+    [CategoryActions.LOAD_CATEGORIES]: loadCategories,
     [CategoryActions.SAVE_NEW_CATEGORY]: saveNewCategory,
     [CategoryActions.UPDATE_CATEGORY]: updateCategory,
     [CategoryActions.DELETE_CATEGORY]: deleteCategory,
   },
   initialState
 );
+
+function loadCategories(draft: Draft<ICategoryStore>, categories: ICategory[]) {
+  for (const category of categories) {
+    draft.categories[category.id] = category;
+  }
+}
 
 function saveNewCategory(draft: Draft<ICategoryStore>, newCategory: ICategory) {
   const { id } = newCategory;

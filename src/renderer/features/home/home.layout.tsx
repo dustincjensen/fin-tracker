@@ -6,6 +6,7 @@ import { AccountSummariesContainer } from './account-summaries/account-summaries
 import { CombinedCategorySummaryContainer } from './combined-category-summary/combined-category-summary.container';
 import { CombinedSummaryContainer } from './combined-summary/combined-summary.container';
 import { InstructionsContainer } from './instructions/instructions.container';
+import { LoadExistingData } from './load-existing-data/load-existing-data.component';
 import { OptionalDisplay } from './optional-display/optional-display.component';
 import { IOptionalDisplayProps } from './optional-display/optional-display.props.interface';
 
@@ -108,6 +109,9 @@ export const HomeLayout = () => {
           </Tooltip>
         </Pane>
         <Pane>
+          {/* TEMP? */}
+          {locked && <LoadExistingData />}
+
           {/* Don't display instructions when unlocking the home page */}
           {locked && <InstructionsContainer />}
 

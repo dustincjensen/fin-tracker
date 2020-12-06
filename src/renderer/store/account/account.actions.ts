@@ -1,6 +1,7 @@
 import { IAccount } from './account.interface';
 
 export class AccountActions {
+  public static LOAD_ACCOUNTS = 'LOAD_ACCOUNTS';
   public static SAVE_NEW_ACCOUNT = 'SAVE_NEW_ACCOUNT';
   public static UPDATE_ACCOUNT = 'UPDATE_ACCOUNT';
   public static DELETE_ACCOUNT = 'DELETE_ACCOUNT';

@@ -5,6 +5,7 @@ import { IRecord } from './record.interface';
 import { ISplitRecord } from './split-record.interface';
 
 export class RecordActions {
+  public static LOAD_RECORDS = 'LOAD_RECORDS';
   public static SAVE_NEW_RECORDS = 'SAVE_NEW_RECORDS';
   public static SET_DETAILS = 'SET_DETAILS';
   public static SET_RECORD_CATEGORY = 'SET_RECORD_CATEGORY';

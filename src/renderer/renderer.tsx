@@ -3,35 +3,32 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 import { applyMiddleware, createStore } from 'redux';
-import { RootLayout } from './features/root/root.layout';
+import thunk, { ThunkMiddleware } from 'redux-thunk';
+import { RootContainer } from './features/root/root.container';
+import { AppActions } from './store/app/app.actions';
 import { ipcReceive } from './store/ipc';
 import { toastMiddleware } from './store/middleware/toast.middleware';
 import { rootReducer } from './store/store';
-import { IPersistedStore } from './store/store.interface';
+import { IStore } from './store/store.interface';
 import './renderer.scss';
 
-const ElectronStore = require('electron-store');
+const store = createStore(
+  rootReducer,
+  {},
+  applyMiddleware(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    thunk as ThunkMiddleware<IStore, any>,
+    ipcReceive,
+    toastMiddleware
+  )
+);
 
-// TODO in future releases should add "value => JSON.stringify(value)" to reduce file size.
-const storage = new ElectronStore({ name: 'appState' });
-const store = createStore(rootReducer, storage.get('state') || {}, applyMiddleware(ipcReceive, toastMiddleware));
-
-store.subscribe(() => {
-  // TODO should we have a delay before setting the state? Subscribe gets called often.
-  const state = store.getState();
-  const persistedState: IPersistedStore = {
-    accounts: state.accounts,
-    autoCategories: state.autoCategories,
-    categories: state.categories,
-    records: state.records,
-  };
-  storage.set('state', persistedState);
-});
+store.dispatch({ type: AppActions.INITIALIZE });
 
 ReactDOM.render(
   <Provider store={store}>
     <HashRouter>
-      <RootLayout />
+      <RootContainer />
     </HashRouter>
   </Provider>,
   document.getElementById('react-render-location')

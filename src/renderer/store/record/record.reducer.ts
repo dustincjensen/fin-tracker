@@ -13,6 +13,7 @@ const initialState: IRecordStore = { records: {} };
 
 export const RecordReducer = createDraftReducer(
   {
+    [RecordActions.LOAD_RECORDS]: loadRecords,
     [RecordActions.SAVE_NEW_RECORDS]: saveNewRecords,
     [RecordActions.SET_DETAILS]: setDetails,
     [RecordActions.SET_RECORD_CATEGORY]: setRecordCategory,
@@ -25,6 +26,21 @@ export const RecordReducer = createDraftReducer(
   },
   initialState
 );
+
+/**
+ * Loads records into state.
+ *
+ * @param draft     The draft state.
+ * @param records   The full list of records.
+ */
+function loadRecords(draft: Draft<IRecordStore>, records: IRecord[]) {
+  for (const record of records) {
+    if (!draft.records[record.accountId]) {
+      draft.records[record.accountId] = [];
+    }
+    draft.records[record.accountId].push(record);
+  }
+}
 
 /**
  * Saves records to an account.

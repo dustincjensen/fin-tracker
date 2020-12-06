@@ -34,7 +34,6 @@ const selectAccountBalances = (query: DateCurriedQuery, dateSelector) =>
         for (const account of accounts) {
           const { id: accountId } = account;
           let balance = records[accountId]?.filter(r => curriedQuery(r.date)).pop()?.balance;
-
           // Get the balance from the previous date if the current date had no entries.
           if (isNullOrUndefined(balance) && index > 0) {
             balance = endAccountBalancesByDate[index - 1].accountBalances[accountId];

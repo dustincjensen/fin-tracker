@@ -8,12 +8,19 @@ const initialState: IAccountStore = { accounts: {} };
 
 export const AccountReducer = createDraftReducer(
   {
+    [AccountActions.LOAD_ACCOUNTS]: loadAccounts,
     [AccountActions.SAVE_NEW_ACCOUNT]: saveNewAccount,
     [AccountActions.UPDATE_ACCOUNT]: updateAccount,
     [AccountActions.DELETE_ACCOUNT]: deleteAccount,
   },
   initialState
 );
+
+function loadAccounts(draft: Draft<IAccountStore>, accounts: IAccount[]) {
+  for (const account of accounts) {
+    draft.accounts[account.id] = account;
+  }
+}
 
 function saveNewAccount(draft: Draft<IAccountStore>, newAccount: IAccount) {
   const { id } = newAccount;

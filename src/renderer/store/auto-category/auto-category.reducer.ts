@@ -13,6 +13,7 @@ const initialState: IAutoCategoryStore = { autoCategories: {} };
 
 export const AutoCategoryReducer = createDraftReducer(
   {
+    [AutoCategoryActions.LOAD_AUTO_CATEGORIES]: loadAutoCategories,
     [RecordActions.SET_RECORD_AUTO_CATEGORY]: saveRecordAutoCategory,
     [AutoCategoryActions.DELETE_AUTO_CATEGORY]: deleteAutoCategory,
     [CategoryActions.DELETE_CATEGORY]: deleteCategory,
@@ -20,6 +21,15 @@ export const AutoCategoryReducer = createDraftReducer(
   },
   initialState
 );
+
+function loadAutoCategories(draft: Draft<IAutoCategoryStore>, autoCategories: IAutoCategory[]) {
+  for (const autoCategory of autoCategories) {
+    if (!draft.autoCategories[autoCategory.accountId]) {
+      draft.autoCategories[autoCategory.accountId] = [];
+    }
+    draft.autoCategories[autoCategory.accountId].push(autoCategory);
+  }
+}
 
 function saveRecordAutoCategory(
   draft: Draft<IAutoCategoryStore>,
