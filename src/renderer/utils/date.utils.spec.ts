@@ -15,7 +15,8 @@ import {
   monthNamesLong,
   monthNamesShort,
   monthValues,
-  stringToString,
+  stringToDayMonthYear,
+  stringToMonthYear,
 } from './date.utils';
 
 describe('utils', () => {
@@ -162,15 +163,26 @@ describe('utils', () => {
       it('should return 2019 when provided 2019-12-31', () => assertGetYearFromDate('2019-12-31', 2019));
     });
 
-    describe('stringToString', () => {
-      const assertStringToString = (date: string, expected: string) => {
-        expect(stringToString(date)).toBe(expected);
+    describe('stringToDayMonthYear', () => {
+      const assertStringToDayMonthYear = (date: string, expected: string) => {
+        expect(stringToDayMonthYear(date)).toBe(expected);
       };
 
-      it('should return 29 Feb 2020 when provided 2020-02-29', () => assertStringToString('2020-02-29', '29 Feb 2020'));
-      it('should return 1 Jan 2020 when provided 2020-01-01', () => assertStringToString('2020-01-01', '1 Jan 2020'));
-      it('should return 31 Dec 2020 when provided 2020-12-31', () => assertStringToString('2020-12-31', '31 Dec 2020'));
-      it('should return 31 Dec 2019 when provided 2019-12-31', () => assertStringToString('2019-12-31', '31 Dec 2019'));
+      it('should return 29 Feb 2020 when provided 2020-02-29', () => assertStringToDayMonthYear('2020-02-29', '29 Feb 2020'));
+      it('should return 1 Jan 2020 when provided 2020-01-01', () => assertStringToDayMonthYear('2020-01-01', '1 Jan 2020'));
+      it('should return 31 Dec 2020 when provided 2020-12-31', () => assertStringToDayMonthYear('2020-12-31', '31 Dec 2020'));
+      it('should return 31 Dec 2019 when provided 2019-12-31', () => assertStringToDayMonthYear('2019-12-31', '31 Dec 2019'));
+    });
+
+    describe('stringToMonthYear', () => {
+      const assertStringToMonthYear = (date: string, expected: string) => {
+        expect(stringToMonthYear(date)).toBe(expected);
+      };
+
+      it('should return Feb 2020 when provided 2020-02-29', () => assertStringToMonthYear('2020-02-29', 'Feb 2020'));
+      it('should return Jan 2020 when provided 2020-01-01', () => assertStringToMonthYear('2020-01-01', 'Jan 2020'));
+      it('should return Dec 2020 when provided 2020-12-31', () => assertStringToMonthYear('2020-12-31', 'Dec 2020'));
+      it('should return Dec 2019 when provided 2019-12-31', () => assertStringToMonthYear('2019-12-31', 'Dec 2019'));
     });
 
     describe('allMonthsBetweenDates', () => {

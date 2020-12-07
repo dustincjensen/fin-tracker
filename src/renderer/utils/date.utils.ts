@@ -127,8 +127,17 @@ export function getYearFromDate(date: string): number {
  *
  * @param date  the date to convert to the new date format.
  */
-export function stringToString(date: string): string {
+export function stringToDayMonthYear(date: string): string {
   return moment(date).format('D MMM YYYY');
+}
+
+/**
+ * Returns the date in the format of 'Feb 2020'.
+ * 
+ * @param date  the date to convert to the new date format.
+ */
+export function stringToMonthYear(date: string): string {
+  return moment(date).format('MMM YYYY');
 }
 
 /**

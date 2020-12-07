@@ -6,7 +6,7 @@ import {
   getEarliestDate,
   getLatestDate,
   getMonthAndYearFromDate,
-  stringToString,
+  stringToDayMonthYear,
 } from '../../../utils/date.utils';
 import { Account } from './account.component';
 import { IAccountProps } from './account.props.interface';
@@ -29,7 +29,7 @@ const mapStateToProps = (state: IStore, { accountId }: OwnProps): StateProps => 
 
   return {
     hasRecords: !!(records?.length > 0),
-    startingDate: newestTransactionDate ? stringToString(newestTransactionDate) : undefined,
+    startingDate: newestTransactionDate ? stringToDayMonthYear(newestTransactionDate) : undefined,
     monthAndYears,
   };
 };

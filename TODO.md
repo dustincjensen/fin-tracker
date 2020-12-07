@@ -11,6 +11,7 @@ Tasks
 Next
 - Allow for archiving accounts (closing accounts)
 - Add transactions manually.
+- Support TFSA/RRSP Manual accounts. (Transfer Category per account? Basic Transfer Category?)
 
 Next 2
 - Improve account monthly header
