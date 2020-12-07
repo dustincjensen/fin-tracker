@@ -1,15 +1,15 @@
 import { FormField, majorScale, Pane, Text } from 'evergreen-ui';
 import * as React from 'react';
 import { accountTypeLabels } from '../../../utils/account.utils';
-import { IAccountMonthsComparisonProps } from './account-months-comparison.props.interface';
+import { IAccountDetailSummaryProps } from './account-detail-summary.props.interface';
 
-export const AccountMonthsComparison = ({
+export const AccountDetailSummary = ({
   accountName,
   accountType,
   displayDate,
   previousMonthEndBalance,
   currentMonthEndBalance,
-}: IAccountMonthsComparisonProps) => {
+}: IAccountDetailSummaryProps) => {
   return (
     <Pane
       border

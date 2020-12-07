@@ -4,14 +4,14 @@ import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
 import { stringToMonthYear } from '../../../utils/date.utils';
 import { isNullOrUndefined } from '../../../utils/object.utils';
-import { AccountMonthsComparison } from './account-months-comparison.component';
-import { IAccountMonthsComparisonProps } from './account-months-comparison.props.interface';
+import { AccountDetailSummary } from './account-detail-summary.component';
+import { IAccountDetailSummaryProps } from './account-detail-summary.props.interface';
 
 type StateProps = Pick<
-  IAccountMonthsComparisonProps,
+  IAccountDetailSummaryProps,
   'accountName' | 'accountType' | 'displayDate' | 'previousMonthEndBalance' | 'currentMonthEndBalance'
 >;
-type OwnProps = Pick<IAccountMonthsComparisonProps, 'accountId' | 'date'>;
+type OwnProps = Pick<IAccountDetailSummaryProps, 'accountId' | 'date'>;
 
 const mapStateToProps = (state: IStore, { accountId, date }: OwnProps): StateProps => {
   const account = AccountSelectors.account(state, accountId);
@@ -28,4 +28,4 @@ const mapStateToProps = (state: IStore, { accountId, date }: OwnProps): StatePro
   };
 };
 
-export const AccountMonthsComparisonContainer = connect(mapStateToProps)(AccountMonthsComparison);
+export const AccountDetailSummaryContainer = connect(mapStateToProps)(AccountDetailSummary);

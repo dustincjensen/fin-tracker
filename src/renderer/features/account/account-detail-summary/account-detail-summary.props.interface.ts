@@ -1,4 +1,4 @@
-export interface IAccountMonthsComparisonProps {
+export interface IAccountDetailSummaryProps {
   accountName: string;
   accountType: string;
   displayDate: string;
