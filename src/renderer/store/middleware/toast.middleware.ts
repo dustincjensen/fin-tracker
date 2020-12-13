@@ -4,7 +4,7 @@ import { CategoryActions } from '../category/category.actions';
 import { RecordActions } from '../record/record.actions';
 
 const toastActions = {
-  [RecordActions.SAVE_NEW_RECORDS]: () => toaster.success('Import completed'),
+  [RecordActions.SAVE_NEW_RECORDS]: () => toaster.success('Records updated'),
 
   [AccountActions.SAVE_NEW_ACCOUNT]: action => toaster.success(`'${action.payload.name}' account created`),
   [AccountActions.UPDATE_ACCOUNT]: action => toaster.success(`'${action.payload.name}' account updated`),

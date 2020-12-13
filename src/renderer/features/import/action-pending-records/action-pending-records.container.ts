@@ -30,7 +30,7 @@ const mapStateToProps = (state: IStore): StateProps => {
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
   return {
     accept: (startingBalance: number, newRecords: IRecord[], existingRecords: IRecord[]) =>
-      RecordActions.pendingRecordsMerged(dispatch, startingBalance, newRecords, existingRecords),
+      RecordActions.newRecordsMerged(dispatch, startingBalance, newRecords, existingRecords),
     clear: () => dispatch(PendingRecordActions.clearImportedRecords()),
   };
 };
