@@ -79,6 +79,7 @@ export const EditAutoCategoryDialog = ({ record, categories, onClose }: IEditAut
       confirmLabel='Save Auto Category'
       title='New Auto Category'
       onConfirm={confirm}
+      shouldCloseOnOverlayClick={false}
     >
       <Alert marginBottom={majorScale(3)} title='Matching descriptions is account specific.'>
         Please note previously auto-categorized transactions that begin with the description below will also be

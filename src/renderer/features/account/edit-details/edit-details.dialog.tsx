@@ -29,6 +29,7 @@ export const EditDetailsDialog = ({ record, onClose }: IEditDetailsProps) => {
       confirmLabel='Save Details'
       title='Edit Details'
       onConfirm={confirm}
+      shouldCloseOnOverlayClick={false}
     >
       <FormField label='Description' marginBottom={majorScale(3)}>
         <Text>{record.description}</Text>
