@@ -1,5 +1,6 @@
 import { Pane } from 'evergreen-ui';
 import * as React from 'react';
+import { AccountActions } from '../account-actions/account-actions.component';
 import { AccountMonthlyBalanceChartContainer } from '../account-balance-line-chart/account-monthly-balance-chart.container';
 import { AccountMonthlyCategoryTotalsChartContainer } from '../account-category-totals-chart/account-monthly-category-totals-chart.container';
 import { AccountDetailSummaryContainer } from '../account-detail-summary/account-detail-summary.container';
@@ -35,6 +36,7 @@ export const Account = ({ accountId, hasRecords, startingDate, monthAndYears }: 
         </Pane>
         <Pane display='grid'>
           <AccountDetailSummaryContainer accountId={accountId} date={date} />
+          <AccountActions accountId={accountId} />
           <AccountMonthlyContainer accountId={accountId} date={date} />
         </Pane>
       </Pane>
