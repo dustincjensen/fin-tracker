@@ -20,7 +20,9 @@ export const EditAutoCategoryDialog = ({ record, categories, onClose }: IEditAut
 
   React.useEffect(() => {
     setDescription(record?.description || '');
+    setDescriptionError('');
     setCategoryRecord({ id: undefined, category: undefined });
+    setCategoryError('');
     setOverwriteExisting(false);
   }, [record]);
 
