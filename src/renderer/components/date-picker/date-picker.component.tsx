@@ -9,15 +9,27 @@ const dayNames = moment.weekdaysMin();
 const outsideMonthStyle = { color: 'rgba(67, 90, 111, 0.3)' };
 const todayStyle = { background: '#DDEBF7' };
 
+interface IDatePickerProps {
+  /**
+   * The value to use for the date picker.
+   */
+  value: string;
+
+  /**
+   * A useState set method.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onChange: any;
+}
+
 // TODO remove moment references for IDate and date.utils methods.
-export const DatePicker = () => {
+export const DatePicker = ({ value: date, onChange }: IDatePickerProps) => {
   const [today] = React.useState(() =>
     moment()
       .startOf('day')
       .toISOString()
   );
-  const [monthInfo, setMonthInfo] = React.useState(() => buildMonth(moment()));
-  const [date, setDate] = React.useState<string>('');
+  const [monthInfo, setMonthInfo] = React.useState(() => buildMonth(moment(date || today)));
 
   const previousMonth = () => setMonthInfo(monthInfo => buildMonth(moment(monthInfo.monthYear).subtract(1, 'month')));
   const nextMonth = () => setMonthInfo(monthInfo => buildMonth(moment(monthInfo.monthYear).add(1, 'month')));
@@ -88,7 +100,7 @@ export const DatePicker = () => {
                 key={d.iso}
                 dateToRender={d}
                 isSelected={date === d.iso}
-                setIsSelected={setDate}
+                setIsSelected={onChange}
                 close={close}
                 style={date !== d.iso ? outsideMonthStyle : undefined}
               />
@@ -99,7 +111,7 @@ export const DatePicker = () => {
                 key={d.iso}
                 dateToRender={d}
                 isSelected={date === d.iso}
-                setIsSelected={setDate}
+                setIsSelected={onChange}
                 close={close}
                 style={d.iso === today && date !== d.iso ? todayStyle : undefined}
               />
@@ -110,7 +122,7 @@ export const DatePicker = () => {
                 key={d.iso}
                 dateToRender={d}
                 isSelected={date === d.iso}
-                setIsSelected={setDate}
+                setIsSelected={onChange}
                 close={close}
                 style={date !== d.iso ? outsideMonthStyle : undefined}
               />
@@ -119,7 +131,7 @@ export const DatePicker = () => {
         </Pane>
       )}
     >
-      <Button width={200}>{date ? formatDateFull(date) : 'Select a date...'}</Button>
+      <Button type='button'>{date ? formatDateFull(date) : 'Select a date...'}</Button>
     </Popover>
   );
 };
