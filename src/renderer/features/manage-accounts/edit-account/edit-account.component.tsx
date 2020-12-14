@@ -90,7 +90,11 @@ export const EditAccount = ({
 
       {!canEditComplexFields && (
         <Alert
-          title={account?.archived ? 'Account is archived.' : 'Editing is limited because records have already been imported for this account.'}
+          title={
+            account?.archived
+              ? 'Account is archived.'
+              : 'Editing is limited because records have already been imported for this account.'
+          }
           marginBottom={majorScale(3)}
         />
       )}
@@ -187,44 +191,50 @@ export const EditAccount = ({
               </>
             )}
           </Pane>
-          
+
           {/* Right Side */}
-          {!isNew && <Pane display='flex' flexDirection='column' justifyContent='space-between' borderLeft paddingLeft={10}>
-            {/* Top */}
-            <Pane>
-              {/* TODO this is a great writeup for a help page. */}
-              {/* Archiving an account lets you remove it from the home page and left hand navigation menu, while keeping all the data around for graphs and data displays. */}
-              <Button type='button' iconAfter={account?.archived ? 'unarchive' : 'archive' } width='100%' appearance='primary' disabled={!canArchive} onClick={handleArchiveAccount}>
-                {account?.archived ? 'Re-activate Account' : 'Archive Account'}
-              </Button>
-              {!canArchive && (
-                <InlineAlert marginTop={5} marginLeft={3}>
-                  {
-                    // Basically means there are no records if the current balance is undefined
-                    isNullOrUndefined(currentBalance) 
+          {!isNew && (
+            <Pane display='flex' flexDirection='column' justifyContent='space-between' borderLeft paddingLeft={10}>
+              {/* Top */}
+              <Pane>
+                {/* TODO this is a great writeup for a help page. */}
+                {/* Archiving an account lets you remove it from the home page and left hand navigation menu, while keeping all the data around for graphs and data displays. */}
+                <Button
+                  type='button'
+                  iconAfter={account?.archived ? 'unarchive' : 'archive'}
+                  width='100%'
+                  appearance='primary'
+                  disabled={!canArchive}
+                  onClick={handleArchiveAccount}
+                >
+                  {account?.archived ? 'Re-activate Account' : 'Archive Account'}
+                </Button>
+                {!canArchive && (
+                  <InlineAlert marginTop={5} marginLeft={3}>
+                    {// Basically means there are no records if the current balance is undefined
+                    isNullOrUndefined(currentBalance)
                       ? 'Empty accounts should be deleted instead of archived.'
-                      : 'To archive, the account must have a current balance of $0.00'
-                  }
-                </InlineAlert>
-              )}
-            </Pane>
+                      : 'To archive, the account must have a current balance of $0.00'}
+                  </InlineAlert>
+                )}
+              </Pane>
 
-            {/* Bottom */}
-            <Pane display='flex' flexDirection='column' justifyContent='flex-end'>
-              <FormField label='End Year' marginBottom={majorScale(3)}>
-                <Text>{account?.endYear || '-'}</Text>
-              </FormField>
-              <FormField label='End Month' marginBottom={majorScale(3)}>
-                <Text>{account && monthNamesLong()[account?.endMonth] || '-'}</Text>
-              </FormField>
-              <FormField label='Current Balance' marginBottom={majorScale(3)}>
-                <Text>{!isNullOrUndefined(currentBalance) && currentBalance.toFixed(2) || '-'}</Text>
-              </FormField>
+              {/* Bottom */}
+              <Pane display='flex' flexDirection='column' justifyContent='flex-end'>
+                <FormField label='End Year' marginBottom={majorScale(3)}>
+                  <Text>{account?.endYear || '-'}</Text>
+                </FormField>
+                <FormField label='End Month' marginBottom={majorScale(3)}>
+                  <Text>{(account && monthNamesLong()[account?.endMonth]) || '-'}</Text>
+                </FormField>
+                <FormField label='Current Balance' marginBottom={majorScale(3)}>
+                  <Text>{(!isNullOrUndefined(currentBalance) && currentBalance.toFixed(2)) || '-'}</Text>
+                </FormField>
+              </Pane>
             </Pane>
-          </Pane>}
-
+          )}
         </Pane>
-        
+
         <Pane display='flex' justifyContent='flex-end' borderTop paddingTop={10}>
           {close && (
             <Button type='button' iconBefore='ban-circle' height={majorScale(5)} onClick={close}>
@@ -232,7 +242,14 @@ export const EditAccount = ({
             </Button>
           )}
           {account?.archived && (
-            <Button is={Link} to={`/account/${account?.id}`} type='button' iconBefore='eye-open' height={majorScale(5)} marginLeft={10}>
+            <Button
+              is={Link}
+              to={`/account/${account?.id}`}
+              type='button'
+              iconBefore='eye-open'
+              height={majorScale(5)}
+              marginLeft={10}
+            >
               View Account
             </Button>
           )}

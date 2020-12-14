@@ -93,7 +93,7 @@ export class RecordSelectors {
   /**
    * Returns the balance of the last record in the account.
    * This should be the account balance.
-   * 
+   *
    * @param state       The current application state.
    * @param accountId   The ID of the account.
    */

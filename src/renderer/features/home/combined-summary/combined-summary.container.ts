@@ -35,7 +35,7 @@ const selectAccountBalances = (query: DateCurriedQuery, dateSelector) =>
 
         for (const account of accounts) {
           const { id: accountId, archived, endYear, endMonth } = account;
-          
+
           // Check if the account is archived and if so, get the end date.
           // If we are dealing with a date that is greater than the end date of the account
           // then we put undefined and move on. This results in a '-' instead of continuing zeroes.
@@ -44,7 +44,7 @@ const selectAccountBalances = (query: DateCurriedQuery, dateSelector) =>
             accountBalances[accountId] = undefined;
             continue;
           }
-          
+
           let balance = records[accountId]?.filter(r => curriedQuery(r.date)).pop()?.balance;
 
           // Get the balance from the previous date if the current date had no entries.

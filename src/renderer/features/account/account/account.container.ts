@@ -33,7 +33,7 @@ const mapStateToProps = (state: IStore, { accountId }: OwnProps): StateProps => 
     hasRecords: !!(records?.length > 0),
     startingDate: newestTransactionDate ? stringToDayMonthYear(newestTransactionDate) : undefined,
     monthAndYears,
-    archived: !!account.archived
+    archived: !!account.archived,
   };
 };
 

@@ -12,7 +12,7 @@ const mapStateToProps = (): StateProps => ({
   headerText: 'New Account',
   saveButtonText: 'Save Account',
   canEditComplexFields: true,
-  isNew: true
+  isNew: true,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

@@ -27,7 +27,7 @@ export class AccountActions {
       id,
       archived,
       endYear,
-      endMonth
-    }
+      endMonth,
+    },
   });
 }

@@ -21,7 +21,7 @@ export const AccountMonthly = ({
   categories,
   updateCategory,
   updateSplitRecordCategory,
-  archived
+  archived,
 }: IAccountMonthlyProps) => {
   const [recordToDeleteSplitsFrom, setRecordToDeleteSplitsFrom] = React.useState<IRecord>(null);
   const [recordToDelete, setRecordToDelete] = React.useState<IRecord>(null);
@@ -74,7 +74,7 @@ export const AccountMonthly = ({
                   </Pane>
                 </Table.TextCell>
                 <Table.TextCell {...w200}>
-                  {(!archived && !record.splitRecords) && (
+                  {!archived && !record.splitRecords && (
                     <CategorySelect
                       record={record}
                       categories={categories}
@@ -82,9 +82,7 @@ export const AccountMonthly = ({
                       disabled={isSplittingTransaction === record.id}
                     />
                   )}
-                  {(archived && record.category) && (
-                    <CategoryTag category={record.category}/>
-                  )}
+                  {archived && record.category && <CategoryTag category={record.category} />}
                 </Table.TextCell>
                 <Table.TextCell isNumber textAlign='right' {...w100}>
                   {record.debit?.toFixed(2) || ''}

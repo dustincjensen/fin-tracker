@@ -32,7 +32,9 @@ export class AccountSelectors {
    * Returns the array of active accounts.
    */
   public static selectActiveAccounts = createSelector(AccountSelectors.accounts, accounts =>
-    Object.keys(accounts).map(id => accounts[id]).filter(a => !a.archived)
+    Object.keys(accounts)
+      .map(id => accounts[id])
+      .filter(a => !a.archived)
   );
 
   /**

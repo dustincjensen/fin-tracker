@@ -13,7 +13,7 @@ export const AccountDetailSummary = ({
 }: IAccountDetailSummaryProps) => {
   return (
     <>
-      {archived && <Alert title="This account is archived. No changes can be made." marginBottom={majorScale(3)} />}
+      {archived && <Alert title='This account is archived. No changes can be made.' marginBottom={majorScale(3)} />}
       <Pane
         border
         paddingLeft={40}
