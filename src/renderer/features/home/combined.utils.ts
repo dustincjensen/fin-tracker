@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import { AccountSelectors } from '../../store/account/account.selectors';
 import { RecordSelectors } from '../../store/record/record.selectors';
+import { getAccountStartDate } from '../../utils/account.utils';
 import {
   allMonthsBetweenDates,
   allYearsBetweenDates,
@@ -52,9 +53,7 @@ export const displayMonthDates = createSelector(
   (accounts, records) => {
     const startingDates = Object.keys(accounts).map(id => {
       const { startYear, startMonth } = accounts[id];
-      // TODO fix typing
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return `${startYear}-${parseInt(startMonth as any) + 1}`;
+      return getAccountStartDate(startYear, startMonth);
     });
 
     const endDates = Object.keys(accounts).map(id => {
