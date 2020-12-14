@@ -133,7 +133,7 @@ export function stringToDayMonthYear(date: string): string {
 
 /**
  * Returns the date in the format of 'Feb 2020'.
- * 
+ *
  * @param date  the date to convert to the new date format.
  */
 export function stringToMonthYear(date: string): string {

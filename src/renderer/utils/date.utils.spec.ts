@@ -168,10 +168,14 @@ describe('utils', () => {
         expect(stringToDayMonthYear(date)).toBe(expected);
       };
 
-      it('should return 29 Feb 2020 when provided 2020-02-29', () => assertStringToDayMonthYear('2020-02-29', '29 Feb 2020'));
-      it('should return 1 Jan 2020 when provided 2020-01-01', () => assertStringToDayMonthYear('2020-01-01', '1 Jan 2020'));
-      it('should return 31 Dec 2020 when provided 2020-12-31', () => assertStringToDayMonthYear('2020-12-31', '31 Dec 2020'));
-      it('should return 31 Dec 2019 when provided 2019-12-31', () => assertStringToDayMonthYear('2019-12-31', '31 Dec 2019'));
+      it('should return 29 Feb 2020 when provided 2020-02-29', () =>
+        assertStringToDayMonthYear('2020-02-29', '29 Feb 2020'));
+      it('should return 1 Jan 2020 when provided 2020-01-01', () =>
+        assertStringToDayMonthYear('2020-01-01', '1 Jan 2020'));
+      it('should return 31 Dec 2020 when provided 2020-12-31', () =>
+        assertStringToDayMonthYear('2020-12-31', '31 Dec 2020'));
+      it('should return 31 Dec 2019 when provided 2019-12-31', () =>
+        assertStringToDayMonthYear('2019-12-31', '31 Dec 2019'));
     });
 
     describe('stringToMonthYear', () => {

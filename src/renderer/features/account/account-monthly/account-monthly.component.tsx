@@ -1,4 +1,4 @@
-import { Table, Popover, Position, Menu, Pane, Tooltip, IconButton } from 'evergreen-ui';
+import { Table, Popover, Position, Menu, Pane, Tooltip, IconButton, Icon } from 'evergreen-ui';
 import * as React from 'react';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
 import { IRecord } from '../../../store/record/record.interface';
@@ -53,14 +53,23 @@ export const AccountMonthly = ({
               <Table.Row isSelectable>
                 <Table.TextCell {...w100}>{formatDate(record.date)}</Table.TextCell>
                 <Table.TextCell>
-                  <Pane>{record.description}</Pane>
-                  {record?.details && (
-                    <Tooltip content={record?.details} hideDelay={0}>
-                      <Pane maxWidth={350} whiteSpace='nowrap' overflow='hidden' textOverflow='ellipsis'>
-                        {record?.details}
-                      </Pane>
-                    </Tooltip>
-                  )}
+                  <Pane display='flex' alignItems='center'>
+                    {record.isManualEntry && (
+                      <Tooltip content='Manually entered' hideDelay={0}>
+                        <Icon icon='manually-entered-data' marginTop={3} marginRight={10} />
+                      </Tooltip>
+                    )}
+                    <Pane>
+                      <Pane>{record.description}</Pane>
+                      {record?.details && (
+                        <Tooltip content={record?.details} hideDelay={0}>
+                          <Pane maxWidth={350} whiteSpace='nowrap' overflow='hidden' textOverflow='ellipsis'>
+                            {record?.details}
+                          </Pane>
+                        </Tooltip>
+                      )}
+                    </Pane>
+                  </Pane>
                 </Table.TextCell>
                 <Table.TextCell {...w200}>
                   {!record.splitRecords && (

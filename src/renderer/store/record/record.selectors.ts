@@ -52,7 +52,7 @@ export class RecordSelectors {
       return previousMonthRecords[previousMonthRecords.length - 1]?.balance;
     }
 
-    // The month before the provided date did not have records. Try again with the month 
+    // The month before the provided date did not have records. Try again with the month
     // before the previous month, but only if we are still after the start date of the account.
     const account = AccountSelectors.account(state, accountId);
     const accountStartDate = createDate(getAccountStartDate(account.startYear, account.startMonth));
@@ -77,7 +77,7 @@ export class RecordSelectors {
       return monthsRecords[monthsRecords.length - 1]?.balance;
     }
 
-    // The month did not have records. Try again with the previous month, 
+    // The month did not have records. Try again with the previous month,
     // but only if we are still after the start date of the account.
     const account = AccountSelectors.account(state, accountId);
     const accountStartDate = createDate(getAccountStartDate(account.startYear, account.startMonth));

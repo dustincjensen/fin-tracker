@@ -10,9 +10,9 @@ Tasks
 =====
 Next
 / Add transactions manually.
-  + fix account summary when months inbetween that have no records don't show previous month balance or end month balance. They should carry over from the last month that had records.
   - update manual transactions? (Or just delete and re-add?)
-  - mark row in table as manual with icon and tooltip
+  + mark row in table as manual with icon and tooltip
+  + fix account summary when months inbetween that have no records don't show previous month balance or end month balance. They should carry over from the last month that had records.
   + delete manual transactions
   + mark transactions as manually entered (new field on IRecord for store)
 - Allow for archiving accounts (closing accounts)
@@ -38,3 +38,5 @@ Next 2
   - Right now if one of the account views breaks, you can't visit another account until you
     visit another route first. Being able to wrap all components in a error boundary HOC would
     be cool!
+
+- Donation link on Github and in app?

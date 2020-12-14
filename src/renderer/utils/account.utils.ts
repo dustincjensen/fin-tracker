@@ -24,7 +24,7 @@ export const accountTypeIconNames: Record<AccountType, IconName> = {
  * There are 2 reasons why this function exists.
  *    1. The months are zero indexed, so I don't forget.
  *    2. The months are stored as strings, but typed as numbers, this makes it inconvenient.
- * 
+ *
  * @param startYear   The starting year of the account.
  * @param startMonth  The starting month of the account.
  */
