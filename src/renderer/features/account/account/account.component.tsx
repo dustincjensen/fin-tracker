@@ -10,7 +10,7 @@ import { MonthYearList } from '../month-year-list/month-year-list.component';
 import { IAccountProps } from './account.props.interface';
 
 // TODO clean up the account id, date, state selector passed to the 3 containers.
-export const Account = ({ accountId, hasRecords, startingDate, monthAndYears }: IAccountProps) => {
+export const Account = ({ accountId, hasRecords, startingDate, monthAndYears, archived }: IAccountProps) => {
   const [date, setDate] = React.useState(startingDate);
 
   React.useEffect(() => {
@@ -35,9 +35,10 @@ export const Account = ({ accountId, hasRecords, startingDate, monthAndYears }: 
           <AccountMonthlyCategoryTotalsChartContainer accountId={accountId} date={date} />
         </Pane>
         <Pane display='grid'>
-          <AccountDetailSummaryContainer accountId={accountId} date={date} />
-          <AccountActions accountId={accountId} />
-          <AccountMonthlyContainer accountId={accountId} date={date} />
+          <AccountDetailSummaryContainer accountId={accountId} date={date} archived={archived} />
+          {/* TODO if this was a container, this could get this flag itself... */}
+          {!archived && <AccountActions accountId={accountId} />}
+          <AccountMonthlyContainer accountId={accountId} date={date} archived={archived} />
         </Pane>
       </Pane>
     </Pane>

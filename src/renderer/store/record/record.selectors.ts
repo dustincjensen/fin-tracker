@@ -89,4 +89,16 @@ export class RecordSelectors {
       return undefined;
     }
   }
+
+  /**
+   * Returns the balance of the last record in the account.
+   * This should be the account balance.
+   * 
+   * @param state       The current application state.
+   * @param accountId   The ID of the account.
+   */
+  public static currentBalance(state: IStore, accountId: string): number {
+    const records = RecordSelectors.recordsByAccountId(state, accountId);
+    return records?.[records.length - 1]?.balance;
+  }
 }

@@ -35,7 +35,27 @@ export interface IEditAccountProps {
   account?: IAccount;
 
   /**
+   * The current balance of the account if available.
+   */
+  currentBalance?: number;
+
+  /**
+   * The year and month of the latest transaction.
+   */
+  lastTransactionDate?: [number, number];
+
+  /**
    * A function when invoked will close the account section.
    */
   close?: () => void;
+
+  /**
+   * True if the account is new (editing).
+   */
+  isNew?: boolean;
+
+  /**
+   * Function to call to archive the account.
+   */
+  archiveAccount?: (id: string, archived: boolean, endYear: number, endMonth: number) => void;
 }

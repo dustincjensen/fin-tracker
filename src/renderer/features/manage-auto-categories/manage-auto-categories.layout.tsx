@@ -6,6 +6,7 @@ import { AutoCategoriesContainer } from './auto-categories/auto-categories.conta
 
 export const ManageAutoCategoriesLayout = () => {
   const [autoCategoryFilter, setAutoCategoryFilter] = React.useState<string>('');
+  // TODO add toggle to see archived account auto categories.
 
   return (
     <ErrorBoundary>

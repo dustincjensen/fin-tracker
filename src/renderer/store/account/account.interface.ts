@@ -39,6 +39,11 @@ export interface IAccount {
   endMonth?: number;
 
   /**
+   * True if the account is archived, false or undefined otherwise.
+   */
+  archived?: boolean;
+
+  /**
    * The type of the account.
    */
   accountType: AccountType;

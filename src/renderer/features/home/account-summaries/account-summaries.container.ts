@@ -14,6 +14,11 @@ type StateProps = IAccountSummariesProps;
 const accountSummarySelector = createSelector(AccountSelectors.accounts, RecordSelectors.records, (accounts, records) =>
   Object.keys(accounts).map(id => {
     const account = accounts[id];
+
+    if (account.archived) {
+      return undefined;
+    }
+
     const accountRecords = records[id];
     const lastRecord = accountRecords?.[accountRecords.length - 1];
     return {
@@ -23,7 +28,7 @@ const accountSummarySelector = createSelector(AccountSelectors.accounts, RecordS
       iconName: accountTypeIconNames[account.accountType] as IconName,
       name: account.name,
     };
-  })
+  }).filter(a => a)
 );
 
 const mapStateToProps = (state: IStore): StateProps => {

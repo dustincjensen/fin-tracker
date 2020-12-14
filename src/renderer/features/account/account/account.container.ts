@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { AccountSelectors } from '../../../store/account/account.selectors';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
 import {
@@ -11,10 +12,11 @@ import {
 import { Account } from './account.component';
 import { IAccountProps } from './account.props.interface';
 
-type StateProps = Pick<IAccountProps, 'hasRecords' | 'startingDate' | 'monthAndYears'>;
+type StateProps = Pick<IAccountProps, 'hasRecords' | 'startingDate' | 'monthAndYears' | 'archived'>;
 type OwnProps = Pick<IAccountProps, 'accountId'>;
 
 const mapStateToProps = (state: IStore, { accountId }: OwnProps): StateProps => {
+  const account = AccountSelectors.account(state, accountId);
   const records = RecordSelectors.recordsByAccountId(state, accountId);
 
   const recordDates = records?.map(r => r.date);
@@ -31,6 +33,7 @@ const mapStateToProps = (state: IStore, { accountId }: OwnProps): StateProps => 
     hasRecords: !!(records?.length > 0),
     startingDate: newestTransactionDate ? stringToDayMonthYear(newestTransactionDate) : undefined,
     monthAndYears,
+    archived: !!account.archived
   };
 };
 

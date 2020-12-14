@@ -10,6 +10,7 @@ export interface IAutoCategoriesProps {
       accountName: string;
       category: ICategory;
       numberOfRecords: number;
+      accountArchived: boolean;
     }
   >;
 

@@ -1,6 +1,7 @@
 import { Table, Popover, Position, Menu, Pane, Tooltip, IconButton, Icon } from 'evergreen-ui';
 import * as React from 'react';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
+import { CategoryTag } from '../../../components/category-tag/category-tag.component';
 import { IRecord } from '../../../store/record/record.interface';
 import { formatDate } from '../../../utils/date.utils';
 import { createStaticWidthCell } from '../../../utils/table.utils';
@@ -20,6 +21,7 @@ export const AccountMonthly = ({
   categories,
   updateCategory,
   updateSplitRecordCategory,
+  archived
 }: IAccountMonthlyProps) => {
   const [recordToDeleteSplitsFrom, setRecordToDeleteSplitsFrom] = React.useState<IRecord>(null);
   const [recordToDelete, setRecordToDelete] = React.useState<IRecord>(null);
@@ -44,7 +46,7 @@ export const AccountMonthly = ({
         <Table.TextHeaderCell {...w100}>Debit</Table.TextHeaderCell>
         <Table.TextHeaderCell {...w100}>Credit</Table.TextHeaderCell>
         <Table.TextHeaderCell {...w100}>Balance</Table.TextHeaderCell>
-        <Table.HeaderCell flex='none' width={54}></Table.HeaderCell>
+        {!archived && <Table.HeaderCell flex='none' width={54}></Table.HeaderCell>}
       </Table.Head>
       <Table.Body>
         {records?.map(record => {
@@ -72,13 +74,16 @@ export const AccountMonthly = ({
                   </Pane>
                 </Table.TextCell>
                 <Table.TextCell {...w200}>
-                  {!record.splitRecords && (
+                  {(!archived && !record.splitRecords) && (
                     <CategorySelect
                       record={record}
                       categories={categories}
                       updateCategory={updateCategory}
                       disabled={isSplittingTransaction === record.id}
                     />
+                  )}
+                  {(archived && record.category) && (
+                    <CategoryTag category={record.category}/>
                   )}
                 </Table.TextCell>
                 <Table.TextCell isNumber textAlign='right' {...w100}>
@@ -90,94 +95,96 @@ export const AccountMonthly = ({
                 <Table.TextCell isNumber textAlign='right' {...w100}>
                   {record.balance?.toFixed(2) || ''}
                 </Table.TextCell>
-                <Table.Cell flex='none' justifyContent='flex-end' width={54}>
-                  <Popover
-                    position={Position.BOTTOM_RIGHT}
-                    content={({ close }) => (
-                      <Menu>
-                        <Menu.Group>
-                          <Menu.Item
-                            icon='edit'
-                            onSelect={() => {
-                              setRecordToAddDetails(record);
-                              setRecordToAutoCategorize(undefined);
-                              setIsSplittingTransaction(undefined);
-                              close();
-                            }}
-                          >
-                            Edit Details
-                          </Menu.Item>
-                          <Menu.Item
-                            icon='fork'
-                            onSelect={() => {
-                              setIsSplittingTransaction(record.id);
-                              setRecordToAddDetails(undefined);
-                              setRecordToAutoCategorize(undefined);
-                              close();
-                            }}
-                          >
-                            {record.splitRecords ? 'Edit Split Transactions' : 'Split Transaction'}
-                          </Menu.Item>
-                          {!record.splitRecords && (
+                {!archived && (
+                  <Table.Cell flex='none' justifyContent='flex-end' width={54}>
+                    <Popover
+                      position={Position.BOTTOM_RIGHT}
+                      content={({ close }) => (
+                        <Menu>
+                          <Menu.Group>
                             <Menu.Item
-                              icon='automatic-updates'
+                              icon='edit'
                               onSelect={() => {
-                                setRecordToAutoCategorize(record);
-                                setRecordToAddDetails(undefined);
+                                setRecordToAddDetails(record);
+                                setRecordToAutoCategorize(undefined);
                                 setIsSplittingTransaction(undefined);
                                 close();
                               }}
                             >
-                              Setup Auto Category
+                              Edit Details
                             </Menu.Item>
+                            <Menu.Item
+                              icon='fork'
+                              onSelect={() => {
+                                setIsSplittingTransaction(record.id);
+                                setRecordToAddDetails(undefined);
+                                setRecordToAutoCategorize(undefined);
+                                close();
+                              }}
+                            >
+                              {record.splitRecords ? 'Edit Split Transactions' : 'Split Transaction'}
+                            </Menu.Item>
+                            {!record.splitRecords && (
+                              <Menu.Item
+                                icon='automatic-updates'
+                                onSelect={() => {
+                                  setRecordToAutoCategorize(record);
+                                  setRecordToAddDetails(undefined);
+                                  setIsSplittingTransaction(undefined);
+                                  close();
+                                }}
+                              >
+                                Setup Auto Category
+                              </Menu.Item>
+                            )}
+                          </Menu.Group>
+                          {(record.splitRecords || record.isManualEntry) && (
+                            <>
+                              <Menu.Divider />
+                              <Menu.Group>
+                                {record.splitRecords && (
+                                  <Menu.Item
+                                    icon='trash'
+                                    intent='danger'
+                                    onSelect={() => {
+                                      setRecordToDeleteSplitsFrom(record);
+                                      close();
+                                    }}
+                                  >
+                                    Delete Split Transactions
+                                  </Menu.Item>
+                                )}
+                                {record.isManualEntry && (
+                                  <Menu.Item
+                                    icon='trash'
+                                    intent='danger'
+                                    onSelect={() => {
+                                      setRecordToDelete(record);
+                                      close();
+                                    }}
+                                  >
+                                    Delete Transaction
+                                  </Menu.Item>
+                                )}
+                              </Menu.Group>
+                            </>
                           )}
-                        </Menu.Group>
-                        {(record.splitRecords || record.isManualEntry) && (
-                          <>
-                            <Menu.Divider />
-                            <Menu.Group>
-                              {record.splitRecords && (
-                                <Menu.Item
-                                  icon='trash'
-                                  intent='danger'
-                                  onSelect={() => {
-                                    setRecordToDeleteSplitsFrom(record);
-                                    close();
-                                  }}
-                                >
-                                  Delete Split Transactions
-                                </Menu.Item>
-                              )}
-                              {record.isManualEntry && (
-                                <Menu.Item
-                                  icon='trash'
-                                  intent='danger'
-                                  onSelect={() => {
-                                    setRecordToDelete(record);
-                                    close();
-                                  }}
-                                >
-                                  Delete Transaction
-                                </Menu.Item>
-                              )}
-                            </Menu.Group>
-                          </>
-                        )}
-                      </Menu>
-                    )}
-                  >
-                    <Tooltip content='Options' hideDelay={0}>
-                      <IconButton
-                        icon='more'
-                        appearance='minimal'
-                        disabled={
-                          (isSplittingTransaction && isSplittingTransaction !== record.id) ||
-                          (!record.credit && !record.debit)
-                        }
-                      />
-                    </Tooltip>
-                  </Popover>
-                </Table.Cell>
+                        </Menu>
+                      )}
+                    >
+                      <Tooltip content='Options' hideDelay={0}>
+                        <IconButton
+                          icon='more'
+                          appearance='minimal'
+                          disabled={
+                            (isSplittingTransaction && isSplittingTransaction !== record.id) ||
+                            (!record.credit && !record.debit)
+                          }
+                        />
+                      </Tooltip>
+                    </Popover>
+                  </Table.Cell>
+                )}
               </Table.Row>
               {isSplittingTransaction === record.id && (
                 <Pane background='tint1' borderLeft borderRight borderBottom>
@@ -202,17 +209,21 @@ export const AccountMonthly = ({
         })}
       </Table.Body>
 
-      {/* Modals
-          These use useCallbacks for the onClose method and all are React.memo'ed.
-          This minimizes renders when switching accounts and months in the account view. */}
-      <DeleteSplitRecordsDialog record={recordToDeleteSplitsFrom} onClose={onDelteSplitRecordsClose} />
-      <DeleteRecordDialog record={recordToDelete} onClose={onDeleteRecordClose} />
-      <EditDetailsDialog record={recordToAddDetails} onClose={onEditDetailsClose} />
-      <EditAutoCategoryDialog
-        record={recordToAutoCategorize}
-        categories={categories}
-        onClose={onEditAutoCategoryClose}
-      />
+      {!archived && (
+        // Modals
+        // These use useCallbacks for the onClose method and all are React.memo'ed.
+        // This minimizes renders when switching accounts and months in the account view.
+        <>
+          <DeleteSplitRecordsDialog record={recordToDeleteSplitsFrom} onClose={onDelteSplitRecordsClose} />
+          <DeleteRecordDialog record={recordToDelete} onClose={onDeleteRecordClose} />
+          <EditDetailsDialog record={recordToAddDetails} onClose={onEditDetailsClose} />
+          <EditAutoCategoryDialog
+            record={recordToAutoCategorize}
+            categories={categories}
+            onClose={onEditAutoCategoryClose}
+          />
+        </>
+      )}
     </Table>
   );
 };

@@ -7,4 +7,5 @@ export interface IAccountDetailSummaryProps {
 
   accountId: string;
   date: string;
+  archived: boolean;
 }

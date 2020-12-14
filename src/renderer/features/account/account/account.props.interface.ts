@@ -18,4 +18,9 @@ export interface IAccountProps {
    * The account to load.
    */
   accountId: string;
+
+  /**
+   * True if the account is archived, false otherwise.
+   */
+  archived: boolean;
 }
