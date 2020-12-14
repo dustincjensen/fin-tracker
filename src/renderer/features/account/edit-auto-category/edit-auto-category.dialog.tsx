@@ -10,7 +10,7 @@ import { IEditAutoCategoryProps } from './edit-auto-category.props.interface';
 
 type CategoryRecord = ICategorySelectProps['record'];
 
-export const EditAutoCategoryDialog = ({ record, categories, onClose }: IEditAutoCategoryProps) => {
+export const EditAutoCategoryDialogComponent = ({ record, categories, onClose }: IEditAutoCategoryProps) => {
   const dispatch = useDispatch();
   const [description, setDescription] = React.useState<string>('');
   const [descriptionError, setDescriptionError] = React.useState<string>('');
@@ -111,3 +111,5 @@ export const EditAutoCategoryDialog = ({ record, categories, onClose }: IEditAut
     </Dialog>
   );
 };
+
+export const EditAutoCategoryDialog = React.memo(EditAutoCategoryDialogComponent);

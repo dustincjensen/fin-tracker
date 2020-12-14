@@ -4,6 +4,7 @@ import { CategorySelect } from '../../../components/category-select/category-sel
 import { IRecord } from '../../../store/record/record.interface';
 import { formatDate } from '../../../utils/date.utils';
 import { createStaticWidthCell } from '../../../utils/table.utils';
+import { DeleteRecordDialog } from '../delete-record/delete-record.dialog';
 import { DeleteSplitRecordsDialog } from '../delete-split-records/delete-split-records.dialog';
 import { EditAutoCategoryDialog } from '../edit-auto-category/edit-auto-category.dialog';
 import { EditDetailsDialog } from '../edit-details/edit-details.dialog';
@@ -20,10 +21,18 @@ export const AccountMonthly = ({
   updateCategory,
   updateSplitRecordCategory,
 }: IAccountMonthlyProps) => {
-  const [recordToDeleteFrom, setRecordToDeleteFrom] = React.useState<IRecord>(null);
+  const [recordToDeleteSplitsFrom, setRecordToDeleteSplitsFrom] = React.useState<IRecord>(null);
+  const [recordToDelete, setRecordToDelete] = React.useState<IRecord>(null);
   const [recordToAddDetails, setRecordToAddDetails] = React.useState<IRecord>(null);
   const [recordToAutoCategorize, setRecordToAutoCategorize] = React.useState<IRecord>(null);
   const [isSplittingTransaction, setIsSplittingTransaction] = React.useState<string>(undefined);
+
+  const onDeleteRecordClose = React.useCallback(() => setRecordToDelete(null), [setRecordToDelete]);
+  const onDelteSplitRecordsClose = React.useCallback(() => setRecordToDeleteSplitsFrom(null), [
+    setRecordToDeleteSplitsFrom,
+  ]);
+  const onEditDetailsClose = React.useCallback(() => setRecordToAddDetails(null), [setRecordToAddDetails]);
+  const onEditAutoCategoryClose = React.useCallback(() => setRecordToAutoCategorize(null), [setRecordToAutoCategorize]);
 
   return (
     <Table>
@@ -114,20 +123,34 @@ export const AccountMonthly = ({
                             </Menu.Item>
                           )}
                         </Menu.Group>
-                        {record.splitRecords && (
+                        {(record.splitRecords || record.isManualEntry) && (
                           <>
                             <Menu.Divider />
                             <Menu.Group>
-                              <Menu.Item
-                                icon='trash'
-                                intent='danger'
-                                onSelect={() => {
-                                  setRecordToDeleteFrom(record);
-                                  close();
-                                }}
-                              >
-                                Delete Split Transactions
-                              </Menu.Item>
+                              {record.splitRecords && (
+                                <Menu.Item
+                                  icon='trash'
+                                  intent='danger'
+                                  onSelect={() => {
+                                    setRecordToDeleteSplitsFrom(record);
+                                    close();
+                                  }}
+                                >
+                                  Delete Split Transactions
+                                </Menu.Item>
+                              )}
+                              {record.isManualEntry && (
+                                <Menu.Item
+                                  icon='trash'
+                                  intent='danger'
+                                  onSelect={() => {
+                                    setRecordToDelete(record);
+                                    close();
+                                  }}
+                                >
+                                  Delete Transaction
+                                </Menu.Item>
+                              )}
                             </Menu.Group>
                           </>
                         )}
@@ -170,14 +193,16 @@ export const AccountMonthly = ({
         })}
       </Table.Body>
 
-      <DeleteSplitRecordsDialog record={recordToDeleteFrom} onClose={() => setRecordToDeleteFrom(null)} />
-
-      <EditDetailsDialog record={recordToAddDetails} onClose={() => setRecordToAddDetails(null)} />
-
+      {/* Modals
+          These use useCallbacks for the onClose method and all are React.memo'ed.
+          This minimizes renders when switching accounts and months in the account view. */}
+      <DeleteSplitRecordsDialog record={recordToDeleteSplitsFrom} onClose={onDelteSplitRecordsClose} />
+      <DeleteRecordDialog record={recordToDelete} onClose={onDeleteRecordClose} />
+      <EditDetailsDialog record={recordToAddDetails} onClose={onEditDetailsClose} />
       <EditAutoCategoryDialog
         record={recordToAutoCategorize}
         categories={categories}
-        onClose={() => setRecordToAutoCategorize(null)}
+        onClose={onEditAutoCategoryClose}
       />
     </Table>
   );

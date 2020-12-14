@@ -9,8 +9,12 @@ Bugs
 Tasks
 =====
 Next
+/ Add transactions manually.
+  - fix account summary when months inbetween that have no records don't show previous month balance or end month balance. They should carry over from the last month that had records? Or should those months even be selectable in the UI?
+  + delete manual transactions
+  + mark transactions as manually entered (new field on IRecord for store)
+  - update manual transactions? (Or just delete and re-add?)
 - Allow for archiving accounts (closing accounts)
-- Add transactions manually.
 - Support TFSA/RRSP Manual accounts. (Transfer Category per account? Basic Transfer Category?)
 
 Next 2
