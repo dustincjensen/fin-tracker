@@ -2,7 +2,12 @@ import { Pane, SearchInput, majorScale, Checkbox } from 'evergreen-ui';
 import * as React from 'react';
 import { IAutoCategoriesFilterProps } from './auto-categories-filter.props.interface';
 
-export const AutoCategoriesFilter = ({ autoCategoryFilter, setAutoCategoryFilter, showArchived, toggleShowArchived }: IAutoCategoriesFilterProps) => {
+export const AutoCategoriesFilter = ({
+  autoCategoryFilter,
+  setAutoCategoryFilter,
+  showArchived,
+  toggleShowArchived,
+}: IAutoCategoriesFilterProps) => {
   const onChange = evt => setAutoCategoryFilter(evt.target.value);
   const onArchivedChange = () => toggleShowArchived();
 

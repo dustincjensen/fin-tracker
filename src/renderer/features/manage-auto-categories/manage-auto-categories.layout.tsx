@@ -14,17 +14,14 @@ export const ManageAutoCategoriesLayout = () => {
     <ErrorBoundary>
       <Pane display='grid' padding={20}>
         <Pane marginBottom={10}>
-          <AutoCategoriesFilter 
+          <AutoCategoriesFilter
             autoCategoryFilter={autoCategoryFilter}
             setAutoCategoryFilter={setAutoCategoryFilter}
             showArchived={showArchived}
             toggleShowArchived={toggleShowArchived}
           />
         </Pane>
-        <AutoCategoriesContainer 
-          autoCategoryFilter={autoCategoryFilter}
-          showArchived={showArchived}
-        />
+        <AutoCategoriesContainer autoCategoryFilter={autoCategoryFilter} showArchived={showArchived} />
       </Pane>
     </ErrorBoundary>
   );

@@ -54,9 +54,9 @@ const mapStateToProps = (state: IStore, { autoCategoryFilter, showArchived }: Ow
     autoCategoryFilter && autoCategoryFilter.length > 0
       ? autoCategories.filter(a => a.description.toLowerCase().indexOf(autoCategoryFilter.toLowerCase()) >= 0)
       : autoCategories;
-    
-  filteredAutoCategories = showArchived 
-    ? filteredAutoCategories 
+
+  filteredAutoCategories = showArchived
+    ? filteredAutoCategories
     : filteredAutoCategories.filter(a => !a.accountArchived);
 
   return {
