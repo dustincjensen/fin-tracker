@@ -103,5 +103,32 @@ describe('reducers', () => {
         expect(newState).toEqual(expectedState);
       });
     });
+
+    describe('archiveAccount', () => {
+      it('should set account as archived', () => {
+        const initialState: IAccountStore = {
+          accounts: {
+            [accountId]: account
+          }
+        };
+        
+        const newState = reducer(initialState, {
+          type: AccountActions.ARCHIVE_ACCOUNT,
+          payload: { id: accountId, archived: true, endYear: 2020, endMonth: 11 }
+        });
+
+        const expectedState: IAccountStore = {
+          accounts: {
+            [accountId]: {
+              ...account,
+              archived: true,
+              endYear: 2020,
+              endMonth: 11
+            }
+          }
+        };
+        expect(newState).toEqual(expectedState);
+      });
+    });
   });
 });

@@ -23,6 +23,7 @@ interface IDatePickerProps {
 }
 
 // TODO remove moment references for IDate and date.utils methods.
+// TODO tests
 export const DatePicker = ({ value: date, onChange }: IDatePickerProps) => {
   const [today] = React.useState(() =>
     moment()
