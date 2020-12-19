@@ -12,7 +12,7 @@ Next
 / Add transactions manually.
   - update manual transactions? (Or just delete and re-add?)
   - Auto Category filter to see archived accounts auto categories.
-  - BUG When you add a transaction it selects the new month on the side visually, but stays on the current month.
+  + BUG When you add a transaction it selects the new month on the side visually, but stays on the current month.
   + mark row in table as manual with icon and tooltip
   + fix account summary when months inbetween that have no records don't show previous month balance or end month balance. They should carry over from the last month that had records.
   + delete manual transactions
