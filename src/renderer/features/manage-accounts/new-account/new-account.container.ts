@@ -5,13 +5,14 @@ import { IAccount } from '../../../store/account/account.interface';
 import { EditAccount } from '../edit-account/edit-account.component';
 import { IEditAccountProps } from '../edit-account/edit-account.props.interface';
 
-type StateProps = Pick<IEditAccountProps, 'headerText' | 'saveButtonText' | 'canEditComplexFields'>;
+type StateProps = Pick<IEditAccountProps, 'headerText' | 'saveButtonText' | 'canEditComplexFields' | 'isNew'>;
 type DispatchProps = Pick<IEditAccountProps, 'saveAccount'>;
 
 const mapStateToProps = (): StateProps => ({
   headerText: 'New Account',
   saveButtonText: 'Save Account',
   canEditComplexFields: true,
+  isNew: true,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

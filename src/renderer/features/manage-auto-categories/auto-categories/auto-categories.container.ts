@@ -10,11 +10,11 @@ import { AutoCategories } from './auto-categories.component';
 import { IAutoCategoriesProps } from './auto-categories.props.interface';
 
 type StateProps = Pick<IAutoCategoriesProps, 'autoCategories'>;
-type OwnProps = Pick<IAutoCategoriesProps, 'autoCategoryFilter'>;
+type OwnProps = Pick<IAutoCategoriesProps, 'autoCategoryFilter' | 'showArchived'>;
 
 const autoCategorySelector = createSelector(
   CategorySelectors.selectCategories,
-  AccountSelectors.selectAccountNames,
+  AccountSelectors.selectAccounts,
   RecordSelectors.records,
   AutoCategorySelectors.autoCategories,
   (categories, accounts, records, autoCategories) => {
@@ -36,7 +36,8 @@ const autoCategorySelector = createSelector(
         return {
           ...ac,
           category: categories.find(c => c.id === ac.categoryId),
-          accountName: account.accountName,
+          accountName: account.name,
+          accountArchived: account.archived,
           numberOfRecords: records[account.id]?.filter(r => r.autoCategoryId === ac.id).length,
         };
       })
@@ -46,13 +47,17 @@ const autoCategorySelector = createSelector(
   }
 );
 
-const mapStateToProps = (state: IStore, { autoCategoryFilter }: OwnProps): StateProps => {
+const mapStateToProps = (state: IStore, { autoCategoryFilter, showArchived }: OwnProps): StateProps => {
   const autoCategories = autoCategorySelector(state);
 
-  const filteredAutoCategories =
+  let filteredAutoCategories =
     autoCategoryFilter && autoCategoryFilter.length > 0
       ? autoCategories.filter(a => a.description.toLowerCase().indexOf(autoCategoryFilter.toLowerCase()) >= 0)
       : autoCategories;
+
+  filteredAutoCategories = showArchived
+    ? filteredAutoCategories
+    : filteredAutoCategories.filter(a => !a.accountArchived);
 
   return {
     autoCategories: filteredAutoCategories,

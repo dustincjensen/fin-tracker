@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { RecordActions } from '../../../store/record/record.actions';
 import { IDeleteSplitRecordsProps } from './delete-split-records.props.interface';
 
-export const DeleteSplitRecordsDialog = ({ record, onClose }: IDeleteSplitRecordsProps) => {
+const DeleteSplitRecordsDialogComponent = ({ record, onClose }: IDeleteSplitRecordsProps) => {
   const dispatch = useDispatch();
 
   if (!record) {
@@ -30,3 +30,5 @@ export const DeleteSplitRecordsDialog = ({ record, onClose }: IDeleteSplitRecord
     </Dialog>
   );
 };
+
+export const DeleteSplitRecordsDialog = React.memo(DeleteSplitRecordsDialogComponent);

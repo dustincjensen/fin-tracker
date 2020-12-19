@@ -10,6 +10,7 @@ export interface IAutoCategoriesProps {
       accountName: string;
       category: ICategory;
       numberOfRecords: number;
+      accountArchived: boolean;
     }
   >;
 
@@ -17,4 +18,9 @@ export interface IAutoCategoriesProps {
    * The auto category filter.
    */
   autoCategoryFilter: string;
+
+  /**
+   * True if archived accounts should be shown, false otherwise.
+   */
+  showArchived: boolean;
 }

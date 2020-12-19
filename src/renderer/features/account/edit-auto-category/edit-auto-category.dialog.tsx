@@ -10,7 +10,7 @@ import { IEditAutoCategoryProps } from './edit-auto-category.props.interface';
 
 type CategoryRecord = ICategorySelectProps['record'];
 
-export const EditAutoCategoryDialog = ({ record, categories, onClose }: IEditAutoCategoryProps) => {
+export const EditAutoCategoryDialogComponent = ({ record, categories, onClose }: IEditAutoCategoryProps) => {
   const dispatch = useDispatch();
   const [description, setDescription] = React.useState<string>('');
   const [descriptionError, setDescriptionError] = React.useState<string>('');
@@ -20,7 +20,9 @@ export const EditAutoCategoryDialog = ({ record, categories, onClose }: IEditAut
 
   React.useEffect(() => {
     setDescription(record?.description || '');
+    setDescriptionError('');
     setCategoryRecord({ id: undefined, category: undefined });
+    setCategoryError('');
     setOverwriteExisting(false);
   }, [record]);
 
@@ -77,6 +79,7 @@ export const EditAutoCategoryDialog = ({ record, categories, onClose }: IEditAut
       confirmLabel='Save Auto Category'
       title='New Auto Category'
       onConfirm={confirm}
+      shouldCloseOnOverlayClick={false}
     >
       <Alert marginBottom={majorScale(3)} title='Matching descriptions is account specific.'>
         Please note previously auto-categorized transactions that begin with the description below will also be
@@ -108,3 +111,5 @@ export const EditAutoCategoryDialog = ({ record, categories, onClose }: IEditAut
     </Dialog>
   );
 };
+
+export const EditAutoCategoryDialog = React.memo(EditAutoCategoryDialogComponent);

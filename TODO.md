@@ -9,11 +9,12 @@ Bugs
 Tasks
 =====
 Next
-- Allow for archiving accounts (closing accounts)
-- Add transactions manually.
+- Support TFSA/RRSP Manual accounts. (Transfer Category per account? Basic Transfer Category?)
+- Update manual transactions? (Or just delete and re-add?)
+- Improve account monthly header
+- Manage Settings into 1 menu option.
 
 Next 2
-- Improve account monthly header
 - Feature component tests
 
 - Refactor selectors
@@ -32,3 +33,5 @@ Next 2
   - Right now if one of the account views breaks, you can't visit another account until you
     visit another route first. Being able to wrap all components in a error boundary HOC would
     be cool!
+
+- Donation link on Github and in app?

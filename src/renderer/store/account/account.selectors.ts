@@ -29,6 +29,15 @@ export class AccountSelectors {
   );
 
   /**
+   * Returns the array of active accounts.
+   */
+  public static selectActiveAccounts = createSelector(AccountSelectors.accounts, accounts =>
+    Object.keys(accounts)
+      .map(id => accounts[id])
+      .filter(a => !a.archived)
+  );
+
+  /**
    * Returns an array of account ID's and names.
    */
   public static selectAccountNames = createSelector(AccountSelectors.accounts, accounts => {

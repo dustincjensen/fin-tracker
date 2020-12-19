@@ -31,4 +31,9 @@ export interface IAccountMonthlyProps {
    * The first date of the month to get the data for.
    */
   date: string;
+
+  /**
+   * True if the account is archived, false otherwise.
+   */
+  archived: boolean;
 }

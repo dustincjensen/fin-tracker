@@ -1,4 +1,4 @@
-import { Table, Tooltip, IconButton, Pane } from 'evergreen-ui';
+import { Table, Tooltip, IconButton, Pane, Icon } from 'evergreen-ui';
 import * as React from 'react';
 import { IAccount } from '../../../store/account/account.interface';
 import { accountTypeLabels } from '../../../utils/account.utils';
@@ -31,7 +31,16 @@ export const Accounts = ({ accounts }: IAccountProps) => {
           return (
             <Pane key={account.id}>
               <Table.Row>
-                <Table.TextCell>{account.name}</Table.TextCell>
+                <Table.TextCell>
+                  <Pane display='flex' alignItems='center'>
+                    {account.archived && (
+                      <Tooltip content='Archived' hideDelay={0}>
+                        <Icon icon='archive' marginTop={3} marginRight={10} />
+                      </Tooltip>
+                    )}
+                    {account.name}
+                  </Pane>
+                </Table.TextCell>
                 <Table.TextCell>{account.accountType && accountTypeLabels[account.accountType]}</Table.TextCell>
                 <Table.Cell flex='none' justifyContent='flex-end' width={100}>
                   <Tooltip content='Edit Account' hideDelay={0}>

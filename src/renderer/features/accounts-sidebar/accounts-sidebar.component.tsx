@@ -6,7 +6,7 @@ import { AccountSelectors } from '../../store/account/account.selectors';
 import { accountTypeIconNames } from '../../utils/account.utils';
 
 export const AccountsSidebar = () => {
-  const accounts = useSelector(AccountSelectors.selectAccounts);
+  const accounts = useSelector(AccountSelectors.selectActiveAccounts);
 
   return (
     <Pane display='flex' flexDirection='column'>

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { RecordActions } from '../../../store/record/record.actions';
 import { IEditDetailsProps } from './edit-details.props.interface';
 
-export const EditDetailsDialog = ({ record, onClose }: IEditDetailsProps) => {
+export const EditDetailsDialogComponent = ({ record, onClose }: IEditDetailsProps) => {
   const dispatch = useDispatch();
   const [details, setDetails] = React.useState<string>('');
 
@@ -29,6 +29,7 @@ export const EditDetailsDialog = ({ record, onClose }: IEditDetailsProps) => {
       confirmLabel='Save Details'
       title='Edit Details'
       onConfirm={confirm}
+      shouldCloseOnOverlayClick={false}
     >
       <FormField label='Description' marginBottom={majorScale(3)}>
         <Text>{record.description}</Text>
@@ -42,3 +43,5 @@ export const EditDetailsDialog = ({ record, onClose }: IEditDetailsProps) => {
     </Dialog>
   );
 };
+
+export const EditDetailsDialog = React.memo(EditDetailsDialogComponent);

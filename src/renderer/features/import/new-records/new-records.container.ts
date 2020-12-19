@@ -16,7 +16,7 @@ type StateProps = Pick<INewRecordsProps, 'accounts' | 'autoCategories' | 'error'
 type DispatchProps = Pick<INewRecordsProps, 'importAction'>;
 
 const mapStateToProps = (state: IStore): StateProps => ({
-  accounts: AccountSelectors.selectAccounts(state),
+  accounts: AccountSelectors.selectActiveAccounts(state),
   autoCategories: AutoCategorySelectors.autoCategories(state),
   error: PendingRecordSelectors.error(state),
 });

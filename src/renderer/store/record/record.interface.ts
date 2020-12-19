@@ -56,4 +56,9 @@ export interface IRecord {
    * The balance of the account up to and including this record.
    */
   balance?: number;
+
+  /**
+   * True if the record was manually entered by the user.
+   */
+  isManualEntry?: boolean;
 }
