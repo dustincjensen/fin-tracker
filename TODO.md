@@ -9,19 +9,12 @@ Bugs
 Tasks
 =====
 Next
-/ Add transactions manually.
-  - update manual transactions? (Or just delete and re-add?)
-  - Auto Category filter to see archived accounts auto categories.
-  + BUG When you add a transaction it selects the new month on the side visually, but stays on the current month.
-  + mark row in table as manual with icon and tooltip
-  + fix account summary when months inbetween that have no records don't show previous month balance or end month balance. They should carry over from the last month that had records.
-  + delete manual transactions
-  + mark transactions as manually entered (new field on IRecord for store)
-+ Allow for archiving accounts (closing accounts)
 - Support TFSA/RRSP Manual accounts. (Transfer Category per account? Basic Transfer Category?)
+- Update manual transactions? (Or just delete and re-add?)
+- Improve account monthly header
+- Manage Settings into 1 menu option.
 
 Next 2
-- Improve account monthly header
 - Feature component tests
 
 - Refactor selectors
