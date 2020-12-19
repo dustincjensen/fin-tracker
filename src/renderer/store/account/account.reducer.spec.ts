@@ -108,13 +108,13 @@ describe('reducers', () => {
       it('should set account as archived', () => {
         const initialState: IAccountStore = {
           accounts: {
-            [accountId]: account
-          }
+            [accountId]: account,
+          },
         };
-        
+
         const newState = reducer(initialState, {
           type: AccountActions.ARCHIVE_ACCOUNT,
-          payload: { id: accountId, archived: true, endYear: 2020, endMonth: 11 }
+          payload: { id: accountId, archived: true, endYear: 2020, endMonth: 11 },
         });
 
         const expectedState: IAccountStore = {
@@ -123,9 +123,9 @@ describe('reducers', () => {
               ...account,
               archived: true,
               endYear: 2020,
-              endMonth: 11
-            }
-          }
+              endMonth: 11,
+            },
+          },
         };
         expect(newState).toEqual(expectedState);
       });

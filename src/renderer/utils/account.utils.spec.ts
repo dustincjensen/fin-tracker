@@ -1,4 +1,4 @@
-import { getAccountStartDate } from "./account.utils";
+import { getAccountStartDate } from './account.utils';
 
 describe('utils', () => {
   describe('account', () => {
