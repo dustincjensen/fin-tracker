@@ -18,4 +18,9 @@ export interface IAutoCategoriesProps {
    * The auto category filter.
    */
   autoCategoryFilter: string;
+
+  /**
+   * True if archived accounts should be shown, false otherwise.
+   */
+  showArchived: boolean;
 }

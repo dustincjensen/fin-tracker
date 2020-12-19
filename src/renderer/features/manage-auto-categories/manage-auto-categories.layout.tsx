@@ -6,15 +6,25 @@ import { AutoCategoriesContainer } from './auto-categories/auto-categories.conta
 
 export const ManageAutoCategoriesLayout = () => {
   const [autoCategoryFilter, setAutoCategoryFilter] = React.useState<string>('');
-  // TODO add toggle to see archived account auto categories.
+  const [showArchived, setShowArchived] = React.useState(false);
+
+  const toggleShowArchived = React.useCallback(() => setShowArchived(a => !a), []);
 
   return (
     <ErrorBoundary>
       <Pane display='grid' padding={20}>
         <Pane marginBottom={10}>
-          <AutoCategoriesFilter autoCategoryFilter={autoCategoryFilter} setAutoCategoryFilter={setAutoCategoryFilter} />
+          <AutoCategoriesFilter 
+            autoCategoryFilter={autoCategoryFilter}
+            setAutoCategoryFilter={setAutoCategoryFilter}
+            showArchived={showArchived}
+            toggleShowArchived={toggleShowArchived}
+          />
         </Pane>
-        <AutoCategoriesContainer autoCategoryFilter={autoCategoryFilter} />
+        <AutoCategoriesContainer 
+          autoCategoryFilter={autoCategoryFilter}
+          showArchived={showArchived}
+        />
       </Pane>
     </ErrorBoundary>
   );
