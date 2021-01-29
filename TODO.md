@@ -12,7 +12,6 @@ Next
 - Support TFSA/RRSP Manual accounts. (Transfer Category per account? Basic Transfer Category?)
 - Update manual transactions? (Or just delete and re-add?)
 - Improve account monthly header
-- Manage Settings into 1 menu option.
 
 Next 2
 - Feature component tests
