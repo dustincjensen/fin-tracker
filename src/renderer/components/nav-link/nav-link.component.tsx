@@ -11,10 +11,13 @@ type NavLinkProps = {
 
   /** The text to display for the button. */
   text: string;
+
+  /** Whether or not the current route is active. */
+  isSelected?: boolean;
 };
 
-export const NavLink = ({ to, iconBefore, text }: NavLinkProps) => (
-  <Button is={Link} appearance='minimal' to={to} iconBefore={iconBefore}>
+export const NavLink = ({ to, iconBefore, text, isSelected }: NavLinkProps) => (
+  <Button is={Link} appearance={isSelected ? 'primary' : 'minimal'} to={to} iconBefore={iconBefore} width='100%'>
     {text}
   </Button>
 );

@@ -15,7 +15,7 @@ export const ImportLayout = (props: RouteComponentProps<{ accountId?: string }>)
   return (
     <ErrorBoundary>
       <Pane height='100%' padding={20}>
-        {!hasPendingRecords && <NewRecordsContainer accountId={accountId} />}
+        {!hasPendingRecords && <NewRecordsContainer key={accountId} accountId={accountId} />}
         {hasPendingRecords && (
           <>
             <Pane marginBottom={20}>

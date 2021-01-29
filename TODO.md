@@ -1,5 +1,7 @@
 Bugs
 ====
+  - Setting category on new transaction does not work
+
   - Tooltip for descriptions is a bit off center
   - Description width could be larger on bigger monitors... maybe use css breakpoints?
 
@@ -12,7 +14,6 @@ Next
 - Support TFSA/RRSP Manual accounts. (Transfer Category per account? Basic Transfer Category?)
 - Update manual transactions? (Or just delete and re-add?)
 - Improve account monthly header
-- Manage Settings into 1 menu option.
 
 Next 2
 - Feature component tests
