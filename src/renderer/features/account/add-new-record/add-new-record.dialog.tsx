@@ -14,6 +14,7 @@ import { newGuid } from '../../../utils/guid.utils';
 import { isNullOrWhitespace } from '../../../utils/object.utils';
 import { IAddNewRecordProps } from './add-new-record.props.interface';
 
+// TODO this is confusing...
 type CategoryRecord = ICategorySelectProps['record'];
 
 const options = [
@@ -109,7 +110,7 @@ export const AddNewRecordDialog = ({ accountId, isShown, onClose }: IAddNewRecor
         date: transactionDate,
         description,
         id: newGuid(),
-        categoryId: categoryRecord?.id,
+        categoryId: categoryRecord?.category?.id,
         credit: debitOrCredit === 'credit' ? (amount as number) : undefined,
         debit: debitOrCredit === 'debit' ? (amount as number) : undefined,
         autoCategoryId: undefined, // TODO We should probably technically look up the auto categories and make sure it doesn't match one.
