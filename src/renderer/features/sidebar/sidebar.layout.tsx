@@ -27,9 +27,24 @@ export const SidebarLayout = () => {
         <Heading size={100} marginBottom='5px'>
           Settings
         </Heading>
-        <NavLink to='/accounts' iconBefore='bank-account' text='Accounts' isSelected={location.pathname === '/accounts'} />
-        <NavLink to='/categories' iconBefore='group-objects' text='Categories' isSelected={location.pathname === '/categories'} />
-        <NavLink to='/autoCategories' iconBefore='automatic-updates' text='Auto Categories' isSelected={location.pathname === '/autoCategories'} />
+        <NavLink
+          to='/accounts'
+          iconBefore='bank-account'
+          text='Accounts'
+          isSelected={location.pathname === '/accounts'}
+        />
+        <NavLink
+          to='/categories'
+          iconBefore='group-objects'
+          text='Categories'
+          isSelected={location.pathname === '/categories'}
+        />
+        <NavLink
+          to='/autoCategories'
+          iconBefore='automatic-updates'
+          text='Auto Categories'
+          isSelected={location.pathname === '/autoCategories'}
+        />
       </Pane>
       <Text paddingTop={20} size={300} textAlign='center'>
         Version: {appVersion}

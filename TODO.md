@@ -1,7 +1,5 @@
 Bugs
 ====
-  - Setting category on new transaction does not work
-
   - Tooltip for descriptions is a bit off center
   - Description width could be larger on bigger monitors... maybe use css breakpoints?
 
