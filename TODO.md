@@ -13,6 +13,17 @@ Next
 - Update manual transactions? (Or just delete and re-add?)
 - Improve account monthly header
 
+- Categories are wide when named after accounts with + Transfer title.
+- If you delete an account, remove categories that have accountTransferId set to that account id.
+
+- Home page Mortgage Summary Card
+- Home page Mortgage in balance chart
+- Mortgage should really have an interest rate and you should be able to see estimated balance based on principal vs interest.
+
+- Storybook
+- Vitejs?
+- Lit.dev
+
 Next 2
 - Feature component tests
 

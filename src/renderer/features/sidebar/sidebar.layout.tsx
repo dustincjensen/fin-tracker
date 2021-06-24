@@ -1,3 +1,4 @@
+import * as path from 'path';
 import { remote } from 'electron';
 import { Button, Heading, majorScale, Pane, Text } from 'evergreen-ui';
 import * as React from 'react';
@@ -6,6 +7,11 @@ import { NavLink } from '../../components/nav-link/nav-link.component';
 import { AccountsSidebar } from '../accounts-sidebar/accounts-sidebar.component';
 
 const appVersion = remote.app.getVersion();
+
+const openUserPath = () => {
+  const appStateJson = path.join(remote.app.getPath('userData'), 'appState.json');
+  remote.shell.showItemInFolder(appStateJson);
+};
 
 export const SidebarLayout = () => {
   const location = useLocation();
@@ -46,6 +52,9 @@ export const SidebarLayout = () => {
           isSelected={location.pathname === '/autoCategories'}
         />
       </Pane>
+      <Button onClick={openUserPath} appearance='minimal' iconBefore='database'>
+        User Data
+      </Button>
       <Text paddingTop={20} size={300} textAlign='center'>
         Version: {appVersion}
       </Text>
