@@ -4,8 +4,9 @@ import * as React from 'react';
 
 type ErrorBoundaryState = { hasError: boolean };
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export class ErrorBoundary extends React.Component<{}, ErrorBoundaryState> {
-  constructor(props: {}) {
+  constructor(props) {
     super(props);
     this.state = {
       hasError: false,

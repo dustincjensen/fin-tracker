@@ -2,6 +2,7 @@ import { IpcRendererEvent } from 'electron';
 import { PendingRecordActions } from './pending-record/pending-record.actions';
 import { RecordActions } from './record/record.actions';
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 const lookup: { [type: string]: Function } = {
   ['IPC_NEW_RECORDS_PARSED']: PendingRecordActions.importNewRecords,
   ['IPC_NEW_RECORDS_ERROR']: PendingRecordActions.importError,

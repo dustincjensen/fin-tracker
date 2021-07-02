@@ -3,6 +3,10 @@ import * as url from 'url';
 import { app, BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
 import { Intercommunication } from './intercommunication';
 
+const ElectronStore = require('electron-store');
+
+ElectronStore.initRenderer();
+
 export class MainElectron {
   // Keep a reference to the window object, if you don't, the
   // window will be closed automatically when the Javascript
@@ -64,6 +68,9 @@ export class MainElectron {
       backgroundColor: '#fff',
       webPreferences: {
         nodeIntegration: true,
+        nodeIntegrationInWorker: true,
+        contextIsolation: false,
+        enableRemoteModule: true,
       },
       autoHideMenuBar: !MainElectron.isDev(),
     };
@@ -112,6 +119,8 @@ export class MainElectron {
       show: MainElectron.isDev(),
       webPreferences: {
         nodeIntegration: true,
+        nodeIntegrationInWorker: true,
+        contextIsolation: false
       },
     });
 

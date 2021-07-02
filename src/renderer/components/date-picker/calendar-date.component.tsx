@@ -21,7 +21,7 @@ interface ICalendarDateProps {
   /**
    * If provided, renders a style on the calendar date button.
    */
-  style?: object;
+  style?: Record<string, unknown>;
 
   /**
    * Tells the date picker to close when the calendar date is selected.

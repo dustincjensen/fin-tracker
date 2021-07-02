@@ -1,4 +1,4 @@
-import { Tablist, Pane, SidebarTab } from 'evergreen-ui';
+import { Tablist, Pane, Tab } from 'evergreen-ui';
 import * as React from 'react';
 import { getMonthAndYearFromDate, monthNamesShort } from '../../../utils/date.utils';
 
@@ -58,27 +58,29 @@ export const MonthYearList = ({ startingDate, monthAndYears, setDate }: MonthYea
     <Pane>
       {years.map((year, yearIndex) => (
         <Tablist key={year} display='flex' flexDirection='column' justifyContent='flex-start' width={80}>
-          <SidebarTab
+          <Tab
             id={year.toString()}
             onSelect={() => selectYear(yearIndex)}
             isSelected={yearIndex === selectedYearIndex}
+            direction='vertical'
           >
             {year}
-          </SidebarTab>
+          </Tab>
           {yearIndex === selectedYearIndex && (
             <Tablist display='flex' flexDirection='column' justifyContent='space-around' width={80}>
               {months.map((month, monthIndex) => (
-                <SidebarTab
+                <Tab
                   key={month}
                   id={month}
                   onSelect={() => selectMonth(month, monthIndex)}
                   isSelected={monthIndex === selectedMonthIndex}
                   display='flex'
                   justifyContent='center'
+                  direction='vertical'
                   disabled={enabledMonthIndiciesForSelectedYear.indexOf(monthIndex) < 0}
                 >
                   {month}
-                </SidebarTab>
+                </Tab>
               ))}
             </Tablist>
           )}
