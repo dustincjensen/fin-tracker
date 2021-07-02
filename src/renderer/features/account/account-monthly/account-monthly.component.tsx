@@ -44,9 +44,10 @@ export const AccountMonthly = ({
   const [isSplittingTransaction, setIsSplittingTransaction] = React.useState<string>(undefined);
 
   const onDeleteRecordClose = React.useCallback(() => setRecordToDelete(null), [setRecordToDelete]);
-  const onDelteSplitRecordsClose = React.useCallback(() => setRecordToDeleteSplitsFrom(null), [
-    setRecordToDeleteSplitsFrom,
-  ]);
+  const onDelteSplitRecordsClose = React.useCallback(
+    () => setRecordToDeleteSplitsFrom(null),
+    [setRecordToDeleteSplitsFrom]
+  );
   const onEditDetailsClose = React.useCallback(() => setRecordToAddDetails(null), [setRecordToAddDetails]);
   const onEditAutoCategoryClose = React.useCallback(() => setRecordToAutoCategorize(null), [setRecordToAutoCategorize]);
 

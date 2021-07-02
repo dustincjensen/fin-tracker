@@ -25,11 +25,7 @@ interface IDatePickerProps {
 // TODO remove moment references for IDate and date.utils methods.
 // TODO tests
 export const DatePicker = ({ value: date, onChange }: IDatePickerProps) => {
-  const [today] = React.useState(() =>
-    moment()
-      .startOf('day')
-      .toISOString()
-  );
+  const [today] = React.useState(() => moment().startOf('day').toISOString());
   const [monthInfo, setMonthInfo] = React.useState(() => buildMonth(moment(date || today)));
 
   const previousMonth = () => setMonthInfo(monthInfo => buildMonth(moment(monthInfo.monthYear).subtract(1, 'month')));

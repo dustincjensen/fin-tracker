@@ -216,10 +216,12 @@ export const EditAccount = ({
                 </Button>
                 {!canArchive && (
                   <InlineAlert marginTop={5} marginLeft={3}>
-                    {// Basically means there are no records if the current balance is undefined
-                    isNullOrUndefined(currentBalance)
-                      ? 'Empty accounts should be deleted instead of archived.'
-                      : 'To archive, the account must have a current balance of $0.00'}
+                    {
+                      // Basically means there are no records if the current balance is undefined
+                      isNullOrUndefined(currentBalance)
+                        ? 'Empty accounts should be deleted instead of archived.'
+                        : 'To archive, the account must have a current balance of $0.00'
+                    }
                   </InlineAlert>
                 )}
               </Pane>

@@ -21,10 +21,12 @@ const mapStateToProps = (state: IStore, { accountId, date }: OwnProps): StatePro
     accountName: account?.name,
     accountType: account?.accountType,
     displayDate: stringToMonthYear(date),
-    previousMonthEndBalance: `${(!isNullOrUndefined(previousMonthEndBalance) && previousMonthEndBalance.toFixed(2)) ||
-      ''}`,
-    currentMonthEndBalance: `${(!isNullOrUndefined(currentMonthEndBalance) && currentMonthEndBalance.toFixed(2)) ||
-      ''}`,
+    previousMonthEndBalance: `${
+      (!isNullOrUndefined(previousMonthEndBalance) && previousMonthEndBalance.toFixed(2)) || ''
+    }`,
+    currentMonthEndBalance: `${
+      (!isNullOrUndefined(currentMonthEndBalance) && currentMonthEndBalance.toFixed(2)) || ''
+    }`,
   };
 };
 

@@ -120,7 +120,7 @@ export class MainElectron {
       webPreferences: {
         nodeIntegration: true,
         nodeIntegrationInWorker: true,
-        contextIsolation: false
+        contextIsolation: false,
       },
     });
 
