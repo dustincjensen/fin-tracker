@@ -4,7 +4,7 @@ import { CategorySelect } from '../../../components/category-select/category-sel
 import { formatDateFull } from '../../../utils/date.utils';
 import { createStaticWidthCell } from '../../../utils/table.utils';
 import { IPendingRecordsProps } from './pending-records.props.interface';
-import './pending-records.scss';
+import './pending-records.css';
 
 const w120 = createStaticWidthCell(120);
 const w200 = createStaticWidthCell(200);
