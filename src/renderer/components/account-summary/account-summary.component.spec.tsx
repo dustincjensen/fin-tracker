@@ -1,4 +1,5 @@
 import { shallow } from 'enzyme';
+import { BankAccountIcon } from 'evergreen-ui';
 import * as React from 'react';
 import { AccountSummary } from './account-summary.component';
 import { IAccountSummaryProps } from './account-summary.props.interface';
@@ -12,7 +13,7 @@ describe('components', () => {
         accountId: 'accountId',
         balance: undefined,
         dateOfLastTransaction: undefined,
-        iconName: 'bank-account',
+        icon: BankAccountIcon,
         name: 'Savings',
       };
     });

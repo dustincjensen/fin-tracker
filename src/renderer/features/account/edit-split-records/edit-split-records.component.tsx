@@ -80,6 +80,7 @@ export const EditSplitRecords = ({ record, categories, onClose }: IEditSplitReco
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const setSplitRecordValue = (id: string, propName: string, value: any) => {
     setSplitRecords(prev => {
       const index = prev.findIndex(r => r.id === id);
