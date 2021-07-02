@@ -1,5 +1,15 @@
 import { useLocalStorage, writeStorage } from '@rehooks/local-storage';
-import { IconButton, Pane, Heading, Tooltip, Text } from 'evergreen-ui';
+import {
+  IconButton,
+  Pane,
+  Heading,
+  Tooltip,
+  Text,
+  ArrowUpIcon,
+  EyeOffIcon,
+  EyeOnIcon,
+  ArrowDownIcon,
+} from 'evergreen-ui';
 import * as React from 'react';
 import { IOptionalDisplayProps } from './optional-display.props.interface';
 
@@ -30,14 +40,14 @@ export const OptionalDisplay = ({
           <Heading>{title}</Heading>
           <Pane display='flex'>
             <Tooltip content='Move up' hideDelay={0}>
-              <IconButton icon='arrow-up' onClick={() => updateOrder(displayKey, 'up')} marginLeft={5} />
+              <IconButton icon={ArrowUpIcon} onClick={() => updateOrder(displayKey, 'up')} marginLeft={5} />
             </Tooltip>
             <Tooltip content='Move down' hideDelay={0}>
-              <IconButton icon='arrow-down' onClick={() => updateOrder(displayKey, 'down')} marginLeft={5} />
+              <IconButton icon={ArrowDownIcon} onClick={() => updateOrder(displayKey, 'down')} marginLeft={5} />
             </Tooltip>
             <Tooltip content={displayed ? 'Hide on Home page' : 'Show on Home page'}>
               <IconButton
-                icon={displayed ? 'eye-off' : 'eye-on'}
+                icon={displayed ? EyeOffIcon : EyeOnIcon}
                 onClick={() => writeStorage(displayKey, !displayed)}
                 marginLeft={5}
               />

@@ -1,4 +1,20 @@
-import { Pane, Alert, Heading, Paragraph, Strong, Button, Text, UnorderedList, ListItem } from 'evergreen-ui';
+import {
+  Pane,
+  Alert,
+  Heading,
+  Paragraph,
+  Strong,
+  Button,
+  Text,
+  UnorderedList,
+  ListItem,
+  BankAccountIcon,
+  CrossIcon,
+  ImportIcon,
+  AutomaticUpdatesIcon,
+  GroupObjectsIcon,
+  majorScale,
+} from 'evergreen-ui';
 import * as React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { IInstructionsProps } from './instructions.props.interface';
@@ -45,12 +61,12 @@ export const Instructions = ({
     <Pane marginTop={20} marginBottom={20} border borderRadius={5} background='tint1'>
       <Pane paddingTop={20} paddingRight={20} paddingLeft={20} paddingBottom={10}>
         <Heading>Welcome to the Fin-Tracker Beta!</Heading>
-        <Paragraph marginBottom={10}>
+        <Paragraph marginTop={majorScale(3)} marginBottom={10}>
           The main purpose of this application is to help you categorize your spending across different financial
           accounts. That is accomplished by importing data available from your bank accounts and categorizing your
           spending. Don&apos;t worry though, you won&apos;t have to do it all by hand!
         </Paragraph>
-        <Paragraph marginBottom={10}>
+        <Paragraph marginTop={majorScale(3)} marginBottom={10}>
           To get started, you can use the messages to below to guide you through the basic use cases of the application.
           Once you are done each step, come back the <Strong>Home</Strong> page to see the next step!
         </Paragraph>
@@ -63,10 +79,10 @@ export const Instructions = ({
                 chequing account or credit card perhaps. Head here to create your first account.
               </Text>
             </Pane>
-            <Button is={RouterLink} to='/accounts' appearance='primary' iconBefore='bank-account'>
+            <Button is={RouterLink} to='/accounts' appearance='primary' iconBefore={BankAccountIcon}>
               Create Account
             </Button>
-            <Button iconBefore='cross' marginLeft={10} onClick={() => hideHint(setShowAccountsHint, ACCOUNTS_HINT)}>
+            <Button iconBefore={CrossIcon} marginLeft={10} onClick={() => hideHint(setShowAccountsHint, ACCOUNTS_HINT)}>
               Dismiss
             </Button>
           </Alert>
@@ -85,10 +101,10 @@ export const Instructions = ({
                 download a <Strong>.qfx, or .qif</Strong> file from your bank account or credit card.
               </Text>
             </Pane>
-            <Button is={RouterLink} to='/import' appearance='primary' iconBefore='import'>
+            <Button is={RouterLink} to='/import' appearance='primary' iconBefore={ImportIcon}>
               Import Transactions
             </Button>
-            <Button iconBefore='cross' marginLeft={10} onClick={() => hideHint(setShowRecordsHint, RECORDS_HINT)}>
+            <Button iconBefore={CrossIcon} marginLeft={10} onClick={() => hideHint(setShowRecordsHint, RECORDS_HINT)}>
               Dismiss
             </Button>
           </Alert>
@@ -102,10 +118,14 @@ export const Instructions = ({
                 hand side. Next thing to do though is start categorizing them! Head here to add some categories.
               </Text>
             </Pane>
-            <Button is={RouterLink} to='/categories' appearance='primary' iconBefore='group-objects'>
+            <Button is={RouterLink} to='/categories' appearance='primary' iconBefore={GroupObjectsIcon}>
               Create Categories
             </Button>
-            <Button iconBefore='cross' marginLeft={10} onClick={() => hideHint(setShowCategoriesHint, CATEGORIES_HINT)}>
+            <Button
+              iconBefore={CrossIcon}
+              marginLeft={10}
+              onClick={() => hideHint(setShowCategoriesHint, CATEGORIES_HINT)}
+            >
               Dismiss
             </Button>
           </Alert>
@@ -131,11 +151,11 @@ export const Instructions = ({
                 categorization if you think you messed up.
               </Text>
             </Pane>
-            <Button is={RouterLink} to='/autoCategories' appearance='primary' iconBefore='automatic-updates'>
+            <Button is={RouterLink} to='/autoCategories' appearance='primary' iconBefore={AutomaticUpdatesIcon}>
               View Auto Categories
             </Button>
             <Button
-              iconBefore='cross'
+              iconBefore={CrossIcon}
               marginLeft={10}
               onClick={() => hideHint(setShowAutoCategoriesHint, AUTO_CATEGORIES_HINT)}
             >
@@ -154,7 +174,7 @@ export const Instructions = ({
                 them new totals and categories.
               </Text>
             </Pane>
-            <Button iconBefore='cross' onClick={() => hideHint(setShowSplitRecordsHint, SPLIT_RECORDS_HINT)}>
+            <Button iconBefore={CrossIcon} onClick={() => hideHint(setShowSplitRecordsHint, SPLIT_RECORDS_HINT)}>
               Dismiss
             </Button>
           </Alert>

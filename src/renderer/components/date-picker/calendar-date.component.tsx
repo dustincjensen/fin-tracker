@@ -35,6 +35,8 @@ const CalendarDateComponent = ({ dateToRender, isSelected, setIsSelected, style,
       appearance={isSelected ? 'primary' : 'minimal'}
       width='100%'
       height='100%'
+      minWidth={0}
+      padding={0}
       justifyContent='center'
       style={style}
       onClick={() => {

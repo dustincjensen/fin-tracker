@@ -1,10 +1,9 @@
-import { IconName } from 'evergreen-ui';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { AccountSelectors } from '../../../store/account/account.selectors';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
-import { accountTypeIconNames } from '../../../utils/account.utils';
+import { accountTypeIcons } from '../../../utils/account.utils';
 import { formatDateFull } from '../../../utils/date.utils';
 import { AccountSummaries } from './account-summaries.component';
 import { IAccountSummariesProps } from './account-summaries.props.interface';
@@ -26,7 +25,7 @@ const accountSummarySelector = createSelector(AccountSelectors.accounts, RecordS
         accountId: account.id,
         balance: lastRecord?.balance,
         dateOfLastTransaction: lastRecord ? formatDateFull(lastRecord.date) : undefined,
-        iconName: accountTypeIconNames[account.accountType] as IconName,
+        icon: accountTypeIcons[account.accountType],
         name: account.name,
       };
     })

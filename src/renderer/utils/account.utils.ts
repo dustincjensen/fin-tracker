@@ -1,4 +1,4 @@
-import { IconName } from 'evergreen-ui';
+import { BankAccountIcon, CreditCardIcon } from 'evergreen-ui';
 import { AccountType } from '../store/account/account.type';
 
 export const accountTypeLabels: Record<AccountType, string> = {
@@ -13,10 +13,12 @@ export const accountTypeNameValuePairs: Array<{ value: AccountType; name: string
   { value: 'CreditCard', name: 'Credit Card' },
 ];
 
-export const accountTypeIconNames: Record<AccountType, IconName> = {
-  Chequing: 'bank-account',
-  Savings: 'bank-account',
-  CreditCard: 'credit-card',
+// TODO typing for evergreen icon components is no longer typed.
+export type IconType = typeof BankAccountIcon;
+export const accountTypeIcons: Record<AccountType, IconType> = {
+  Chequing: BankAccountIcon,
+  Savings: BankAccountIcon,
+  CreditCard: CreditCardIcon,
 };
 
 /**

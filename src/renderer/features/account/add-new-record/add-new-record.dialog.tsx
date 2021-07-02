@@ -186,6 +186,7 @@ export const AddNewRecordDialog = ({ accountId, isShown, onClose }: IAddNewRecor
             onChange={evt => amountChange(evt.target.value)}
             marginRight={10}
           />
+          {/* TODO deprecated */}
           <SegmentedControl
             name='debitOrCredit'
             options={options}

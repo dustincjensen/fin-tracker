@@ -58,7 +58,11 @@ export const MonthYearList = ({ startingDate, monthAndYears, setDate }: MonthYea
     <Pane>
       {years.map((year, yearIndex) => (
         <Tablist key={year} display='flex' flexDirection='column' justifyContent='flex-start' width={80}>
-          <SidebarTab id={year} onSelect={() => selectYear(yearIndex)} isSelected={yearIndex === selectedYearIndex}>
+          <SidebarTab
+            id={year.toString()}
+            onSelect={() => selectYear(yearIndex)}
+            isSelected={yearIndex === selectedYearIndex}
+          >
             {year}
           </SidebarTab>
           {yearIndex === selectedYearIndex && (
@@ -69,8 +73,8 @@ export const MonthYearList = ({ startingDate, monthAndYears, setDate }: MonthYea
                   id={month}
                   onSelect={() => selectMonth(month, monthIndex)}
                   isSelected={monthIndex === selectedMonthIndex}
-                  textAlign='center'
-                  paddingRight={8}
+                  display='flex'
+                  justifyContent='center'
                   disabled={enabledMonthIndiciesForSelectedYear.indexOf(monthIndex) < 0}
                 >
                   {month}

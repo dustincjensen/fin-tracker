@@ -1,4 +1,4 @@
-import { Table, Text, Pane, IconButton, Tooltip } from 'evergreen-ui';
+import { Table, Text, Pane, IconButton, Tooltip, EditIcon, TrashIcon } from 'evergreen-ui';
 import * as React from 'react';
 import { ICategory } from '../../../store/category/category.interface';
 import { DeleteCategoryDialog } from '../delete-category/delete-category.dialog';
@@ -42,7 +42,7 @@ export const Categories = ({ categories }: ICategoriesProps) => {
                 <Table.Cell flex='none' justifyContent='flex-end' width={100}>
                   <Tooltip content='Edit Category' hideDelay={0}>
                     <IconButton
-                      icon='edit'
+                      icon={EditIcon}
                       appearance='minimal'
                       disabled={isEditing && isEditing !== category.id}
                       onClick={() => setIsEditing(category.id)}
@@ -51,7 +51,7 @@ export const Categories = ({ categories }: ICategoriesProps) => {
                   </Tooltip>
                   <Tooltip content='Delete Category' hideDelay={0}>
                     <IconButton
-                      icon='trash'
+                      icon={TrashIcon}
                       appearance='minimal'
                       intent='danger'
                       onClick={() => setCategoryToDelete(category)}

@@ -1,4 +1,18 @@
-import { Pane, Button, majorScale, InlineAlert, Table, TextInput, IconButton, Icon, Strong } from 'evergreen-ui';
+import {
+  Pane,
+  Button,
+  majorScale,
+  InlineAlert,
+  Table,
+  TextInput,
+  IconButton,
+  Strong,
+  CrossIcon,
+  ForkIcon,
+  DollarIcon,
+  BanCircleIcon,
+  FloppyDiskIcon,
+} from 'evergreen-ui';
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
@@ -134,7 +148,7 @@ export const EditSplitRecords = ({ record, categories, onClose }: IEditSplitReco
         )}
         <Pane>
           {/* Render a "fake" header for the table. */}
-          <Table.Row height={30} alignItems='flex-end' borderBottom='none'>
+          <Table.Head height={30} alignItems='flex-end' borderBottom='none' paddingRight={0} background='tint1'>
             <Table.TextHeaderCell {...w100}></Table.TextHeaderCell>
             <Table.TextHeaderCell>Description</Table.TextHeaderCell>
             <Table.TextHeaderCell {...w200}>Category</Table.TextHeaderCell>
@@ -142,14 +156,14 @@ export const EditSplitRecords = ({ record, categories, onClose }: IEditSplitReco
             <Table.TextHeaderCell {...w100}>{record.credit && 'Credit'}</Table.TextHeaderCell>
             <Table.TextHeaderCell {...w100}></Table.TextHeaderCell>
             <Table.HeaderCell flex='none' width={54}></Table.HeaderCell>
-          </Table.Row>
+          </Table.Head>
           {splitRecords.map(splitRecord => {
             return (
-              <Table.Row key={splitRecord.id} borderBottom='none'>
+              <Table.Row key={splitRecord.id} borderBottom='none' backgroundColor='tint1'>
                 <Table.Cell {...w100} justifyContent='flex-end' paddingRight={3}>
                   <IconButton
                     appearance='minimal'
-                    icon='cross'
+                    icon={CrossIcon}
                     disabled={!canRemoveRow}
                     onClick={() => removeSplit(splitRecord.id)}
                   />
@@ -195,17 +209,17 @@ export const EditSplitRecords = ({ record, categories, onClose }: IEditSplitReco
             );
           })}
           {/* Render row for add split and debit/credit total. */}
-          <Table.Row borderBottom='none' marginBottom={majorScale(3)}>
+          <Table.Row borderBottom='none' marginBottom={majorScale(3)} backgroundColor='tint1'>
             <Table.Cell {...w100}></Table.Cell>
             <Table.Cell>
-              <Button type='button' iconBefore='fork' appearance='primary' onClick={addSplit}>
+              <Button type='button' iconBefore={ForkIcon} appearance='primary' onClick={addSplit}>
                 Add Split
               </Button>
             </Table.Cell>
             <Table.Cell {...w200}></Table.Cell>
             {!!record.credit && <Table.Cell {...w100}></Table.Cell>}
             <Table.Cell justifyContent='space-between' borderTop {...w100}>
-              <Icon icon='dollar' size={14} />
+              <DollarIcon size={14} />
               <Strong size={400}>{total?.toFixed(2)}</Strong>
             </Table.Cell>
             {!!record.debit && <Table.Cell {...w100}></Table.Cell>}
@@ -223,10 +237,10 @@ export const EditSplitRecords = ({ record, categories, onClose }: IEditSplitReco
           marginRight={20}
           paddingTop={10}
         >
-          <Button type='button' iconBefore='ban-circle' height={majorScale(5)} marginRight={10} onClick={onClose}>
+          <Button type='button' iconBefore={BanCircleIcon} height={majorScale(5)} marginRight={10} onClick={onClose}>
             Cancel
           </Button>
-          <Button appearance='primary' iconBefore='floppy-disk' height={majorScale(5)}>
+          <Button appearance='primary' iconBefore={FloppyDiskIcon} height={majorScale(5)}>
             Save Splits
           </Button>
         </Pane>

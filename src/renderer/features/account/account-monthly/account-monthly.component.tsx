@@ -1,4 +1,18 @@
-import { Table, Popover, Position, Menu, Pane, Tooltip, IconButton, Icon } from 'evergreen-ui';
+import {
+  Table,
+  Popover,
+  Position,
+  Menu,
+  Pane,
+  Tooltip,
+  IconButton,
+  ManuallyEnteredDataIcon,
+  EditIcon,
+  ForkIcon,
+  AutomaticUpdatesIcon,
+  TrashIcon,
+  MoreIcon,
+} from 'evergreen-ui';
 import * as React from 'react';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
 import { CategoryTag } from '../../../components/category-tag/category-tag.component';
@@ -58,7 +72,7 @@ export const AccountMonthly = ({
                   <Pane display='flex' alignItems='center'>
                     {record.isManualEntry && (
                       <Tooltip content='Manually entered' hideDelay={0}>
-                        <Icon icon='manually-entered-data' marginTop={3} marginRight={10} />
+                        <ManuallyEnteredDataIcon marginTop={3} marginRight={10} />
                       </Tooltip>
                     )}
                     <Pane>
@@ -101,7 +115,7 @@ export const AccountMonthly = ({
                         <Menu>
                           <Menu.Group>
                             <Menu.Item
-                              icon='edit'
+                              icon={EditIcon}
                               onSelect={() => {
                                 setRecordToAddDetails(record);
                                 setRecordToAutoCategorize(undefined);
@@ -112,7 +126,7 @@ export const AccountMonthly = ({
                               Edit Details
                             </Menu.Item>
                             <Menu.Item
-                              icon='fork'
+                              icon={ForkIcon}
                               onSelect={() => {
                                 setIsSplittingTransaction(record.id);
                                 setRecordToAddDetails(undefined);
@@ -124,7 +138,7 @@ export const AccountMonthly = ({
                             </Menu.Item>
                             {!record.splitRecords && (
                               <Menu.Item
-                                icon='automatic-updates'
+                                icon={AutomaticUpdatesIcon}
                                 onSelect={() => {
                                   setRecordToAutoCategorize(record);
                                   setRecordToAddDetails(undefined);
@@ -142,7 +156,7 @@ export const AccountMonthly = ({
                               <Menu.Group>
                                 {record.splitRecords && (
                                   <Menu.Item
-                                    icon='trash'
+                                    icon={TrashIcon}
                                     intent='danger'
                                     onSelect={() => {
                                       setRecordToDeleteSplitsFrom(record);
@@ -154,7 +168,7 @@ export const AccountMonthly = ({
                                 )}
                                 {record.isManualEntry && (
                                   <Menu.Item
-                                    icon='trash'
+                                    icon={TrashIcon}
                                     intent='danger'
                                     onSelect={() => {
                                       setRecordToDelete(record);
@@ -172,7 +186,7 @@ export const AccountMonthly = ({
                     >
                       <Tooltip content='Options' hideDelay={0}>
                         <IconButton
-                          icon='more'
+                          icon={MoreIcon}
                           appearance='minimal'
                           disabled={
                             (isSplittingTransaction && isSplittingTransaction !== record.id) ||

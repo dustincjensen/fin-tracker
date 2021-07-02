@@ -1,4 +1,4 @@
-import { Table, Pane, IconButton, Tooltip, Icon } from 'evergreen-ui';
+import { Table, Pane, IconButton, Tooltip, ArchiveIcon, TrashIcon } from 'evergreen-ui';
 import * as React from 'react';
 import { CategoryTag } from '../../../components/category-tag/category-tag.component';
 import { IAutoCategory } from '../../../store/auto-category/auto-category.interface';
@@ -30,7 +30,7 @@ export const AutoCategories = ({ autoCategories }: IAutoCategoriesProps) => {
                   <Pane display='flex' alignItems='center'>
                     {autoCategory.accountArchived && (
                       <Tooltip content='Archived' hideDelay={0}>
-                        <Icon icon='archive' marginTop={3} marginRight={10} />
+                        <ArchiveIcon marginTop={3} marginRight={10} />
                       </Tooltip>
                     )}
                     {autoCategory.accountName}
@@ -45,7 +45,7 @@ export const AutoCategories = ({ autoCategories }: IAutoCategoriesProps) => {
                   {!autoCategory.accountArchived && (
                     <Tooltip content='Delete Auto Category' hideDelay={0} position='bottom-right'>
                       <IconButton
-                        icon='trash'
+                        icon={TrashIcon}
                         appearance='minimal'
                         intent='danger'
                         onClick={() => setAutoCategoryToDelete(autoCategory)}
