@@ -1,4 +1,4 @@
-import { Button, FilePicker, FormField, Heading, Icon, majorScale, Pane, SelectField, Alert } from 'evergreen-ui';
+import { Button, FilePicker, FormField, Heading, majorScale, Pane, SelectField, Alert, ImportIcon } from 'evergreen-ui';
 import * as React from 'react';
 import { IAccount } from '../../../store/account/account.interface';
 import { ParseType } from '../../../store/pending-record/parse.type';
@@ -56,7 +56,7 @@ export const NewRecords = ({ accountId, accounts, error, autoCategories, importA
   return (
     <Pane border padding={20} background='tint1' borderRadius={5}>
       <Pane borderBottom display='flex' alignItems='center' marginBottom={20} paddingBottom={10}>
-        <Icon icon='import' size={25} marginRight={10} color='default' />
+        <ImportIcon size={25} marginRight={10} color='default' />
         <Heading size={700}>Import</Heading>
       </Pane>
 
@@ -91,7 +91,7 @@ export const NewRecords = ({ accountId, accounts, error, autoCategories, importA
             </Pane>
           )}
           <Pane display='flex' justifyContent='flex-end' paddingTop={10}>
-            <Button appearance='primary' height={majorScale(5)} iconBefore='import'>
+            <Button appearance='primary' height={majorScale(5)} iconBefore={ImportIcon}>
               Import
             </Button>
           </Pane>

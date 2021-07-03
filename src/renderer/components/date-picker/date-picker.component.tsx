@@ -1,4 +1,4 @@
-import { Button, IconButton, Pane, Popover, Position, Text } from 'evergreen-ui';
+import { Button, IconButton, Pane, Popover, Position, Text, ChevronLeftIcon, ChevronRightIcon } from 'evergreen-ui';
 import moment from 'moment';
 import * as React from 'react';
 import { formatDateFull } from '../../utils/date.utils';
@@ -25,11 +25,7 @@ interface IDatePickerProps {
 // TODO remove moment references for IDate and date.utils methods.
 // TODO tests
 export const DatePicker = ({ value: date, onChange }: IDatePickerProps) => {
-  const [today] = React.useState(() =>
-    moment()
-      .startOf('day')
-      .toISOString()
-  );
+  const [today] = React.useState(() => moment().startOf('day').toISOString());
   const [monthInfo, setMonthInfo] = React.useState(() => buildMonth(moment(date || today)));
 
   const previousMonth = () => setMonthInfo(monthInfo => buildMonth(moment(monthInfo.monthYear).subtract(1, 'month')));
@@ -75,8 +71,8 @@ export const DatePicker = ({ value: date, onChange }: IDatePickerProps) => {
             <Text gridColumn='1 / 6' fontWeight={700} marginLeft={6}>
               {monthInfo.monthYear}
             </Text>
-            <IconButton appearance='minimal' icon='chevron-left' iconSize={20} onClick={previousMonth} />
-            <IconButton appearance='minimal' icon='chevron-right' iconSize={20} onClick={nextMonth} />
+            <IconButton appearance='minimal' icon={ChevronLeftIcon} iconSize={20} onClick={previousMonth} />
+            <IconButton appearance='minimal' icon={ChevronRightIcon} iconSize={20} onClick={nextMonth} />
 
             {/* Row 2 - Weekday names */}
             {dayNames.map(dn => (

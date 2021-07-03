@@ -22,7 +22,17 @@ module.exports = {
     'react/prop-types': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
-    '@typescript-eslint/interface-name-prefix': ['error', { 'prefixWithI': 'always' }],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "interface",
+        "format": ["PascalCase"],
+        "custom": {
+          "regex": "^I[A-Z]",
+          "match": true
+        }
+      }
+    ],
     '@typescript-eslint/no-use-before-define': ['error', {
       'functions': false,
       'classes': true,
@@ -36,6 +46,7 @@ module.exports = {
     'import/newline-after-import': ['error', { 'count': 1 }],
     "import/named": "off",
     'semi': 'error',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
   settings: {
     react: {

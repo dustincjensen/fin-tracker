@@ -8,7 +8,7 @@ import { ipcReceive } from './store/ipc';
 import { toastMiddleware } from './store/middleware/toast.middleware';
 import { rootReducer } from './store/store';
 import { IPersistedStore } from './store/store.interface';
-import './renderer.scss';
+import './renderer.css';
 
 const ElectronStore = require('electron-store');
 

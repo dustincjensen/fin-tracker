@@ -3,6 +3,12 @@ import * as React from 'react';
 import { accountTypeLabels } from '../../../utils/account.utils';
 import { IAccountDetailSummaryProps } from './account-detail-summary.props.interface';
 
+const Field = ({ label, text }) => (
+  <FormField label={label}>
+    <Text>{text}</Text>
+  </FormField>
+);
+
 export const AccountDetailSummary = ({
   accountName,
   accountType,
@@ -35,9 +41,3 @@ export const AccountDetailSummary = ({
     </>
   );
 };
-
-const Field = ({ label, text }) => (
-  <FormField label={label}>
-    <Text>{text}</Text>
-  </FormField>
-);

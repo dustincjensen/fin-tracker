@@ -3,13 +3,18 @@ import {
   Button,
   FormField,
   Heading,
-  Icon,
   InlineAlert,
   Pane,
   SelectField,
   Text,
   TextInputField,
   majorScale,
+  BankAccountIcon,
+  BanCircleIcon,
+  EyeOpenIcon,
+  FloppyDiskIcon,
+  UnarchiveIcon,
+  ArchiveIcon,
 } from 'evergreen-ui';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
@@ -83,7 +88,7 @@ export const EditAccount = ({
     <Pane padding={20} background='tint1' border={!account} borderRadius={!account ? 5 : 0}>
       {headerText && (
         <Pane borderBottom display='flex' alignItems='center' marginBottom={20} paddingBottom={10}>
-          <Icon icon='bank-account' size={25} marginRight={10} color='default' />
+          <BankAccountIcon size={25} marginRight={10} color='default' />
           <Heading size={700}>{headerText}</Heading>
         </Pane>
       )}
@@ -201,7 +206,7 @@ export const EditAccount = ({
                 {/* Archiving an account lets you remove it from the home page and left hand navigation menu, while keeping all the data around for graphs and data displays. */}
                 <Button
                   type='button'
-                  iconAfter={account?.archived ? 'unarchive' : 'archive'}
+                  iconAfter={account?.archived ? UnarchiveIcon : ArchiveIcon}
                   width='100%'
                   appearance='primary'
                   disabled={!canArchive}
@@ -211,10 +216,12 @@ export const EditAccount = ({
                 </Button>
                 {!canArchive && (
                   <InlineAlert marginTop={5} marginLeft={3}>
-                    {// Basically means there are no records if the current balance is undefined
-                    isNullOrUndefined(currentBalance)
-                      ? 'Empty accounts should be deleted instead of archived.'
-                      : 'To archive, the account must have a current balance of $0.00'}
+                    {
+                      // Basically means there are no records if the current balance is undefined
+                      isNullOrUndefined(currentBalance)
+                        ? 'Empty accounts should be deleted instead of archived.'
+                        : 'To archive, the account must have a current balance of $0.00'
+                    }
                   </InlineAlert>
                 )}
               </Pane>
@@ -237,7 +244,7 @@ export const EditAccount = ({
 
         <Pane display='flex' justifyContent='flex-end' borderTop paddingTop={10}>
           {close && (
-            <Button type='button' iconBefore='ban-circle' height={majorScale(5)} onClick={close}>
+            <Button type='button' iconBefore={BanCircleIcon} height={majorScale(5)} onClick={close}>
               Cancel
             </Button>
           )}
@@ -246,7 +253,7 @@ export const EditAccount = ({
               is={Link}
               to={`/account/${account?.id}`}
               type='button'
-              iconBefore='eye-open'
+              iconBefore={EyeOpenIcon}
               height={majorScale(5)}
               marginLeft={10}
             >
@@ -254,7 +261,7 @@ export const EditAccount = ({
             </Button>
           )}
           {!account?.archived && (
-            <Button appearance='primary' iconBefore='floppy-disk' height={majorScale(5)} marginLeft={10}>
+            <Button appearance='primary' iconBefore={FloppyDiskIcon} height={majorScale(5)} marginLeft={10}>
               {saveButtonText}
             </Button>
           )}

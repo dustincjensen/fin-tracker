@@ -1,4 +1,4 @@
-import { Pane, Table, Icon, Text } from 'evergreen-ui';
+import { Pane, Table, Text, ForkIcon } from 'evergreen-ui';
 import * as React from 'react';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
 import { createStaticWidthCell } from '../../../utils/table.utils';
@@ -20,7 +20,7 @@ export const SplitRecords = ({ records, categories, updateCategory }: ISplitReco
             <Table.Row isSelectable>
               <Table.Cell {...w100}></Table.Cell>
               <Table.Cell alignItems='center'>
-                <Icon icon='fork' color='default' />
+                <ForkIcon color='default' />
                 <Text paddingLeft={15}>{record.description}</Text>
               </Table.Cell>
               <Table.TextCell {...w200}>

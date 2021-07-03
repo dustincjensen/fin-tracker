@@ -1,10 +1,22 @@
-import { Pane, Card, Heading, Text, Strong, IconButton, Icon, Tooltip } from 'evergreen-ui';
+import {
+  Pane,
+  Card,
+  Heading,
+  Text,
+  Strong,
+  IconButton,
+  Tooltip,
+  DollarIcon,
+  EyeOpenIcon,
+  ImportIcon,
+  Icon,
+} from 'evergreen-ui';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { isNullOrUndefined } from '../../utils/object.utils';
 import { IAccountSummaryProps } from './account-summary.props.interface';
 
-export const AccountSummary = ({ accountId, iconName, balance, name, dateOfLastTransaction }: IAccountSummaryProps) => {
+export const AccountSummary = ({ accountId, icon, balance, name, dateOfLastTransaction }: IAccountSummaryProps) => {
   return (
     <Card
       elevation={1}
@@ -18,7 +30,8 @@ export const AccountSummary = ({ accountId, iconName, balance, name, dateOfLastT
     >
       <Pane display='flex' flexDirection='column' height='100%' justifyContent='space-between'>
         <Pane borderBottom display='flex' alignItems='center' marginBottom={10} paddingBottom={5}>
-          <Icon icon={iconName} marginRight={5} color='default' />
+          {/* TODO this is a bit weird still... */}
+          <Icon icon={icon} marginRight={5} color='default' />
           <Heading>{name}</Heading>
         </Pane>
         {!isNullOrUndefined(balance) && (
@@ -27,7 +40,7 @@ export const AccountSummary = ({ accountId, iconName, balance, name, dateOfLastT
               <Pane width={105}>
                 <Text color='muted'>Balance:</Text>
               </Pane>
-              <Icon icon='dollar' color='default' size={12} marginLeft={10} />
+              <DollarIcon color='default' size={12} marginLeft={10} />
               <Strong>{balance}</Strong>
             </Pane>
             <Pane display='flex' alignItems='center'>
@@ -51,10 +64,10 @@ export const AccountSummary = ({ accountId, iconName, balance, name, dateOfLastT
         )}
         <Pane display='flex' justifyContent='flex-end' borderTop paddingTop={5}>
           <Tooltip content='Open Account' hideDelay={0}>
-            <IconButton appearance='minimal' icon='eye-open' is={Link} to={`/account/${accountId}`} />
+            <IconButton appearance='minimal' icon={EyeOpenIcon} is={Link} to={`/account/${accountId}`} />
           </Tooltip>
           <Tooltip content='Import Records' hideDelay={0}>
-            <IconButton appearance='minimal' icon='import' is={Link} to={`/import/${accountId}`} />
+            <IconButton appearance='minimal' icon={ImportIcon} is={Link} to={`/import/${accountId}`} />
           </Tooltip>
         </Pane>
       </Pane>

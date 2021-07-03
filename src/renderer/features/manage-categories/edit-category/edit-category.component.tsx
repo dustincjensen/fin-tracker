@@ -1,13 +1,15 @@
 import {
   Button,
   Heading,
-  Icon,
   majorScale,
   Pane,
   TextInputField,
   FormFieldLabel,
   FormFieldDescription,
   Popover,
+  GroupObjectsIcon,
+  BanCircleIcon,
+  FloppyDiskIcon,
 } from 'evergreen-ui';
 import * as React from 'react';
 import { CirclePicker } from 'react-color';
@@ -39,7 +41,7 @@ export const EditCategory = ({ close, saveCategory, saveButtonText, headerText, 
     <Pane padding={20} background='tint1' border={!category} borderRadius={!category ? 5 : 0}>
       {headerText && (
         <Pane borderBottom display='flex' alignItems='center' marginBottom={20} paddingBottom={10}>
-          <Icon icon='group-objects' size={25} marginRight={10} color='default' />
+          <GroupObjectsIcon size={25} marginRight={10} color='default' />
           <Heading size={700}>{headerText}</Heading>
         </Pane>
       )}
@@ -89,10 +91,10 @@ export const EditCategory = ({ close, saveCategory, saveButtonText, headerText, 
           </Pane>
         </Pane>
         <Pane display='flex' justifyContent='flex-end' borderTop paddingTop={10}>
-          <Button type='button' iconBefore='ban-circle' height={majorScale(5)} marginRight={10} onClick={close}>
+          <Button type='button' iconBefore={BanCircleIcon} height={majorScale(5)} marginRight={10} onClick={close}>
             Cancel
           </Button>
-          <Button appearance='primary' iconBefore='floppy-disk' height={majorScale(5)}>
+          <Button appearance='primary' iconBefore={FloppyDiskIcon} height={majorScale(5)}>
             {saveButtonText}
           </Button>
         </Pane>
