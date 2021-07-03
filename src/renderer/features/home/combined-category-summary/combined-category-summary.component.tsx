@@ -1,5 +1,5 @@
 import useLocalStorage from '@rehooks/local-storage';
-import { Button, Checkbox, IconButton, Pane, SelectMenu, SelectMenuItem } from 'evergreen-ui';
+import { Button, Checkbox, CrossIcon, IconButton, Pane, SelectMenu, SelectMenuItem } from 'evergreen-ui';
 import * as React from 'react';
 import {
   BarChart,
@@ -123,7 +123,7 @@ export const CombinedCategorySummary = ({ categories, categoryTotalsByMonth }: I
             {selectedNames || 'Select Categories...'}
           </Button>
         </SelectMenu>
-        <IconButton icon='cross' onClick={clearSelectedCategories} />
+        <IconButton icon={CrossIcon} onClick={clearSelectedCategories} />
       </Pane>
 
       <ResponsiveContainer width='100%' height={400}>

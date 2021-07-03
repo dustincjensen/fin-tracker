@@ -1,4 +1,4 @@
-import { Table, Tooltip, IconButton, Pane, Icon } from 'evergreen-ui';
+import { Table, Tooltip, IconButton, Pane, ArchiveIcon, EditIcon, TrashIcon } from 'evergreen-ui';
 import * as React from 'react';
 import { IAccount } from '../../../store/account/account.interface';
 import { accountTypeLabels } from '../../../utils/account.utils';
@@ -35,7 +35,7 @@ export const Accounts = ({ accounts }: IAccountProps) => {
                   <Pane display='flex' alignItems='center'>
                     {account.archived && (
                       <Tooltip content='Archived' hideDelay={0}>
-                        <Icon icon='archive' marginTop={3} marginRight={10} />
+                        <ArchiveIcon marginTop={3} marginRight={10} />
                       </Tooltip>
                     )}
                     {account.name}
@@ -45,7 +45,7 @@ export const Accounts = ({ accounts }: IAccountProps) => {
                 <Table.Cell flex='none' justifyContent='flex-end' width={100}>
                   <Tooltip content='Edit Account' hideDelay={0}>
                     <IconButton
-                      icon='edit'
+                      icon={EditIcon}
                       appearance='minimal'
                       disabled={isEditing && isEditing !== account.id}
                       onClick={() => setIsEditing(account.id)}
@@ -54,7 +54,7 @@ export const Accounts = ({ accounts }: IAccountProps) => {
                   </Tooltip>
                   <Tooltip content='Delete Account' hideDelay={0}>
                     <IconButton
-                      icon='trash'
+                      icon={TrashIcon}
                       appearance='minimal'
                       intent='danger'
                       onClick={() => setAccountToDelete(account)}

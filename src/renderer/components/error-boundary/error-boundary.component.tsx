@@ -1,11 +1,12 @@
 import { shell } from 'electron';
-import { Pane, Heading, Icon, majorScale, Paragraph, Button } from 'evergreen-ui';
+import { Pane, Heading, majorScale, Paragraph, Button, WarningSignIcon } from 'evergreen-ui';
 import * as React from 'react';
 
 type ErrorBoundaryState = { hasError: boolean };
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export class ErrorBoundary extends React.Component<{}, ErrorBoundaryState> {
-  constructor(props: {}) {
+  constructor(props) {
     super(props);
     this.state = {
       hasError: false,
@@ -29,11 +30,11 @@ export class ErrorBoundary extends React.Component<{}, ErrorBoundaryState> {
     if (this.state.hasError) {
       return (
         <Pane height='100%' display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
-          <Icon icon='warning-sign' color='default' size={majorScale(5)} />
+          <WarningSignIcon color='default' size={majorScale(5)} />
           <Heading size={700} marginBottom={majorScale(2)}>
             Something went wrong
           </Heading>
-          <Paragraph maxWidth={400} marginBottom={majorScale(2)}>
+          <Paragraph marginTop={majorScale(3)} maxWidth={400} marginBottom={majorScale(2)}>
             We are sorry for the inconvenience. If you want to head over to our Github page and let us know what you
             were doing when this happened it would be greatly appreciated.
           </Paragraph>

@@ -1,4 +1,4 @@
-import { Button, majorScale, Pane, FormField, Text } from 'evergreen-ui';
+import { Button, majorScale, Pane, FormField, Text, CrossIcon, TickIcon } from 'evergreen-ui';
 import * as React from 'react';
 import { accountTypeLabels } from '../../../utils/account.utils';
 import { IActionPendingRecordsProps } from './action-pending-records.props.interface';
@@ -33,14 +33,14 @@ export const ActionPendingRecords = ({
           <Button
             appearance='primary'
             intent='success'
-            iconBefore='tick'
+            iconBefore={TickIcon}
             height={majorScale(5)}
             marginBottom={20}
             onClick={() => accept(startingBalance, newRecords, existingRecords)}
           >
             Accept Records
           </Button>
-          <Button appearance='primary' intent='danger' iconBefore='cross' height={majorScale(5)} onClick={clear}>
+          <Button appearance='primary' intent='danger' iconBefore={CrossIcon} height={majorScale(5)} onClick={clear}>
             Clear Records
           </Button>
         </Pane>

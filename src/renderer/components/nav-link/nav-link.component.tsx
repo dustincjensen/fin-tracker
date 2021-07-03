@@ -1,13 +1,14 @@
-import { Button, IconName } from 'evergreen-ui';
+import { Button } from 'evergreen-ui';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { IconType } from '../../utils/account.utils';
 
 type NavLinkProps = {
   /** The route to navigate to. */
   to: string;
 
   /** The evergreen ui icon to display. */
-  iconBefore: IconName;
+  iconBefore: IconType;
 
   /** The text to display for the button. */
   text: string;
@@ -17,7 +18,15 @@ type NavLinkProps = {
 };
 
 export const NavLink = ({ to, iconBefore, text, isSelected }: NavLinkProps) => (
-  <Button is={Link} appearance={isSelected ? 'primary' : 'minimal'} to={to} iconBefore={iconBefore} width='100%'>
+  <Button
+    is={Link}
+    appearance={isSelected ? 'primary' : 'minimal'}
+    to={to}
+    iconBefore={iconBefore}
+    width='100%'
+    display='flex'
+    justifyContent='flex-start'
+  >
     {text}
   </Button>
 );

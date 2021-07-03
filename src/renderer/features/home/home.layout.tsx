@@ -1,5 +1,5 @@
 import { useLocalStorage, writeStorage } from '@rehooks/local-storage';
-import { Pane, Heading, IconButton, Tooltip } from 'evergreen-ui';
+import { Pane, Heading, IconButton, Tooltip, LockIcon, UnlockIcon } from 'evergreen-ui';
 import * as React from 'react';
 import { ErrorBoundary } from '../../components/error-boundary/error-boundary.component';
 import { AccountSummariesContainer } from './account-summaries/account-summaries.container';
@@ -104,7 +104,7 @@ export const HomeLayout = () => {
         <Pane display='flex' justifyContent='space-between' marginBottom={10}>
           <Heading size={700}>{locked ? 'Home' : 'Edit Home'}</Heading>
           <Tooltip position='left' content={locked ? 'Edit Home page' : 'Finish Edit Home page'}>
-            <IconButton icon={locked ? 'lock' : 'unlock'} appearance='minimal' onClick={updateLocked} />
+            <IconButton icon={locked ? LockIcon : UnlockIcon} appearance='minimal' onClick={updateLocked} />
           </Tooltip>
         </Pane>
         <Pane>

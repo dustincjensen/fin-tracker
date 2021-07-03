@@ -98,9 +98,7 @@ export function formatDateMonthYear(date: string): string {
  * @param date  the date to find the previous month of.
  */
 export function getPreviousMonth(date: string): string {
-  return moment(date)
-    .subtract(1, 'months')
-    .toISOString();
+  return moment(date).subtract(1, 'months').toISOString();
 }
 
 /**

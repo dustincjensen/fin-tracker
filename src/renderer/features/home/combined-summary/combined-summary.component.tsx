@@ -1,4 +1,14 @@
-import { Pane, Heading, IconButton, Text, Select } from 'evergreen-ui';
+import {
+  Pane,
+  Heading,
+  IconButton,
+  Text,
+  Select,
+  DoubleChevronLeftIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  DoubleChevronRightIcon,
+} from 'evergreen-ui';
 import * as React from 'react';
 import { useWindowWidth } from '../../../hooks/use-window-width.hook';
 import { formatDateMonthYear } from '../../../utils/date.utils';
@@ -108,13 +118,13 @@ export const CombinedSummary = ({ accounts, endMonthBalances, endYearBalances }:
       <Pane>
         <Pane display='flex' justifyContent='space-between' alignItems='center' marginBottom={3}>
           <Pane display='flex'>
-            <IconButton icon='double-chevron-left' onClick={fullLeftClick} marginRight={3} />
-            <IconButton icon='chevron-left' onClick={onLeftClick} />
+            <IconButton icon={DoubleChevronLeftIcon} onClick={fullLeftClick} marginRight={3} />
+            <IconButton icon={ChevronLeftIcon} onClick={onLeftClick} />
           </Pane>
           <Heading>Accounts Summary</Heading>
           <Pane display='flex'>
-            <IconButton icon='chevron-right' onClick={onRightClick} marginRight={3} />
-            <IconButton icon='double-chevron-right' onClick={fullRightClick} />
+            <IconButton icon={ChevronRightIcon} onClick={onRightClick} marginRight={3} />
+            <IconButton icon={DoubleChevronRightIcon} onClick={fullRightClick} />
           </Pane>
         </Pane>
         <Pane border borderRadius={0}>

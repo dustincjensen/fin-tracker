@@ -1,4 +1,4 @@
-import { Pane, Text, Button, Icon, minorScale } from 'evergreen-ui';
+import { Pane, Text, Button, minorScale, SmallCrossIcon } from 'evergreen-ui';
 import * as React from 'react';
 import { ICategoryTagProps } from './category-tag.props.interface';
 
@@ -20,7 +20,7 @@ export const CategoryTag = ({ category, onClear }: ICategoryTagProps) => {
         </Text>
         {onClear && (
           <Button type='button' height={minorScale(4)} padding={0} margin={0} appearance='minimal' onClick={onClear}>
-            <Icon icon='small-cross' color='white' />
+            <SmallCrossIcon color='white' />
           </Button>
         )}
       </Pane>

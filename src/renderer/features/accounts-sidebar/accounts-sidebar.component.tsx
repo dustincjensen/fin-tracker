@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { NavLink } from '../../components/nav-link/nav-link.component';
 import { AccountSelectors } from '../../store/account/account.selectors';
-import { accountTypeIconNames } from '../../utils/account.utils';
+import { accountTypeIcons } from '../../utils/account.utils';
 
 export const AccountsSidebar = () => {
   const location = useLocation();
@@ -14,14 +14,14 @@ export const AccountsSidebar = () => {
     <Pane display='flex' flexDirection='column'>
       {accounts.map(account => {
         const toLocation = `/account/${account.id}`;
-        const iconName = accountTypeIconNames[account.accountType];
+        const icon = accountTypeIcons[account.accountType];
         const isSelected = location.pathname === toLocation;
         return (
           <NavLink
             key={account.id}
             to={`/account/${account.id}`}
             text={account.name}
-            iconBefore={iconName}
+            iconBefore={icon}
             isSelected={isSelected}
           />
         );

@@ -1,4 +1,4 @@
-import { Pane, SearchInput, Button, majorScale } from 'evergreen-ui';
+import { Pane, SearchInput, Button, majorScale, PlusIcon } from 'evergreen-ui';
 import * as React from 'react';
 import { ICategoriesFilterProps } from './categories-filter.props.interface';
 
@@ -10,7 +10,7 @@ export const CategoriesFilter = ({ categoryFilter, setCategoryFilter, openNewCat
       <Button
         appearance='primary'
         intent='success'
-        iconBefore='plus'
+        iconBefore={PlusIcon}
         minWidth={154}
         height={majorScale(5)}
         marginRight={10}

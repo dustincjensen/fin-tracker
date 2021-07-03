@@ -1,4 +1,4 @@
-import { IconName } from 'evergreen-ui';
+import { IconType } from '../../utils/account.utils';
 
 export interface IAccountSummaryProps {
   /**
@@ -9,7 +9,7 @@ export interface IAccountSummaryProps {
   /**
    * The name of the icon to use.
    */
-  iconName: IconName;
+  icon: IconType;
 
   /**
    * The name of the account.
