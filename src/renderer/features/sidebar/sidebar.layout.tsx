@@ -74,7 +74,13 @@ export const SidebarLayout = (props: {
           isSelected={location.pathname === '/autoCategories'}
         />
       </Pane>
-      <Button onClick={openUserPath} appearance='minimal' iconBefore={DatabaseIcon}>
+      <Button
+        onClick={openUserPath}
+        appearance='minimal'
+        iconBefore={DatabaseIcon}
+        display='flex'
+        justifyContent='flex-start'
+      >
         User Data
       </Button>
       <Text paddingTop={20} size={300} textAlign='center'>
