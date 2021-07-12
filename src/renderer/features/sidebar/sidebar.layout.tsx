@@ -39,7 +39,7 @@ export const SidebarLayout = (props: {
         iconBefore={ImportIcon}
         height={majorScale(7)}
         marginBottom='15px'
-        appearance={location.pathname === '/import' ? 'primary' : 'minimal'}
+        appearance={location.pathname.startsWith('/import') ? 'primary' : 'minimal'}
       >
         Import
       </Button>
