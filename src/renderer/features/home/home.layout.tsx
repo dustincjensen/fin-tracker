@@ -2,7 +2,7 @@ import { useLocalStorage, writeStorage } from '@rehooks/local-storage';
 import { Pane, Heading, IconButton, Tooltip, LockIcon, UnlockIcon } from 'evergreen-ui';
 import * as React from 'react';
 import { ErrorBoundary } from '../../components/error-boundary/error-boundary.component';
-import { AccountSummariesContainer } from './account-summaries/account-summaries.container';
+import { AccountSummaries } from './account-summaries/account-summaries.component';
 import { CombinedCategorySummaryContainer } from './combined-category-summary/combined-category-summary.container';
 import { CombinedSummaryContainer } from './combined-summary/combined-summary.container';
 import { InstructionsContainer } from './instructions/instructions.container';
@@ -26,7 +26,7 @@ const renderAccountsSummaryTitle = (locked: boolean, updateOrder: IOptionalDispl
     title='Accounts Summary (Tiles)'
     displayKey={accountsSummaryTilesDisplayed}
     updateOrder={updateOrder}
-    component={AccountSummariesContainer}
+    component={AccountSummaries}
   />
 );
 

@@ -33,6 +33,7 @@ export const RecordReducer = createDraftReducer(
  * @param records   The full list of our account records.
  */
 function saveNewRecords(draft: Draft<IRecordStore>, records: IRecord[]) {
+  // TODO if the only record is a manual and it get's deleted... this doesn't remove the record.
   if (records && records.length > 0) {
     const accountId = records[0]?.accountId;
     draft.records[accountId] = records;

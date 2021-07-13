@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router';
 import { AccountLayout } from '../account/account.layout';
 import { HomeLayout } from '../home/home.layout';
 import { ImportLayout } from '../import/import.layout';
+import { InvestmentLayout } from '../investment/investment.layout';
 import { ManageAccountLayout } from '../manage-accounts/manage-accounts.layout';
 import { ManageAutoCategoriesLayout } from '../manage-auto-categories/manage-auto-categories.layout';
 import { ManageCategoryLayout } from '../manage-categories/manage-categories.layout';
@@ -22,6 +23,7 @@ export const RootLayout = () => {
             <Route exact path='/autoCategories' component={ManageAutoCategoriesLayout} />
             <Route exact path='/categories' component={ManageCategoryLayout} />
             <Route exact path='/account/:accountId' component={AccountLayout} />
+            <Route exact path='/investment/:accountId' component={InvestmentLayout} />
             <Route exact path='/import/:accountId?' component={ImportLayout} />
           </Switch>
         </Pane>

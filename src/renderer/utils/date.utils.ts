@@ -1,4 +1,4 @@
-import moment, { Moment } from 'moment';
+import moment, { isMoment, Moment } from 'moment';
 
 export interface IDate {
   year: () => number;
@@ -79,7 +79,10 @@ export function formatDate(date: string): string {
  *
  * @param date  the date to be formatted.
  */
-export function formatDateFull(date: string): string {
+export function formatDateFull(date: string | Moment): string {
+  if (isMoment(date)) {
+    return date.format('LL');
+  }
   return moment(date).format('LL');
 }
 
@@ -194,4 +197,13 @@ export function getEarliestDate(dates: string[]) {
  */
 export function getLatestDate(dates: string[]) {
   return moment.max(dates.filter(d => d).map(d => moment(d)));
+}
+
+/**
+ * Returns a date in YYYY-MM-DD format for Open Exchange Rate API.
+ * 
+ * @param date  The date to format.
+ */
+export function getDateForOer(date: string): string {
+  return moment(date).format('YYYY-MM-DD');
 }

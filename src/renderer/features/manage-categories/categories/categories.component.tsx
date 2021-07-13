@@ -49,14 +49,16 @@ export const Categories = ({ categories }: ICategoriesProps) => {
                       marginRight={5}
                     />
                   </Tooltip>
-                  <Tooltip content='Delete Category' hideDelay={0}>
-                    <IconButton
-                      icon={TrashIcon}
-                      appearance='minimal'
-                      intent='danger'
-                      onClick={() => setCategoryToDelete(category)}
-                    />
-                  </Tooltip>
+                  {!category.accountTransferId && (
+                    <Tooltip content='Delete Category' hideDelay={0}>
+                      <IconButton
+                        icon={TrashIcon}
+                        appearance='minimal'
+                        intent='danger'
+                        onClick={() => setCategoryToDelete(category)}
+                      />
+                    </Tooltip>
+                  )}
                 </Table.Cell>
               </Table.Row>
               {isEditing === category.id && (

@@ -29,6 +29,7 @@ export const EditCategory = ({ close, saveCategory, saveButtonText, headerText, 
 
     const updatedCategory: ICategory = {
       id: category?.id || newGuid(),
+      accountTransferId: category?.accountTransferId,
       name,
       color,
     };

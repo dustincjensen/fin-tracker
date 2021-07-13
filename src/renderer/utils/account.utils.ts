@@ -1,16 +1,20 @@
-import { BankAccountIcon, CreditCardIcon } from 'evergreen-ui';
+import { BankAccountIcon, ChartIcon, CreditCardIcon } from 'evergreen-ui';
 import { AccountType } from '../store/account/account.type';
 
 export const accountTypeLabels: Record<AccountType, string> = {
   Chequing: 'Chequing',
   Savings: 'Savings',
   CreditCard: 'Credit Card',
+  RRSP: 'RRSP',
+  TFSA: 'TFSA',
 };
 
 export const accountTypeNameValuePairs: Array<{ value: AccountType; name: string }> = [
   { value: 'Chequing', name: 'Chequing' },
   { value: 'Savings', name: 'Savings' },
   { value: 'CreditCard', name: 'Credit Card' },
+  { value: 'RRSP', name: 'Registered Retirement Savings Plan' },
+  { value: 'TFSA', name: 'Tax-free Savings Account' },
 ];
 
 // TODO typing for evergreen icon components is no longer typed.
@@ -19,7 +23,35 @@ export const accountTypeIcons: Record<AccountType, IconType> = {
   Chequing: BankAccountIcon,
   Savings: BankAccountIcon,
   CreditCard: CreditCardIcon,
+  RRSP: ChartIcon,
+  TFSA: ChartIcon,
 };
+
+export const accountRoutes: Record<AccountType, string> = {
+  Chequing: '/account',
+  Savings: '/account',
+  CreditCard: '/account',
+  RRSP: '/investment',
+  TFSA: '/investment',
+};
+
+/**
+ * Returns true if the account is a bank account type.
+ * 
+ * @param type  The type of the account.
+ */
+export function isBankAccount(type: AccountType) {
+  return ['Chequing', 'Savings', 'CreditCard'].includes(type);
+}
+
+/**
+ * Returns true if the account is an investment account type.
+ * 
+ * @param type  The type of the account.
+ */
+export function isInvestmentAccount(type: AccountType) {
+  return ['RRSP', 'TFSA'].includes(type);
+}
 
 /**
  * Returns a date string for the account start date.

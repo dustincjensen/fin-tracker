@@ -12,17 +12,18 @@ Next
 - Support TFSA/RRSP Manual accounts. (Transfer Category per account? Basic Transfer Category?)
 - Update manual transactions? (Or just delete and re-add?)
 - Improve account monthly header
+- Look at removing HideDelay as it might be causing ToolTip issues.
 
 - Categories are wide when named after accounts with + Transfer title.
-- If you delete an account, remove categories that have accountTransferId set to that account id.
+- Cannot remove single record when it is manual transaction.
+- Change how archiving works for Investment accounts (needs to check for records in investment records).
+- IsStacked chart bug due to useLocalStorage update.
 
 - Home page Mortgage Summary Card
 - Home page Mortgage in balance chart
 - Mortgage should really have an interest rate and you should be able to see estimated balance based on principal vs interest.
 
 - Storybook
-- Vitejs?
-- Lit.dev
 
 Next 2
 - Feature component tests

@@ -97,5 +97,13 @@ describe('reducers', () => {
         expect(newState).toEqual(expectedState);
       });
     });
+
+    describe('createTransferCategory', () => {
+      // TODO
+    });
+
+    describe('deleteTransferCategory', () => {
+      // TODO
+    });
   });
 });

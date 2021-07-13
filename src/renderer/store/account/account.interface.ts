@@ -14,7 +14,7 @@ export interface IAccount {
   /**
    * The balance to start tracking this account.
    */
-  startingBalance: number;
+  startingBalance?: number;
 
   /**
    * The year the starting balance is from.

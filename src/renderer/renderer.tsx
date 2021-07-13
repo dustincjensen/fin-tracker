@@ -23,6 +23,7 @@ store.subscribe(() => {
     accounts: state.accounts,
     autoCategories: state.autoCategories,
     categories: state.categories,
+    investmentRecords: state.investmentRecords,
     records: state.records,
   };
   storage.set('state', persistedState);

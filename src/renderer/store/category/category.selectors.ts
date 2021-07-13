@@ -20,6 +20,16 @@ export class CategorySelectors {
       .sort(CategorySelectors.sort)
   );
 
+  /**
+   * Returns the array of categories wihout transfer categories.
+   */
+  public static selectDisplayCategories = createSelector(CategorySelectors.categories, categories =>
+    Object.keys(categories)
+      .map(id => categories[id])
+      .filter(c => !c.accountTransferId)
+      .sort(CategorySelectors.sort)
+  );
+
   private static sort(c1: { name: string }, c2: { name: string }) {
     const c1Name = c1.name.toLowerCase();
     const c2Name = c2.name.toLowerCase();
