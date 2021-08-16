@@ -4,7 +4,7 @@ import * as React from 'react';
 import { ErrorBoundary } from '../../components/error-boundary/error-boundary.component';
 import { AccountSummaries } from './account-summaries/account-summaries.component';
 import { CombinedCategorySummaryContainer } from './combined-category-summary/combined-category-summary.container';
-import { CombinedSummaryContainer } from './combined-summary/combined-summary.container';
+import { CombinedSummary } from './combined-summary/combined-summary.component';
 import { InstructionsContainer } from './instructions/instructions.container';
 import { OptionalDisplay } from './optional-display/optional-display.component';
 import { IOptionalDisplayProps } from './optional-display/optional-display.props.interface';
@@ -36,7 +36,7 @@ const renderAccountsSummaryMonthlyYearly = (locked: boolean, updateOrder: IOptio
     title='Accounts Summary (Monthly/Yearly)'
     displayKey={accountsSummaryMonthlyYearlyDisplayed}
     updateOrder={updateOrder}
-    component={CombinedSummaryContainer}
+    component={CombinedSummary}
   />
 );
 

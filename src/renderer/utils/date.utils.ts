@@ -207,3 +207,7 @@ export function getLatestDate(dates: string[]) {
 export function getDateForOer(date: string): string {
   return moment(date).format('YYYY-MM-DD');
 }
+
+export function getDateFromTimestamp(timestamp: number): string {
+  return moment(timestamp).format('YYYY-MM-DD');
+}
