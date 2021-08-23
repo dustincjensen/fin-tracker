@@ -7,10 +7,10 @@ const openExchangeRatesApiKey = '473417c4f6e0437ebe45ff10020eab35';
 interface IDateRate {
   date: string;
   rate: string;
-  actualDate: string;
+  actualDate: string; // todo remove?
 }
 
-export const useRatesByDates = (dates: string[], currency: string) => {
+export const useRatesByDates = (dates: string[], byMonth: boolean, currency: string) => {
   const [rates, setRates] = React.useState<IDateRate[]>([]);
   
   React.useEffect(() => {
@@ -25,7 +25,7 @@ export const useRatesByDates = (dates: string[], currency: string) => {
         return;
       }
 
-      const oerDates = dates.map(dateUtils.getDateForOer);
+      const oerDates = dates.map(byMonth ? dateUtils.getMonthDateForOer : dateUtils.getYearDateForOer);
       const rates = await Promise.all(oerDates.map(d => OpenExchangeRatesApi.getRatesOn(openExchangeRatesApiKey, d)));
 
       const dateRates: IDateRate[] = [];

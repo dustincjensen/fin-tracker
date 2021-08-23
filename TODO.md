@@ -1,6 +1,5 @@
 Bugs
 ====
-  - Date for rate is start of year for TFSA accounts in combined summary.
   - In combined.utils, getting the investment dates, we use the last entry, even thought they are not sorted by date. This could lead to missing months.
   - Tooltip for descriptions is a bit off center
   - Description width could be larger on bigger monitors... maybe use css breakpoints?

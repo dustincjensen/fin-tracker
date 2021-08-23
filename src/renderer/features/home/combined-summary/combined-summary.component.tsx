@@ -94,7 +94,7 @@ export const CombinedSummary = () => {
 
   
   // TODO dates are first of month (this leads to weird stuff like calculating May 31st record value if it was there on May 1st.)
-  const { rates } = useRatesByDates(displayableDates, 'USD');
+  const { rates } = useRatesByDates(displayableDates, byMonth === 'monthly', 'USD');
   // console.log(rates);
 
 
