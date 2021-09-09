@@ -1,7 +1,6 @@
 Bugs
 ====
   - In combined.utils, getting the investment dates, we use the last entry, even thought they are not sorted by date. This could lead to missing months.
-  - Tooltip for descriptions is a bit off center
   - Description width could be larger on bigger monitors... maybe use css breakpoints?
 
   - When you go between accounts that are on the same month/year it won't load the numbers on the category graph.
@@ -15,7 +14,6 @@ Next
 - Improve account monthly header
 - Look at removing HideDelay as it might be causing ToolTip issues.
 
-- Categories are wide when named after accounts with + Transfer title.
 - Cannot remove single record when it is manual transaction.
 - Change how archiving works for Investment accounts (needs to check for records in investment records).
 - IsStacked chart bug due to useLocalStorage update.

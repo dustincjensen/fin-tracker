@@ -28,7 +28,7 @@
     "@rehooks/local-storage": "^2.4.1",
     "electron-squirrel-startup": "^1.0.0",
     "electron-store": "^8.0.0",
-    "evergreen-ui": "^6.1.0",
+    "evergreen-ui": "^6.4.0",
     "immer": "^9.0.3",
     "lodash.debounce": "^4.0.8",
     "moment": "^2.29.1",
