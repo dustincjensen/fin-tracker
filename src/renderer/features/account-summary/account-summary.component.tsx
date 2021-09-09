@@ -91,10 +91,10 @@ export const AccountSummary = ({ accountId }: IAccountSummaryProps) => {
           </Pane>
         )}
         <Pane display='flex' justifyContent='flex-end' borderTop paddingTop={5}>
-          <Tooltip content='Open Account' hideDelay={0}>
+          <Tooltip content='Open Account'>
             <IconButton appearance='minimal' icon={EyeOpenIcon} is={Link} to={`/account/${accountId}`} />
           </Tooltip>
-          <Tooltip content='Import Records' hideDelay={0}>
+          <Tooltip content='Import Records'>
             <IconButton appearance='minimal' icon={ImportIcon} is={Link} to={`/import/${accountId}`} />
           </Tooltip>
         </Pane>

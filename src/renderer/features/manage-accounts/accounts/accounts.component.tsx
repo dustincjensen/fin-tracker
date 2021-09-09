@@ -34,7 +34,7 @@ export const Accounts = ({ accounts }: IAccountProps) => {
                 <Table.TextCell>
                   <Pane display='flex' alignItems='center'>
                     {account.archived && (
-                      <Tooltip content='Archived' hideDelay={0}>
+                      <Tooltip content='Archived'>
                         <ArchiveIcon marginTop={3} marginRight={10} />
                       </Tooltip>
                     )}
@@ -43,7 +43,7 @@ export const Accounts = ({ accounts }: IAccountProps) => {
                 </Table.TextCell>
                 <Table.TextCell>{account.accountType && accountTypeLabels[account.accountType]}</Table.TextCell>
                 <Table.Cell flex='none' justifyContent='flex-end' width={100}>
-                  <Tooltip content='Edit Account' hideDelay={0}>
+                  <Tooltip content='Edit Account'>
                     <IconButton
                       icon={EditIcon}
                       appearance='minimal'
@@ -52,7 +52,7 @@ export const Accounts = ({ accounts }: IAccountProps) => {
                       marginRight={5}
                     />
                   </Tooltip>
-                  <Tooltip content='Delete Account' hideDelay={0}>
+                  <Tooltip content='Delete Account'>
                     <IconButton
                       icon={TrashIcon}
                       appearance='minimal'

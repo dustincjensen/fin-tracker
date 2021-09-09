@@ -50,7 +50,7 @@ export const InvestmentSummary = ({ accountId }: IInvestmentSummaryProps) => {
           </Pane>
         )}
         <Pane display='flex' justifyContent='flex-end' borderTop paddingTop={5}>
-          <Tooltip content='Open Investment Account' hideDelay={0}>
+          <Tooltip content='Open Investment Account'>
             <IconButton appearance='minimal' icon={EyeOpenIcon} is={Link} to={`/investment/${accountId}`} /> 
           </Tooltip>
         </Pane>

@@ -15,14 +15,14 @@ const TransferHistoryRecordComponent = ({ record, account }: ITransferHistoryRec
       <Table.TextCell>
         <Pane display='flex' alignItems='center'>
           {record.isManualEntry && (
-            <Tooltip content='Manually entered' hideDelay={0}>
+            <Tooltip content='Manually entered'>
               <ManuallyEnteredDataIcon marginTop={3} marginRight={10} />
             </Tooltip>
           )}
           <Pane>
             <Pane>{record.description}</Pane>
             {record?.details && (
-              <Tooltip content={record?.details} hideDelay={0}>
+              <Tooltip content={record?.details}>
                 <Pane maxWidth={350} whiteSpace='nowrap' overflow='hidden' textOverflow='ellipsis'>
                   {record?.details}
                 </Pane>

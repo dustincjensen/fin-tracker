@@ -39,10 +39,10 @@ export const OptionalDisplay = ({
         >
           <Heading>{title}</Heading>
           <Pane display='flex'>
-            <Tooltip content='Move up' hideDelay={0}>
+            <Tooltip content='Move up'>
               <IconButton icon={ArrowUpIcon} onClick={() => updateOrder(displayKey, 'up')} marginLeft={5} />
             </Tooltip>
-            <Tooltip content='Move down' hideDelay={0}>
+            <Tooltip content='Move down'>
               <IconButton icon={ArrowDownIcon} onClick={() => updateOrder(displayKey, 'down')} marginLeft={5} />
             </Tooltip>
             <Tooltip content={displayed ? 'Hide on Home page' : 'Show on Home page'}>

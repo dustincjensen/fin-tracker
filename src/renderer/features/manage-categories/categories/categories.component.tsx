@@ -40,7 +40,7 @@ export const Categories = ({ categories }: ICategoriesProps) => {
                   <Text marginLeft={10}>{category.color || ''}</Text>
                 </Table.Cell>
                 <Table.Cell flex='none' justifyContent='flex-end' width={100}>
-                  <Tooltip content='Edit Category' hideDelay={0}>
+                  <Tooltip content='Edit Category'>
                     <IconButton
                       icon={EditIcon}
                       appearance='minimal'
@@ -50,7 +50,7 @@ export const Categories = ({ categories }: ICategoriesProps) => {
                     />
                   </Tooltip>
                   {!category.accountTransferId && (
-                    <Tooltip content='Delete Category' hideDelay={0}>
+                    <Tooltip content='Delete Category'>
                       <IconButton
                         icon={TrashIcon}
                         appearance='minimal'

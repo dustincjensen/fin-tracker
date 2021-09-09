@@ -29,7 +29,7 @@ export const AutoCategories = ({ autoCategories }: IAutoCategoriesProps) => {
                 <Table.TextCell {...w200}>
                   <Pane display='flex' alignItems='center'>
                     {autoCategory.accountArchived && (
-                      <Tooltip content='Archived' hideDelay={0}>
+                      <Tooltip content='Archived'>
                         <ArchiveIcon marginTop={3} marginRight={10} />
                       </Tooltip>
                     )}
@@ -43,7 +43,7 @@ export const AutoCategories = ({ autoCategories }: IAutoCategoriesProps) => {
                 <Table.TextCell {...w100}>{autoCategory.numberOfRecords}</Table.TextCell>
                 <Table.Cell {...w100} justifyContent='flex-end'>
                   {!autoCategory.accountArchived && (
-                    <Tooltip content='Delete Auto Category' hideDelay={0} position='bottom-right'>
+                    <Tooltip content='Delete Auto Category' position='bottom-right'>
                       <IconButton
                         icon={TrashIcon}
                         appearance='minimal'

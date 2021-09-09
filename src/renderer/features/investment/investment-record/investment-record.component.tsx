@@ -40,7 +40,7 @@ const InvestmentRecordComponent = ({ record, setRecordToDelete }: IInvestmentRec
             </Menu>
           )}
         >
-          <Tooltip content='Options' hideDelay={0}>
+          <Tooltip content='Options'>
             <IconButton
               icon={MoreIcon}
               appearance='minimal'
