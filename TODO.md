@@ -12,7 +12,6 @@ Next
 - Support TFSA/RRSP Manual accounts. (Transfer Category per account? Basic Transfer Category?)
 - Update manual transactions? (Or just delete and re-add?)
 - Improve account monthly header
-- Look at removing HideDelay as it might be causing ToolTip issues.
 
 - Cannot remove single record when it is manual transaction.
 - Change how archiving works for Investment accounts (needs to check for records in investment records).
