@@ -1,4 +1,3 @@
-import useLocalStorage from '@rehooks/local-storage';
 import { Button, Checkbox, CrossIcon, IconButton, Pane, SelectMenu, SelectMenuItem } from 'evergreen-ui';
 import * as React from 'react';
 import {
@@ -12,6 +11,7 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from 'recharts';
+import {useLocalStorage} from '../../../hooks/use-local-storage.hook';
 import { ICategory } from '../../../store/category/category.interface';
 import { formatDateMonthYear } from '../../../utils/date.utils';
 import { isNullOrUndefined } from '../../../utils/object.utils';
@@ -55,7 +55,7 @@ export const CombinedCategorySummary = ({ categories, categoryTotalsByMonth }: I
       categories
     );
   });
-  const [isStacked, setIsStacked] = useLocalStorage<boolean>(combinedCategorySummaryStackedOption);
+  const [isStacked, setIsStacked] = useLocalStorage<boolean>(combinedCategorySummaryStackedOption, false);
 
   // Create the data structure, which flattens the categories
   // into an array of objects that is keyed by the name of the

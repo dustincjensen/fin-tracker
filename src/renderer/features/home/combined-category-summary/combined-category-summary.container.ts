@@ -70,7 +70,7 @@ const selectCategoryTotalsByMonth = categorySummarySelector(queryByIsInYearAndMo
 
 const mapStateToProps = (state: IStore): StateProps => {
   return {
-    categories: CategorySelectors.selectCategories(state),
+    categories: CategorySelectors.selectDisplayCategories(state),
     categoryTotalsByMonth: selectCategoryTotalsByMonth(state),
   };
 };

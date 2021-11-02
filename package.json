@@ -25,7 +25,6 @@
   "author": "Dustin Jensen",
   "license": "ISC",
   "dependencies": {
-    "@rehooks/local-storage": "^2.4.1",
     "electron-squirrel-startup": "^1.0.0",
     "electron-store": "^8.0.0",
     "evergreen-ui": "^6.4.0",

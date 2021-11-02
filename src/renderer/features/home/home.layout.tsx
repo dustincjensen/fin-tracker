@@ -1,7 +1,7 @@
-import { useLocalStorage, writeStorage } from '@rehooks/local-storage';
 import { Pane, Heading, IconButton, Tooltip, LockIcon, UnlockIcon } from 'evergreen-ui';
 import * as React from 'react';
 import { ErrorBoundary } from '../../components/error-boundary/error-boundary.component';
+import { useLocalStorage } from '../../hooks/use-local-storage.hook';
 import { AccountSummaries } from './account-summaries/account-summaries.component';
 import { CombinedCategorySummaryContainer } from './combined-category-summary/combined-category-summary.container';
 import { CombinedSummary } from './combined-summary/combined-summary.component';
@@ -59,7 +59,7 @@ const keyToRenderMap = {
 export const HomeLayout = () => {
   const [locked, setLocked] = React.useState<boolean>(true);
   const updateLocked = () => setLocked(v => !v);
-  const [homePageOrder] = useLocalStorage<string[]>(homePageOrderLocalStorage, defaultOrder);
+  const [homePageOrder, setHomePageOrder] = useLocalStorage<string[]>(homePageOrderLocalStorage, defaultOrder);
   const [fullHomePageOrder, setFullHomePageOrder] = React.useState<string[]>([
     ...homePageOrder.filter(k => defaultOrder.indexOf(k) >= 0),
     ...defaultOrder.filter(k => homePageOrder.indexOf(k) < 0),
@@ -82,7 +82,7 @@ export const HomeLayout = () => {
           ...firstHalf.slice(firstHalf.length - 1),
           ...secondHalf,
         ];
-        writeStorage(homePageOrderLocalStorage, newOrder);
+        setHomePageOrder(newOrder);
         setFullHomePageOrder(newOrder);
       } else {
         const newOrder = [
@@ -91,7 +91,7 @@ export const HomeLayout = () => {
           fullHomePageOrder[indexOfKey],
           ...secondHalf.slice(1),
         ];
-        writeStorage(homePageOrderLocalStorage, newOrder);
+        setHomePageOrder(newOrder);
         setFullHomePageOrder(newOrder);
       }
     },

@@ -1,4 +1,3 @@
-import { useLocalStorage, writeStorage } from '@rehooks/local-storage';
 import {
   IconButton,
   Pane,
@@ -11,6 +10,7 @@ import {
   ArrowDownIcon,
 } from 'evergreen-ui';
 import * as React from 'react';
+import { useLocalStorage } from '../../../hooks/use-local-storage.hook';
 import { IOptionalDisplayProps } from './optional-display.props.interface';
 
 export const OptionalDisplay = ({
@@ -20,7 +20,7 @@ export const OptionalDisplay = ({
   updateOrder,
   component: OptionalComponent,
 }: IOptionalDisplayProps) => {
-  const [displayed] = useLocalStorage<boolean>(displayKey, true);
+  const [displayed, setDisplayed] = useLocalStorage<boolean>(displayKey, true);
 
   if (!displayed && locked) {
     return null;
@@ -48,7 +48,7 @@ export const OptionalDisplay = ({
             <Tooltip content={displayed ? 'Hide on Home page' : 'Show on Home page'}>
               <IconButton
                 icon={displayed ? EyeOffIcon : EyeOnIcon}
-                onClick={() => writeStorage(displayKey, !displayed)}
+                onClick={() => setDisplayed(!displayed)}
                 marginLeft={5}
               />
             </Tooltip>

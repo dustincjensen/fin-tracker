@@ -9,13 +9,15 @@ Bugs
 Tasks
 =====
 Next
-- Support TFSA/RRSP Manual accounts. (Transfer Category per account? Basic Transfer Category?)
++ IsStacked chart bug due to useLocalStorage update.
++ Support TFSA/RRSP Manual accounts. 
+- Transfer Category per account? Basic Transfer Category?
+  - Improve implementation from TFSA / RRSP accounts
 - Update manual transactions? (Or just delete and re-add?)
 - Improve account monthly header
 
 - Cannot remove single record when it is manual transaction.
 - Change how archiving works for Investment accounts (needs to check for records in investment records).
-- IsStacked chart bug due to useLocalStorage update.
 
 - Home page Mortgage Summary Card
 - Home page Mortgage in balance chart
