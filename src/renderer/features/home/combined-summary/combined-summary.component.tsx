@@ -17,6 +17,7 @@ import { isBankAccount } from '../../../utils/account.utils';
 import { useRatesByDates } from '../../investment/_hooks/use-rates-by-dates.hook';
 import { displayMonthDates, displayYearDates } from '../combined.utils';
 import { BankAccountRowSummary } from './bank-account-row-summary.component';
+import { CombinedChart } from './combined-chart.component';
 import { DateHeaders } from './date-headers.component';
 import { InvestmentAccountRowSummary } from './investment-account-row-summary.component';
 import { TotalRow } from './total-row.component';
@@ -92,13 +93,10 @@ export const CombinedSummary = () => {
   const start = displayableDates.length - numberOfColumns - startingColumnIndex;
   const end = displayableDates.length - startingColumnIndex;
 
-  
-  // TODO dates are first of month (this leads to weird stuff like calculating May 31st record value if it was there on May 1st.)
   const { rates } = useRatesByDates(displayableDates, byMonth === 'monthly', 'USD');
-  // console.log(rates);
-
 
   return (
+    <TotalContext.Provider value={{ totals: [] }}>
     <div ref={containerRef} style={{ display: 'flex' }}>
       <Pane
         display='flex'
@@ -153,24 +151,26 @@ export const CombinedSummary = () => {
               justifyContent: 'space-between'
             }}
           >
-            <TotalContext.Provider value={{ totals: [] }}>
-              <Pane>
-                <DateHeaders 
-                  byMonth={byMonth} 
-                  start={start} 
-                  end={end}
-                  dates={displayableDates} />
-                {accounts.map(a => {
-                  return isBankAccount(a.accountType) 
-                    ? <BankAccountRowSummary key={a.id} accountId={a.id} byMonth={byMonth === 'monthly'} start={start} end={end} dates={displayableDates} />
-                    : <InvestmentAccountRowSummary key={a.id} accountId={a.id} byMonth={byMonth === 'monthly'} start={start} end={end} dates={displayableDates} rates={rates} />;
-                })}
-              </Pane>
-              <TotalRow start={start} end={end} />
-            </TotalContext.Provider>
+            <Pane>
+              <DateHeaders 
+                byMonth={byMonth} 
+                start={start} 
+                end={end}
+                dates={displayableDates} />
+              {accounts.map(a => {
+                return isBankAccount(a.accountType) 
+                  ? <BankAccountRowSummary key={a.id} accountId={a.id} byMonth={byMonth === 'monthly'} start={start} end={end} dates={displayableDates} />
+                  : <InvestmentAccountRowSummary key={a.id} accountId={a.id} byMonth={byMonth === 'monthly'} start={start} end={end} dates={displayableDates} rates={rates} />;
+              })}
+            </Pane>
+            <TotalRow start={start} end={end} />
           </div>
         </Pane>
       </Pane>
     </div>
+    <Pane width={nameWidth + (displayWidth * numberOfColumns)}>
+      <CombinedChart displayableDates={displayableDates} />
+    </Pane>
+    </TotalContext.Provider>
   );
 };

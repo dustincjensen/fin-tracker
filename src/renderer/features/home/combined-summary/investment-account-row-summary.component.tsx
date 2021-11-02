@@ -35,7 +35,11 @@ const selectAccountBalances = (query: DateCurriedQuery, dates: string[]) =>
           continue;
         }
 
-        const balances = records?.filter(r => curriedQuery(r.date));
+        const investRecords = records ? [...records] : [];
+        // TODO better way to sort?
+        investRecords.sort((a, b) => createDate(a.date) > createDate(b.date) ? 1 : -1);
+
+        const balances = investRecords?.filter(r => curriedQuery(r.date));
         let cadBalance = balances?.filter(r => r.investmentCurrency === 'CAD').pop()?.balance;
         let usdBalance = balances?.filter(r => r.investmentCurrency === 'USD').pop()?.balance;
 
