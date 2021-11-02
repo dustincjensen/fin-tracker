@@ -7,7 +7,7 @@ import { CategorySelectors } from '../../../store/category/category.selectors';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
 import { accountTypeLabels, getAccountStartDate } from '../../../utils/account.utils';
-import { stringToMonthYear } from '../../../utils/date.utils';
+import { stringToMonthYear, today } from '../../../utils/date.utils';
 import { sortByDateDescending } from '../../../utils/record.utils';
 import { useBalanceByRate } from '../_hooks/use-balance-by-rate.hook';
 import { IInvestmentDetailSummaryProps } from './investment-detail-summary.props.interface';
@@ -51,8 +51,10 @@ const selectTransferCost = createSelector(
 
   const cadLatest = useSelector((state: IStore) => latestBalanceSelector(state, accountId, 'CAD'));
   const usdLatest = useSelector((state: IStore) => latestBalanceSelector(state, accountId, 'USD'));
-  const {convertedBalance: usdConverted} = useBalanceByRate(usdLatest?.balance, usdLatest?.date, usdLatest?.investmentCurrency);
-  const balance = (cadLatest?.balance || 0.0) + (usdConverted || 0.0);
+  const {convertedBalance: latestUsdConverted} = useBalanceByRate(usdLatest?.balance, usdLatest?.date, usdLatest?.investmentCurrency);
+  const {convertedBalance: todaysUsdConverted} = useBalanceByRate(usdLatest?.balance, today(), usdLatest?.investmentCurrency);
+  const latestBalance = (cadLatest?.balance || 0.0) + (latestUsdConverted || 0.0);
+  const todaysBalance = (cadLatest?.balance || 0.0) + (todaysUsdConverted || 0.0);
 
   return (
     <>
@@ -67,13 +69,14 @@ const selectTransferCost = createSelector(
         borderRadius={5}
         marginBottom={majorScale(3)}
       >
-        <Pane display='grid' gridTemplateColumns='auto auto auto auto auto 1fr' columnGap='50px'>
+        <Pane display='grid' gridTemplateColumns='auto auto auto auto auto auto 1fr' columnGap='50px'>
           <Field label='Account Name' text={name} />
           <Field label='Account Type' text={accountTypeLabels[accountType]} />
           <Field label='Start Date' text={startDate} />
           <Field label="Transfer Category" text={transferCategory?.name} />
           <Field label="Transfer Cost" text={transferCost.toFixed(2)} />
-          <Field label="Latest Balance" text={balance.toFixed(2)} />
+          <Field label="Latest Balance" text={latestBalance.toFixed(2)} />
+          <Field label="Today's Balance" text={todaysBalance.toFixed(2)} />
         </Pane>
       </Pane>
     </>

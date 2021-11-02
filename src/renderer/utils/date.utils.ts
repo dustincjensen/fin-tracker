@@ -244,3 +244,8 @@ export function getYearDateForOer(date: string): string {
 export function getDateFromTimestamp(timestamp: number): string {
   return moment(timestamp).format('YYYY-MM-DD');
 }
+
+// TODO docs
+export function today(): string {
+  return moment().format('YYYY-MM-DD');
+}
