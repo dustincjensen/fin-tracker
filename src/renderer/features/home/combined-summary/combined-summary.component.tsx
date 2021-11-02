@@ -76,6 +76,14 @@ export const CombinedSummary = () => {
     }
   };
 
+  const setStartIndexOnChartClick = (date: string) => {
+    const index = displayableDates.indexOf(date);
+    if (index >= 0)
+    { 
+      setStartingColumnIndex(Math.max(displayableDates.length - numberOfColumns - index, 0));
+    }
+  };
+
   const setDisplayOption = evt => {
     // Set the index back to the start when toggling between month and year since one chart might
     // have significantly more or less columns.
@@ -169,7 +177,7 @@ export const CombinedSummary = () => {
       </Pane>
     </div>
     <Pane width={nameWidth + (displayWidth * numberOfColumns)}>
-      <CombinedChart displayableDates={displayableDates} />
+      <CombinedChart displayableDates={displayableDates} start={start} end={end} setStartDate={setStartIndexOnChartClick} />
     </Pane>
     </TotalContext.Provider>
   );
