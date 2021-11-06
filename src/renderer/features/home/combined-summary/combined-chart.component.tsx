@@ -34,7 +34,7 @@ export const CombinedChart = (props: {
             }
           }
         }}>
-        <Line type='monotone' dataKey='total' stroke='#008800' dot={false} />
+        <Line type='monotone' dataKey='total' stroke='#008800' isAnimationActive={false} />
         <CartesianGrid stroke='#222' strokeDasharray='5 5' />
         <XAxis dataKey='date' minTickGap={20} >
           <Label value='Date' position="insideBottom" offset={-5} />
@@ -44,6 +44,8 @@ export const CombinedChart = (props: {
         </YAxis>
         <Tooltip isAnimationActive={false} />
         {dipsBelowZero && <ReferenceLine y={0} stroke='#ff0000' strokeDasharray='5 5' />}
+
+        {/* TODO handle reference area when it is 1 month/year. */}
         <ReferenceArea x1={formatDateMonthYear(displayableDates[start])} x2={formatDateMonthYear(displayableDates[end - 1])} />
       </LineChart>
     </ResponsiveContainer>
