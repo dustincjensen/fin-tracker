@@ -3,6 +3,7 @@ import { Dispatch } from 'redux';
 import { createSelector } from 'reselect';
 import { AccountActions } from '../../../store/account/account.actions';
 import { IAccount } from '../../../store/account/account.interface';
+import { InvestmentRecordSelectors } from '../../../store/investment-record/investment-record.selectors';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
 import { createDate } from '../../../utils/date.utils';
@@ -26,15 +27,28 @@ const mapStateToProps = () => {
     return undefined;
   });
 
+  const selectLastInvestmentTransactionDate = createSelector(InvestmentRecordSelectors.recordsByAccountId, (records): [number, number] => {
+    const investRecords = records ? [...records] : [];
+    investRecords.sort((a, b) => createDate(a.date) > createDate(b.date) ? 1 : -1);
+    const lastRecordDate = investRecords?.[investRecords.length - 1]?.date;
+    if (lastRecordDate) {
+      const lrd = createDate(lastRecordDate);
+      return [lrd.year(), lrd.month()];
+    }
+    return undefined;
+  });
+
   return (state: IStore, ownProps: OwnProps): StateProps => {
     const records = RecordSelectors.recordsByAccountId(state, ownProps.account.id);
     const currentBalance = RecordSelectors.currentBalance(state, ownProps.account.id);
+    const investmentBalance = InvestmentRecordSelectors.balance(state, ownProps.account.id);
     const lastTransactionDate = selectLastTransactionDate(state, ownProps.account.id);
+    const lastInvestmentTransactionDate = selectLastInvestmentTransactionDate(state, ownProps.account.id);
     return {
       saveButtonText: 'Update Account',
       canEditComplexFields: (!records || records.length === 0) && !ownProps.account.archived,
-      currentBalance,
-      lastTransactionDate,
+      currentBalance: currentBalance || investmentBalance,
+      lastTransactionDate: lastTransactionDate || lastInvestmentTransactionDate,
     };
   };
 };

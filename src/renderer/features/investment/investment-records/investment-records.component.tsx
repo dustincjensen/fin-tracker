@@ -2,6 +2,7 @@ import { Pane, Table } from 'evergreen-ui';
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
+import { AccountSelectors } from '../../../store/account/account.selectors';
 import { IInvestmentRecord } from '../../../store/investment-record/investment-record.interface';
 import { IStore } from '../../../store/store.interface';
 import { sortByDateDescending } from '../../../utils/record.utils';
@@ -22,6 +23,7 @@ const recordsSelector = createSelector(
 export const InvestmentRecords = ({ accountId, currency }: IInvestmentRecordsProps) => {
   const records = useSelector((state: IStore) => recordsSelector(state, accountId, currency));
   const [recordToDelete, setRecordToDelete] = React.useState<IInvestmentRecord>(undefined);
+  const { archived } = useSelector((state: IStore) => AccountSelectors.account(state, accountId));
 
   const clearRecordToDelete = React.useCallback(() => setRecordToDelete(undefined), []);
 
@@ -33,10 +35,10 @@ export const InvestmentRecords = ({ accountId, currency }: IInvestmentRecordsPro
           {currency !== 'CAD' && <Table.TextHeaderCell>Exchange Rate</Table.TextHeaderCell>}
           <Table.TextHeaderCell>Balance</Table.TextHeaderCell>
           {currency !== 'CAD' && <Table.TextHeaderCell>Converted</Table.TextHeaderCell>}
-          <Table.HeaderCell flex='none' width={54}></Table.HeaderCell>
+          {!archived && <Table.HeaderCell flex='none' width={54}></Table.HeaderCell>}
         </Table.Head>
         <Table.VirtualBody height={300}>
-          {records?.map(record => <InvestmentRecord key={record.id} record={record} setRecordToDelete={setRecordToDelete} />)}
+          {records?.map(record => <InvestmentRecord key={record.id} record={record} setRecordToDelete={setRecordToDelete} accountArchived={archived} />)}
         </Table.VirtualBody>
       </Table>
 

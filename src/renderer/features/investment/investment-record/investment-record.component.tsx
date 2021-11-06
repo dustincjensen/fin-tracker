@@ -4,7 +4,7 @@ import * as dateUtils from '../../../utils/date.utils';
 import { useBalanceByRate } from '../_hooks/use-balance-by-rate.hook';
 import { IInvestmentRecordProps } from './investment-record.props.interface';
 
-const InvestmentRecordComponent = ({ record, setRecordToDelete }: IInvestmentRecordProps) => {
+const InvestmentRecordComponent = ({ record, setRecordToDelete, accountArchived }: IInvestmentRecordProps) => {
   const { convertedBalance, rate } = useBalanceByRate(record.balance, record.date, record.investmentCurrency);
 
   return (
@@ -20,7 +20,7 @@ const InvestmentRecordComponent = ({ record, setRecordToDelete }: IInvestmentRec
       {record.investmentCurrency !== 'CAD' && <Table.TextCell isNumber textAlign='right'>
         {convertedBalance?.toFixed(2)}
       </Table.TextCell>}
-      <Table.Cell flex='none' justifyContent='flex-end' width={54}>
+      {!accountArchived && <Table.Cell flex='none' justifyContent='flex-end' width={54}>
         <Popover
           position={Position.BOTTOM_RIGHT}
           content={({ close }) => (
@@ -47,7 +47,7 @@ const InvestmentRecordComponent = ({ record, setRecordToDelete }: IInvestmentRec
             />
           </Tooltip>
         </Popover>
-      </Table.Cell>
+      </Table.Cell>}
     </Table.Row>
   );
 };

@@ -10,4 +10,9 @@ export interface IInvestmentRecordProps {
    * UseState setter for the record to delete.
    */
   setRecordToDelete: React.Dispatch<React.SetStateAction<IInvestmentRecord>>;
+
+  /**
+   * True if the account is archived; false otherwise.
+   */
+  accountArchived: boolean;
 }

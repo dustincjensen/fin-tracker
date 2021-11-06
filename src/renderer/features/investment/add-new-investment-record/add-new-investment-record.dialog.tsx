@@ -28,7 +28,7 @@ export const AddNewInvestmentRecordDialog = ({ accountId, currency, onClose }: I
 
     // Balance should be not be '', zero, or a number with more than 2 decimals.
     let newBalanceError = '';
-    if (typeof balance === 'string' || balance === 0) {
+    if (typeof balance === 'string') {
       hasError = true;
       newBalanceError = 'Please enter a balance';
     } else {
