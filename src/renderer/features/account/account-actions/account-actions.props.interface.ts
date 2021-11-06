@@ -4,7 +4,13 @@ export interface IAccountActionsProps {
    */
   accountId: string;
 
+  /**
+   * The selected category ID.
+   */
   selectedCategoryId: string;
   
+  /**
+   * Function to set the selected category ID.
+   */
   setSelectedCategoryId: React.Dispatch<React.SetStateAction<string>>;
 }
