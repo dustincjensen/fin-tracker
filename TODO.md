@@ -12,6 +12,8 @@ Next
 + IsStacked chart bug due to useLocalStorage update.
 + Support TFSA/RRSP Manual accounts. 
 + Change how archiving works for Investment accounts (needs to check for records in investment records).
++ Add Third Party API Store for Open Exchange Rates API Key.
+- Add filter for uncategorized records in account.
 - Transfer Category per account? Basic Transfer Category?
   - Improve implementation from TFSA / RRSP accounts
 
