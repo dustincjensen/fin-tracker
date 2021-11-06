@@ -179,7 +179,7 @@ export const CombinedSummary = () => {
       </Pane>
     </div>
     <Pane width={nameWidth + (displayWidth * numberOfColumns)}>
-      <CombinedChart displayableDates={displayableDates} start={start} end={end} setStartDate={setStartIndexOnChartClick} />
+      <CombinedChart displayableDates={displayableDates} start={start} end={end} setStartDate={setStartIndexOnChartClick} byMonth={byMonth === 'monthly'} />
     </Pane>
     </TotalContext.Provider>
   );

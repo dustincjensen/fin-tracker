@@ -1,16 +1,18 @@
 import * as React from 'react';
 import { CartesianGrid, Label, Line, LineChart, ReferenceArea, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { formatDateMonthYear } from '../../../utils/date.utils';
+import { formatDateMonthYear, getYearFromDate } from '../../../utils/date.utils';
 import { TotalContext } from './total.context';
 
 export const CombinedChart = (props: {
   displayableDates: string[],
   start: number,
   end: number,
-  setStartDate: (date: string) => void
+  setStartDate: (date: string) => void,
+  byMonth: boolean
 }) => {
-  const { displayableDates, start, end } = props;
+  const { displayableDates, start, end, byMonth } = props;
   const totalContext = React.useContext(TotalContext);
+  const dateFormat = byMonth ? formatDateMonthYear : getYearFromDate;
   
   const range = Array.from({ length: props.displayableDates.length }, (_, i) => 0 + i);
   const totals = range.map(index => {
@@ -18,7 +20,7 @@ export const CombinedChart = (props: {
       .totals
       .map(t => t[index])
       .reduce((prev: number, curr: number) => prev + (curr || 0.0), 0.0);
-    return { date: formatDateMonthYear(props.displayableDates[index]), total: parseFloat(total.toFixed(2)) };
+    return { date: dateFormat(props.displayableDates[index]), total: parseFloat(total.toFixed(2)) };
   });
 
   const dipsBelowZero = !!totals?.some(r => r.total < 0);
@@ -28,7 +30,7 @@ export const CombinedChart = (props: {
       <LineChart data={totals} margin={{ top: 20, right: 0, bottom: 20, left: 20 }} onClick={e => 
         {
           if (e?.activeLabel) {
-            const index = displayableDates.map(d => formatDateMonthYear(d)).indexOf(e.activeLabel);
+            const index = displayableDates.map(d => dateFormat(d)).indexOf(e.activeLabel);
             if (index >= 0) {
               props.setStartDate(displayableDates[index]);
             }
@@ -46,7 +48,10 @@ export const CombinedChart = (props: {
         {dipsBelowZero && <ReferenceLine y={0} stroke='#ff0000' strokeDasharray='5 5' />}
 
         {/* TODO handle reference area when it is 1 month/year. */}
-        <ReferenceArea x1={formatDateMonthYear(displayableDates[start])} x2={formatDateMonthYear(displayableDates[end - 1])} />
+        <ReferenceArea 
+          x1={dateFormat(displayableDates[start])} 
+          x2={dateFormat(displayableDates[end - 1])}
+        />
       </LineChart>
     </ResponsiveContainer>
   );
