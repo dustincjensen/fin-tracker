@@ -6,6 +6,7 @@ import { InvestmentRecordReducer } from './investment-record/investment-record.r
 import { PendingRecordReducer } from './pending-record/pending-record.reducer';
 import { RecordReducer } from './record/record.reducer';
 import { IStore } from './store.interface';
+import { ThirdPartyApiReducer } from './third-party-api/third-party-api.reducer';
 
 // TODO fixing typing...
 export const rootReducer = combineReducers<IStore>({
@@ -15,4 +16,5 @@ export const rootReducer = combineReducers<IStore>({
   investmentRecords: InvestmentRecordReducer,
   pendingRecords: PendingRecordReducer,
   records: RecordReducer,
+  thirdPartyApi: ThirdPartyApiReducer,
 });

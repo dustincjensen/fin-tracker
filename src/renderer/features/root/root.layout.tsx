@@ -9,6 +9,7 @@ import { InvestmentLayout } from '../investment/investment.layout';
 import { ManageAccountLayout } from '../manage-accounts/manage-accounts.layout';
 import { ManageAutoCategoriesLayout } from '../manage-auto-categories/manage-auto-categories.layout';
 import { ManageCategoryLayout } from '../manage-categories/manage-categories.layout';
+import { ManageThirdPartyApisLayout } from '../manage-third-party-apis/manage-third-party-apis.layout';
 import { SidebarLayout } from '../sidebar/sidebar.layout';
 
 const newThemeOption = 'newThemeOption';
@@ -28,6 +29,7 @@ export const RootLayout = () => {
             <Route exact path='/account/:accountId' component={AccountLayout} />
             <Route exact path='/investment/:accountId' component={InvestmentLayout} />
             <Route exact path='/import/:accountId?' component={ImportLayout} />
+            <Route exact path='/thirdPartyApis' component={ManageThirdPartyApisLayout} />
           </Switch>
         </Pane>
       </Pane>

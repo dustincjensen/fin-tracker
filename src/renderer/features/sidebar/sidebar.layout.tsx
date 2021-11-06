@@ -1,6 +1,7 @@
 import * as path from 'path';
 import { remote } from 'electron';
 import {
+  ApplicationIcon,
   AutomaticUpdatesIcon,
   BankAccountIcon,
   Button,
@@ -72,6 +73,12 @@ export const SidebarLayout = (props: {
           iconBefore={AutomaticUpdatesIcon}
           text='Auto Categories'
           isSelected={location.pathname === '/autoCategories'}
+        />
+        <NavLink
+          to='/thirdPartyApis'
+          iconBefore={ApplicationIcon}
+          text="Third Party API's"
+          isSelected={location.pathname === '/thirdPartyApis'}
         />
       </Pane>
       <Button

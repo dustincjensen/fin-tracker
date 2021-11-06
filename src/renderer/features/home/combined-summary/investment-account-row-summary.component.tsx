@@ -92,6 +92,27 @@ export const InvestmentAccountRowSummary = ({ accountId, byMonth, start, end, da
     // Set the totals in the context...
     totalContext.totals.push(combinedBalances.map(b => b.total));
   }
+  else {
+    // TODO better way to handle this?
+    // NO API KEY is present so we will straight add the 2 balances together.
+
+    combinedBalances = balances.map((b, i) => {
+      if (isNullOrUndefined(b?.cadTotal) && isNullOrUndefined(b?.usdTotal)) {
+        return {
+          ...b,
+          total: undefined
+        };
+      }
+
+      return {
+        ...b,
+        total: (b?.cadTotal || 0.0) + (b?.usdTotal || 0.0)
+      };
+    });
+
+    // Set the totals in the context...
+    totalContext.totals.push(combinedBalances.map(b => b.total));
+  }
 
   return (
     <Pane

@@ -25,6 +25,7 @@ store.subscribe(() => {
     categories: state.categories,
     investmentRecords: state.investmentRecords,
     records: state.records,
+    thirdPartyApi: state.thirdPartyApi
   };
   storage.set('state', persistedState);
 });
