@@ -38,6 +38,11 @@ export interface IAccountMonthlyProps {
   archived: boolean;
 
   /**
+   * The description to filter by.
+   */
+  filterDescription?: string
+
+  /**
    * The ID of the category to filter by.
    */
   filterCategoryId?: string;

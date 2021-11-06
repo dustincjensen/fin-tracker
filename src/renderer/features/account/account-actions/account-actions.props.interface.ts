@@ -5,6 +5,16 @@ export interface IAccountActionsProps {
   accountId: string;
 
   /**
+   * The filtered description.
+   */
+  filterDescription: string;
+
+  /**
+   * Function to set the filtered description.
+   */
+  setFilterDescription: React.Dispatch<React.SetStateAction<string>>;
+
+  /**
    * The selected category ID.
    */
   selectedCategoryId: string;
