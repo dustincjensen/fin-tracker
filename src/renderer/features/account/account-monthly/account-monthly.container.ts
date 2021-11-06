@@ -9,7 +9,7 @@ import { IAccountMonthlyProps } from './account-monthly.props.interface';
 
 type StateProps = Pick<IAccountMonthlyProps, 'records' | 'categories'>;
 type DispatchProps = Pick<IAccountMonthlyProps, 'updateCategory' | 'updateSplitRecordCategory'>;
-type OwnProps = Pick<IAccountMonthlyProps, 'accountId' | 'date'>;
+type OwnProps = Pick<IAccountMonthlyProps, 'accountId' | 'date' | 'filterCategoryId'>;
 
 const mapStateToProps = (state: IStore, ownProps: OwnProps): StateProps => {
   const { accountId, date } = ownProps;
@@ -28,8 +28,14 @@ const mapStateToProps = (state: IStore, ownProps: OwnProps): StateProps => {
     };
   });
 
+  const filteredRecords = ownProps.filterCategoryId
+    ? ownProps.filterCategoryId === 'Uncategorized' 
+      ? records.filter(r => (r.splitRecords === undefined && !r.categoryId) || (r.splitRecords?.some(sr => !sr.categoryId)))
+      : records.filter(r => r.categoryId === ownProps.filterCategoryId || r.splitRecords?.some(sr => sr.categoryId === ownProps.filterCategoryId))
+    : records;
+
   return {
-    records,
+    records: filteredRecords,
     categories,
   };
 };

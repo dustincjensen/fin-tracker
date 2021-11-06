@@ -13,6 +13,7 @@ import { IAccountProps } from './account.props.interface';
 // TODO clean up the account id, date, state selector passed to the 3 containers.
 export const Account = ({ accountId, hasRecords, startingDate, monthAndYears, archived }: IAccountProps) => {
   const [date, setDate] = React.useState(startingDate);
+  const [selectedCategoryId, setSelectedCategoryId] = React.useState<string>('');
 
   // Always reset the date when changing accounts.
   React.useEffect(() => {
@@ -49,8 +50,8 @@ export const Account = ({ accountId, hasRecords, startingDate, monthAndYears, ar
         <Pane display='grid'>
           <AccountDetailSummaryContainer accountId={accountId} date={date} archived={archived} />
           {/* TODO if this was a container, this could get this flag itself... */}
-          {!archived && <AccountActions accountId={accountId} />}
-          <AccountMonthlyContainer accountId={accountId} date={date} archived={archived} />
+          {!archived && <AccountActions accountId={accountId} selectedCategoryId={selectedCategoryId} setSelectedCategoryId={setSelectedCategoryId} />}
+          <AccountMonthlyContainer accountId={accountId} date={date} archived={archived} filterCategoryId={selectedCategoryId} />
         </Pane>
       </Pane>
     </Pane>

@@ -36,4 +36,9 @@ export interface IAccountMonthlyProps {
    * True if the account is archived, false otherwise.
    */
   archived: boolean;
+
+  /**
+   * The ID of the category to filter by.
+   */
+  filterCategoryId?: string;
 }
