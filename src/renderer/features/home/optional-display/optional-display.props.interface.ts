@@ -22,5 +22,5 @@ export interface IOptionalDisplayProps {
   /**
    * The optional component to render.
    */
-  component: React.ReactType;
+  component: React.FunctionComponent;
 }

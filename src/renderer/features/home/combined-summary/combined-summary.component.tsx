@@ -16,6 +16,7 @@ import { AccountSelectors } from '../../../store/account/account.selectors';
 import { isBankAccount } from '../../../utils/account.utils';
 import { useRatesByDates } from '../../investment/_hooks/use-rates-by-dates.hook';
 import { displayMonthDates, displayYearDates } from '../combined.utils';
+import { EditHomeContext } from '../edit-home.context';
 import { BankAccountRowSummary } from './bank-account-row-summary.component';
 import { CombinedChart } from './combined-chart.component';
 import { DateHeaders } from './date-headers.component';
@@ -29,6 +30,7 @@ const defaultNumberOfColumns = 1;
 const accountSummaryDisplayOption = 'accountSummaryDisplayOption';
 
 export const CombinedSummary = () => {
+  const {locked: editHomeLocked} = React.useContext(EditHomeContext);
   const [numberOfColumns, setNumberOfColumns] = React.useState(defaultNumberOfColumns);
   const [startingColumnIndex, setStartingColumnIndex] = React.useState(0);
   const [byMonth, setByMonth] = React.useState<string>(localStorage.getItem(accountSummaryDisplayOption) || 'monthly');
@@ -61,7 +63,7 @@ export const CombinedSummary = () => {
     // Have to adjust the starting column index since the window width sizing could affect
     // the calculation of the displayable balance range.
     setStartingColumnIndex(i => (i >= displayableDates.length - noc ? displayableDates.length - noc : i));
-  }, [windowWidth, byMonth]);
+  }, [windowWidth, byMonth, editHomeLocked]);
 
   const fullLeftClick = () => setStartingColumnIndex(displayableDates.length - numberOfColumns);
   const onLeftClick = () => {

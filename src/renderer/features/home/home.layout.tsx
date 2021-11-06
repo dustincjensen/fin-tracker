@@ -5,6 +5,7 @@ import { useLocalStorage } from '../../hooks/use-local-storage.hook';
 import { AccountSummaries } from './account-summaries/account-summaries.component';
 import { CombinedCategorySummaryContainer } from './combined-category-summary/combined-category-summary.container';
 import { CombinedSummary } from './combined-summary/combined-summary.component';
+import { EditHomeContext } from './edit-home.context';
 import { InstructionsContainer } from './instructions/instructions.container';
 import { OptionalDisplay } from './optional-display/optional-display.component';
 import { IOptionalDisplayProps } from './optional-display/optional-display.props.interface';
@@ -100,23 +101,25 @@ export const HomeLayout = () => {
 
   return (
     <ErrorBoundary>
-      <Pane padding={20}>
-        <Pane display='flex' justifyContent='space-between' marginBottom={10}>
-          <Heading size={700}>{locked ? 'Home' : 'Edit Home'}</Heading>
-          <Tooltip position='left' content={locked ? 'Edit Home page' : 'Finish Edit Home page'}>
-            <IconButton icon={locked ? LockIcon : UnlockIcon} appearance='minimal' onClick={updateLocked} />
-          </Tooltip>
-        </Pane>
-        <Pane>
-          {/* Don't display instructions when unlocking the home page */}
-          {locked && <InstructionsContainer />}
+      <EditHomeContext.Provider value={{ locked }}>
+        <Pane padding={20}>
+          <Pane display='flex' justifyContent='space-between' marginBottom={10}>
+            <Heading size={700}>{locked ? 'Home' : 'Edit Home'}</Heading>
+            <Tooltip position='left' content={locked ? 'Edit Home page' : 'Finish Edit Home page'}>
+              <IconButton icon={locked ? LockIcon : UnlockIcon} appearance='minimal' onClick={updateLocked} />
+            </Tooltip>
+          </Pane>
+          <Pane>
+            {/* Don't display instructions when unlocking the home page */}
+            {locked && <InstructionsContainer />}
 
-          {/* Render the home page components that the user can turn on/off */}
-          {fullHomePageOrder.map(key => {
-            return <Pane key={key}>{keyToRenderMap[key](locked, updateHomePageOrder)}</Pane>;
-          })}
+            {/* Render the home page components that the user can turn on/off */}
+            {fullHomePageOrder.map(key => {
+              return <Pane key={key}>{keyToRenderMap[key](locked, updateHomePageOrder)}</Pane>;
+            })}
+          </Pane>
         </Pane>
-      </Pane>
+      </EditHomeContext.Provider>
     </ErrorBoundary>
   );
 };

@@ -55,7 +55,7 @@ export const OptionalDisplay = ({
           </Pane>
         </Pane>
       )}
-      <Pane position='relative' padding={!locked ? 25 : 0}>
+      <Pane position='relative' padding={!locked ? 25 : 0} overflow='hidden'>
         <OptionalComponent />
         {!locked && !displayed && (
           <Pane
