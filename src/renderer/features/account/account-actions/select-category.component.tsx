@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { CategorySelectors } from '../../../store/category/category.selectors';
 
 export const SelectCategory = ({ selectedCategory, setSelectedCategory }) => {
-  const categories = useSelector(CategorySelectors.selectDisplayCategories);
+  const categories = useSelector(CategorySelectors.selectCategories);
   const categoryOptions = [{ label: 'Uncategorized', value: 'Uncategorized' }, ...categories.map(c => ({ label: c.name, value: c.id }))];
   const [name, setName] = React.useState<string>('');
   
