@@ -105,17 +105,17 @@ describe('reducers', () => {
           id: categoryId,
           name: 'Eating Out',
           color: '#654321',
-          accountTransferId: 'accountId'
+          accountTransferId: 'accountId',
         };
         const initialState: ICategoryStore = {
           categories: {
-            [categoryId]: transferCategory
-          }
+            [categoryId]: transferCategory,
+          },
         };
 
         const newState = reducer(initialState, {
           type: AccountActions.DELETE_ACCOUNT,
-          payload: { id: 'accountId' }
+          payload: { id: 'accountId' },
         });
 
         const expectedState: ICategoryStore = {

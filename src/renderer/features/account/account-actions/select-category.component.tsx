@@ -5,9 +5,12 @@ import { CategorySelectors } from '../../../store/category/category.selectors';
 
 export const SelectCategory = ({ selectedCategory, setSelectedCategory }) => {
   const categories = useSelector(CategorySelectors.selectCategories);
-  const categoryOptions = [{ label: 'Uncategorized', value: 'Uncategorized' }, ...categories.map(c => ({ label: c.name, value: c.id }))];
+  const categoryOptions = [
+    { label: 'Uncategorized', value: 'Uncategorized' },
+    ...categories.map(c => ({ label: c.name, value: c.id })),
+  ];
   const [name, setName] = React.useState<string>('');
-  
+
   const onSelect = (item: SelectMenuItem) => {
     setName(item.label);
     setSelectedCategory(item.value);
@@ -29,7 +32,7 @@ export const SelectCategory = ({ selectedCategory, setSelectedCategory }) => {
           {name || 'Filter by Category'}
         </Button>
       </SelectMenu>
-      <IconButton icon={CrossIcon} onClick={clearSelectedCategory} height={majorScale(5)}/>
+      <IconButton icon={CrossIcon} onClick={clearSelectedCategory} height={majorScale(5)} />
     </Pane>
   );
 };

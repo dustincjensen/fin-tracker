@@ -22,7 +22,7 @@ export const useBalanceByRate = (balance: number, date: string, currency: string
 
       const d = dateUtils.getDateForOer(date);
       const r = await OpenExchangeRatesApi.getRatesOn(oerApiKey, d);
-      
+
       // TODO support other currencies...
       if (currency === 'USD') {
         const cadRate = parseFloat(r.rates.CAD.toPrecision(4));

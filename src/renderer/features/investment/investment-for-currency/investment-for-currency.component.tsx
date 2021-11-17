@@ -16,12 +16,18 @@ export const InvestmentForCurrency = ({ accountId, currency }: IInvestmentForCur
     <Pane>
       <Pane display='flex' justifyContent='space-between' marginBottom={10}>
         <Heading size={700}>{currency}</Heading>
-        {!archived && <Button iconBefore={AddIcon} appearance='primary' intent='success' onClick={toggleShown}>Add Balance</Button>}
+        {!archived && (
+          <Button iconBefore={AddIcon} appearance='primary' intent='success' onClick={toggleShown}>
+            Add Balance
+          </Button>
+        )}
       </Pane>
 
       <InvestmentRecords accountId={accountId} currency={currency} />
 
-      {isAddBalanceShown && <AddNewInvestmentRecordDialog accountId={accountId} currency={currency} onClose={toggleShown} />}
+      {isAddBalanceShown && (
+        <AddNewInvestmentRecordDialog accountId={accountId} currency={currency} onClose={toggleShown} />
+      )}
     </Pane>
   );
 };

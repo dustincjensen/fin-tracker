@@ -15,4 +15,4 @@ export type OpenExchangeRatesRates = {
    * USD, CAD, EUR, GBP, etc.
    */
   rates: Record<string, number>;
-}
+};

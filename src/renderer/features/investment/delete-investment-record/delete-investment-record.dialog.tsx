@@ -6,7 +6,7 @@ import { IDeleteInvestmentRecordProps } from './delete-investment-record.props.i
 
 const DeleteInvestmentRecordDialogComponent = ({ record, onClose }: IDeleteInvestmentRecordProps) => {
   const dispatch = useDispatch();
-  
+
   const confirm = () => {
     dispatch(InvestmentRecordActions.deleteRecord(record));
     onClose();

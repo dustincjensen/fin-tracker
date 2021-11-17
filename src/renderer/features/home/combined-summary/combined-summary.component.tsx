@@ -30,14 +30,14 @@ const defaultNumberOfColumns = 1;
 const accountSummaryDisplayOption = 'accountSummaryDisplayOption';
 
 export const CombinedSummary = () => {
-  const {locked: editHomeLocked} = React.useContext(EditHomeContext);
+  const { locked: editHomeLocked } = React.useContext(EditHomeContext);
   const [numberOfColumns, setNumberOfColumns] = React.useState(defaultNumberOfColumns);
   const [startingColumnIndex, setStartingColumnIndex] = React.useState(0);
   const [byMonth, setByMonth] = React.useState<string>(localStorage.getItem(accountSummaryDisplayOption) || 'monthly');
   const containerRef = React.useRef<HTMLDivElement>();
   const windowWidth = useWindowWidth();
 
-  const dateSelector = React.useMemo(() => byMonth === 'monthly' ? displayMonthDates : displayYearDates, [byMonth]);
+  const dateSelector = React.useMemo(() => (byMonth === 'monthly' ? displayMonthDates : displayYearDates), [byMonth]);
   const displayableDates = useSelector(dateSelector);
 
   const accounts = useSelector(AccountSelectors.selectAccounts);
@@ -80,8 +80,7 @@ export const CombinedSummary = () => {
 
   const setStartIndexOnChartClick = (date: string) => {
     const index = displayableDates.indexOf(date);
-    if (index >= 0)
-    { 
+    if (index >= 0) {
       setStartingColumnIndex(Math.max(displayableDates.length - numberOfColumns - index, 0));
     }
   };
@@ -107,80 +106,107 @@ export const CombinedSummary = () => {
 
   return (
     <TotalContext.Provider value={{ totals: [] }}>
-    <div ref={containerRef} style={{ display: 'flex' }}>
-      <Pane
-        display='flex'
-        flexDirection='column'
-        alignItems='flex-end'
-        height='auto'
-        minWidth={nameWidth}
-        maxWidth={nameWidth}
-      >
-        <Pane marginBottom={35} width='100%'>
-          <Select defaultValue={byMonth} width='100%' paddingRight={5} onChange={setDisplayOption}>
-            <option value='monthly'>Monthly</option>
-            <option value='yearly'>Yearly</option>
-          </Select>
-        </Pane>
-        {accounts.map(ac => {
-          const { id: accountId, name: accountName } = ac;
-          return (
-            <Pane key={accountId} padding={10} borderBottom width='100%' display='flex' justifyContent='flex-start' height={40}>
-              <Text whiteSpace='nowrap' overflow='hidden' textOverflow='ellipsis'>
-                {accountName}
-              </Text>
+      <div ref={containerRef} style={{ display: 'flex' }}>
+        <Pane
+          display='flex'
+          flexDirection='column'
+          alignItems='flex-end'
+          height='auto'
+          minWidth={nameWidth}
+          maxWidth={nameWidth}
+        >
+          <Pane marginBottom={35} width='100%'>
+            <Select defaultValue={byMonth} width='100%' paddingRight={5} onChange={setDisplayOption}>
+              <option value='monthly'>Monthly</option>
+              <option value='yearly'>Yearly</option>
+            </Select>
+          </Pane>
+          {accounts.map(ac => {
+            const { id: accountId, name: accountName } = ac;
+            return (
+              <Pane
+                key={accountId}
+                padding={10}
+                borderBottom
+                width='100%'
+                display='flex'
+                justifyContent='flex-start'
+                height={40}
+              >
+                <Text whiteSpace='nowrap' overflow='hidden' textOverflow='ellipsis'>
+                  {accountName}
+                </Text>
+              </Pane>
+            );
+          })}
+          <Pane display='flex' flexDirection='column' flex={1} justifyContent='flex-end' width='100%'>
+            <Pane padding={10} borderBottom borderTop='3px solid #474d66' display='flex' justifyContent='flex-start'>
+              <Text>Total</Text>
             </Pane>
-          );
-        })}
-        <Pane display='flex' flexDirection='column' flex={1} justifyContent='flex-end' width='100%'>
-          <Pane padding={10} borderBottom borderTop='3px solid #474d66' display='flex' justifyContent='flex-start'>
-            <Text>Total</Text>
           </Pane>
         </Pane>
-      </Pane>
 
-      <Pane>
-        <Pane display='flex' justifyContent='space-between' alignItems='center' marginBottom={3}>
-          <Pane display='flex'>
-            <IconButton icon={DoubleChevronLeftIcon} onClick={fullLeftClick} marginRight={3} />
-            <IconButton icon={ChevronLeftIcon} onClick={onLeftClick} />
-          </Pane>
-          <Heading>Accounts Summary</Heading>
-          <Pane display='flex'>
-            <IconButton icon={ChevronRightIcon} onClick={onRightClick} marginRight={3} />
-            <IconButton icon={DoubleChevronRightIcon} onClick={fullRightClick} />
-          </Pane>
-        </Pane>
-        <Pane borderTop borderRight borderBottom borderRadius={0}>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              overflowX: 'hidden',
-              width: displayWidth * numberOfColumns,
-              justifyContent: 'space-between'
-            }}
-          >
-            <Pane>
-              <DateHeaders 
-                byMonth={byMonth} 
-                start={start} 
-                end={end}
-                dates={displayableDates} />
-              {accounts.map(a => {
-                return isBankAccount(a.accountType) 
-                  ? <BankAccountRowSummary key={a.id} accountId={a.id} byMonth={byMonth === 'monthly'} start={start} end={end} dates={displayableDates} />
-                  : <InvestmentAccountRowSummary key={a.id} accountId={a.id} byMonth={byMonth === 'monthly'} start={start} end={end} dates={displayableDates} rates={rates} />;
-              })}
+        <Pane>
+          <Pane display='flex' justifyContent='space-between' alignItems='center' marginBottom={3}>
+            <Pane display='flex'>
+              <IconButton icon={DoubleChevronLeftIcon} onClick={fullLeftClick} marginRight={3} />
+              <IconButton icon={ChevronLeftIcon} onClick={onLeftClick} />
             </Pane>
-            <TotalRow start={start} end={end} />
-          </div>
+            <Heading>Accounts Summary</Heading>
+            <Pane display='flex'>
+              <IconButton icon={ChevronRightIcon} onClick={onRightClick} marginRight={3} />
+              <IconButton icon={DoubleChevronRightIcon} onClick={fullRightClick} />
+            </Pane>
+          </Pane>
+          <Pane borderTop borderRight borderBottom borderRadius={0}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                overflowX: 'hidden',
+                width: displayWidth * numberOfColumns,
+                justifyContent: 'space-between',
+              }}
+            >
+              <Pane>
+                <DateHeaders byMonth={byMonth} start={start} end={end} dates={displayableDates} />
+                {accounts.map(a => {
+                  return isBankAccount(a.accountType) ? (
+                    <BankAccountRowSummary
+                      key={a.id}
+                      accountId={a.id}
+                      byMonth={byMonth === 'monthly'}
+                      start={start}
+                      end={end}
+                      dates={displayableDates}
+                    />
+                  ) : (
+                    <InvestmentAccountRowSummary
+                      key={a.id}
+                      accountId={a.id}
+                      byMonth={byMonth === 'monthly'}
+                      start={start}
+                      end={end}
+                      dates={displayableDates}
+                      rates={rates}
+                    />
+                  );
+                })}
+              </Pane>
+              <TotalRow start={start} end={end} />
+            </div>
+          </Pane>
         </Pane>
+      </div>
+      <Pane width={nameWidth + displayWidth * numberOfColumns}>
+        <CombinedChart
+          displayableDates={displayableDates}
+          start={start}
+          end={end}
+          setStartDate={setStartIndexOnChartClick}
+          byMonth={byMonth === 'monthly'}
+        />
       </Pane>
-    </div>
-    <Pane width={nameWidth + (displayWidth * numberOfColumns)}>
-      <CombinedChart displayableDates={displayableDates} start={start} end={end} setStartDate={setStartIndexOnChartClick} byMonth={byMonth === 'monthly'} />
-    </Pane>
     </TotalContext.Provider>
   );
 };

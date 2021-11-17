@@ -14,9 +14,9 @@ import './renderer.css';
 const ElectronStore = require('electron-store');
 
 // TODO in future releases should add "value => JSON.stringify(value)" to reduce file size.
-const storage = new ElectronStore({ 
+const storage = new ElectronStore({
   name: 'appState',
-  migrations
+  migrations,
 });
 const store = createStore(rootReducer, storage.get('state') || {}, applyMiddleware(ipcReceive, toastMiddleware));
 
@@ -29,7 +29,7 @@ store.subscribe(() => {
     categories: state.categories,
     investmentRecords: state.investmentRecords,
     records: state.records,
-    thirdPartyApi: state.thirdPartyApi
+    thirdPartyApi: state.thirdPartyApi,
   };
   storage.set('state', persistedState);
 });

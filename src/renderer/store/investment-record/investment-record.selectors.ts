@@ -13,7 +13,7 @@ export class InvestmentRecordSelectors {
 
   /**
    * Returns the records for a specific account.
-   * 
+   *
    * @param state       The current application state.
    * @param accountId   The ID of the account.
    */
@@ -32,7 +32,7 @@ export class InvestmentRecordSelectors {
     const records = InvestmentRecordSelectors.recordsByAccountId(state, accountId);
 
     const investRecords = records ? [...records] : [];
-    investRecords.sort((a, b) => createDate(a.date) > createDate(b.date) ? 1 : -1);
+    investRecords.sort((a, b) => (createDate(a.date) > createDate(b.date) ? 1 : -1));
 
     const cadBalance = investRecords?.filter(r => r.investmentCurrency === 'CAD').pop()?.balance;
     const usdBalance = investRecords?.filter(r => r.investmentCurrency === 'USD').pop()?.balance;

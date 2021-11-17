@@ -97,11 +97,11 @@ export const EditCategory = ({ close, saveCategory, saveButtonText, headerText, 
           <Button type='button' iconBefore={BanCircleIcon} height={majorScale(5)} marginRight={10} onClick={close}>
             Cancel
           </Button>
-          {!category?.accountTransferId &&
-          <Button appearance='primary' iconBefore={FloppyDiskIcon} height={majorScale(5)}>
-            {saveButtonText}
-          </Button>
-}
+          {!category?.accountTransferId && (
+            <Button appearance='primary' iconBefore={FloppyDiskIcon} height={majorScale(5)}>
+              {saveButtonText}
+            </Button>
+          )}
         </Pane>
       </form>
     </Pane>

@@ -18,7 +18,7 @@ export interface IAccountActionsProps {
    * The selected category ID.
    */
   selectedCategoryId: string;
-  
+
   /**
    * Function to set the selected category ID.
    */

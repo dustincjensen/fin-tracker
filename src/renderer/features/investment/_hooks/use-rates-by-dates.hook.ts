@@ -13,7 +13,7 @@ interface IDateRate {
 export const useRatesByDates = (dates: string[], byMonth: boolean, currency: string) => {
   const oerApiKey = useSelector(ThirdPartyApiSelectors.openExchangeRatesApiKey);
   const [rates, setRates] = React.useState<IDateRate[]>([]);
-  
+
   React.useEffect(() => {
     (async () => {
       if (!dates || !currency || !oerApiKey) {
@@ -31,11 +31,14 @@ export const useRatesByDates = (dates: string[], byMonth: boolean, currency: str
 
       const dateRates: IDateRate[] = [];
       for (let i = 0; i < dates.length; i++) {
-        dateRates.push({ actualDate: dateUtils.getDateFromTimestamp(rates[i].timestamp * 1000), date: dates[i], rate: rates[i].rates.CAD.toPrecision(4) });
+        dateRates.push({
+          actualDate: dateUtils.getDateFromTimestamp(rates[i].timestamp * 1000),
+          date: dates[i],
+          rate: rates[i].rates.CAD.toPrecision(4),
+        });
       }
 
       setRates(dateRates);
-
     })();
   }, [dates, currency, oerApiKey]);
 

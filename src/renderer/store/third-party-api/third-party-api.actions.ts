@@ -3,6 +3,6 @@ export class ThirdPartyApiActions {
 
   public static updateOerApiKey = (apiKey: string) => ({
     type: ThirdPartyApiActions.UPDATE_OER_API_KEY,
-    payload: apiKey
+    payload: apiKey,
   });
 }

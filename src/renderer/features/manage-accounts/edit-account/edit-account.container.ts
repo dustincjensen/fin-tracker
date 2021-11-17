@@ -27,16 +27,19 @@ const mapStateToProps = () => {
     return undefined;
   });
 
-  const selectLastInvestmentTransactionDate = createSelector(InvestmentRecordSelectors.recordsByAccountId, (records): [number, number] => {
-    const investRecords = records ? [...records] : [];
-    investRecords.sort((a, b) => createDate(a.date) > createDate(b.date) ? 1 : -1);
-    const lastRecordDate = investRecords?.[investRecords.length - 1]?.date;
-    if (lastRecordDate) {
-      const lrd = createDate(lastRecordDate);
-      return [lrd.year(), lrd.month()];
+  const selectLastInvestmentTransactionDate = createSelector(
+    InvestmentRecordSelectors.recordsByAccountId,
+    (records): [number, number] => {
+      const investRecords = records ? [...records] : [];
+      investRecords.sort((a, b) => (createDate(a.date) > createDate(b.date) ? 1 : -1));
+      const lastRecordDate = investRecords?.[investRecords.length - 1]?.date;
+      if (lastRecordDate) {
+        const lrd = createDate(lastRecordDate);
+        return [lrd.year(), lrd.month()];
+      }
+      return undefined;
     }
-    return undefined;
-  });
+  );
 
   return (state: IStore, ownProps: OwnProps): StateProps => {
     const records = RecordSelectors.recordsByAccountId(state, ownProps.account.id);

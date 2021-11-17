@@ -24,35 +24,47 @@ const latestBalanceSelector = createSelector(
   (state: IStore) => state.investmentRecords.records,
   (state: IStore, accountId: string) => accountId,
   (State: IStore, accountId: string, currency: string) => currency,
-  (records, accountId, currency) => records[accountId]
-    ?.filter(r => r.investmentCurrency === currency)
-    .sort(sortByDateDescending)[0] || undefined
+  (records, accountId, currency) =>
+    records[accountId]?.filter(r => r.investmentCurrency === currency).sort(sortByDateDescending)[0] || undefined
 );
 
 const selectTransferCost = createSelector(
   RecordSelectors.selectAllRecordsWithCategory,
   (state: IStore, accountId: string) => accountId,
-  (records, accountId) => records
-    ?.map(r => {
-      if (r?.credit) {
-        return r.accountId === accountId ? r.credit : -r.credit;
-      } 
-      return r.accountId === accountId ? -r.debit : r.debit;
-    })
-    .reduce((prev, curr) => curr + prev, 0.0)
+  (records, accountId) =>
+    records
+      ?.map(r => {
+        if (r?.credit) {
+          return r.accountId === accountId ? r.credit : -r.credit;
+        }
+        return r.accountId === accountId ? -r.debit : r.debit;
+      })
+      .reduce((prev, curr) => curr + prev, 0.0)
 );
 
-  export const InvestmentDetailSummary = ({ accountId }: IInvestmentDetailSummaryProps) => {
-  const {archived, name, accountType, startYear, startMonth} = useSelector((state: IStore) => AccountSelectors.account(state, accountId));
-  const transferCategory = useSelector((state: IStore) => CategorySelectors.selectCategories(state).find(c => c.accountTransferId === accountId));
+export const InvestmentDetailSummary = ({ accountId }: IInvestmentDetailSummaryProps) => {
+  const { archived, name, accountType, startYear, startMonth } = useSelector((state: IStore) =>
+    AccountSelectors.account(state, accountId)
+  );
+  const transferCategory = useSelector((state: IStore) =>
+    CategorySelectors.selectCategories(state).find(c => c.accountTransferId === accountId)
+  );
   const transferCost = useSelector((state: IStore) => selectTransferCost(state, accountId, transferCategory.id));
 
-  const startDate =  stringToMonthYear(getAccountStartDate(startYear, startMonth));
+  const startDate = stringToMonthYear(getAccountStartDate(startYear, startMonth));
 
   const cadLatest = useSelector((state: IStore) => latestBalanceSelector(state, accountId, 'CAD'));
   const usdLatest = useSelector((state: IStore) => latestBalanceSelector(state, accountId, 'USD'));
-  const {convertedBalance: latestUsdConverted} = useBalanceByRate(usdLatest?.balance, usdLatest?.date, usdLatest?.investmentCurrency);
-  const {convertedBalance: todaysUsdConverted} = useBalanceByRate(usdLatest?.balance, today(), usdLatest?.investmentCurrency);
+  const { convertedBalance: latestUsdConverted } = useBalanceByRate(
+    usdLatest?.balance,
+    usdLatest?.date,
+    usdLatest?.investmentCurrency
+  );
+  const { convertedBalance: todaysUsdConverted } = useBalanceByRate(
+    usdLatest?.balance,
+    today(),
+    usdLatest?.investmentCurrency
+  );
   const latestBalance = (cadLatest?.balance || 0.0) + (latestUsdConverted || 0.0);
   const todaysBalance = (cadLatest?.balance || 0.0) + (todaysUsdConverted || 0.0);
 
@@ -73,9 +85,9 @@ const selectTransferCost = createSelector(
           <Field label='Account Name' text={name} />
           <Field label='Account Type' text={accountTypeLabels[accountType]} />
           <Field label='Start Date' text={startDate} />
-          <Field label="Transfer Category" text={transferCategory?.name} />
-          <Field label="Transfer Cost" text={transferCost.toFixed(2)} />
-          <Field label="Latest Balance" text={latestBalance.toFixed(2)} />
+          <Field label='Transfer Category' text={transferCategory?.name} />
+          <Field label='Transfer Cost' text={transferCost.toFixed(2)} />
+          <Field label='Latest Balance' text={latestBalance.toFixed(2)} />
           <Field label="Today's Balance" text={todaysBalance.toFixed(2)} />
         </Pane>
       </Pane>

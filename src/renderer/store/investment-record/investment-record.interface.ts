@@ -18,7 +18,7 @@ export interface IInvestmentRecord {
    * The date the record took place.
    */
   date: string;
- 
+
   /**
    * The balance of the account on this date.
    */

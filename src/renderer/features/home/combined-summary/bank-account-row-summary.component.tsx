@@ -12,49 +12,45 @@ import { DateCurriedQuery, queryByIsInYear, queryByIsInYearAndMonth } from '../c
 import { TotalContext } from './total.context';
 
 const selectAccountBalances = (query: DateCurriedQuery, dates: string[]) =>
-  createSelector(
-    AccountSelectors.account,
-    RecordSelectors.recordsByAccountId,
-    (account, records) => {
-      const endAccountBalancesByDate = [];
-      for (let index = 0; index < dates.length; index++) {
-        const date = dates[index];
-        
-        // Only need to create this date once for each check against the accounts records.
-        const curriedQuery = query(date);
-        const currentDate = createDate(date);
+  createSelector(AccountSelectors.account, RecordSelectors.recordsByAccountId, (account, records) => {
+    const endAccountBalancesByDate = [];
+    for (let index = 0; index < dates.length; index++) {
+      const date = dates[index];
 
-        const { archived, endYear, endMonth } = account;
+      // Only need to create this date once for each check against the accounts records.
+      const curriedQuery = query(date);
+      const currentDate = createDate(date);
 
-        // Check if the account is archived and if so, get the end date.
-        // If we are dealing with a date that is greater than the end date of the account
-        // then we put undefined and move on. This results in a '-' instead of continuing zeroes.
-        const accountEndDate = archived ? createDate(`${endYear}-${endMonth + 1}`) : undefined;
-        if (accountEndDate && currentDate > accountEndDate) {
-          endAccountBalancesByDate.push({ date, total: undefined });
-          continue;
-        }
+      const { archived, endYear, endMonth } = account;
 
-        let balance = records?.filter(r => curriedQuery(r.date)).pop()?.balance;
-
-        // Get the balance from the previous date if the current date had no entries.
-        if (isNullOrUndefined(balance) && index > 0) {
-          balance = endAccountBalancesByDate[index - 1].total;
-        }
-
-        endAccountBalancesByDate.push({ date, total: isNullOrUndefined(balance) ? undefined : balance });
+      // Check if the account is archived and if so, get the end date.
+      // If we are dealing with a date that is greater than the end date of the account
+      // then we put undefined and move on. This results in a '-' instead of continuing zeroes.
+      const accountEndDate = archived ? createDate(`${endYear}-${endMonth + 1}`) : undefined;
+      if (accountEndDate && currentDate > accountEndDate) {
+        endAccountBalancesByDate.push({ date, total: undefined });
+        continue;
       }
-      return endAccountBalancesByDate;
+
+      let balance = records?.filter(r => curriedQuery(r.date)).pop()?.balance;
+
+      // Get the balance from the previous date if the current date had no entries.
+      if (isNullOrUndefined(balance) && index > 0) {
+        balance = endAccountBalancesByDate[index - 1].total;
+      }
+
+      endAccountBalancesByDate.push({ date, total: isNullOrUndefined(balance) ? undefined : balance });
     }
-  );
+    return endAccountBalancesByDate;
+  });
 
 const displayWidth = 300;
 
 export const BankAccountRowSummary = ({ accountId, byMonth, start, end, dates }: any) => {
-  const selectBalances = useMemo(() => selectAccountBalances(
-    byMonth ? queryByIsInYearAndMonth : queryByIsInYear,
-    dates
-  ), [byMonth, dates]);
+  const selectBalances = useMemo(
+    () => selectAccountBalances(byMonth ? queryByIsInYearAndMonth : queryByIsInYear, dates),
+    [byMonth, dates]
+  );
   const balances = useSelector((state: IStore) => selectBalances(state, accountId));
 
   // Set the balances in the total context.
@@ -62,11 +58,7 @@ export const BankAccountRowSummary = ({ accountId, byMonth, start, end, dates }:
   totalContext.totals.push(balances.map(b => b.total));
 
   return (
-    <Pane
-      borderRadius={0}
-      display='flex'
-      flexDirection='row'
-    >
+    <Pane borderRadius={0} display='flex' flexDirection='row'>
       {balances.slice(start, end).map(bobj => {
         const balance = bobj.total;
         return (

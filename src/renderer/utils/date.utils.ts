@@ -201,7 +201,7 @@ export function getLatestDate(dates: string[]) {
 
 /**
  * Returns a date in YYYY-MM-DD format for Open Exchange Rate API.
- * 
+ *
  * @param date  The date to format.
  */
 export function getDateForOer(date: string): string {
@@ -211,7 +211,7 @@ export function getDateForOer(date: string): string {
 /**
  * Returns a date in YYYY-MM-DD format for Open Exchange Rate API
  * rounded up to the end of the month.
- * 
+ *
  * @param date  The date to format.
  */
 export function getMonthDateForOer(date: string): string {
@@ -227,7 +227,7 @@ export function getMonthDateForOer(date: string): string {
 /**
  * Returns a date in YYYY-MM-DD format for Open Exchange Rate API
  * rounded up to the end of the year.
- * 
+ *
  * @param date  The date to format.
  */
 export function getYearDateForOer(date: string): string {

@@ -14,12 +14,18 @@ const w200 = createStaticWidthCell(200);
 
 export const TransferHistory = ({ accountId }: ITransferHistoryProps) => {
   const account = useSelector((state: IStore) => AccountSelectors.account(state, accountId));
-  const transferCategory = useSelector((state: IStore) => CategorySelectors.selectCategories(state).find(c => c.accountTransferId === accountId));
-  const records = useSelector((state: IStore) => RecordSelectors.selectAllRecordsWithCategory(state, accountId, transferCategory.id));
+  const transferCategory = useSelector((state: IStore) =>
+    CategorySelectors.selectCategories(state).find(c => c.accountTransferId === accountId)
+  );
+  const records = useSelector((state: IStore) =>
+    RecordSelectors.selectAllRecordsWithCategory(state, accountId, transferCategory.id)
+  );
 
   return (
     <Pane>
-      <Heading size={700} marginBottom={10}>Transfer History</Heading>
+      <Heading size={700} marginBottom={10}>
+        Transfer History
+      </Heading>
       <Table border>
         <Table.Head paddingRight={0}>
           <Table.TextHeaderCell {...w200}>Date</Table.TextHeaderCell>
@@ -29,7 +35,9 @@ export const TransferHistory = ({ accountId }: ITransferHistoryProps) => {
           <Table.TextHeaderCell {...w100}>Credit</Table.TextHeaderCell>
         </Table.Head>
         <Table.Body height={300}>
-          {records?.map(record => <TransferHistoryRecord key={record.id} account={account} record={record} />)}
+          {records?.map(record => (
+            <TransferHistoryRecord key={record.id} account={account} record={record} />
+          ))}
         </Table.Body>
       </Table>
     </Pane>

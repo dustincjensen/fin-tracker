@@ -38,20 +38,20 @@ export const InvestmentSummary = ({ accountId }: IInvestmentSummaryProps) => {
               <Pane width={105}>
                 <Text color='muted'>Last Transaction:</Text>
               </Pane>
-              <Strong data-name='latest-transaction' marginLeft={12}>{formatDateFull(latestDate)}</Strong>
+              <Strong data-name='latest-transaction' marginLeft={12}>
+                {formatDateFull(latestDate)}
+              </Strong>
             </Pane>
           </Pane>
         )}
         {!balance && (
           <Pane data-name='empty-account' marginBottom={10} padding={10} display='flex' justifyContent='center'>
-            <Text color='muted'>
-              Empty! Assign the account transfer category to transactions.
-            </Text>
+            <Text color='muted'>Empty! Assign the account transfer category to transactions.</Text>
           </Pane>
         )}
         <Pane display='flex' justifyContent='flex-end' borderTop paddingTop={5}>
           <Tooltip content='Open Investment Account'>
-            <IconButton appearance='minimal' icon={EyeOpenIcon} is={Link} to={`/investment/${accountId}`} /> 
+            <IconButton appearance='minimal' icon={EyeOpenIcon} is={Link} to={`/investment/${accountId}`} />
           </Tooltip>
         </Pane>
       </Pane>

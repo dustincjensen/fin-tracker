@@ -11,10 +11,12 @@ export const AccountSummaries = () => {
 
   return (
     <Pane display='flex' flexWrap='wrap'>
-      {activeAccounts.map(account => 
-        isBankAccount(account.accountType)
-          ? <AccountSummary key={account.id} accountId={account.id} />
-          : <InvestmentSummary key={account.id} accountId={account.id} />
+      {activeAccounts.map(account =>
+        isBankAccount(account.accountType) ? (
+          <AccountSummary key={account.id} accountId={account.id} />
+        ) : (
+          <InvestmentSummary key={account.id} accountId={account.id} />
+        )
       )}
     </Pane>
   );

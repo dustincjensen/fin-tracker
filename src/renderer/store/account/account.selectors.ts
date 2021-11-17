@@ -41,7 +41,7 @@ export class AccountSelectors {
   /**
    * Returns the array of active, bank accounts.
    */
-  public static selectActiveBankAccounts = createSelector(AccountSelectors.accounts, accounts => 
+  public static selectActiveBankAccounts = createSelector(AccountSelectors.accounts, accounts =>
     Object.keys(accounts)
       .map(id => accounts[id])
       .filter(a => !a.archived && isBankAccount(a.accountType))

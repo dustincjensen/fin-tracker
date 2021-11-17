@@ -11,16 +11,16 @@ describe('components', () => {
 
     beforeEach(() => {
       props = {
-        accountId: 'accountId'
+        accountId: 'accountId',
       };
     });
 
     const assertRenderDetails = (balance: number, emptyAccountLength: number, accountDetailsLength: number) => {
-      jest.spyOn(ReactRedux, 'useSelector').mockReturnValueOnce({ 
+      jest.spyOn(ReactRedux, 'useSelector').mockReturnValueOnce({
         name: 'TestAccount',
         balance,
         dateOfLastTransaction: '2021-07-12',
-        icon: BankAccountIcon
+        icon: BankAccountIcon,
       });
 
       const component = shallow(<AccountSummary {...props} />);

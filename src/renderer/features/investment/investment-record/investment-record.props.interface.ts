@@ -1,4 +1,4 @@
-import { IInvestmentRecord } from "../../../store/investment-record/investment-record.interface";
+import { IInvestmentRecord } from '../../../store/investment-record/investment-record.interface';
 
 export interface IInvestmentRecordProps {
   /**

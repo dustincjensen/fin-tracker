@@ -23,27 +23,26 @@ import { formatDateFull } from '../../utils/date.utils';
 import { isNullOrUndefined } from '../../utils/object.utils';
 import { IAccountSummaryProps } from './account-summary.props.interface';
 
-const accountSummarySelector = createSelector(
-  AccountSelectors.account, 
-  RecordSelectors.records, 
-  (account, records) => {
-    if (account.archived) {
-      return undefined;
-    }
+const accountSummarySelector = createSelector(AccountSelectors.account, RecordSelectors.records, (account, records) => {
+  if (account.archived) {
+    return undefined;
+  }
 
-    const accountRecords = records[account.id];
-    const lastRecord = accountRecords?.[accountRecords.length - 1];
-    
-    return {
-      balance: lastRecord?.balance,
-      dateOfLastTransaction: lastRecord ? formatDateFull(lastRecord.date) : undefined,
-      name: account.name,
-      icon: accountTypeIcons[account.accountType],
-    };
+  const accountRecords = records[account.id];
+  const lastRecord = accountRecords?.[accountRecords.length - 1];
+
+  return {
+    balance: lastRecord?.balance,
+    dateOfLastTransaction: lastRecord ? formatDateFull(lastRecord.date) : undefined,
+    name: account.name,
+    icon: accountTypeIcons[account.accountType],
+  };
 });
 
 export const AccountSummary = ({ accountId }: IAccountSummaryProps) => {
-  const { name, balance, dateOfLastTransaction, icon } = useSelector((state: IStore) => accountSummarySelector(state, accountId));
+  const { name, balance, dateOfLastTransaction, icon } = useSelector((state: IStore) =>
+    accountSummarySelector(state, accountId)
+  );
 
   return (
     <Card

@@ -32,10 +32,10 @@ const TransferHistoryRecordComponent = ({ record, account }: ITransferHistoryRec
         </Pane>
       </Table.TextCell>
       <Table.TextCell isNumber textAlign='right' {...w100}>
-        {record.accountId === account.id ? (record.debit?.toFixed(2) || '') : (record.credit?.toFixed(2) || '')}
+        {record.accountId === account.id ? record.debit?.toFixed(2) || '' : record.credit?.toFixed(2) || ''}
       </Table.TextCell>
       <Table.TextCell isNumber textAlign='right' {...w100}>
-        {record.accountId === account.id ? (record.credit?.toFixed(2) || '') : (record.debit?.toFixed(2) || '')}
+        {record.accountId === account.id ? record.credit?.toFixed(2) || '' : record.debit?.toFixed(2) || ''}
       </Table.TextCell>
     </Table.Row>
   );

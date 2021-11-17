@@ -63,11 +63,8 @@ export const displayMonthDates = createSelector(
       .map(id => {
         const accountRecords = records[id];
         const investRecords = investmentRecords[id] ? [...investmentRecords[id]] : [];
-        investRecords?.sort((a, b) => createDate(a.date) > createDate(b.date) ? 1 : -1);
-        return [
-          accountRecords?.[accountRecords.length - 1].date,
-          investRecords?.[investRecords?.length - 1].date
-        ];
+        investRecords?.sort((a, b) => (createDate(a.date) > createDate(b.date) ? 1 : -1));
+        return [accountRecords?.[accountRecords.length - 1].date, investRecords?.[investRecords?.length - 1].date];
       })
       .reduce((prev: string[], curr: string[]) => [...prev, ...curr], []);
 
@@ -93,11 +90,8 @@ export const displayYearDates = createSelector(
       .map(id => {
         const accountRecords = records[id];
         const investRecords = investmentRecords[id] ? [...investmentRecords[id]] : [];
-        investRecords.sort((a, b) => createDate(a.date) > createDate(b.date) ? 1 : -1);
-        return [
-          accountRecords?.[accountRecords.length - 1].date,
-          investRecords?.[investRecords?.length - 1].date,
-        ];
+        investRecords.sort((a, b) => (createDate(a.date) > createDate(b.date) ? 1 : -1));
+        return [accountRecords?.[accountRecords.length - 1].date, investRecords?.[investRecords?.length - 1].date];
       })
       .reduce((prev: string[], curr: string[]) => [...prev, ...curr], []);
 

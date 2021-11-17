@@ -14,9 +14,8 @@ const recordsSelector = createSelector(
   (state: IStore) => state.investmentRecords.records,
   (state: IStore, accountId: string) => accountId,
   (State: IStore, accountId: string, currency: string) => currency,
-  (records, accountId, currency) => records[accountId]
-    ?.filter(r => r.investmentCurrency === currency)
-    .sort(sortByDateDescending) || []
+  (records, accountId, currency) =>
+    records[accountId]?.filter(r => r.investmentCurrency === currency).sort(sortByDateDescending) || []
 );
 
 // TODO support other default currency other than CAD
@@ -38,7 +37,14 @@ export const InvestmentRecords = ({ accountId, currency }: IInvestmentRecordsPro
           {!archived && <Table.HeaderCell flex='none' width={54}></Table.HeaderCell>}
         </Table.Head>
         <Table.VirtualBody height={300}>
-          {records?.map(record => <InvestmentRecord key={record.id} record={record} setRecordToDelete={setRecordToDelete} accountArchived={archived} />)}
+          {records?.map(record => (
+            <InvestmentRecord
+              key={record.id}
+              record={record}
+              setRecordToDelete={setRecordToDelete}
+              accountArchived={archived}
+            />
+          ))}
         </Table.VirtualBody>
       </Table>
 

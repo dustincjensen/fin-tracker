@@ -16,7 +16,7 @@ export const CategoryReducer = createDraftReducer(
     [CategoryActions.DELETE_CATEGORY]: deleteCategory,
     [AccountActions.SAVE_NEW_ACCOUNT]: createTransferCategory,
     [CategoryActions.ADD_TRANSFER_CATEGORY]: createTransferCategory,
-    [AccountActions.DELETE_ACCOUNT]: deleteTransferCategory
+    [AccountActions.DELETE_ACCOUNT]: deleteTransferCategory,
   },
   initialState
 );
@@ -43,7 +43,7 @@ function createTransferCategory(draft: Draft<ICategoryStore>, newAccount: IAccou
     id: newGuid(),
     name: `${newAccount.name} Transfer`,
     color: '#000',
-    accountTransferId: newAccount.id
+    accountTransferId: newAccount.id,
   };
   draft.categories[newCategory.id] = newCategory;
 }

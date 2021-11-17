@@ -12,15 +12,7 @@ const AccountLink = ({ account, pathname }: { account: IAccount; pathname: strin
   const toLocation = `${accountRoutes[type]}/${account.id}`;
   const icon = accountTypeIcons[account.accountType];
   const isSelected = pathname === toLocation;
-  return (
-    <NavLink
-      key={account.id}
-      to={toLocation}
-      text={account.name}
-      iconBefore={icon}
-      isSelected={isSelected}
-    />
-  );
+  return <NavLink key={account.id} to={toLocation} text={account.name} iconBefore={icon} isSelected={isSelected} />;
 };
 
 export const AccountsSidebar = () => {
@@ -34,14 +26,18 @@ export const AccountsSidebar = () => {
       </Heading>
       {accounts
         .filter(a => isBankAccount(a.accountType))
-        .map(account => <AccountLink key={account.id} account={account} pathname={pathname} />)}
+        .map(account => (
+          <AccountLink key={account.id} account={account} pathname={pathname} />
+        ))}
 
       <Heading size={100} marginTop='20px' marginBottom='5px'>
         Investments
       </Heading>
       {accounts
         .filter(a => isInvestmentAccount(a.accountType))
-        .map(account => <AccountLink key={account.id} account={account} pathname={pathname} />)}
+        .map(account => (
+          <AccountLink key={account.id} account={account} pathname={pathname} />
+        ))}
     </Pane>
   );
 };

@@ -11,7 +11,7 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from 'recharts';
-import {useLocalStorage} from '../../../hooks/use-local-storage.hook';
+import { useLocalStorage } from '../../../hooks/use-local-storage.hook';
 import { ICategory } from '../../../store/category/category.interface';
 import { formatDateMonthYear } from '../../../utils/date.utils';
 import { isNullOrUndefined } from '../../../utils/object.utils';

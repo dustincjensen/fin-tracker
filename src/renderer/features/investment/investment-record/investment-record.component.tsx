@@ -10,44 +10,47 @@ const InvestmentRecordComponent = ({ record, setRecordToDelete, accountArchived 
   return (
     <Table.Row isSelectable>
       <Table.TextCell>{dateUtils.formatDateFull(record.date)}</Table.TextCell>
-      {record.investmentCurrency !== 'CAD' && <Table.TextCell isNumber textAlign='right'>
-        {rate}
-      </Table.TextCell>}
+      {record.investmentCurrency !== 'CAD' && (
+        <Table.TextCell isNumber textAlign='right'>
+          {rate}
+        </Table.TextCell>
+      )}
       <Table.TextCell isNumber textAlign='right'>
         {record.investmentCurrency !== 'CAD' && `${record.investmentCurrency} `}
         {record.balance?.toFixed(2) || ''}
       </Table.TextCell>
-      {record.investmentCurrency !== 'CAD' && <Table.TextCell isNumber textAlign='right'>
-        {convertedBalance?.toFixed(2)}
-      </Table.TextCell>}
-      {!accountArchived && <Table.Cell flex='none' justifyContent='flex-end' width={54}>
-        <Popover
-          position={Position.BOTTOM_RIGHT}
-          content={({ close }) => (
-            <Menu>
-              <Menu.Group>
-                <Menu.Item
-                  icon={TrashIcon}
-                  intent='danger'
-                  onSelect={() => {
-                    setRecordToDelete(record);
-                    close();
-                  }}
-                >
-                  Delete Balance
-                </Menu.Item>
-              </Menu.Group>
-            </Menu>
-          )}
-        >
-          <Tooltip content='Options'>
-            <IconButton
-              icon={MoreIcon}
-              appearance='minimal'
-            />
-          </Tooltip>
-        </Popover>
-      </Table.Cell>}
+      {record.investmentCurrency !== 'CAD' && (
+        <Table.TextCell isNumber textAlign='right'>
+          {convertedBalance?.toFixed(2)}
+        </Table.TextCell>
+      )}
+      {!accountArchived && (
+        <Table.Cell flex='none' justifyContent='flex-end' width={54}>
+          <Popover
+            position={Position.BOTTOM_RIGHT}
+            content={({ close }) => (
+              <Menu>
+                <Menu.Group>
+                  <Menu.Item
+                    icon={TrashIcon}
+                    intent='danger'
+                    onSelect={() => {
+                      setRecordToDelete(record);
+                      close();
+                    }}
+                  >
+                    Delete Balance
+                  </Menu.Item>
+                </Menu.Group>
+              </Menu>
+            )}
+          >
+            <Tooltip content='Options'>
+              <IconButton icon={MoreIcon} appearance='minimal' />
+            </Tooltip>
+          </Popover>
+        </Table.Cell>
+      )}
     </Table.Row>
   );
 };

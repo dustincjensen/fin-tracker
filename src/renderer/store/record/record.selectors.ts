@@ -16,14 +16,13 @@ export class RecordSelectors {
     return state.records.records;
   }
 
-  public static selectAllRecordsAcrossAccounts = createSelector(
-    RecordSelectors.records,
-    records => {
-      return Object.keys(records).map(id => records[id]).reduce((prev, curr) => {
+  public static selectAllRecordsAcrossAccounts = createSelector(RecordSelectors.records, records => {
+    return Object.keys(records)
+      .map(id => records[id])
+      .reduce((prev, curr) => {
         return [...prev, ...curr];
       }, []);
-    }
-  );
+  });
 
   public static selectAllRecordsWithCategory = createSelector(
     RecordSelectors.selectAllRecordsAcrossAccounts,
@@ -31,11 +30,11 @@ export class RecordSelectors {
     AccountSelectors.accounts,
     (state: IStore, accountId: string, categoryId: string) => categoryId,
     (records, recordsForInvestment, accounts, categoryId) => {
-      return [...records.filter(r => r.categoryId === categoryId), ...recordsForInvestment || []]
+      return [...records.filter(r => r.categoryId === categoryId), ...(recordsForInvestment || [])]
         .map(r => {
           return {
             ...r,
-            accountName: accounts[r.accountId].name
+            accountName: accounts[r.accountId].name,
           };
         })
         .sort(sortByDateDescending);

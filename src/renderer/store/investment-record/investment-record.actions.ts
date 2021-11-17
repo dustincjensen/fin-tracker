@@ -11,6 +11,6 @@ export class InvestmentRecordActions {
 
   public static deleteRecord = (record: IInvestmentRecord) => ({
     type: InvestmentRecordActions.DELETE_RECORD,
-    payload: record
+    payload: record,
   });
 }

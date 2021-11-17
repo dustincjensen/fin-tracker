@@ -37,7 +37,7 @@ export const accountRoutes: Record<AccountType, string> = {
 
 /**
  * Returns true if the account is a bank account type.
- * 
+ *
  * @param type  The type of the account.
  */
 export function isBankAccount(type: AccountType) {
@@ -46,7 +46,7 @@ export function isBankAccount(type: AccountType) {
 
 /**
  * Returns true if the account is an investment account type.
- * 
+ *
  * @param type  The type of the account.
  */
 export function isInvestmentAccount(type: AccountType) {

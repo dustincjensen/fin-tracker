@@ -1,6 +1,6 @@
-import moment from "moment";
+import moment from 'moment';
 
-type RecordType = { id: string, date: string };
+type RecordType = { id: string; date: string };
 
 // TODO docs
 export function sortByDate(a: RecordType, b: RecordType): number {

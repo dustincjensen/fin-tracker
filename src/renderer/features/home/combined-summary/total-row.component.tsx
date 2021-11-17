@@ -7,16 +7,15 @@ const displayWidth = 300;
 
 export const TotalRow = ({ start, end }: any) => {
   const totalContext = React.useContext(TotalContext);
-  
-  const range = Array.from({ length: end - start}, (_, i) => start + i);
+
+  const range = Array.from({ length: end - start }, (_, i) => start + i);
   const totals = range.map(index => {
-    const total = totalContext
-      .totals
+    const total = totalContext.totals
       .map(t => t[index])
       .reduce((prev: number, curr: number) => prev + (curr || 0.0), 0.0);
     return total;
   });
-    
+
   return (
     <Pane display='flex' borderTop='3px solid #474d66'>
       {totals.map((t, index) => {

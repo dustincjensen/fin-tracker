@@ -40,7 +40,7 @@ export interface IAccountMonthlyProps {
   /**
    * The description to filter by.
    */
-  filterDescription?: string
+  filterDescription?: string;
 
   /**
    * The ID of the category to filter by.

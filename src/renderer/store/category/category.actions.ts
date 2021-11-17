@@ -24,6 +24,6 @@ export class CategoryActions {
 
   public static addTransferCategory = (account: IAccount) => ({
     type: CategoryActions.ADD_TRANSFER_CATEGORY,
-    payload: account
+    payload: account,
   });
 }

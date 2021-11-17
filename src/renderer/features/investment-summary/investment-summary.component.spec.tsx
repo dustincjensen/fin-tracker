@@ -11,7 +11,7 @@ describe('components', () => {
 
     beforeEach(() => {
       props = {
-        accountId: 'accountId'
+        accountId: 'accountId',
       };
     });
 
@@ -20,7 +20,7 @@ describe('components', () => {
         name: 'TFSA',
         icon: ChartIcon,
         balance: undefined,
-        latestDate: '2021-07-12'
+        latestDate: '2021-07-12',
       });
 
       const component = shallow(<InvestmentSummary {...props} />);
@@ -33,7 +33,7 @@ describe('components', () => {
         name: 'TFSA',
         icon: ChartIcon,
         balance: 12345.54,
-        latestDate: '2021-07-12'
+        latestDate: '2021-07-12',
       });
 
       const component = shallow(<InvestmentSummary {...props} />);

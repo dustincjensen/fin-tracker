@@ -12,10 +12,10 @@ import { IPersistedStore } from './store.interface';
  * Each transaction should be marked including transfers/payments
  * between accounts. These categories will allow for that.
  */
-const migration_1_1_0 = (storage) => {
+const migration_1_1_0 = storage => {
   const tmpStore = createStore(rootReducer, storage.get('state') || {});
   const state = tmpStore.getState();
-    
+
   // Add Transfer categories for each account that exists but does not have one yet.
   const accounts = AccountSelectors.accounts(state);
   const categories = CategorySelectors.selectCategories(state);
@@ -26,11 +26,13 @@ const migration_1_1_0 = (storage) => {
       tmpStore.dispatch(CategoryActions.addTransferCategory(accounts[accountId]));
     }
   }
-  
+
   // Add the external transfer category...
   if (!categories.find(c => c.accountTransferId === '__EXTERNAL_ACCOUNT__')) {
     console.log('Adding __EXTERNAL_ACCOUNT__ transfer category');
-    tmpStore.dispatch(CategoryActions.addTransferCategory({ id: '__EXTERNAL_ACCOUNT__', name: 'External Account' } as IAccount));
+    tmpStore.dispatch(
+      CategoryActions.addTransferCategory({ id: '__EXTERNAL_ACCOUNT__', name: 'External Account' } as IAccount)
+    );
   }
 
   const newState = tmpStore.getState();
@@ -40,12 +42,12 @@ const migration_1_1_0 = (storage) => {
     categories: newState.categories,
     investmentRecords: newState.investmentRecords,
     records: newState.records,
-    thirdPartyApi: newState.thirdPartyApi
+    thirdPartyApi: newState.thirdPartyApi,
   };
   storage.set('state', persistedState);
   storage.set('migrationVersion', '1.1.0');
 };
 
 export const migrations = {
-  '>= 1.1.0': migration_1_1_0
+  '>= 1.1.0': migration_1_1_0,
 };

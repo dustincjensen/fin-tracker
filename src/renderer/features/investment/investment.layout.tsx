@@ -8,7 +8,7 @@ import { InvestmentForCurrency } from './investment-for-currency/investment-for-
 import { TransferHistory } from './transfer-history/transfer-history.component';
 
 export const InvestmentLayout = () => {
-  const {accountId} = useParams<{ accountId: string }>();
+  const { accountId } = useParams<{ accountId: string }>();
   return (
     <ErrorBoundary>
       <Pane padding={20}>
