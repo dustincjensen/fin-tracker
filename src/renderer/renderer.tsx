@@ -6,6 +6,7 @@ import { applyMiddleware, createStore } from 'redux';
 import { RootLayout } from './features/root/root.layout';
 import { ipcReceive } from './store/ipc';
 import { toastMiddleware } from './store/middleware/toast.middleware';
+import { migrations } from './store/migrations';
 import { rootReducer } from './store/store';
 import { IPersistedStore } from './store/store.interface';
 import './renderer.css';
@@ -13,7 +14,10 @@ import './renderer.css';
 const ElectronStore = require('electron-store');
 
 // TODO in future releases should add "value => JSON.stringify(value)" to reduce file size.
-const storage = new ElectronStore({ name: 'appState' });
+const storage = new ElectronStore({ 
+  name: 'appState',
+  migrations
+});
 const store = createStore(rootReducer, storage.get('state') || {}, applyMiddleware(ipcReceive, toastMiddleware));
 
 store.subscribe(() => {

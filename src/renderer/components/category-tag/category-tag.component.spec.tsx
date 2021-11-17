@@ -1,5 +1,4 @@
 import { shallow } from 'enzyme';
-import { Button } from 'evergreen-ui';
 import * as React from 'react';
 import { CategoryTag } from './category-tag.component';
 import { ICategoryTagProps } from './category-tag.props.interface';
@@ -43,19 +42,19 @@ describe('components', () => {
 
     it('should not render a button when onClear is not provided', () => {
       const component = shallow(<CategoryTag {...props} onClear={undefined} />);
-      expect(component.find(Button).length).toBe(0);
+      expect(component.find('button').length).toBe(0);
     });
 
     it('should render a button when onClear is provided', () => {
       const onClear = jest.fn();
       const component = shallow(<CategoryTag {...props} onClear={onClear} />);
-      expect(component.find(Button).length).toBe(1);
+      expect(component.find('button').length).toBe(1);
     });
 
     it('should call onClear when button is clicked', () => {
       const onClear = jest.fn();
       const component = shallow(<CategoryTag {...props} onClear={onClear} />);
-      component.find(Button).simulate('click');
+      component.find('button').simulate('click');
       expect(onClear).toHaveBeenCalled();
     });
   });
