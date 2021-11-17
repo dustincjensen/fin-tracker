@@ -4,7 +4,17 @@ import { formatDateMonthYear } from '../../../utils/date.utils';
 
 const displayWidth = 300;
 
-export const DateHeaders = ({ dates, start, end, byMonth }: any) => {
+export const DateHeaders = ({
+  dates,
+  start,
+  end,
+  byMonth,
+}: {
+  dates: string[];
+  start: number;
+  end: number;
+  byMonth: string;
+}) => {
   return (
     <Pane display='flex' flexDirection='row'>
       {dates.slice(start, end).map(d => {

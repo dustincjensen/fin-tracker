@@ -46,7 +46,19 @@ const selectAccountBalances = (query: DateCurriedQuery, dates: string[]) =>
 
 const displayWidth = 300;
 
-export const BankAccountRowSummary = ({ accountId, byMonth, start, end, dates }: any) => {
+export const BankAccountRowSummary = ({
+  accountId,
+  byMonth,
+  start,
+  end,
+  dates,
+}: {
+  accountId: string;
+  byMonth: boolean;
+  start: number;
+  end: number;
+  dates: string[];
+}) => {
   const selectBalances = useMemo(
     () => selectAccountBalances(byMonth ? queryByIsInYearAndMonth : queryByIsInYear, dates),
     [byMonth, dates]

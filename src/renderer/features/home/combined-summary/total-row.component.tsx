@@ -5,7 +5,7 @@ import { TotalContext } from './total.context';
 
 const displayWidth = 300;
 
-export const TotalRow = ({ start, end }: any) => {
+export const TotalRow = ({ start, end }: { start: number; end: number }) => {
   const totalContext = React.useContext(TotalContext);
 
   const range = Array.from({ length: end - start }, (_, i) => start + i);

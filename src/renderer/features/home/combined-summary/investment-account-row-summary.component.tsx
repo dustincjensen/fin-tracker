@@ -8,6 +8,7 @@ import { InvestmentRecordSelectors } from '../../../store/investment-record/inve
 import { IStore } from '../../../store/store.interface';
 import { createDate } from '../../../utils/date.utils';
 import { isNullOrUndefined } from '../../../utils/object.utils';
+import { IDateRate } from '../../investment/_hooks/use-rates-by-dates.hook';
 import { DateCurriedQuery, queryByIsInYear, queryByIsInYearAndMonth } from '../combined.utils';
 import { TotalContext } from './total.context';
 
@@ -59,7 +60,21 @@ const selectAccountBalances = (query: DateCurriedQuery, dates: string[]) =>
 
 const displayWidth = 300;
 
-export const InvestmentAccountRowSummary = ({ accountId, byMonth, start, end, dates, rates }: any) => {
+export const InvestmentAccountRowSummary = ({
+  accountId,
+  byMonth,
+  start,
+  end,
+  dates,
+  rates,
+}: {
+  accountId: string;
+  byMonth: boolean;
+  start: number;
+  end: number;
+  dates: string[];
+  rates: IDateRate[];
+}) => {
   const selectBalances = useMemo(
     () => selectAccountBalances(byMonth ? queryByIsInYearAndMonth : queryByIsInYear, dates),
     [byMonth, dates]
@@ -91,7 +106,7 @@ export const InvestmentAccountRowSummary = ({ accountId, byMonth, start, end, da
     // TODO better way to handle this?
     // NO API KEY is present so we will straight add the 2 balances together.
 
-    combinedBalances = balances.map((b, i) => {
+    combinedBalances = balances.map(b => {
       if (isNullOrUndefined(b?.cadTotal) && isNullOrUndefined(b?.usdTotal)) {
         return {
           ...b,

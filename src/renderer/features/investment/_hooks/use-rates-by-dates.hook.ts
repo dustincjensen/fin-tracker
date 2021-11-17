@@ -4,7 +4,7 @@ import { ThirdPartyApiSelectors } from '../../../store/third-party-api/third-par
 import { OpenExchangeRatesApi } from '../../../third-party-apis/open-exchange-rates/oer.api';
 import * as dateUtils from '../../../utils/date.utils';
 
-interface IDateRate {
+export interface IDateRate {
   date: string;
   rate: string;
   actualDate: string; // todo remove?
