@@ -50,7 +50,7 @@ const mapStateToProps = () => {
     return {
       saveButtonText: 'Update Account',
       canEditComplexFields: (!records || records.length === 0) && !ownProps.account.archived,
-      currentBalance: currentBalance || investmentBalance,
+      currentBalance: currentBalance ?? investmentBalance,
       lastTransactionDate: lastTransactionDate || lastInvestmentTransactionDate,
     };
   };
