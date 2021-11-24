@@ -107,6 +107,11 @@ export const CombinedCategorySummary = ({ categories, categoryTotalsByMonth }: I
     return null;
   }
 
+  // Hide chart if you don't have categories.
+  if (categoryOptions?.length === 0 ) {
+    return null;
+  }
+
   return (
     <Pane marginLeft={-20}>
       <Pane display='flex' alignItems='center' justifyContent='flex-end'>

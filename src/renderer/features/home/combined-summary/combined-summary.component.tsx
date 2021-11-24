@@ -93,16 +93,14 @@ export const CombinedSummary = () => {
     localStorage.setItem(accountSummaryDisplayOption, evt.target.value);
   };
 
-  // TODO test this again
-  // // Don't render anything if there are no end balances.
-  // if (!displayableDates || displayableDates.flatMap(e => Object.values(e.accountBalances)).filter(e => e).length === 0) {
-  //   return null;
-  // }
-
   const start = displayableDates.length - numberOfColumns - startingColumnIndex;
   const end = displayableDates.length - startingColumnIndex;
 
   const { rates } = useRatesByDates(displayableDates, byMonth === 'monthly', 'USD');
+
+  if (accounts?.length === 0) {
+    return null;
+  }
 
   return (
     <TotalContext.Provider value={{ totals: [] }}>

@@ -19,25 +19,32 @@ export const AccountsSidebar = () => {
   const { pathname } = useLocation<Location>();
   const accounts = useSelector(AccountSelectors.selectActiveAccounts);
 
+  const bankAccounts = accounts.filter(a => isBankAccount(a.accountType));
+  const investmentAccounts = accounts.filter(a => isInvestmentAccount(a.accountType));
+
   return (
     <Pane display='flex' flexDirection='column'>
-      <Heading size={100} marginTop='20px' marginBottom='5px'>
-        Accounts
-      </Heading>
-      {accounts
-        .filter(a => isBankAccount(a.accountType))
-        .map(account => (
-          <AccountLink key={account.id} account={account} pathname={pathname} />
-        ))}
+      {bankAccounts?.length > 0 && (
+        <>
+          <Heading size={100} marginTop='20px' marginBottom='5px'>
+            Accounts
+          </Heading>
+          {bankAccounts.map(account => (
+            <AccountLink key={account.id} account={account} pathname={pathname} />
+          ))}
+        </>
+      )}
 
-      <Heading size={100} marginTop='20px' marginBottom='5px'>
-        Investments
-      </Heading>
-      {accounts
-        .filter(a => isInvestmentAccount(a.accountType))
-        .map(account => (
-          <AccountLink key={account.id} account={account} pathname={pathname} />
-        ))}
+      {investmentAccounts?.length > 0 && (
+        <>
+          <Heading size={100} marginTop='20px' marginBottom='5px'>
+            Investments
+          </Heading>
+          {investmentAccounts.map(account => (
+            <AccountLink key={account.id} account={account} pathname={pathname} />
+          ))}
+        </>
+      )}
     </Pane>
   );
 };
