@@ -108,7 +108,7 @@ export const CombinedCategorySummary = ({ categories, categoryTotalsByMonth }: I
   }
 
   // Hide chart if you don't have categories.
-  if (categoryOptions?.length === 0 ) {
+  if (categoryOptions?.length === 0) {
     return null;
   }
 
