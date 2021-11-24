@@ -2,7 +2,7 @@ Bugs
 ====
   + In combined.utils, getting the investment dates, we use the last entry, even thought they are not sorted by date. This could lead to missing months.
   - Description width could be larger on bigger monitors... maybe use css breakpoints?
-
+  - If you delete an account that the transfer account category is in use for an auto category then it will end up being abandoned in the auto category list.
   - When you go between accounts that are on the same month/year it won't load the numbers on the category graph.
   + Fix minor issue where the combined accounts summary goes off the page when getting put inside the edit home page view.
 
@@ -16,7 +16,7 @@ Next
 + Add category filter for uncategorized records in account.
 + Add description filter for records in account.
 + Transfer Category per account? Basic Transfer Category?
-  - Improve implementation from TFSA / RRSP accounts
+  + Improve implementation from TFSA / RRSP accounts
 
 
 - Cannot remove single record when it is manual transaction.

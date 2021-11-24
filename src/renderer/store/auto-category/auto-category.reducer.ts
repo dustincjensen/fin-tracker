@@ -74,4 +74,7 @@ function deleteCategory(draft: Draft<IAutoCategoryStore>, category: ICategory) {
 function deleteAccount(draft: Draft<IAutoCategoryStore>, account: IAccount) {
   const { id } = account;
   delete draft.autoCategories[id];
+
+  // TODO if you delete an account that the transfer account category is in use for an auto category
+  // then it will end up being abandoned in the auto category list.
 }

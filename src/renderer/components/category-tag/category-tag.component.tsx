@@ -10,7 +10,7 @@ export const CategoryTag = ({ category, onClear }: ICategoryTagProps) => {
         data-name='category-tag'
         display='flex'
         alignItems='center'
-        background={category.color || '#333'}
+        background={category?.color || '#333'}
         padding={5}
         paddingRight={5}
         paddingLeft={10}
@@ -30,7 +30,7 @@ export const CategoryTag = ({ category, onClear }: ICategoryTagProps) => {
               paddingTop='8px'
               textAlign='center'
             >
-              <Text color='white'>{category.name}</Text>
+              <Text color='white'>{category?.name}</Text>
             </Pane>
           )}
         >
@@ -42,7 +42,7 @@ export const CategoryTag = ({ category, onClear }: ICategoryTagProps) => {
             paddingRight={onClear ? 10 : 5}
             onClick={close}
           >
-            {category.name}
+            {category?.name}
           </Text>
         </Popover>
 
