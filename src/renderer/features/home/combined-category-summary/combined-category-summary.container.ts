@@ -57,6 +57,25 @@ const categorySummarySelector = (query: DateCurriedQuery, dateSelector) =>
                 categoryBalances[categoryId] = balance;
               }
             }
+
+            // TODO bug where split records are not in balance for this chart.
+            // const splits = record.splitRecords;
+            // if (splits?.some(s => s.categoryId)) {
+            //     Add to category balances
+            // }
+
+            /*
+            Fun Jul 2018
+            745.7
+            212.49 -> actual 272.49 // FIX
+            52.49
+            77.44
+            2581.41
+            964.66
+
+            Car Jun 2019
+            479.37 -> actual 671.27 // FIX
+            */
           }
         }
         categoryBalancesByDate.push({ date, categoryBalances: categoryBalances });
