@@ -7,10 +7,7 @@ Bugs
 Tasks
 =====
 Next
-- Bug Split records are not in balance for combined category summary container chart.
 - Package updates
-- Make PR for TFSA-RRSP-Accounts
-- Make new release on GitHub
 - Refactor 
   - Selectors
   - Components

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Pane } from 'evergreen-ui';
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
