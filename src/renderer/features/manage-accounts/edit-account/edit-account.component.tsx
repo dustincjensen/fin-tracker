@@ -20,7 +20,13 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { IAccount } from '../../../store/account/account.interface';
 import { AccountType } from '../../../store/account/account.type';
-import { accountTypeNameValuePairs, accountTypeLabels } from '../../../utils/account.utils';
+import {
+  accountTypeNameValuePairs,
+  accountTypeLabels,
+  isBankAccount,
+  isInvestmentAccount,
+  accountRoutes,
+} from '../../../utils/account.utils';
 import { monthValues, monthNamesLong } from '../../../utils/date.utils';
 import { newGuid } from '../../../utils/guid.utils';
 import { isNullOrUndefined } from '../../../utils/object.utils';
@@ -54,14 +60,15 @@ export const EditAccount = ({
   const handleSubmit = evt => {
     evt.preventDefault();
 
+    const at = accountType as AccountType;
     const updatedAccount: IAccount = {
       id: account?.id || newGuid(),
       name,
       startYear,
       startMonth,
-      startingBalance,
+      startingBalance: isBankAccount(at) ? startingBalance : undefined,
       // Todo fix typing
-      accountType: accountType as AccountType,
+      accountType: at,
     };
 
     saveAccount(updatedAccount);
@@ -160,16 +167,18 @@ export const EditAccount = ({
                     </option>
                   ))}
                 </SelectField>
-                <TextInputField
-                  width={350}
-                  label='Starting Balance'
-                  name='startingBalance'
-                  type='number'
-                  value={startingBalance}
-                  onChange={handleStartingBalanceChange}
-                  step={0.01}
-                  required
-                />
+                {isBankAccount(accountType as AccountType) && (
+                  <TextInputField
+                    width={350}
+                    label='Starting Balance'
+                    name='startingBalance'
+                    type='number'
+                    value={startingBalance}
+                    onChange={handleStartingBalanceChange}
+                    step={0.01}
+                    required
+                  />
+                )}
               </>
             )}
             {!canEditComplexFields && (
@@ -235,7 +244,10 @@ export const EditAccount = ({
                   <Text>{(account && monthNamesLong()[account?.endMonth]) || '-'}</Text>
                 </FormField>
                 <FormField label='Current Balance' marginBottom={majorScale(3)}>
-                  <Text>{(!isNullOrUndefined(currentBalance) && currentBalance.toFixed(2)) || '-'}</Text>
+                  {isBankAccount(account?.accountType) && (
+                    <Text>{(!isNullOrUndefined(currentBalance) && currentBalance.toFixed(2)) || '-'}</Text>
+                  )}
+                  {isInvestmentAccount(account?.accountType) && <Text>Calculated value</Text>}
                 </FormField>
               </Pane>
             </Pane>
@@ -251,7 +263,7 @@ export const EditAccount = ({
           {account?.archived && (
             <Button
               is={Link}
-              to={`/account/${account?.id}`}
+              to={`${accountRoutes[account?.accountType]}/${account?.id}`}
               type='button'
               iconBefore={EyeOpenIcon}
               height={majorScale(5)}

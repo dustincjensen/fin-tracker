@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {
   allMonthsBetweenDates,
   allYearsBetweenDates,
@@ -5,6 +6,8 @@ import {
   formatDate,
   formatDateFull,
   formatDateMonthYear,
+  getMonthDateForOer,
+  getYearDateForOer,
   getEarliestDate,
   getLatestDate,
   getMonthAndYearFromDate,
@@ -17,6 +20,7 @@ import {
   monthValues,
   stringToDayMonthYear,
   stringToMonthYear,
+  getDateForOer,
 } from './date.utils';
 
 describe('utils', () => {
@@ -101,6 +105,7 @@ describe('utils', () => {
       it('should format "2020-05-04" as "May 4"', () => assertFormatDate('2020-05-04', 'May 4'));
     });
 
+    // TODO Test with moment objects as well
     describe('formatDateFull', () => {
       const assertFormatDateFull = (date: string, expected: string) => {
         expect(formatDateFull(date)).toBe(expected);
@@ -256,6 +261,32 @@ describe('utils', () => {
       it('should return the latest date', () => {
         const dates = [undefined, null, '2019-01-15', '2019-01-02', '2019-02-01', '2020-01-01', '2018-04-04'];
         expect(getLatestDate(dates).format('YYYY-MM-DD')).toBe('2020-01-01');
+      });
+    });
+
+    describe('getDateForOer', () => {
+      it('should return the date in YYYY-MM-DD format', () => {
+        expect(getDateForOer('07-23-2021')).toBe('2021-07-23');
+      });
+    });
+
+    describe('getMonthDateForOer', () => {
+      it('should return today when end of month is greater than today', () => {
+        expect(getMonthDateForOer('2077-12-31')).toBe(moment().format('YYYY-MM-DD'));
+      });
+
+      it('should return end of month when it is less than today', () => {
+        expect(getMonthDateForOer('2021-01')).toBe('2021-01-31');
+      });
+    });
+
+    describe('getYearDateForOer', () => {
+      it('should return today when end of year is greater than today', () => {
+        expect(getYearDateForOer('2077-12-31')).toBe(moment().format('YYYY-MM-DD'));
+      });
+
+      it('should return end of year when it is less than today', () => {
+        expect(getYearDateForOer('2020-01-05')).toBe('2020-12-31');
       });
     });
   });

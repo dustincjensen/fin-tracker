@@ -16,7 +16,10 @@ const hasRecords = createSelector(RecordSelectors.records, records =>
   Object.keys(records).some(key => records[key]?.length > 0)
 );
 
-const hasCategories = createSelector(CategorySelectors.categories, categories => Object.keys(categories).length > 0);
+const hasCategories = createSelector(
+  CategorySelectors.selectDisplayCategories,
+  categories => Object.keys(categories).length > 0
+);
 
 const hasAutoCategory = createSelector(AutoCategorySelectors.autoCategories, autoCategories =>
   Object.keys(autoCategories).some(key => autoCategories[key].length > 0)

@@ -1,1 +1,1 @@
-export type AccountType = 'Chequing' | 'Savings' | 'CreditCard';
+export type AccountType = 'Chequing' | 'Savings' | 'CreditCard' | 'TFSA' | 'RRSP';

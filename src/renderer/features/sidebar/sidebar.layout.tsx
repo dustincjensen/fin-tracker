@@ -1,8 +1,11 @@
+import * as path from 'path';
 import { remote } from 'electron';
 import {
+  ApplicationIcon,
   AutomaticUpdatesIcon,
   BankAccountIcon,
   Button,
+  DatabaseIcon,
   GroupObjectsIcon,
   Heading,
   HomeIcon,
@@ -19,6 +22,11 @@ import { AccountsSidebar } from '../accounts-sidebar/accounts-sidebar.component'
 
 const appVersion = remote.app.getVersion();
 
+const openUserPath = () => {
+  const appStateJson = path.join(remote.app.getPath('userData'), 'appState.json');
+  remote.shell.showItemInFolder(appStateJson);
+};
+
 export const SidebarLayout = (props: {
   theme: boolean;
   toggleTheme: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,7 +40,7 @@ export const SidebarLayout = (props: {
         iconBefore={ImportIcon}
         height={majorScale(7)}
         marginBottom='15px'
-        appearance={location.pathname === '/import' ? 'primary' : 'minimal'}
+        appearance={location.pathname.startsWith('/import') ? 'primary' : 'minimal'}
       >
         Import
       </Button>
@@ -66,7 +74,22 @@ export const SidebarLayout = (props: {
           text='Auto Categories'
           isSelected={location.pathname === '/autoCategories'}
         />
+        <NavLink
+          to='/thirdPartyApis'
+          iconBefore={ApplicationIcon}
+          text="Third Party API's"
+          isSelected={location.pathname === '/thirdPartyApis'}
+        />
       </Pane>
+      <Button
+        onClick={openUserPath}
+        appearance='minimal'
+        iconBefore={DatabaseIcon}
+        display='flex'
+        justifyContent='flex-start'
+      >
+        User Data
+      </Button>
       <Text paddingTop={20} size={300} textAlign='center'>
         Version: {appVersion}
       </Text>

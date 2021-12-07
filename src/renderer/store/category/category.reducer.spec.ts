@@ -1,3 +1,4 @@
+import { AccountActions } from '../account/account.actions';
 import { CategoryActions } from './category.actions';
 import { ICategory } from './category.interface';
 import { CategoryReducer as reducer } from './category.reducer';
@@ -93,6 +94,32 @@ describe('reducers', () => {
           categories: {
             [otherCategoryId]: otherCategory,
           },
+        };
+        expect(newState).toEqual(expectedState);
+      });
+    });
+
+    describe('deleteTransferCategory', () => {
+      it('should delete transfer category when it exists', () => {
+        const transferCategory: ICategory = {
+          id: categoryId,
+          name: 'Eating Out',
+          color: '#654321',
+          accountTransferId: 'accountId',
+        };
+        const initialState: ICategoryStore = {
+          categories: {
+            [categoryId]: transferCategory,
+          },
+        };
+
+        const newState = reducer(initialState, {
+          type: AccountActions.DELETE_ACCOUNT,
+          payload: { id: 'accountId' },
+        });
+
+        const expectedState: ICategoryStore = {
+          categories: {},
         };
         expect(newState).toEqual(expectedState);
       });

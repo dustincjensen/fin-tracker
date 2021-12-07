@@ -72,14 +72,14 @@ export const AccountMonthly = ({
                 <Table.TextCell>
                   <Pane display='flex' alignItems='center'>
                     {record.isManualEntry && (
-                      <Tooltip content='Manually entered' hideDelay={0}>
+                      <Tooltip content='Manually entered'>
                         <ManuallyEnteredDataIcon marginTop={3} marginRight={10} />
                       </Tooltip>
                     )}
                     <Pane>
                       <Pane>{record.description}</Pane>
                       {record?.details && (
-                        <Tooltip content={record?.details} hideDelay={0}>
+                        <Tooltip content={record?.details}>
                           <Pane maxWidth={350} whiteSpace='nowrap' overflow='hidden' textOverflow='ellipsis'>
                             {record?.details}
                           </Pane>
@@ -185,7 +185,7 @@ export const AccountMonthly = ({
                         </Menu>
                       )}
                     >
-                      <Tooltip content='Options' hideDelay={0}>
+                      <Tooltip content='Options'>
                         <IconButton
                           icon={MoreIcon}
                           appearance='minimal'

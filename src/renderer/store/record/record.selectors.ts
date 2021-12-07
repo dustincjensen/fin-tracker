@@ -1,5 +1,7 @@
+import { createSelector } from 'reselect';
 import { getAccountStartDate } from '../../utils/account.utils';
 import { createDate, getPreviousMonth, isInYearMonth } from '../../utils/date.utils';
+import { sortByDateDescending } from '../../utils/record.utils';
 import { AccountSelectors } from '../account/account.selectors';
 import { IStore } from '../store.interface';
 import { IRecord } from './record.interface';
@@ -13,6 +15,31 @@ export class RecordSelectors {
   public static records(state: IStore) {
     return state.records.records;
   }
+
+  public static selectAllRecordsAcrossAccounts = createSelector(RecordSelectors.records, records => {
+    return Object.keys(records)
+      .map(id => records[id])
+      .reduce((prev, curr) => {
+        return [...prev, ...curr];
+      }, []);
+  });
+
+  public static selectAllRecordsWithCategory = createSelector(
+    RecordSelectors.selectAllRecordsAcrossAccounts,
+    RecordSelectors.recordsByAccountId,
+    AccountSelectors.accounts,
+    (state: IStore, accountId: string, categoryId: string) => categoryId,
+    (records, recordsForInvestment, accounts, categoryId) => {
+      return [...records.filter(r => r.categoryId === categoryId), ...(recordsForInvestment || [])]
+        .map(r => {
+          return {
+            ...r,
+            accountName: accounts[r.accountId].name,
+          };
+        })
+        .sort(sortByDateDescending);
+    }
+  );
 
   /**
    * Returns the records for a specific account.

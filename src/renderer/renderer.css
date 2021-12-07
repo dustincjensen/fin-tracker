@@ -12,11 +12,11 @@ body {
   height: 100%;
 }
 
-.scroll-bar-styled::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 12px;
 }
 
-.scroll-bar-styled::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background-color: #626970;
   outline: 1px solid #555C63;
 }

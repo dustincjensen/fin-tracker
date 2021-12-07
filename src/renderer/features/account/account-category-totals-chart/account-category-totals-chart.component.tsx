@@ -20,6 +20,11 @@ export const AccountCategoryTotalsChart = ({ records, categories }: IAccountCate
   // Don't display empty categories.
   data = data.filter(d => d.Total !== 0.0);
 
+  // Don't render the chart if there are no categories with totals.
+  if (data.length === 0) {
+    return null;
+  }
+
   // Get the colors for the remaining categories.
   const colors = data.map(c => c.color || '#333');
 

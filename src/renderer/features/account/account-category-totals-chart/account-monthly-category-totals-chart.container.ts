@@ -11,7 +11,8 @@ type OwnProps = Pick<IAccountCategoryTotalsChartProps, 'accountId' | 'date'>;
 const mapStateToProps = (state: IStore, { accountId, date }: OwnProps): StateProps => {
   return {
     records: RecordSelectors.recordsByDate(state, accountId, date),
-    categories: CategorySelectors.selectCategories(state),
+    // TODO verify that the transfer categories should not be shown.
+    categories: CategorySelectors.selectDisplayCategories(state),
   };
 };
 

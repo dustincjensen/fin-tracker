@@ -9,7 +9,7 @@ import { IAccountMonthlyProps } from './account-monthly.props.interface';
 
 type StateProps = Pick<IAccountMonthlyProps, 'records' | 'categories'>;
 type DispatchProps = Pick<IAccountMonthlyProps, 'updateCategory' | 'updateSplitRecordCategory'>;
-type OwnProps = Pick<IAccountMonthlyProps, 'accountId' | 'date'>;
+type OwnProps = Pick<IAccountMonthlyProps, 'accountId' | 'date' | 'filterDescription' | 'filterCategoryId'>;
 
 const mapStateToProps = (state: IStore, ownProps: OwnProps): StateProps => {
   const { accountId, date } = ownProps;
@@ -28,8 +28,31 @@ const mapStateToProps = (state: IStore, ownProps: OwnProps): StateProps => {
     };
   });
 
+  // Filter category
+  let filteredRecords = ownProps.filterCategoryId
+    ? ownProps.filterCategoryId === 'Uncategorized'
+      ? records.filter(r => (r.splitRecords === undefined && !r.category) || r.splitRecords?.some(sr => !sr.categoryId))
+      : records.filter(
+          r =>
+            r.category?.id === ownProps.filterCategoryId ||
+            r.categoryId === ownProps.filterCategoryId ||
+            r.splitRecords?.some(sr => sr.categoryId === ownProps.filterCategoryId)
+        )
+    : records;
+
+  // Filter description
+  const lowercaseFilter = ownProps.filterDescription?.toLowerCase();
+  filteredRecords = lowercaseFilter
+    ? filteredRecords.filter(
+        r =>
+          r.description.toLowerCase().indexOf(lowercaseFilter) >= 0 ||
+          r.details?.toLowerCase().indexOf(lowercaseFilter) >= 0 ||
+          r.splitRecords?.some(sr => sr.description.toLowerCase().indexOf(lowercaseFilter) >= 0)
+      )
+    : filteredRecords;
+
   return {
-    records,
+    records: filteredRecords,
     categories,
   };
 };

@@ -1,4 +1,4 @@
-import moment, { Moment } from 'moment';
+import moment, { isMoment, Moment } from 'moment';
 
 export interface IDate {
   year: () => number;
@@ -79,7 +79,10 @@ export function formatDate(date: string): string {
  *
  * @param date  the date to be formatted.
  */
-export function formatDateFull(date: string): string {
+export function formatDateFull(date: string | Moment): string {
+  if (isMoment(date)) {
+    return date.format('LL');
+  }
   return moment(date).format('LL');
 }
 
@@ -194,4 +197,55 @@ export function getEarliestDate(dates: string[]) {
  */
 export function getLatestDate(dates: string[]) {
   return moment.max(dates.filter(d => d).map(d => moment(d)));
+}
+
+/**
+ * Returns a date in YYYY-MM-DD format for Open Exchange Rate API.
+ *
+ * @param date  The date to format.
+ */
+export function getDateForOer(date: string): string {
+  return moment(date).format('YYYY-MM-DD');
+}
+
+/**
+ * Returns a date in YYYY-MM-DD format for Open Exchange Rate API
+ * rounded up to the end of the month.
+ *
+ * @param date  The date to format.
+ */
+export function getMonthDateForOer(date: string): string {
+  const endOfMonth = moment(date).endOf('month');
+  const today = moment();
+
+  if (endOfMonth > today) {
+    return today.format('YYYY-MM-DD');
+  }
+  return endOfMonth.format('YYYY-MM-DD');
+}
+
+/**
+ * Returns a date in YYYY-MM-DD format for Open Exchange Rate API
+ * rounded up to the end of the year.
+ *
+ * @param date  The date to format.
+ */
+export function getYearDateForOer(date: string): string {
+  const endOfYear = moment(date).endOf('year');
+  const today = moment();
+
+  if (endOfYear > today) {
+    return today.format('YYYY-MM-DD');
+  }
+  return endOfYear.format('YYYY-MM-DD');
+}
+
+// TODO remove?
+export function getDateFromTimestamp(timestamp: number): string {
+  return moment(timestamp).format('YYYY-MM-DD');
+}
+
+// TODO docs
+export function today(): string {
+  return moment().format('YYYY-MM-DD');
 }

@@ -1,4 +1,7 @@
 import { Draft } from 'immer';
+import { newGuid } from '../../utils/guid.utils';
+import { AccountActions } from '../account/account.actions';
+import { IAccount } from '../account/account.interface';
 import { createDraftReducer } from '../draft.reducer';
 import { CategoryActions } from './category.actions';
 import { ICategory } from './category.interface';
@@ -11,6 +14,9 @@ export const CategoryReducer = createDraftReducer(
     [CategoryActions.SAVE_NEW_CATEGORY]: saveNewCategory,
     [CategoryActions.UPDATE_CATEGORY]: updateCategory,
     [CategoryActions.DELETE_CATEGORY]: deleteCategory,
+    [AccountActions.SAVE_NEW_ACCOUNT]: createTransferCategory,
+    [CategoryActions.ADD_TRANSFER_CATEGORY]: createTransferCategory,
+    [AccountActions.DELETE_ACCOUNT]: deleteTransferCategory,
   },
   initialState
 );
@@ -30,4 +36,24 @@ function updateCategory(draft: Draft<ICategoryStore>, updatedCategory: ICategory
 
 function deleteCategory(draft: Draft<ICategoryStore>, deletedCategory: ICategory) {
   delete draft.categories[deletedCategory.id];
+}
+
+function createTransferCategory(draft: Draft<ICategoryStore>, newAccount: IAccount) {
+  const newCategory: ICategory = {
+    id: newGuid(),
+    name: `${newAccount.name} Transfer`,
+    color: '#000',
+    accountTransferId: newAccount.id,
+  };
+  draft.categories[newCategory.id] = newCategory;
+}
+
+function deleteTransferCategory(draft: Draft<ICategoryStore>, account: IAccount) {
+  const category = Object.keys(draft.categories)
+    .map(id => draft.categories[id])
+    .find(c => c.accountTransferId === account.id);
+
+  if (category) {
+    delete draft.categories[category.id];
+  }
 }

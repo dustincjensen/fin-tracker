@@ -57,6 +57,21 @@ const categorySummarySelector = (query: DateCurriedQuery, dateSelector) =>
                 categoryBalances[categoryId] = balance;
               }
             }
+
+            // If the record has category or auto category it probably shouldn't have split records too.
+            const splits = record.splitRecords;
+            if (splits?.some(s => s.categoryId)) {
+              for (const split of splits.filter(s => s.categoryId)) {
+                const categoryId = split.categoryId;
+                const balance = (split.credit || 0) - (split.debit || 0);
+
+                if (categoryBalances[categoryId]) {
+                  categoryBalances[categoryId] += balance;
+                } else {
+                  categoryBalances[categoryId] = balance;
+                }
+              }
+            }
           }
         }
         categoryBalancesByDate.push({ date, categoryBalances: categoryBalances });
@@ -70,7 +85,7 @@ const selectCategoryTotalsByMonth = categorySummarySelector(queryByIsInYearAndMo
 
 const mapStateToProps = (state: IStore): StateProps => {
   return {
-    categories: CategorySelectors.selectCategories(state),
+    categories: CategorySelectors.selectDisplayCategories(state),
     categoryTotalsByMonth: selectCategoryTotalsByMonth(state),
   };
 };

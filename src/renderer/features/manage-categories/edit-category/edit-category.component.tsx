@@ -29,6 +29,7 @@ export const EditCategory = ({ close, saveCategory, saveButtonText, headerText, 
 
     const updatedCategory: ICategory = {
       id: category?.id || newGuid(),
+      accountTransferId: category?.accountTransferId,
       name,
       color,
     };
@@ -54,6 +55,7 @@ export const EditCategory = ({ close, saveCategory, saveButtonText, headerText, 
             value={name}
             onChange={handleNameChange}
             required
+            disabled={!!category?.accountTransferId}
             //isInvalid={name === ''}
             //validationMessage='Please enter a category name.'
           />
@@ -76,6 +78,7 @@ export const EditCategory = ({ close, saveCategory, saveButtonText, headerText, 
                 display='flex'
                 justifyContent='space-between'
                 paddingRight={10}
+                disabled={!!category?.accountTransferId}
               >
                 {color || 'Select Color...'}
                 <div style={{ border: '1px solid black', background: color, width: '40px', height: '26px' }}>
@@ -94,9 +97,11 @@ export const EditCategory = ({ close, saveCategory, saveButtonText, headerText, 
           <Button type='button' iconBefore={BanCircleIcon} height={majorScale(5)} marginRight={10} onClick={close}>
             Cancel
           </Button>
-          <Button appearance='primary' iconBefore={FloppyDiskIcon} height={majorScale(5)}>
-            {saveButtonText}
-          </Button>
+          {!category?.accountTransferId && (
+            <Button appearance='primary' iconBefore={FloppyDiskIcon} height={majorScale(5)}>
+              {saveButtonText}
+            </Button>
+          )}
         </Pane>
       </form>
     </Pane>

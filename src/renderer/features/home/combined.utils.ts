@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import { AccountSelectors } from '../../store/account/account.selectors';
+import { InvestmentRecordSelectors } from '../../store/investment-record/investment-record.selectors';
 import { RecordSelectors } from '../../store/record/record.selectors';
 import { getAccountStartDate } from '../../utils/account.utils';
 import {
@@ -50,16 +51,22 @@ export const queryByIsInYear = queryBy(isInYear, t => `${t}-01-01`);
 export const displayMonthDates = createSelector(
   AccountSelectors.accounts,
   RecordSelectors.records,
-  (accounts, records) => {
+  InvestmentRecordSelectors.records,
+  (accounts, records, investmentRecords) => {
     const startingDates = Object.keys(accounts).map(id => {
+      // TODO nothing stops a record, or investment record from appearing earlier than the start date of the account.
       const { startYear, startMonth } = accounts[id];
       return getAccountStartDate(startYear, startMonth);
     });
 
-    const endDates = Object.keys(accounts).map(id => {
-      const accountRecords = records[id];
-      return accountRecords?.[accountRecords.length - 1].date;
-    });
+    const endDates = Object.keys(accounts)
+      .map(id => {
+        const accountRecords = records[id];
+        const investRecords = investmentRecords[id] ? [...investmentRecords[id]] : [];
+        investRecords?.sort((a, b) => (createDate(a.date) > createDate(b.date) ? 1 : -1));
+        return [accountRecords?.[accountRecords.length - 1].date, investRecords?.[investRecords?.length - 1].date];
+      })
+      .reduce((prev: string[], curr: string[]) => [...prev, ...curr], []);
 
     return allMonthsBetweenDates(getEarliestDate(startingDates), getLatestDate(endDates));
   }
@@ -71,16 +78,22 @@ export const displayMonthDates = createSelector(
 export const displayYearDates = createSelector(
   AccountSelectors.accounts,
   RecordSelectors.records,
-  (accounts, records) => {
+  InvestmentRecordSelectors.records,
+  (accounts, records, investmentRecords) => {
     const startingDates = Object.keys(accounts).map(id => {
+      // TODO nothing stops a record, or investment record from appearing earlier than the start date of the account.
       const { startYear } = accounts[id];
       return `${startYear}-12-01`;
     });
 
-    const endDates = Object.keys(accounts).map(id => {
-      const accountRecords = records[id];
-      return accountRecords?.[accountRecords.length - 1].date;
-    });
+    const endDates = Object.keys(accounts)
+      .map(id => {
+        const accountRecords = records[id];
+        const investRecords = investmentRecords[id] ? [...investmentRecords[id]] : [];
+        investRecords.sort((a, b) => (createDate(a.date) > createDate(b.date) ? 1 : -1));
+        return [accountRecords?.[accountRecords.length - 1].date, investRecords?.[investRecords?.length - 1].date];
+      })
+      .reduce((prev: string[], curr: string[]) => [...prev, ...curr], []);
 
     return allYearsBetweenDates(getEarliestDate(startingDates), getLatestDate(endDates));
   }

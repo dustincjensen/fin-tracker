@@ -1,10 +1,11 @@
-import { useLocalStorage, writeStorage } from '@rehooks/local-storage';
 import { Pane, Heading, IconButton, Tooltip, LockIcon, UnlockIcon } from 'evergreen-ui';
 import * as React from 'react';
 import { ErrorBoundary } from '../../components/error-boundary/error-boundary.component';
-import { AccountSummariesContainer } from './account-summaries/account-summaries.container';
+import { useLocalStorage } from '../../hooks/use-local-storage.hook';
+import { AccountSummaries } from './account-summaries/account-summaries.component';
 import { CombinedCategorySummaryContainer } from './combined-category-summary/combined-category-summary.container';
-import { CombinedSummaryContainer } from './combined-summary/combined-summary.container';
+import { CombinedSummary } from './combined-summary/combined-summary.component';
+import { EditHomeContext } from './edit-home.context';
 import { InstructionsContainer } from './instructions/instructions.container';
 import { OptionalDisplay } from './optional-display/optional-display.component';
 import { IOptionalDisplayProps } from './optional-display/optional-display.props.interface';
@@ -26,7 +27,7 @@ const renderAccountsSummaryTitle = (locked: boolean, updateOrder: IOptionalDispl
     title='Accounts Summary (Tiles)'
     displayKey={accountsSummaryTilesDisplayed}
     updateOrder={updateOrder}
-    component={AccountSummariesContainer}
+    component={AccountSummaries}
   />
 );
 
@@ -36,7 +37,7 @@ const renderAccountsSummaryMonthlyYearly = (locked: boolean, updateOrder: IOptio
     title='Accounts Summary (Monthly/Yearly)'
     displayKey={accountsSummaryMonthlyYearlyDisplayed}
     updateOrder={updateOrder}
-    component={CombinedSummaryContainer}
+    component={CombinedSummary}
   />
 );
 
@@ -59,7 +60,7 @@ const keyToRenderMap = {
 export const HomeLayout = () => {
   const [locked, setLocked] = React.useState<boolean>(true);
   const updateLocked = () => setLocked(v => !v);
-  const [homePageOrder] = useLocalStorage<string[]>(homePageOrderLocalStorage, defaultOrder);
+  const [homePageOrder, setHomePageOrder] = useLocalStorage<string[]>(homePageOrderLocalStorage, defaultOrder);
   const [fullHomePageOrder, setFullHomePageOrder] = React.useState<string[]>([
     ...homePageOrder.filter(k => defaultOrder.indexOf(k) >= 0),
     ...defaultOrder.filter(k => homePageOrder.indexOf(k) < 0),
@@ -82,7 +83,7 @@ export const HomeLayout = () => {
           ...firstHalf.slice(firstHalf.length - 1),
           ...secondHalf,
         ];
-        writeStorage(homePageOrderLocalStorage, newOrder);
+        setHomePageOrder(newOrder);
         setFullHomePageOrder(newOrder);
       } else {
         const newOrder = [
@@ -91,7 +92,7 @@ export const HomeLayout = () => {
           fullHomePageOrder[indexOfKey],
           ...secondHalf.slice(1),
         ];
-        writeStorage(homePageOrderLocalStorage, newOrder);
+        setHomePageOrder(newOrder);
         setFullHomePageOrder(newOrder);
       }
     },
@@ -100,23 +101,25 @@ export const HomeLayout = () => {
 
   return (
     <ErrorBoundary>
-      <Pane padding={20}>
-        <Pane display='flex' justifyContent='space-between' marginBottom={10}>
-          <Heading size={700}>{locked ? 'Home' : 'Edit Home'}</Heading>
-          <Tooltip position='left' content={locked ? 'Edit Home page' : 'Finish Edit Home page'}>
-            <IconButton icon={locked ? LockIcon : UnlockIcon} appearance='minimal' onClick={updateLocked} />
-          </Tooltip>
-        </Pane>
-        <Pane>
-          {/* Don't display instructions when unlocking the home page */}
-          {locked && <InstructionsContainer />}
+      <EditHomeContext.Provider value={{ locked }}>
+        <Pane padding={20}>
+          <Pane display='flex' justifyContent='space-between' marginBottom={10}>
+            <Heading size={700}>{locked ? 'Home' : 'Edit Home'}</Heading>
+            <Tooltip position='left' content={locked ? 'Edit Home page' : 'Finish Edit Home page'}>
+              <IconButton icon={locked ? LockIcon : UnlockIcon} appearance='minimal' onClick={updateLocked} />
+            </Tooltip>
+          </Pane>
+          <Pane>
+            {/* Don't display instructions when unlocking the home page */}
+            {locked && <InstructionsContainer />}
 
-          {/* Render the home page components that the user can turn on/off */}
-          {fullHomePageOrder.map(key => {
-            return <Pane key={key}>{keyToRenderMap[key](locked, updateHomePageOrder)}</Pane>;
-          })}
+            {/* Render the home page components that the user can turn on/off */}
+            {fullHomePageOrder.map(key => {
+              return <Pane key={key}>{keyToRenderMap[key](locked, updateHomePageOrder)}</Pane>;
+            })}
+          </Pane>
         </Pane>
-      </Pane>
+      </EditHomeContext.Provider>
     </ErrorBoundary>
   );
 };

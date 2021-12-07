@@ -10,28 +10,37 @@ import {
   DoubleChevronRightIcon,
 } from 'evergreen-ui';
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 import { useWindowWidth } from '../../../hooks/use-window-width.hook';
-import { formatDateMonthYear } from '../../../utils/date.utils';
-import { isNullOrUndefined } from '../../../utils/object.utils';
-import { ICombinedSummaryProps } from './combined-summary.props.interface';
+import { AccountSelectors } from '../../../store/account/account.selectors';
+import { isBankAccount } from '../../../utils/account.utils';
+import { useRatesByDates } from '../../investment/_hooks/use-rates-by-dates.hook';
+import { displayMonthDates, displayYearDates } from '../combined.utils';
+import { EditHomeContext } from '../edit-home.context';
+import { BankAccountRowSummary } from './bank-account-row-summary.component';
+import { CombinedChart } from './combined-chart.component';
+import { DateHeaders } from './date-headers.component';
+import { InvestmentAccountRowSummary } from './investment-account-row-summary.component';
+import { TotalRow } from './total-row.component';
+import { TotalContext } from './total.context';
 
 const displayWidth = 300;
 const nameWidth = 150;
 const defaultNumberOfColumns = 1;
 const accountSummaryDisplayOption = 'accountSummaryDisplayOption';
 
-export const CombinedSummary = ({ accounts, endMonthBalances, endYearBalances }: ICombinedSummaryProps) => {
+export const CombinedSummary = () => {
+  const { locked: editHomeLocked } = React.useContext(EditHomeContext);
   const [numberOfColumns, setNumberOfColumns] = React.useState(defaultNumberOfColumns);
   const [startingColumnIndex, setStartingColumnIndex] = React.useState(0);
   const [byMonth, setByMonth] = React.useState<string>(localStorage.getItem(accountSummaryDisplayOption) || 'monthly');
   const containerRef = React.useRef<HTMLDivElement>();
   const windowWidth = useWindowWidth();
 
-  const endBalances = byMonth === 'monthly' ? endMonthBalances : endYearBalances;
-  const displayableEndBalances = endBalances.slice(
-    endBalances.length - numberOfColumns - startingColumnIndex,
-    endBalances.length - startingColumnIndex
-  );
+  const dateSelector = React.useMemo(() => (byMonth === 'monthly' ? displayMonthDates : displayYearDates), [byMonth]);
+  const displayableDates = useSelector(dateSelector);
+
+  const accounts = useSelector(AccountSelectors.selectAccounts);
 
   React.useEffect(() => {
     if (!containerRef.current) {
@@ -48,17 +57,17 @@ export const CombinedSummary = ({ accounts, endMonthBalances, endYearBalances }:
 
     // Math.min(columns, 4)
     // If we want to limit the width of the component
-    const noc = Math.min(columns, endBalances.length);
+    const noc = Math.min(columns, displayableDates.length);
     setNumberOfColumns(noc);
 
     // Have to adjust the starting column index since the window width sizing could affect
     // the calculation of the displayable balance range.
-    setStartingColumnIndex(i => (i >= endBalances.length - noc ? endBalances.length - noc : i));
-  }, [windowWidth, byMonth]);
+    setStartingColumnIndex(i => (i >= displayableDates.length - noc ? displayableDates.length - noc : i));
+  }, [windowWidth, byMonth, editHomeLocked]);
 
-  const fullLeftClick = () => setStartingColumnIndex(endBalances.length - numberOfColumns);
+  const fullLeftClick = () => setStartingColumnIndex(displayableDates.length - numberOfColumns);
   const onLeftClick = () => {
-    if (startingColumnIndex < endBalances.length - numberOfColumns) {
+    if (startingColumnIndex < displayableDates.length - numberOfColumns) {
       setStartingColumnIndex(i => i + 1);
     }
   };
@@ -66,6 +75,13 @@ export const CombinedSummary = ({ accounts, endMonthBalances, endYearBalances }:
   const onRightClick = () => {
     if (startingColumnIndex > 0) {
       setStartingColumnIndex(i => i - 1);
+    }
+  };
+
+  const setStartIndexOnChartClick = (date: string) => {
+    const index = displayableDates.indexOf(date);
+    if (index >= 0) {
+      setStartingColumnIndex(Math.max(displayableDates.length - numberOfColumns - index, 0));
     }
   };
 
@@ -77,117 +93,118 @@ export const CombinedSummary = ({ accounts, endMonthBalances, endYearBalances }:
     localStorage.setItem(accountSummaryDisplayOption, evt.target.value);
   };
 
-  // Don't render anything if there are no end balances.
-  if (!endBalances || endBalances.flatMap(e => Object.values(e.accountBalances)).filter(e => e).length === 0) {
+  const start = displayableDates.length - numberOfColumns - startingColumnIndex;
+  const end = displayableDates.length - startingColumnIndex;
+
+  const { rates } = useRatesByDates(displayableDates, byMonth === 'monthly', 'USD');
+
+  if (accounts?.length === 0) {
     return null;
   }
 
   return (
-    <div ref={containerRef} style={{ display: 'flex' }}>
-      <Pane
-        display='flex'
-        flexDirection='column'
-        alignItems='flex-end'
-        height='auto'
-        minWidth={nameWidth}
-        maxWidth={nameWidth}
-      >
-        <Pane marginBottom={35} width='100%'>
-          <Select defaultValue={byMonth} width='100%' paddingRight={5} onChange={setDisplayOption}>
-            <option value='monthly'>Monthly</option>
-            <option value='yearly'>Yearly</option>
-          </Select>
-        </Pane>
-        {accounts.map(ac => {
-          const { id: accountId, accountName } = ac;
-          return (
-            <Pane key={accountId} padding={10} borderBottom width='100%' display='flex' justifyContent='flex-start'>
-              <Text whiteSpace='nowrap' overflow='hidden' textOverflow='ellipsis'>
-                {accountName}
-              </Text>
+    <TotalContext.Provider value={{ totals: [] }}>
+      <div ref={containerRef} style={{ display: 'flex' }}>
+        <Pane
+          display='flex'
+          flexDirection='column'
+          alignItems='flex-end'
+          height='auto'
+          minWidth={nameWidth}
+          maxWidth={nameWidth}
+        >
+          <Pane marginBottom={35} width='100%'>
+            <Select defaultValue={byMonth} width='100%' paddingRight={5} onChange={setDisplayOption}>
+              <option value='monthly'>Monthly</option>
+              <option value='yearly'>Yearly</option>
+            </Select>
+          </Pane>
+          {accounts.map(ac => {
+            const { id: accountId, name: accountName } = ac;
+            return (
+              <Pane
+                key={accountId}
+                padding={10}
+                borderBottom
+                width='100%'
+                display='flex'
+                justifyContent='flex-start'
+                height={40}
+              >
+                <Text whiteSpace='nowrap' overflow='hidden' textOverflow='ellipsis'>
+                  {accountName}
+                </Text>
+              </Pane>
+            );
+          })}
+          <Pane display='flex' flexDirection='column' flex={1} justifyContent='flex-end' width='100%'>
+            <Pane padding={10} borderBottom borderTop='3px solid #474d66' display='flex' justifyContent='flex-start'>
+              <Text>Total</Text>
             </Pane>
-          );
-        })}
-        <Pane display='flex' flexDirection='column' flex={1} justifyContent='flex-end' width='100%'>
-          <Pane padding={10} borderBottom borderTop display='flex' justifyContent='flex-start'>
-            <Text>Total</Text>
           </Pane>
         </Pane>
-      </Pane>
 
-      <Pane>
-        <Pane display='flex' justifyContent='space-between' alignItems='center' marginBottom={3}>
-          <Pane display='flex'>
-            <IconButton icon={DoubleChevronLeftIcon} onClick={fullLeftClick} marginRight={3} />
-            <IconButton icon={ChevronLeftIcon} onClick={onLeftClick} />
+        <Pane>
+          <Pane display='flex' justifyContent='space-between' alignItems='center' marginBottom={3}>
+            <Pane display='flex'>
+              <IconButton icon={DoubleChevronLeftIcon} onClick={fullLeftClick} marginRight={3} />
+              <IconButton icon={ChevronLeftIcon} onClick={onLeftClick} />
+            </Pane>
+            <Heading>Accounts Summary</Heading>
+            <Pane display='flex'>
+              <IconButton icon={ChevronRightIcon} onClick={onRightClick} marginRight={3} />
+              <IconButton icon={DoubleChevronRightIcon} onClick={fullRightClick} />
+            </Pane>
           </Pane>
-          <Heading>Accounts Summary</Heading>
-          <Pane display='flex'>
-            <IconButton icon={ChevronRightIcon} onClick={onRightClick} marginRight={3} />
-            <IconButton icon={DoubleChevronRightIcon} onClick={fullRightClick} />
+          <Pane borderTop borderRight borderBottom borderRadius={0}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                overflowX: 'hidden',
+                width: displayWidth * numberOfColumns,
+                justifyContent: 'space-between',
+              }}
+            >
+              <Pane>
+                <DateHeaders byMonth={byMonth} start={start} end={end} dates={displayableDates} />
+                {accounts.map(a => {
+                  return isBankAccount(a.accountType) ? (
+                    <BankAccountRowSummary
+                      key={a.id}
+                      accountId={a.id}
+                      byMonth={byMonth === 'monthly'}
+                      start={start}
+                      end={end}
+                      dates={displayableDates}
+                    />
+                  ) : (
+                    <InvestmentAccountRowSummary
+                      key={a.id}
+                      accountId={a.id}
+                      byMonth={byMonth === 'monthly'}
+                      start={start}
+                      end={end}
+                      dates={displayableDates}
+                      rates={rates}
+                    />
+                  );
+                })}
+              </Pane>
+              <TotalRow start={start} end={end} />
+            </div>
           </Pane>
         </Pane>
-        <Pane border borderRadius={0}>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              overflowX: 'hidden',
-              width: displayWidth * numberOfColumns,
-              minHeight: 400,
-            }}
-          >
-            {displayableEndBalances.map(eb => {
-              return (
-                <Pane
-                  key={eb.date}
-                  minWidth={displayWidth}
-                  borderLeft
-                  borderRadius={0}
-                  display='flex'
-                  flexDirection='column'
-                  justifyContent='space-between'
-                >
-                  <Pane>
-                    <Pane
-                      display='flex'
-                      alignItems='center'
-                      justifyContent='center'
-                      background='tint1'
-                      borderBottom
-                      height={31}
-                    >
-                      <Heading>{byMonth === 'monthly' ? formatDateMonthYear(eb.date) : eb.date}</Heading>
-                    </Pane>
-                    <Pane>
-                      {Object.keys(eb.accountBalances).map(accountId => {
-                        const balance = eb.accountBalances[accountId];
-                        return (
-                          <Pane
-                            key={accountId}
-                            padding={10}
-                            borderBottom
-                            width='100%'
-                            display='flex'
-                            justifyContent='flex-end'
-                          >
-                            <Text>{isNullOrUndefined(balance) ? '-' : balance?.toFixed(2)}</Text>
-                          </Pane>
-                        );
-                      })}
-                    </Pane>
-                  </Pane>
-                  <Pane borderTop>
-                    <Pane padding={10} width='100%' display='flex' justifyContent='flex-end'>
-                      <Text>{isNullOrUndefined(eb.total) ? '-' : eb.total?.toFixed(2)}</Text>
-                    </Pane>
-                  </Pane>
-                </Pane>
-              );
-            })}
-          </div>
-        </Pane>
+      </div>
+      <Pane width={nameWidth + displayWidth * numberOfColumns}>
+        <CombinedChart
+          displayableDates={displayableDates}
+          start={start}
+          end={end}
+          setStartDate={setStartIndexOnChartClick}
+          byMonth={byMonth === 'monthly'}
+        />
       </Pane>
-    </div>
+    </TotalContext.Provider>
   );
 };

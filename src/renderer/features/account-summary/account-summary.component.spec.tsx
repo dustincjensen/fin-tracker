@@ -1,6 +1,7 @@
 import { shallow } from 'enzyme';
 import { BankAccountIcon } from 'evergreen-ui';
 import * as React from 'react';
+import * as ReactRedux from 'react-redux';
 import { AccountSummary } from './account-summary.component';
 import { IAccountSummaryProps } from './account-summary.props.interface';
 
@@ -11,15 +12,18 @@ describe('components', () => {
     beforeEach(() => {
       props = {
         accountId: 'accountId',
-        balance: undefined,
-        dateOfLastTransaction: undefined,
-        icon: BankAccountIcon,
-        name: 'Savings',
       };
     });
 
     const assertRenderDetails = (balance: number, emptyAccountLength: number, accountDetailsLength: number) => {
-      const component = shallow(<AccountSummary {...props} balance={balance} />);
+      jest.spyOn(ReactRedux, 'useSelector').mockReturnValueOnce({
+        name: 'TestAccount',
+        balance,
+        dateOfLastTransaction: '2021-07-12',
+        icon: BankAccountIcon,
+      });
+
+      const component = shallow(<AccountSummary {...props} />);
       expect(component.find('[data-name="empty-account"]').length).toBe(emptyAccountLength);
       expect(component.find('[data-name="account-details"]').length).toBe(accountDetailsLength);
     };

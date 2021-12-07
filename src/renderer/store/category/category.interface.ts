@@ -13,4 +13,9 @@ export interface ICategory {
    * A hex code for the color of the category.
    */
   color: string;
+
+  /**
+   * If present, the account to transfer the amount to.
+   */
+  accountTransferId?: string;
 }
