@@ -58,24 +58,20 @@ const categorySummarySelector = (query: DateCurriedQuery, dateSelector) =>
               }
             }
 
-            // TODO bug where split records are not in balance for this chart.
-            // const splits = record.splitRecords;
-            // if (splits?.some(s => s.categoryId)) {
-            //     Add to category balances
-            // }
+            // If the record has category or auto category it probably shouldn't have split records too.
+            const splits = record.splitRecords;
+            if (splits?.some(s => s.categoryId)) {
+              for (const split of splits.filter(s => s.categoryId)) {
+                const categoryId = split.categoryId;
+                const balance = (split.credit || 0) - (split.debit || 0);
 
-            /*
-            Fun Jul 2018
-            745.7
-            212.49 -> actual 272.49 // FIX
-            52.49
-            77.44
-            2581.41
-            964.66
-
-            Car Jun 2019
-            479.37 -> actual 671.27 // FIX
-            */
+                if (categoryBalances[categoryId]) {
+                  categoryBalances[categoryId] += balance;
+                } else {
+                  categoryBalances[categoryId] = balance;
+                }
+              }
+            }
           }
         }
         categoryBalancesByDate.push({ date, categoryBalances: categoryBalances });
