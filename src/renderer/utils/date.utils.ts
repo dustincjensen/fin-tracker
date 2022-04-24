@@ -249,3 +249,7 @@ export function getDateFromTimestamp(timestamp: number): string {
 export function today(): string {
   return moment().format('YYYY-MM-DD');
 }
+
+export function endOfNextMonth(date: IDate): IDate {
+  return moment(date as moment.Moment).add(1, 'week').endOf('month');
+}

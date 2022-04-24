@@ -1,4 +1,4 @@
-import { Pane, Heading } from 'evergreen-ui';
+import { Pane, Heading, BankAccountIcon } from 'evergreen-ui';
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
@@ -45,6 +45,8 @@ export const AccountsSidebar = () => {
           ))}
         </>
       )}
+
+      <NavLink key={'mortgageId'} to='/mortgage/mortgageId' text='Mortgage' iconBefore={BankAccountIcon} isSelected={pathname === '/mortgage/mortgageId'} />
     </Pane>
   );
 };
