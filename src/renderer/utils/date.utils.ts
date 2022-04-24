@@ -253,3 +253,12 @@ export function today(): string {
 export function endOfNextMonth(date: IDate): IDate {
   return moment(date as moment.Moment).add(1, 'week').endOf('month');
 }
+
+export function withinThreeDays(date: IDate, compare: IDate): boolean {
+  const diff = moment(date as moment.Moment).diff(moment(compare as moment.Moment));
+  const duration = moment.duration(diff);
+  
+  if (Math.abs(duration.subtract(3, 'days').asDays()) <= moment.duration(3, 'days').asDays()) return true;
+  if (Math.abs(duration.add(3, 'days').asDays()) <= moment.duration(3, 'days').asDays()) return true;
+  return false;
+}
