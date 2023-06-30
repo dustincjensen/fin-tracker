@@ -1,10 +1,9 @@
 import { Pane, Heading } from 'evergreen-ui';
 import * as React from 'react';
-import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { NavLink } from '../../components/nav-link/nav-link.component';
+import { useActiveAccounts } from '../../hooks/accounts/use-active-accounts.hook';
 import { IAccount } from '../../store/account/account.interface';
-import { AccountSelectors } from '../../store/account/account.selectors';
 import { accountRoutes, accountTypeIcons, isBankAccount, isInvestmentAccount } from '../../utils/account.utils';
 
 const AccountLink = ({ account, pathname }: { account: IAccount; pathname: string }) => {
@@ -17,7 +16,7 @@ const AccountLink = ({ account, pathname }: { account: IAccount; pathname: strin
 
 export const AccountsSidebar = () => {
   const { pathname } = useLocation<Location>();
-  const accounts = useSelector(AccountSelectors.selectActiveAccounts);
+  const { activeAccounts: accounts } = useActiveAccounts();
 
   const bankAccounts = accounts.filter(a => isBankAccount(a.accountType));
   const investmentAccounts = accounts.filter(a => isInvestmentAccount(a.accountType));

@@ -1,7 +1,7 @@
 import { Pane } from 'evergreen-ui';
 import * as React from 'react';
 import { ErrorBoundary } from '../../components/error-boundary/error-boundary.component';
-import { AccountsContainer } from './accounts/accounts.container';
+import { Accounts } from './accounts/accounts.component';
 import { NewAccountContainer } from './new-account/new-account.container';
 
 export const ManageAccountLayout = () => {
@@ -11,7 +11,7 @@ export const ManageAccountLayout = () => {
         <Pane marginBottom={20}>
           <NewAccountContainer />
         </Pane>
-        <AccountsContainer />
+        <Accounts />
       </Pane>
     </ErrorBoundary>
   );

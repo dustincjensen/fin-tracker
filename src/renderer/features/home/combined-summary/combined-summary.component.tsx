@@ -11,8 +11,8 @@ import {
 } from 'evergreen-ui';
 import * as React from 'react';
 import { useSelector } from 'react-redux';
+import { useAccounts } from '../../../hooks/accounts/use-accounts.hook';
 import { useWindowWidth } from '../../../hooks/use-window-width.hook';
-import { AccountSelectors } from '../../../store/account/account.selectors';
 import { isBankAccount } from '../../../utils/account.utils';
 import { useRatesByDates } from '../../investment/_hooks/use-rates-by-dates.hook';
 import { displayMonthDates, displayYearDates } from '../combined.utils';
@@ -40,7 +40,7 @@ export const CombinedSummary = () => {
   const dateSelector = React.useMemo(() => (byMonth === 'monthly' ? displayMonthDates : displayYearDates), [byMonth]);
   const displayableDates = useSelector(dateSelector);
 
-  const accounts = useSelector(AccountSelectors.selectAccounts);
+  const { accounts } = useAccounts();
 
   React.useEffect(() => {
     if (!containerRef.current) {

@@ -5,7 +5,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { ErrorBoundary } from '../../components/error-boundary/error-boundary.component';
 import { PendingRecordSelectors } from '../../store/pending-record/pending-record.selectors';
 import { ActionPendingRecordsContainer } from './action-pending-records/action-pending-records.container';
-import { NewRecordsContainer } from './new-records/new-records.container';
+import { NewRecords } from './new-records/new-records.component';
 import { PendingRecordsContainer } from './pending-records/pending-records.container';
 
 export const ImportLayout = (props: RouteComponentProps<{ accountId?: string }>) => {
@@ -15,7 +15,7 @@ export const ImportLayout = (props: RouteComponentProps<{ accountId?: string }>)
   return (
     <ErrorBoundary>
       <Pane height='100%' padding={20}>
-        {!hasPendingRecords && <NewRecordsContainer key={accountId} accountId={accountId} />}
+        {!hasPendingRecords && <NewRecords key={accountId} accountId={accountId} />}
         {hasPendingRecords && (
           <>
             <Pane marginBottom={20}>

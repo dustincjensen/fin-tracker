@@ -4,6 +4,7 @@ import { IAccount } from '../../../store/account/account.interface';
 import { ParseType } from '../../../store/pending-record/parse.type';
 import { isNullOrUndefined } from '../../../utils/object.utils';
 import { INewRecordsProps } from './new-records.props.interface';
+import { useNewRecords, useNewRecordsActions } from './use-new-records.hook';
 
 const getAccountOptions = (accounts: IAccount[]) =>
   accounts.map(a => (
@@ -23,7 +24,10 @@ const getImportOptions = () => (
   </>
 );
 
-export const NewRecords = ({ accountId, accounts, error, autoCategories, importAction }: INewRecordsProps) => {
+export const NewRecords = ({ accountId }: INewRecordsProps) => {
+  const { accounts, autoCategories, error } = useNewRecords();
+  const { importAction } = useNewRecordsActions();
+
   const [selectedAccountId, setSelectedAccountId] = React.useState(accountId || accounts?.[0]?.id || '');
   const [selectedFile, setSelectedFile] = React.useState<File>(null);
   const [importMethod, setImportMethod] = React.useState<ParseType>('QFX');
