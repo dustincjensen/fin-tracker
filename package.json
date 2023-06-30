@@ -126,5 +126,8 @@
       "context": "electron-renderer",
       "publicUrl": "."
     }
+  },
+  "volta": {
+    "node": "14.21.3"
   }
 }

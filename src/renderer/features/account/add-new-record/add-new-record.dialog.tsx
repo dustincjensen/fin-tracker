@@ -187,6 +187,7 @@ export const AddNewRecordDialog = ({ accountId, isShown, onClose }: IAddNewRecor
             marginRight={10}
           />
           {/* TODO deprecated */}
+          {/* Removed in v7 */}
           <SegmentedControl
             name='debitOrCredit'
             options={options}

@@ -49,4 +49,4 @@ const CalendarDateComponent = ({ dateToRender, isSelected, setIsSelected, style,
   </Pane>
 );
 
-export const CalendarDate = React.memo(CalendarDateComponent);
+export const CalendarDate: React.FC<ICalendarDateProps> = React.memo(CalendarDateComponent);
