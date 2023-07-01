@@ -1,6 +1,6 @@
 import { ICategory } from '../../../store/category/category.interface';
 
-export interface IEditCategoryProps {
+export interface IModifyCategoryProps {
   /**
    * The optional text for the header.
    */

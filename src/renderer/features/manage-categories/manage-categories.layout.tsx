@@ -3,7 +3,7 @@ import * as React from 'react';
 import { ErrorBoundary } from '../../components/error-boundary/error-boundary.component';
 import { CategoriesFilter } from './categories-filter/categories-filter.component';
 import { CategoriesContainer } from './categories/categories.container';
-import { NewCategoryContainer } from './new-category/new-category.container';
+import { NewCategory } from './new-category/new-category.component';
 
 export const ManageCategoryLayout = () => {
   const [showNewCategory, setShowNewCategory] = React.useState<boolean>(false);
@@ -17,7 +17,7 @@ export const ManageCategoryLayout = () => {
       <Pane display='grid' padding={20}>
         {showNewCategory && (
           <Pane marginBottom={20}>
-            <NewCategoryContainer close={closeNewCategory} />
+            <NewCategory close={closeNewCategory} />
           </Pane>
         )}
         <Pane marginBottom={10}>

@@ -15,5 +15,9 @@
 		".parcel-cache": true,
 		"node_modules": true,
 		"out": true,
-	}
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+	},
+	"typescript.tsdk": "node_modules\\typescript\\lib"
 }

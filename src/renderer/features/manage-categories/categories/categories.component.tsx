@@ -2,7 +2,7 @@ import { Table, Text, Pane, IconButton, Tooltip, EditIcon, TrashIcon } from 'eve
 import * as React from 'react';
 import { ICategory } from '../../../store/category/category.interface';
 import { DeleteCategoryDialog } from '../delete-category/delete-category.dialog';
-import { EditCategoryContainer } from '../edit-category/edit-category.container';
+import { EditCategory } from '../edit-category/edit-category.component';
 import { ICategoriesProps } from './categories.props.interface';
 
 export const Categories = ({ categories }: ICategoriesProps) => {
@@ -16,7 +16,7 @@ export const Categories = ({ categories }: ICategoriesProps) => {
     if (isEditing && !categories.find(c => c.id === isEditing)) {
       setIsEditing(undefined);
     }
-  }, [categories]);
+  }, [categories, isEditing]);
 
   return (
     <Table>
@@ -44,7 +44,7 @@ export const Categories = ({ categories }: ICategoriesProps) => {
                     <IconButton
                       icon={EditIcon}
                       appearance='minimal'
-                      disabled={isEditing && isEditing !== category.id}
+                      disabled={!!isEditing && isEditing !== category.id}
                       onClick={() => setIsEditing(category.id)}
                       marginRight={5}
                     />
@@ -63,7 +63,7 @@ export const Categories = ({ categories }: ICategoriesProps) => {
               </Table.Row>
               {isEditing === category.id && (
                 <Pane background='tint1' borderLeft borderRight borderBottom>
-                  <EditCategoryContainer category={category} close={() => setIsEditing(undefined)} />
+                  <EditCategory category={category} close={() => setIsEditing(undefined)} />
                 </Pane>
               )}
             </Pane>

@@ -5,17 +5,22 @@ import { ICategory } from '../../../store/category/category.interface';
 import { ModifyCategory } from '../modify-category/modify-category.component';
 import { IModifyCategoryProps } from '../modify-category/modify-category.props.interface';
 
-type EditCategoryProps = Pick<IModifyCategoryProps, 'close' | 'category'>;
+type NewCategoryProps = Pick<IModifyCategoryProps, 'close'>;
 
-export const EditCategory = ({ close, category }: EditCategoryProps) => {
+export const NewCategory = ({ close }: NewCategoryProps) => {
   const dispatch = useDispatch();
 
   const saveCategory = useCallback(
-    (category: ICategory) => dispatch(CategoryActions.updateCategory(category)),
+    (category: ICategory) => dispatch(CategoryActions.saveNewCategory(category)),
     [dispatch]
   );
 
   return (
-    <ModifyCategory saveButtonText='Update Category' category={category} saveCategory={saveCategory} close={close} />
+    <ModifyCategory
+      headerText='New Category'
+      saveButtonText='Save Category'
+      saveCategory={saveCategory}
+      close={close}
+    />
   );
 };
