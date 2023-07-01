@@ -13,11 +13,37 @@ import {
 } from 'evergreen-ui';
 import * as React from 'react';
 import { CirclePicker } from 'react-color';
-import { ICategory } from '../../../store/category/category.interface';
-import { newGuid } from '../../../utils/guid.utils';
-import { IModifyCategoryProps } from './modify-category.props.interface';
+import { ICategory } from '../../store/category/category.interface';
+import { newGuid } from '../../utils/guid.utils';
 
-export const ModifyCategory = ({ close, saveCategory, saveButtonText, headerText, category }: IModifyCategoryProps) => {
+export type ModifyCategoryProps = {
+  /**
+   * The optional text for the header.
+   */
+  headerText?: string;
+
+  /**
+   * The text for the save button.
+   */
+  saveButtonText: string;
+
+  /**
+   * Action to save a category.
+   */
+  saveCategory: (category: ICategory) => void;
+
+  /**
+   * The existing category if available.
+   */
+  category?: ICategory;
+
+  /**
+   * A function when invoked will close the category section.
+   */
+  close: () => void;
+};
+
+export const ModifyCategory = ({ close, saveCategory, saveButtonText, headerText, category }: ModifyCategoryProps) => {
   const [name, setName] = React.useState<string>(category?.name || '');
   const [color, setColor] = React.useState<string>(category?.color || '');
 

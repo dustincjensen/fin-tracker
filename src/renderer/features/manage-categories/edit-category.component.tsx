@@ -1,11 +1,10 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { CategoryActions } from '../../../store/category/category.actions';
-import { ICategory } from '../../../store/category/category.interface';
-import { ModifyCategory } from '../modify-category/modify-category.component';
-import { IModifyCategoryProps } from '../modify-category/modify-category.props.interface';
+import { CategoryActions } from '../../store/category/category.actions';
+import { ICategory } from '../../store/category/category.interface';
+import { ModifyCategory, ModifyCategoryProps } from './modify-category.component';
 
-type EditCategoryProps = Pick<IModifyCategoryProps, 'close' | 'category'>;
+type EditCategoryProps = Pick<ModifyCategoryProps, 'close' | 'category'>;
 
 export const EditCategory = ({ close, category }: EditCategoryProps) => {
   const dispatch = useDispatch();

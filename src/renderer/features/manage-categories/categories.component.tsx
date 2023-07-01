@@ -1,11 +1,20 @@
 import { Table, Text, Pane, IconButton, Tooltip, EditIcon, TrashIcon } from 'evergreen-ui';
 import * as React from 'react';
-import { ICategory } from '../../../store/category/category.interface';
-import { DeleteCategoryDialog } from '../delete-category/delete-category.dialog';
-import { EditCategory } from '../edit-category/edit-category.component';
-import { ICategoriesProps } from './categories.props.interface';
+import { useFilteredCategories } from '../../hooks/categories/use-filtered-categories.hook';
+import { ICategory } from '../../store/category/category.interface';
+import { DeleteCategoryDialog } from './delete-category.dialog';
+import { EditCategory } from './edit-category.component';
 
-export const Categories = ({ categories }: ICategoriesProps) => {
+type CategoriesProps = {
+  /**
+   * The category filter.
+   */
+  categoryFilter: string;
+};
+
+export const Categories = ({ categoryFilter }: CategoriesProps) => {
+  const { filteredCategories: categories } = useFilteredCategories(categoryFilter);
+
   const [categoryToDelete, setCategoryToDelete] = React.useState<ICategory>(null);
   const [isEditing, setIsEditing] = React.useState<string>(undefined);
 

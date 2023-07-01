@@ -1,9 +1,9 @@
 import { Pane } from 'evergreen-ui';
 import * as React from 'react';
 import { ErrorBoundary } from '../../components/error-boundary/error-boundary.component';
-import { CategoriesFilter } from './categories-filter/categories-filter.component';
-import { CategoriesContainer } from './categories/categories.container';
-import { NewCategory } from './new-category/new-category.component';
+import { CategoriesFilter } from './categories-filter.component';
+import { Categories } from './categories.component';
+import { NewCategory } from './new-category.component';
 
 export const ManageCategoryLayout = () => {
   const [showNewCategory, setShowNewCategory] = React.useState<boolean>(false);
@@ -27,7 +27,7 @@ export const ManageCategoryLayout = () => {
             setCategoryFilter={setCategoryFilter}
           />
         </Pane>
-        <CategoriesContainer categoryFilter={categoryFilter} />
+        <Categories categoryFilter={categoryFilter} />
       </Pane>
     </ErrorBoundary>
   );

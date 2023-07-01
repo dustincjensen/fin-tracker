@@ -19,7 +19,7 @@ export const Accounts = () => {
     if (isEditing && !accounts.find(c => c.id === isEditing)) {
       setIsEditing(undefined);
     }
-  }, [accounts]);
+  }, [accounts, isEditing]);
 
   return (
     <Table>
