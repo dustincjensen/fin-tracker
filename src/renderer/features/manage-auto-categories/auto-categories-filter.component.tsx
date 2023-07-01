@@ -1,13 +1,35 @@
 import { Pane, SearchInput, majorScale, Checkbox } from 'evergreen-ui';
-import * as React from 'react';
-import { IAutoCategoriesFilterProps } from './auto-categories-filter.props.interface';
+import React from 'react';
+
+type AutoCategoriesFilterProps = {
+  /**
+   * The auto category filter.
+   */
+  autoCategoryFilter: string;
+
+  /**
+   * A function to set the current filter value.
+   */
+  setAutoCategoryFilter: (search: string) => void;
+
+  /**
+   * True if archived accounts should be shown, false otherwise.
+   */
+  showArchived: boolean;
+
+  /**
+   * A function to toggle show archived.
+   */
+  toggleShowArchived: () => void;
+};
 
 export const AutoCategoriesFilter = ({
   autoCategoryFilter,
   setAutoCategoryFilter,
   showArchived,
   toggleShowArchived,
-}: IAutoCategoriesFilterProps) => {
+}: AutoCategoriesFilterProps) => {
+  // TODO callbacks...
   const onChange = evt => setAutoCategoryFilter(evt.target.value);
   const onArchivedChange = () => toggleShowArchived();
 

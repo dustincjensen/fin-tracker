@@ -13,6 +13,8 @@ export class CategorySelectors {
 
   /**
    * Returns the array of categories.
+   *
+   * @deprecated Do not use.
    */
   public static selectCategories = createSelector(CategorySelectors.categories, categories =>
     Object.keys(categories)
@@ -22,6 +24,8 @@ export class CategorySelectors {
 
   /**
    * Returns the array of categories wihout transfer categories.
+   *
+   * @deprecated Do not use.
    */
   public static selectDisplayCategories = createSelector(CategorySelectors.categories, categories =>
     Object.keys(categories)

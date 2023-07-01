@@ -1,9 +1,9 @@
 import { Table, Text, Pane, IconButton, Tooltip, EditIcon, TrashIcon } from 'evergreen-ui';
 import * as React from 'react';
-import { useFilteredCategories } from '../../hooks/categories/use-filtered-categories.hook';
 import { ICategory } from '../../store/category/category.interface';
 import { DeleteCategoryDialog } from './delete-category.dialog';
 import { EditCategory } from './edit-category.component';
+import { useFilteredCategories } from './use-filtered-categories.hook';
 
 type CategoriesProps = {
   /**

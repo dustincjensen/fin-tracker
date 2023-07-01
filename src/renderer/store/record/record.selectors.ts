@@ -16,6 +16,9 @@ export class RecordSelectors {
     return state.records.records;
   }
 
+  /**
+   * @deprecated Do not use.
+   */
   public static selectAllRecordsAcrossAccounts = createSelector(RecordSelectors.records, records => {
     return Object.keys(records)
       .map(id => records[id])
@@ -24,6 +27,9 @@ export class RecordSelectors {
       }, []);
   });
 
+  /**
+   * @deprecated Do not use.
+   */
   public static selectAllRecordsWithCategory = createSelector(
     RecordSelectors.selectAllRecordsAcrossAccounts,
     RecordSelectors.recordsByAccountId,
