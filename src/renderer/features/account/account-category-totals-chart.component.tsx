@@ -1,8 +1,24 @@
-import * as React from 'react';
+import React from 'react';
 import { CartesianGrid, BarChart, XAxis, YAxis, Bar, Cell, Tooltip, ReferenceLine } from 'recharts';
-import { IAccountCategoryTotalsChartProps } from './account-category-totals-chart.props.interface';
+import { useDisplayCategories } from '../../hooks/categories/use-display-categories.hook';
+import { useRecordsByDate } from '../../hooks/records/use-records-by-date.hook';
 
-export const AccountCategoryTotalsChart = ({ records, categories }: IAccountCategoryTotalsChartProps) => {
+type AccountCategoryTotalsChartProps = {
+  /**
+   * The ID of the account to display.
+   */
+  accountId: string;
+
+  /**
+   * The first date of the month to get the data for.
+   */
+  date: string;
+};
+
+export const AccountCategoryTotalsChart = ({ accountId, date }: AccountCategoryTotalsChartProps) => {
+  const { records } = useRecordsByDate(accountId, date);
+  const { categories } = useDisplayCategories();
+
   let data = categories?.map(c => ({ categoryId: c.id, color: c.color, name: c.name, Total: 0.0 }));
 
   for (const category of data) {

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { createDate } from '../../../utils/date.utils';
 import { AccountActions } from '../account-actions/account-actions.component';
 import { AccountBalanceLineChart } from '../account-balance-line-chart.component';
-import { AccountMonthlyCategoryTotalsChartContainer } from '../account-category-totals-chart/account-monthly-category-totals-chart.container';
+import { AccountCategoryTotalsChart } from '../account-category-totals-chart.component';
 import { AccountDetailSummary } from '../account-detail-summary.component';
 import { AccountMonthlyContainer } from '../account-monthly/account-monthly.container';
 import { EmptyAccount } from '../empty-account/empty-account.component';
@@ -46,7 +46,7 @@ export const Account = ({ accountId, hasRecords, startingDate, monthAndYears, ar
       <Pane padding={20} overflowX='hidden' overflowY='auto' className='scroll-bar-styled'>
         <Pane display='flex'>
           <AccountBalanceLineChart accountId={accountId} date={date} />
-          <AccountMonthlyCategoryTotalsChartContainer accountId={accountId} date={date} />
+          <AccountCategoryTotalsChart accountId={accountId} date={date} />
         </Pane>
         <Pane display='grid'>
           <AccountDetailSummary accountId={accountId} date={date} archived={archived} />
