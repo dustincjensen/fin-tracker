@@ -4,7 +4,7 @@ import { createDate } from '../../../utils/date.utils';
 import { AccountActions } from '../account-actions/account-actions.component';
 import { AccountBalanceLineChart } from '../account-balance-line-chart.component';
 import { AccountMonthlyCategoryTotalsChartContainer } from '../account-category-totals-chart/account-monthly-category-totals-chart.container';
-import { AccountDetailSummaryContainer } from '../account-detail-summary/account-detail-summary.container';
+import { AccountDetailSummary } from '../account-detail-summary.component';
 import { AccountMonthlyContainer } from '../account-monthly/account-monthly.container';
 import { EmptyAccount } from '../empty-account/empty-account.component';
 import { MonthYearList } from '../month-year-list/month-year-list.component';
@@ -49,7 +49,7 @@ export const Account = ({ accountId, hasRecords, startingDate, monthAndYears, ar
           <AccountMonthlyCategoryTotalsChartContainer accountId={accountId} date={date} />
         </Pane>
         <Pane display='grid'>
-          <AccountDetailSummaryContainer accountId={accountId} date={date} archived={archived} />
+          <AccountDetailSummary accountId={accountId} date={date} archived={archived} />
           {/* TODO if this was a container, this could get this flag itself... */}
           {!archived && (
             <AccountActions
