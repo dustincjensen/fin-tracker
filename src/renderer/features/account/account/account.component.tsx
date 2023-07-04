@@ -2,7 +2,7 @@ import { Pane } from 'evergreen-ui';
 import * as React from 'react';
 import { createDate } from '../../../utils/date.utils';
 import { AccountActions } from '../account-actions/account-actions.component';
-import { AccountMonthlyBalanceChartContainer } from '../account-balance-line-chart/account-monthly-balance-chart.container';
+import { AccountBalanceLineChart } from '../account-balance-line-chart.component';
 import { AccountMonthlyCategoryTotalsChartContainer } from '../account-category-totals-chart/account-monthly-category-totals-chart.container';
 import { AccountDetailSummaryContainer } from '../account-detail-summary/account-detail-summary.container';
 import { AccountMonthlyContainer } from '../account-monthly/account-monthly.container';
@@ -45,7 +45,7 @@ export const Account = ({ accountId, hasRecords, startingDate, monthAndYears, ar
 
       <Pane padding={20} overflowX='hidden' overflowY='auto' className='scroll-bar-styled'>
         <Pane display='flex'>
-          <AccountMonthlyBalanceChartContainer accountId={accountId} date={date} />
+          <AccountBalanceLineChart accountId={accountId} date={date} />
           <AccountMonthlyCategoryTotalsChartContainer accountId={accountId} date={date} />
         </Pane>
         <Pane display='grid'>
