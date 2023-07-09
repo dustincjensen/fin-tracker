@@ -1,15 +1,44 @@
 import { Table } from 'evergreen-ui';
-import * as React from 'react';
-import { CategorySelect } from '../../../components/category-select/category-select.component';
-import { formatDateFull } from '../../../utils/date.utils';
-import { createStaticWidthCell } from '../../../utils/table.utils';
-import { IPendingRecordsProps } from './pending-records.props.interface';
+import React, { useCallback, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { CategorySelect } from '../../components/category-select/category-select.component';
+import { useCategories } from '../../hooks/categories/use-categories.hook';
+import { PendingRecordActions } from '../../store/pending-record/pending-record.actions';
+import { PendingRecordSelectors } from '../../store/pending-record/pending-record.selectors';
+import { formatDateFull } from '../../utils/date.utils';
+import { createStaticWidthCell } from '../../utils/table.utils';
 import './pending-records.css';
 
 const w120 = createStaticWidthCell(120);
 const w200 = createStaticWidthCell(200);
 
-export const PendingRecords = ({ records, categories, updatePendingRecordCategory }: IPendingRecordsProps) => {
+const usePendingRecords = () => {
+  const pendingRecords = useSelector(PendingRecordSelectors.records);
+  const { categories } = useCategories();
+
+  return {
+    pendingRecords: useMemo(() => {
+      return pendingRecords?.map(r => ({
+        ...r,
+        category: categories.find(c => c.id === r.categoryId),
+        splitRecords: undefined,
+      }));
+    }, [categories, pendingRecords]),
+  };
+};
+
+export const PendingRecords = () => {
+  const dispatch = useDispatch();
+
+  const { categories } = useCategories();
+  const { pendingRecords: records } = usePendingRecords();
+
+  const updatePendingRecordCategory = useCallback(
+    (recordId: string, categoryId: string) =>
+      dispatch(PendingRecordActions.updatePendingRecordCategory(recordId, categoryId)),
+    [dispatch]
+  );
+
   return (
     <Table display='flex' flexDirection='column' className='pending_records_wrapper'>
       <Table.Head>

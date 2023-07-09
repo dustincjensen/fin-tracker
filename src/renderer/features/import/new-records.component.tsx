@@ -1,10 +1,9 @@
 import { Button, FilePicker, FormField, Heading, majorScale, Pane, SelectField, Alert, ImportIcon } from 'evergreen-ui';
 import * as React from 'react';
-import { IAccount } from '../../../store/account/account.interface';
-import { ParseType } from '../../../store/pending-record/parse.type';
-import { isNullOrUndefined } from '../../../utils/object.utils';
-import { INewRecordsProps } from './new-records.props.interface';
-import { useNewRecords, useNewRecordsActions } from './use-new-records.hook';
+import { IAccount } from '../../store/account/account.interface';
+import { ParseType } from '../../store/pending-record/parse.type';
+import { isNullOrUndefined } from '../../utils/object.utils';
+import { useNewRecords } from './use-new-records.hook';
 
 const getAccountOptions = (accounts: IAccount[]) =>
   accounts.map(a => (
@@ -24,9 +23,16 @@ const getImportOptions = () => (
   </>
 );
 
-export const NewRecords = ({ accountId }: INewRecordsProps) => {
-  const { accounts, autoCategories, error } = useNewRecords();
-  const { importAction } = useNewRecordsActions();
+type NewRecordsProps = {
+  /**
+   * When navigating from an account we receive an ID,
+   * so we can pre-fill the selector.
+   */
+  accountId: string | undefined;
+};
+
+export const NewRecords = ({ accountId }: NewRecordsProps) => {
+  const { accounts, autoCategories, error, importAction } = useNewRecords();
 
   const [selectedAccountId, setSelectedAccountId] = React.useState(accountId || accounts?.[0]?.id || '');
   const [selectedFile, setSelectedFile] = React.useState<File>(null);

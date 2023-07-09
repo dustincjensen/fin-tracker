@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import { ErrorBoundary } from '../../components/error-boundary/error-boundary.component';
 import { PendingRecordSelectors } from '../../store/pending-record/pending-record.selectors';
-import { ActionPendingRecordsContainer } from './action-pending-records/action-pending-records.container';
-import { NewRecords } from './new-records/new-records.component';
-import { PendingRecordsContainer } from './pending-records/pending-records.container';
+import { ActionPendingRecords } from './action-pending-records.component';
+import { NewRecords } from './new-records.component';
+import { PendingRecords } from './pending-records.component';
 
 export const ImportLayout = (props: RouteComponentProps<{ accountId?: string }>) => {
   const hasPendingRecords = useSelector(PendingRecordSelectors.pendingRecords).accountId != undefined;
@@ -19,9 +19,9 @@ export const ImportLayout = (props: RouteComponentProps<{ accountId?: string }>)
         {hasPendingRecords && (
           <>
             <Pane marginBottom={20}>
-              <ActionPendingRecordsContainer />
+              <ActionPendingRecords />
             </Pane>
-            <PendingRecordsContainer />
+            <PendingRecords />
           </>
         )}
       </Pane>
