@@ -1,16 +1,16 @@
 import { Table, Tooltip, IconButton, Pane, ArchiveIcon, EditIcon, TrashIcon } from 'evergreen-ui';
-import * as React from 'react';
-import { useAccounts } from '../../../hooks/accounts/use-accounts.hook';
-import { IAccount } from '../../../store/account/account.interface';
-import { accountTypeLabels } from '../../../utils/account.utils';
-import { DeleteAccountDialog } from '../delete-account/delete-account.dialog';
-import { EditAccountContainer } from '../edit-account/edit-account.container';
+import React from 'react';
+import { useAccounts } from '../../hooks/accounts/use-accounts.hook';
+import { IAccount } from '../../store/account/account.interface';
+import { accountTypeLabels } from '../../utils/account.utils';
+import { DeleteAccountDialog } from './delete-account.dialog';
+import { EditAccountContainer } from './edit-account/edit-account.container';
 
 export const Accounts = () => {
   const { accounts } = useAccounts();
 
-  const [accountToDelete, setAccountToDelete] = React.useState<IAccount>(null);
-  const [isEditing, setIsEditing] = React.useState<string>(undefined);
+  const [accountToDelete, setAccountToDelete] = React.useState<IAccount | null>(null);
+  const [isEditing, setIsEditing] = React.useState<string | undefined>(undefined);
 
   React.useEffect(() => {
     // If the record we are editing is removed from the list

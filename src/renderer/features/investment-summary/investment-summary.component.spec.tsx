@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import { ChartIcon } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { InvestmentSummary } from './investment-summary.component';
 import * as useInvestmentSummaryHook from './investment-summary.hook';
 import { IInvestmentSummaryProps } from './investment-summary.props.interface';

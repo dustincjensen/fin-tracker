@@ -1,5 +1,5 @@
 import { Pane } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { useActiveAccounts } from '../../../hooks/accounts/use-active-accounts.hook';
 import { isBankAccount } from '../../../utils/account.utils';
 import { AccountSummary } from '../../account-summary/account-summary.component';

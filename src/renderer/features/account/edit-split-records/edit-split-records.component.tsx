@@ -13,7 +13,7 @@ import {
   BanCircleIcon,
   FloppyDiskIcon,
 } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
 import { RecordActions } from '../../../store/record/record.actions';

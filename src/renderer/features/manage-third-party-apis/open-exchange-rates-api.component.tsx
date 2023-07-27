@@ -7,18 +7,18 @@ import {
   TextInput,
   TickCircleIcon,
 } from 'evergreen-ui';
-import * as React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
-import { ThirdPartyApiActions } from '../../../store/third-party-api/third-party-api.actions';
-import { ThirdPartyApiSelectors } from '../../../store/third-party-api/third-party-api.selectors';
-import { isNullOrWhitespace } from '../../../utils/object.utils';
+import { ThirdPartyApiActions } from '../../store/third-party-api/third-party-api.actions';
+import { ThirdPartyApiSelectors } from '../../store/third-party-api/third-party-api.selectors';
+import { isNullOrWhitespace } from '../../utils/object.utils';
 
 export const OpenExchangeRatesApi = () => {
   const dispatch = useDispatch();
   const currentOerApiKey = useSelector(ThirdPartyApiSelectors.openExchangeRatesApiKey);
   const [oerApiKey, setOerApiKey] = useState(currentOerApiKey);
-  const [oerApiKeyError, setOerApiKeyError] = useState(undefined);
+  const [oerApiKeyError, setOerApiKeyError] = useState<string | undefined>(undefined);
   const [successfulSave, setSuccessfulSave] = useState(false);
 
   const handleApiKeyChange = evt => {

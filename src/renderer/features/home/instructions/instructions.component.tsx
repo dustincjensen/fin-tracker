@@ -15,7 +15,7 @@ import {
   GroupObjectsIcon,
   majorScale,
 } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { IInstructionsProps } from './instructions.props.interface';
 

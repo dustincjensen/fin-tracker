@@ -1,5 +1,5 @@
 import { Table, Text, Pane, IconButton, Tooltip, EditIcon, TrashIcon } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { ICategory } from '../../store/category/category.interface';
 import { DeleteCategoryDialog } from './delete-category.dialog';
 import { EditCategory } from './edit-category.component';

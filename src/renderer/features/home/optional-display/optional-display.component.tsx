@@ -9,7 +9,7 @@ import {
   EyeOnIcon,
   ArrowDownIcon,
 } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { useLocalStorage } from '../../../hooks/use-local-storage.hook';
 import { IOptionalDisplayProps } from './optional-display.props.interface';
 

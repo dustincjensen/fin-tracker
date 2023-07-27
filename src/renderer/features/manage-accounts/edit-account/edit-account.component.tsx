@@ -16,7 +16,7 @@ import {
   UnarchiveIcon,
   ArchiveIcon,
 } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { IAccount } from '../../../store/account/account.interface';
 import { AccountType } from '../../../store/account/account.type';

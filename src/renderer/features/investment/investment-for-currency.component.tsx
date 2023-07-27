@@ -1,13 +1,24 @@
 import { AddIcon, Button, Heading, Pane } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { AccountSelectors } from '../../../store/account/account.selectors';
-import { IStore } from '../../../store/store.interface';
-import { AddNewInvestmentRecordDialog } from '../add-new-investment-record/add-new-investment-record.dialog';
-import { InvestmentRecords } from '../investment-records/investment-records.component';
-import { IInvestmentForCurrencyProps } from './investment-for-currency.props.interface';
+import { AccountSelectors } from '../../store/account/account.selectors';
+import { IStore } from '../../store/store.interface';
+import { AddNewInvestmentRecordDialog } from './add-new-investment-record.dialog';
+import { InvestmentRecords } from './investment-records.component';
 
-export const InvestmentForCurrency = ({ accountId, currency }: IInvestmentForCurrencyProps) => {
+type InvestmentForCurrencyProps = {
+  /**
+   * The ID of the investment account.
+   */
+  accountId: string;
+
+  /**
+   * The currency type.
+   */
+  currency: string;
+};
+
+export const InvestmentForCurrency = ({ accountId, currency }: InvestmentForCurrencyProps) => {
   const [isAddBalanceShown, setIsAddBalanceShown] = React.useState(false);
   const toggleShown = () => setIsAddBalanceShown(s => !s);
   const { archived } = useSelector((state: IStore) => AccountSelectors.account(state, accountId));

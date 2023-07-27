@@ -1,5 +1,5 @@
 import { Heading, Pane } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { formatDateMonthYear } from '../../../utils/date.utils';
 
 const displayWidth = 300;

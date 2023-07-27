@@ -1,5 +1,5 @@
 import { Pane } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { createDate } from '../../../utils/date.utils';
 import { AccountActions } from '../account-actions/account-actions.component';
 import { AccountBalanceLineChart } from '../account-balance-line-chart.component';

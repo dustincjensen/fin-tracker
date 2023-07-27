@@ -1,5 +1,5 @@
 import { Dialog, FormField, majorScale, Alert, TextInputField, Switch } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
 import { ICategorySelectProps } from '../../../components/category-select/category-select.props.interface';

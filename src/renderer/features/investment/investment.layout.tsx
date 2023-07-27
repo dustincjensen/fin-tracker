@@ -1,10 +1,10 @@
 import { Pane } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { ErrorBoundary } from '../../components/error-boundary/error-boundary.component';
-import { InvestmentDetailSummary } from './investment-detail-summary/investment-detail-summary.component';
-import { InvestmentForCurrency } from './investment-for-currency/investment-for-currency.component';
-import { TransferHistory } from './transfer-history/transfer-history.component';
+import { InvestmentDetailSummary } from './investment-detail-summary.component';
+import { InvestmentForCurrency } from './investment-for-currency.component';
+import { TransferHistory } from './transfer-history.component';
 
 export const InvestmentLayout = () => {
   const { accountId } = useParams<{ accountId: string }>();

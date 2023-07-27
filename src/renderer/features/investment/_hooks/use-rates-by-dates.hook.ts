@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { ThirdPartyApiSelectors } from '../../../store/third-party-api/third-party-api.selectors';
 import { OpenExchangeRatesApi } from '../../../third-party-apis/open-exchange-rates/oer.api';

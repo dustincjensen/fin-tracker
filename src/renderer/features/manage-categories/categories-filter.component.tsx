@@ -1,5 +1,5 @@
 import { Pane, SearchInput, Button, majorScale, PlusIcon } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 
 export type CategoriesFilterProps = {
   /**

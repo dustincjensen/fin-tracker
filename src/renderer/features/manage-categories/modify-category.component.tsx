@@ -11,7 +11,7 @@ import {
   BanCircleIcon,
   FloppyDiskIcon,
 } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { CirclePicker } from 'react-color';
 import { ICategory } from '../../store/category/category.interface';
 import { newGuid } from '../../utils/guid.utils';

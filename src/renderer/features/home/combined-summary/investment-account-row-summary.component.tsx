@@ -1,6 +1,6 @@
 import { Pane, Text } from 'evergreen-ui';
-import * as React from 'react';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
+
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { AccountSelectors } from '../../../store/account/account.selectors';

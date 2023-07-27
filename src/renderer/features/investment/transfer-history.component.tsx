@@ -1,24 +1,30 @@
 import { Pane, Heading, Table } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { AccountSelectors } from '../../../store/account/account.selectors';
-import { CategorySelectors } from '../../../store/category/category.selectors';
-import { RecordSelectors } from '../../../store/record/record.selectors';
-import { IStore } from '../../../store/store.interface';
-import { createStaticWidthCell } from '../../../utils/table.utils';
-import { TransferHistoryRecord } from '../transfer-history-record/transfer-history-record.component';
-import { ITransferHistoryProps } from './transfer-history.props.interface';
+import { AccountSelectors } from '../../store/account/account.selectors';
+import { CategorySelectors } from '../../store/category/category.selectors';
+import { RecordSelectors } from '../../store/record/record.selectors';
+import { IStore } from '../../store/store.interface';
+import { createStaticWidthCell } from '../../utils/table.utils';
+import { TransferHistoryRecord } from './transfer-history-record.component';
 
 const w100 = createStaticWidthCell(100);
 const w200 = createStaticWidthCell(200);
 
-export const TransferHistory = ({ accountId }: ITransferHistoryProps) => {
+type TransferHistoryProps = {
+  /**
+   * The ID of the investment account.
+   */
+  accountId: string;
+};
+
+export const TransferHistory = ({ accountId }: TransferHistoryProps) => {
   const account = useSelector((state: IStore) => AccountSelectors.account(state, accountId));
   const transferCategory = useSelector((state: IStore) =>
     CategorySelectors.selectCategories(state).find(c => c.accountTransferId === accountId)
   );
   const records = useSelector((state: IStore) =>
-    RecordSelectors.selectAllRecordsWithCategory(state, accountId, transferCategory.id)
+    RecordSelectors.selectAllRecordsWithCategory(state, accountId, transferCategory?.id)
   );
 
   return (

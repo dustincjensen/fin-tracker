@@ -1,13 +1,31 @@
 import { ManuallyEnteredDataIcon, Pane, Table, Tooltip } from 'evergreen-ui';
-import * as React from 'react';
-import * as dateUtils from '../../../utils/date.utils';
-import { createStaticWidthCell } from '../../../utils/table.utils';
-import { ITransferHistoryRecordProps } from './transfer-history-record.props.interface';
+import React from 'react';
+import { IAccount } from '../../store/account/account.interface';
+import { IRecord } from '../../store/record/record.interface';
+import * as dateUtils from '../../utils/date.utils';
+import { createStaticWidthCell } from '../../utils/table.utils';
 
 const w100 = createStaticWidthCell(100);
 const w200 = createStaticWidthCell(200);
 
-const TransferHistoryRecordComponent = ({ record, account }: ITransferHistoryRecordProps) => {
+type TransferHistoryRecordProps = {
+  /**
+   * The record that was transfered to the investment account.
+   */
+  record: IRecord & {
+    /**
+     * The name of the account transfered from.
+     */
+    accountName: string;
+  };
+
+  /**
+   * The investment account.
+   */
+  account: IAccount;
+};
+
+const TransferHistoryRecordComponent = ({ record, account }: TransferHistoryRecordProps) => {
   return (
     <Table.Row isSelectable>
       <Table.TextCell {...w200}>{dateUtils.formatDateFull(record.date)}</Table.TextCell>

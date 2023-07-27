@@ -1,5 +1,5 @@
 import debounce from 'lodash.debounce';
-import * as React from 'react';
+import React from 'react';
 
 // https://gist.github.com/nslocum/f147149a243069577a91f5e1beaa5776
 export const useWindowWidth = (delay = 300) => {

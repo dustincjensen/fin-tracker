@@ -1,5 +1,5 @@
 import { Pane, Card, Heading, Text, Strong, IconButton, Icon, Tooltip, EyeOpenIcon, DollarIcon } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { formatDateFull } from '../../utils/date.utils';
 import { useInvestmentSummary } from './investment-summary.hook';

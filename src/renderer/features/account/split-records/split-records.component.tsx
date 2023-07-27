@@ -1,5 +1,5 @@
 import { Pane, Table, Text, ForkIcon } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
 import { createStaticWidthCell } from '../../../utils/table.utils';
 import { ISplitRecordsProps } from './split-records.props.interface';

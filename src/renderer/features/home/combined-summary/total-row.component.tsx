@@ -1,5 +1,5 @@
 import { Pane, Text } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { isNullOrUndefined } from '../../../utils/object.utils';
 import { TotalContext } from './total.context';
 

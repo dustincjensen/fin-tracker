@@ -1,5 +1,5 @@
 import { Dialog } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { RecordActions } from '../../../store/record/record.actions';
 import { IDeleteSplitRecordsProps } from './delete-split-records.props.interface';

@@ -1,5 +1,5 @@
 import { Button, Checkbox, CrossIcon, IconButton, Pane, SelectMenu, SelectMenuItem } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import {
   BarChart,
   Bar,

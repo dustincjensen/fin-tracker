@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme';
-import * as React from 'react';
+import React from 'react';
 import { CategoryTag } from './category-tag.component';
 import { ICategoryTagProps } from './category-tag.props.interface';
 

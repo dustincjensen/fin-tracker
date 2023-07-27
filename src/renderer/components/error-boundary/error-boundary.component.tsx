@@ -1,6 +1,6 @@
 import { shell } from 'electron';
 import { Pane, Heading, majorScale, Paragraph, Button, WarningSignIcon } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 
 type ErrorBoundaryState = { hasError: boolean };
 
@@ -45,7 +45,7 @@ export class ErrorBoundary extends React.Component<{}, ErrorBoundaryState> {
       );
     }
 
-    return this.props.children;
+    return <>{this.props.children}</>;
   }
 
   private onLinkClick = () => shell.openExternal('https://github.com/dustincjensen/fin-tracker/issues');

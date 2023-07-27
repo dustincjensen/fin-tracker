@@ -1,14 +1,30 @@
 import { Dialog, FormField, majorScale, TextInput } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { DatePicker } from '../../../components/date-picker/date-picker.component';
-import { InvestmentRecordActions } from '../../../store/investment-record/investment-record.actions';
-import { IInvestmentRecord } from '../../../store/investment-record/investment-record.interface';
-import { newGuid } from '../../../utils/guid.utils';
-import { isNullOrWhitespace } from '../../../utils/object.utils';
-import { IAddNewInvestmentRecordProps } from './add-new-investment-record.props.interface';
+import { DatePicker } from '../../components/date-picker/date-picker.component';
+import { InvestmentRecordActions } from '../../store/investment-record/investment-record.actions';
+import { IInvestmentRecord } from '../../store/investment-record/investment-record.interface';
+import { newGuid } from '../../utils/guid.utils';
+import { isNullOrWhitespace } from '../../utils/object.utils';
 
-export const AddNewInvestmentRecordDialog = ({ accountId, currency, onClose }: IAddNewInvestmentRecordProps) => {
+type AddNewInvestmentRecordProps = {
+  /**
+   * The account to add the record to.
+   */
+  accountId: string;
+
+  /**
+   * The currency type for the record.
+   */
+  currency: string;
+
+  /**
+   * Action to call when the modal closes.
+   */
+  onClose: () => void;
+};
+
+export const AddNewInvestmentRecordDialog = ({ accountId, currency, onClose }: AddNewInvestmentRecordProps) => {
   const dispatch = useDispatch();
   const [transactionDate, setTransactionDate] = React.useState('');
   const [transactionDateError, setTransactionDateError] = React.useState('');

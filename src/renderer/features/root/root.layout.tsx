@@ -1,5 +1,5 @@
 import { Pane, ThemeProvider, classicTheme, defaultTheme } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router';
 import { useLocalStorage } from '../../hooks/use-local-storage.hook';
 import { AccountLayout } from '../account/account.layout';

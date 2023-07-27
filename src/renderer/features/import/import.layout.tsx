@@ -1,5 +1,5 @@
 import { Pane } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import { ErrorBoundary } from '../../components/error-boundary/error-boundary.component';

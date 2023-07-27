@@ -1,6 +1,6 @@
 import { Button, IconButton, Pane, Popover, Position, Text, ChevronLeftIcon, ChevronRightIcon } from 'evergreen-ui';
 import moment from 'moment';
-import * as React from 'react';
+import React from 'react';
 import { formatDateFull } from '../../utils/date.utils';
 import { CalendarDate } from './calendar-date.component';
 import { buildMonth } from './date-picker.utils';

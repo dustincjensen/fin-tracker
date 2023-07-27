@@ -1,5 +1,5 @@
 import { Dialog, FormField, majorScale, TextInputField, Text } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { RecordActions } from '../../../store/record/record.actions';
 import { IEditDetailsProps } from './edit-details.props.interface';

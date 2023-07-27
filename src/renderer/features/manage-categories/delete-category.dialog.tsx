@@ -1,5 +1,5 @@
 import { Dialog } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { CategoryActions } from '../../store/category/category.actions';
 import { ICategory } from '../../store/category/category.interface';

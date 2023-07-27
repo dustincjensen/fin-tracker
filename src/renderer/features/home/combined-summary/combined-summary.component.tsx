@@ -9,7 +9,7 @@ import {
   ChevronRightIcon,
   DoubleChevronRightIcon,
 } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { useAccounts } from '../../../hooks/accounts/use-accounts.hook';
 import { useWindowWidth } from '../../../hooks/use-window-width.hook';

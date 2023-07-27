@@ -1,5 +1,5 @@
 import { Dialog } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { AccountSelectors } from '../../../store/account/account.selectors';
 import { RecordActions } from '../../../store/record/record.actions';

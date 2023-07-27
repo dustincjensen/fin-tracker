@@ -1,5 +1,5 @@
 import { Pane, SelectMenu, Button, IconButton, CrossIcon, majorScale } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { CategorySelectors } from '../../../store/category/category.selectors';
 

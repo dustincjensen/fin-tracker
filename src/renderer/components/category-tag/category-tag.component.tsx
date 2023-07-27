@@ -1,5 +1,5 @@
 import { Pane, Text, SmallCrossIcon, Popover } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { ICategoryTagProps } from './category-tag.props.interface';
 import './category-tag.css';
 

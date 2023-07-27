@@ -1,6 +1,6 @@
 import { mount } from 'enzyme';
 import { Pane } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { ErrorBoundary } from './error-boundary.component';
 
 const TestChild = () => <div data-name='test-child'>Test Child Render</div>;

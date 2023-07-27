@@ -1,14 +1,13 @@
 import { Pane, Table } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
-import { AccountSelectors } from '../../../store/account/account.selectors';
-import { IInvestmentRecord } from '../../../store/investment-record/investment-record.interface';
-import { IStore } from '../../../store/store.interface';
-import { sortByDateDescending } from '../../../utils/record.utils';
-import { DeleteInvestmentRecordDialog } from '../delete-investment-record/delete-investment-record.dialog';
-import { InvestmentRecord } from '../investment-record/investment-record.component';
-import { IInvestmentRecordsProps } from './investment-records.props.interface';
+import { AccountSelectors } from '../../store/account/account.selectors';
+import { IInvestmentRecord } from '../../store/investment-record/investment-record.interface';
+import { IStore } from '../../store/store.interface';
+import { sortByDateDescending } from '../../utils/record.utils';
+import { DeleteInvestmentRecordDialog } from './delete-investment-record.dialog';
+import { InvestmentRecord } from './investment-record.component';
 
 const recordsSelector = createSelector(
   (state: IStore) => state.investmentRecords.records,
@@ -18,10 +17,22 @@ const recordsSelector = createSelector(
     records[accountId]?.filter(r => r.investmentCurrency === currency).sort(sortByDateDescending) || []
 );
 
+type InvestmentRecordsProps = {
+  /**
+   * The ID of the investment account.
+   */
+  accountId: string;
+
+  /**
+   * The currency type.
+   */
+  currency: string;
+};
+
 // TODO support other default currency other than CAD
-export const InvestmentRecords = ({ accountId, currency }: IInvestmentRecordsProps) => {
+export const InvestmentRecords = ({ accountId, currency }: InvestmentRecordsProps) => {
   const records = useSelector((state: IStore) => recordsSelector(state, accountId, currency));
-  const [recordToDelete, setRecordToDelete] = React.useState<IInvestmentRecord>(undefined);
+  const [recordToDelete, setRecordToDelete] = React.useState<IInvestmentRecord | undefined>(undefined);
   const { archived } = useSelector((state: IStore) => AccountSelectors.account(state, accountId));
 
   const clearRecordToDelete = React.useCallback(() => setRecordToDelete(undefined), []);

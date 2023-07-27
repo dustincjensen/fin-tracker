@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import { SelectMenu } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { CategoryTag } from '../category-tag/category-tag.component';
 import { CategorySelect } from './category-select.component';
 import { ICategorySelectProps } from './category-select.props.interface';

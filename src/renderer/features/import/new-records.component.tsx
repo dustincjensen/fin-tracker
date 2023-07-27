@@ -1,5 +1,5 @@
 import { Button, FilePicker, FormField, Heading, majorScale, Pane, SelectField, Alert, ImportIcon } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { IAccount } from '../../store/account/account.interface';
 import { ParseType } from '../../store/pending-record/parse.type';
 import { isNullOrUndefined } from '../../utils/object.utils';

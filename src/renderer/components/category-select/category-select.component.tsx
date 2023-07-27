@@ -1,5 +1,5 @@
 import { Button, SelectMenu, SelectMenuItem } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { createSelector } from 'reselect';
 import { ICategory } from '../../store/category/category.interface';
 import { CategoryTag } from '../category-tag/category-tag.component';

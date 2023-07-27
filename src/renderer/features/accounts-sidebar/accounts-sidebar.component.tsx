@@ -1,5 +1,5 @@
 import { Pane, Heading } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { NavLink } from '../../components/nav-link/nav-link.component';
 import { useActiveAccounts } from '../../hooks/accounts/use-active-accounts.hook';

@@ -1,10 +1,22 @@
 import { Dialog } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { InvestmentRecordActions } from '../../../store/investment-record/investment-record.actions';
-import { IDeleteInvestmentRecordProps } from './delete-investment-record.props.interface';
+import { InvestmentRecordActions } from '../../store/investment-record/investment-record.actions';
+import { IInvestmentRecord } from '../../store/investment-record/investment-record.interface';
 
-const DeleteInvestmentRecordDialogComponent = ({ record, onClose }: IDeleteInvestmentRecordProps) => {
+type DeleteInvestmentRecordProps = {
+  /**
+   * The record to delete.
+   */
+  record: IInvestmentRecord;
+
+  /**
+   * Action to call when the modal closes.
+   */
+  onClose: () => void;
+};
+
+const DeleteInvestmentRecordDialogComponent = ({ record, onClose }: DeleteInvestmentRecordProps) => {
   const dispatch = useDispatch();
 
   const confirm = () => {

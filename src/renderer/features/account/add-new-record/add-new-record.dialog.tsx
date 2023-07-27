@@ -1,5 +1,5 @@
 import { Dialog, FormField, majorScale, TextInputField, SegmentedControl, TextInput, Pane } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
 import { ICategorySelectProps } from '../../../components/category-select/category-select.props.interface';

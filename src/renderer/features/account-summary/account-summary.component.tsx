@@ -11,38 +11,42 @@ import {
   ImportIcon,
   Icon,
 } from 'evergreen-ui';
-import * as React from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { createSelector } from 'reselect';
 import { AccountSelectors } from '../../store/account/account.selectors';
 import { RecordSelectors } from '../../store/record/record.selectors';
 import { IStore } from '../../store/store.interface';
 import { accountTypeIcons } from '../../utils/account.utils';
 import { formatDateFull } from '../../utils/date.utils';
 import { isNullOrUndefined } from '../../utils/object.utils';
-import { IAccountSummaryProps } from './account-summary.props.interface';
 
-const accountSummarySelector = createSelector(AccountSelectors.account, RecordSelectors.records, (account, records) => {
-  if (account.archived) {
-    return undefined;
-  }
+const useAccountSummary = (accountId: string) => {
+  const account = useSelector((state: IStore) => AccountSelectors.account(state, accountId));
+  const accountRecords = useSelector((state: IStore) => RecordSelectors.recordsByAccountId(state, accountId));
 
-  const accountRecords = records[account.id];
   const lastRecord = accountRecords?.[accountRecords.length - 1];
 
-  return {
-    balance: lastRecord?.balance,
-    dateOfLastTransaction: lastRecord ? formatDateFull(lastRecord.date) : undefined,
-    name: account.name,
-    icon: accountTypeIcons[account.accountType],
-  };
-});
-
-export const AccountSummary = ({ accountId }: IAccountSummaryProps) => {
-  const { name, balance, dateOfLastTransaction, icon } = useSelector((state: IStore) =>
-    accountSummarySelector(state, accountId)
+  return useMemo(
+    () => ({
+      balance: lastRecord?.balance,
+      dateOfLastTransaction: lastRecord ? formatDateFull(lastRecord.date) : undefined,
+      name: account.name,
+      icon: accountTypeIcons[account.accountType],
+    }),
+    [account.accountType, account.name, lastRecord]
   );
+};
+
+export type AccountSummaryProps = {
+  /**
+   * The ID of the account.
+   */
+  accountId: string;
+};
+
+export const AccountSummary = ({ accountId }: AccountSummaryProps) => {
+  const { name, balance, dateOfLastTransaction, icon } = useAccountSummary(accountId);
 
   return (
     <Card

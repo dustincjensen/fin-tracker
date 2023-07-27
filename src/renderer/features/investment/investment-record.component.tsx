@@ -1,10 +1,27 @@
 import { IconButton, Menu, MoreIcon, Popover, Position, Table, Tooltip, TrashIcon } from 'evergreen-ui';
-import * as React from 'react';
-import * as dateUtils from '../../../utils/date.utils';
-import { useBalanceByRate } from '../_hooks/use-balance-by-rate.hook';
-import { IInvestmentRecordProps } from './investment-record.props.interface';
+import React from 'react';
+import { IInvestmentRecord } from '../../store/investment-record/investment-record.interface';
+import * as dateUtils from '../../utils/date.utils';
+import { useBalanceByRate } from './_hooks/use-balance-by-rate.hook';
 
-const InvestmentRecordComponent = ({ record, setRecordToDelete, accountArchived }: IInvestmentRecordProps) => {
+type InvestmentRecordProps = {
+  /**
+   * The investment record.
+   */
+  record: IInvestmentRecord;
+
+  /**
+   * UseState setter for the record to delete.
+   */
+  setRecordToDelete: React.Dispatch<React.SetStateAction<IInvestmentRecord>>;
+
+  /**
+   * True if the account is archived; false otherwise.
+   */
+  accountArchived: boolean;
+};
+
+const InvestmentRecordComponent = ({ record, setRecordToDelete, accountArchived }: InvestmentRecordProps) => {
   const { convertedBalance, rate } = useBalanceByRate(record.balance, record.date, record.investmentCurrency);
 
   return (

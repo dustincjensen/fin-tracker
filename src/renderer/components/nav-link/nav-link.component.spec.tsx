@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import { Button, HomeIcon } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { NavLink } from './nav-link.component';
 
 describe('components', () => {

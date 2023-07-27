@@ -13,7 +13,7 @@ import {
   TrashIcon,
   MoreIcon,
 } from 'evergreen-ui';
-import * as React from 'react';
+import React from 'react';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
 import { CategoryTag } from '../../../components/category-tag/category-tag.component';
 import { IRecord } from '../../../store/record/record.interface';
