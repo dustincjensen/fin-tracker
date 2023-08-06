@@ -5,7 +5,7 @@
     "strict": true,
     "moduleResolution": "node",
     "rootDir": "..",
-    "outFile": "../../../dist/background.worker.js",
+    "outFile": "../../dist/background.worker.js",
     "composite": true,
     "declarationMap": true,
     "sourceMap": true,

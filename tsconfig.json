@@ -9,10 +9,7 @@
     "jsx": "react",
     "esModuleInterop": true
   },
-  "exclude": [
-    "src/renderer",
-    "src/background",
-    "out",
-    "node_modules"
+  "include": [
+    "src/index.ts"
   ]
 }
