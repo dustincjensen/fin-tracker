@@ -1,0 +1,1 @@
+export type WorkerReturnType = 'NEW_RECORDS_PARSED' | 'NEW_RECORDS_ERROR' | 'NEW_RECORDS_MERGED';

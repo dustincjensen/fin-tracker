@@ -2,14 +2,14 @@ import { Draft } from 'immer';
 import { newGuid } from '../../utils/guid.utils';
 import { AccountActions } from '../account/account.actions';
 import { IAccount } from '../account/account.interface';
-import { createDraftReducer } from '../draft.reducer';
+import { createReducer } from '../create-reducer';
 import { CategoryActions } from './category.actions';
 import { ICategory } from './category.interface';
 import { ICategoryStore } from './category.store.interface';
 
 const initialState: ICategoryStore = { categories: {} };
 
-export const CategoryReducer = createDraftReducer(
+export const CategoryReducer = createReducer(
   {
     [CategoryActions.SAVE_NEW_CATEGORY]: saveNewCategory,
     [CategoryActions.UPDATE_CATEGORY]: updateCategory,

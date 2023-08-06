@@ -5,12 +5,10 @@
   "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf .parcel-cache .cache dist out",
-    "build:dev:background": "parcel ./src/background/background.html --target electron -p 4321",
     "build:dev:renderer": "parcel ./src/renderer/renderer.html --target electron",
-    "build:dev": "tsc && concurrently \"npm run build:dev:renderer\" \"npm run build:dev:background\"",
-    "build:background": "parcel build ./src/background/background.html --target electron",
+    "build:dev": "tsc -b ./ src/renderer/background-worker && npm run build:dev:renderer",
     "build:renderer": "parcel build ./src/renderer/renderer.html --target electron",
-    "build": "tsc && concurrently \"npm run build:renderer\" \"npm run build:background\"",
+    "build": "tsc && npm run build:renderer",
     "start": "concurrently \"npm run build:dev:renderer\" \"electron ./dist/index.js --dev\"",
     "dev": "electron ./dist/index.js --dev",
     "prod": "electron .",
@@ -81,7 +79,7 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "icon": "src/assets/ft.ico"
+        "icon": "assets/ft.ico"
       },
       "makers": [
         {

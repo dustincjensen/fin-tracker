@@ -1,11 +1,11 @@
 import { Draft } from 'immer';
-import { createDraftReducer } from '../draft.reducer';
+import { createReducer } from '../create-reducer';
 import { ThirdPartyApiActions } from './third-party-api.actions';
 import { IThirdPartyApiStore } from './third-party-api.store.interface';
 
 const initialState: IThirdPartyApiStore = { openExchangeRatesApiKey: undefined };
 
-export const ThirdPartyApiReducer = createDraftReducer(
+export const ThirdPartyApiReducer = createReducer(
   {
     [ThirdPartyApiActions.UPDATE_OER_API_KEY]: updateOerApiKey,
   },

@@ -1,7 +1,6 @@
-import moment from 'moment';
-import { IRecord } from '../interfaces/record.interface';
+import { Record } from '../../models/record.type';
 
-export function sortRecordsByDate(records: IRecord[]): IRecord[] {
+export function sortRecordsByDate(records: Record[]): Record[] {
   records.sort(sortByDate);
   return records;
 }
@@ -11,9 +10,9 @@ export function sortRecordsByDate(records: IRecord[]): IRecord[] {
 // then you don't need to recalculate those balances.
 export function sortAndCalculateBalance(
   startingBalance: number,
-  newRecords: IRecord[],
-  previousRecords: IRecord[]
-): IRecord[] {
+  newRecords: Record[],
+  previousRecords: Record[]
+): Record[] {
   const allRecords = [...(newRecords || []), ...(previousRecords || [])];
   allRecords.sort(sortByDate);
 
@@ -27,13 +26,13 @@ export function sortAndCalculateBalance(
   return allRecords;
 }
 
-function sortByDate(a: IRecord, b: IRecord): number {
-  // TODO moment complains about the date format provided if not ISO, but it works...
-  const aDate = moment(a.date);
-  const bDate = moment(b.date);
+// TODO DO some heavy testing on parsing to ensure that the date sorting for various QFX data sets works perfectly.
+function sortByDate(a: Record, b: Record): number {
+  const aDate = new Date(a.date);
+  const bDate = new Date(b.date);
 
-  if (aDate.isBefore(bDate)) return -1;
-  if (aDate.isAfter(bDate)) return 1;
+  if (aDate < bDate) return -1;
+  if (aDate > bDate) return 1;
 
   if (a.id < b.id) return -1;
   if (a.id > b.id) return 1;

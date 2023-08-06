@@ -1,12 +1,14 @@
-import * as fs from 'fs';
-import { IAutoCategory } from '../interfaces/auto-category.interface';
-import { IRecord } from '../interfaces/record.interface';
-import { newGuid } from '../utils/guid.utils';
+import { AutoCategory } from '../../models/auto-category.type';
+import { Record } from '../../models/record.type';
+import { newGuid } from '../../utils/guid.utils';
 
 const stringRemoveExtraneousSpaces = /\s{2,}/g;
 
-export function parse(accountId: string, filePath: string, autoCategories: IAutoCategory[]): IRecord[] {
-  const data = fs.readFileSync(filePath, { encoding: 'utf-8' });
+export function parse(accountId: string, file: File, autoCategories: AutoCategory[]): Record[] {
+  const fileReader = new FileReaderSync();
+  const data = fileReader.readAsText(file, 'utf-8');
+
+  // const data = fs.readFileSync(file, { encoding: 'utf-8' });
   const separated = data
     .split('^')
     .map(r => {
@@ -25,16 +27,16 @@ export function parse(accountId: string, filePath: string, autoCategories: IAuto
         }
       }
 
-      const credit = amount > 0 ? amount : undefined;
-      const debit = amount <= 0 ? amount * -1 : undefined;
+      const credit = amount !== undefined && amount > 0 ? amount : undefined;
+      const debit = amount !== undefined && amount <= 0 ? amount * -1 : undefined;
 
       const description = `${payee}${date ? ' ' + memo : ''}`.replace(stringRemoveExtraneousSpaces, ' ').trim();
       const autoCategoryMatch = autoCategories?.find(ac => description.startsWith(ac.description));
 
-      const record: IRecord = {
+      const record: Record = {
         id: newGuid(),
         accountId,
-        date: date ? date : memo,
+        date: (date ? date : memo) as string,
         description,
         autoCategoryId: autoCategoryMatch?.id,
         categoryId: autoCategoryMatch?.categoryId,
@@ -46,5 +48,5 @@ export function parse(accountId: string, filePath: string, autoCategories: IAuto
     })
     .filter(r => r != null && r.date != null);
 
-  return separated;
+  return separated as Record[];
 }

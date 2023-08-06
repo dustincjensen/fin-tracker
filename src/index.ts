@@ -1,7 +1,6 @@
 import * as path from 'path';
 import * as url from 'url';
 import { app, BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
-import { Intercommunication } from './intercommunication';
 
 const ElectronStore = require('electron-store');
 
@@ -12,7 +11,6 @@ export class MainElectron {
   // window will be closed automatically when the Javascript
   // object is garbage collected.
   public static renderer: BrowserWindow;
-  public static background: BrowserWindow;
 
   public static start() {
     if (require('electron-squirrel-startup')) {
@@ -20,7 +18,6 @@ export class MainElectron {
     }
 
     MainElectron._initializeElectron();
-    Intercommunication.setupListeners();
   }
 
   private static isDev(): boolean {
@@ -107,34 +104,9 @@ export class MainElectron {
       // Dereference the window object.
       MainElectron.renderer = null;
 
-      // Dereference the background window too.
-      MainElectron.background = null;
-
       // If you don't do this fin-tracker keeps running forever.
       app.quit();
     });
-
-    // Create the background window to handle work for us.
-    MainElectron.background = new BrowserWindow({
-      show: MainElectron.isDev(),
-      webPreferences: {
-        nodeIntegration: true,
-        nodeIntegrationInWorker: true,
-        contextIsolation: false,
-      },
-    });
-
-    MainElectron.background.loadURL(
-      url.format({
-        pathname: path.join(__dirname, './background.html'),
-        protocol: 'file:',
-        slashes: true,
-      })
-    );
-
-    if (MainElectron.isDev()) {
-      MainElectron.background.webContents.openDevTools();
-    }
   }
 }
 

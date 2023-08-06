@@ -1,4 +1,4 @@
-export interface IAutoCategory {
+export type AutoCategory = {
   /**
    * The ID of the auto category.
    */
@@ -18,4 +18,4 @@ export interface IAutoCategory {
    * The ID of the category to assign.
    */
   categoryId: string;
-}
+};

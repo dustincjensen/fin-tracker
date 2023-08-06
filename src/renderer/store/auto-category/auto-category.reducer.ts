@@ -3,7 +3,7 @@ import { AccountActions } from '../account/account.actions';
 import { IAccount } from '../account/account.interface';
 import { CategoryActions } from '../category/category.actions';
 import { ICategory } from '../category/category.interface';
-import { createDraftReducer } from '../draft.reducer';
+import { createReducer } from '../create-reducer';
 import { RecordActions } from '../record/record.actions';
 import { AutoCategoryActions } from './auto-category.actions';
 import { IAutoCategory } from './auto-category.interface';
@@ -11,7 +11,7 @@ import { IAutoCategoryStore } from './auto-category.store.interface';
 
 const initialState: IAutoCategoryStore = { autoCategories: {} };
 
-export const AutoCategoryReducer = createDraftReducer(
+export const AutoCategoryReducer = createReducer(
   {
     [RecordActions.SET_RECORD_AUTO_CATEGORY]: saveRecordAutoCategory,
     [AutoCategoryActions.DELETE_AUTO_CATEGORY]: deleteAutoCategory,

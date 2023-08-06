@@ -1,26 +1,30 @@
 import { Button, majorScale, Pane, FormField, Text, CrossIcon, TickIcon } from 'evergreen-ui';
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useBackgroundWorkerContext } from '../../background-worker-provider.component';
 import { AccountSelectors } from '../../store/account/account.selectors';
 import { PendingRecordActions } from '../../store/pending-record/pending-record.actions';
 import { PendingRecordSelectors } from '../../store/pending-record/pending-record.selectors';
-import { RecordActions } from '../../store/record/record.actions';
 import { RecordSelectors } from '../../store/record/record.selectors';
 import { IStore } from '../../store/store.interface';
 import { accountTypeLabels } from '../../utils/account.utils';
 
 export const ActionPendingRecords = () => {
+  const dispatch = useDispatch();
   const pendingRecords = useSelector(PendingRecordSelectors.pendingRecords);
   const account = useSelector((state: IStore) => AccountSelectors.account(state, pendingRecords?.accountId));
   const existingRecords = useSelector((state: IStore) =>
     RecordSelectors.recordsByAccountId(state, pendingRecords?.accountId)
   );
-
-  const dispatch = useDispatch();
+  const worker = useBackgroundWorkerContext();
 
   const accept = useCallback(() => {
-    RecordActions.newRecordsMerged(dispatch, account?.startingBalance ?? 0, pendingRecords?.records, existingRecords);
-  }, [dispatch, account?.startingBalance, pendingRecords?.records, existingRecords]);
+    worker.invokeBackgroundTask?.('NEW_RECORDS_MERGED', [
+      account?.startingBalance ?? 0,
+      pendingRecords?.records,
+      existingRecords,
+    ]);
+  }, [worker, account?.startingBalance, pendingRecords?.records, existingRecords]);
 
   const clear = useCallback(() => dispatch(PendingRecordActions.clearImportedRecords()), [dispatch]);
 

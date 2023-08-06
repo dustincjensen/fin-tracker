@@ -1,12 +1,12 @@
 import { Dialog, FormField, majorScale, TextInputField, SegmentedControl, TextInput, Pane } from 'evergreen-ui';
 import React from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
+import { useBackgroundWorkerContext } from '../../../background-worker-provider.component';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
 import { ICategorySelectProps } from '../../../components/category-select/category-select.props.interface';
 import { DatePicker } from '../../../components/date-picker/date-picker.component';
 import { AccountSelectors } from '../../../store/account/account.selectors';
 import { CategorySelectors } from '../../../store/category/category.selectors';
-import { RecordActions } from '../../../store/record/record.actions';
 import { IRecord } from '../../../store/record/record.interface';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
@@ -24,13 +24,13 @@ const options = [
 
 // TODO review this component
 export const AddNewRecordDialog = ({ accountId, isShown, onClose }: IAddNewRecordProps) => {
-  const dispatch = useDispatch();
   const categories = useSelector(CategorySelectors.selectCategories, shallowEqual);
   const account = useSelector((state: IStore) => AccountSelectors.account(state, accountId), shallowEqual);
   const existingRecords = useSelector(
     (state: IStore) => RecordSelectors.recordsByAccountId(state, accountId),
     shallowEqual
   );
+  const worker = useBackgroundWorkerContext();
 
   const [transactionDate, setTransactionDate] = React.useState('');
   const [transactionDateError, setTransactionDateError] = React.useState('');
@@ -119,9 +119,7 @@ export const AddNewRecordDialog = ({ accountId, isShown, onClose }: IAddNewRecor
         balance: undefined,
       },
     ];
-
-    RecordActions.newRecordsMerged(dispatch, account.startingBalance, newRecords, existingRecords);
-
+    worker.invokeBackgroundTask?.('NEW_RECORDS_MERGED', [account.startingBalance, newRecords, existingRecords]);
     onClose();
   };
 

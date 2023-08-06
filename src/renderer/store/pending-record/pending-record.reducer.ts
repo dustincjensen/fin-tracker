@@ -1,5 +1,5 @@
 import { Draft } from 'immer';
-import { createDraftReducer } from '../draft.reducer';
+import { createReducer } from '../create-reducer';
 import { RecordActions } from '../record/record.actions';
 import { IRecord } from '../record/record.interface';
 import { PendingRecordActions } from './pending-record.actions';
@@ -13,7 +13,7 @@ const initialState: IPendingRecordStore = {
   error: undefined,
 };
 
-export const PendingRecordReducer = createDraftReducer(
+export const PendingRecordReducer = createReducer(
   {
     [PendingRecordActions.NEW_RECORDS_IMPORTED]: importRecords,
     [PendingRecordActions.NEW_RECORDS_ERROR]: importError,

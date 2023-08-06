@@ -1,12 +1,13 @@
-import * as fs from 'fs';
-import { IAutoCategory } from '../interfaces/auto-category.interface';
-import { IRecord } from '../interfaces/record.interface';
-import { newGuid } from '../utils/guid.utils';
+import { AutoCategory } from '../../models/auto-category.type';
+import { Record } from '../../models/record.type';
+import { newGuid } from '../../utils/guid.utils';
 
 const stringRemoveExtraneousSpaces = /\s{2,}/g;
 
-export function parse(accountId: string, filePath: string, autoCategories: IAutoCategory[]): IRecord[] {
-  const data = fs.readFileSync(filePath, { encoding: 'utf-8' });
+export function parse(accountId: string, file: File, autoCategories: AutoCategory[]): Record[] {
+  const fileReader = new FileReaderSync();
+  const data = fileReader.readAsText(file, 'utf-8');
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let record: any = {};
   let tranStarted = false;
@@ -61,7 +62,7 @@ export function parse(accountId: string, filePath: string, autoCategories: IAuto
       const description = `${name}${memo ? ' ' + memo : ''}`.replace(stringRemoveExtraneousSpaces, ' ').trim();
       const autoCategoryMatch = autoCategories?.find(ac => description.startsWith(ac.description));
 
-      const record: IRecord = {
+      const record: Record = {
         id: newGuid(),
         accountId,
         date,

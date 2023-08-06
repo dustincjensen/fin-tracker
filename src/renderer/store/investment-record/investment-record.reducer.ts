@@ -1,14 +1,14 @@
 import { Draft } from 'immer';
 import { AccountActions } from '../account/account.actions';
 import { IAccount } from '../account/account.interface';
-import { createDraftReducer } from '../draft.reducer';
+import { createReducer } from '../create-reducer';
 import { InvestmentRecordActions } from './investment-record.actions';
 import { IInvestmentRecord } from './investment-record.interface';
 import { IInvestmentRecordStore } from './investment-record.store.interface';
 
 const initialState: IInvestmentRecordStore = { records: {} };
 
-export const InvestmentRecordReducer = createDraftReducer(
+export const InvestmentRecordReducer = createReducer(
   {
     [InvestmentRecordActions.ADD_RECORD]: addRecord,
     [InvestmentRecordActions.DELETE_RECORD]: deleteRecord,

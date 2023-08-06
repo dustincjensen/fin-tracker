@@ -3,7 +3,7 @@ import { AccountActions } from '../account/account.actions';
 import { IAccount } from '../account/account.interface';
 import { AutoCategoryActions } from '../auto-category/auto-category.actions';
 import { IAutoCategory } from '../auto-category/auto-category.interface';
-import { createDraftReducer } from '../draft.reducer';
+import { createReducer } from '../create-reducer';
 import { RecordActions } from './record.actions';
 import { IRecord } from './record.interface';
 import { IRecordStore } from './record.store.interface';
@@ -11,7 +11,7 @@ import { ISplitRecord } from './split-record.interface';
 
 const initialState: IRecordStore = { records: {} };
 
-export const RecordReducer = createDraftReducer(
+export const RecordReducer = createReducer(
   {
     [RecordActions.SAVE_NEW_RECORDS]: saveNewRecords,
     [RecordActions.SET_DETAILS]: setDetails,
