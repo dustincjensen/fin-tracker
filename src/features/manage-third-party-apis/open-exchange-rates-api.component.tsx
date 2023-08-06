@@ -10,7 +10,7 @@ import {
 import React, { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { ThirdPartyApiActions } from '../../store/third-party-api/third-party-api.actions';
+import { updateOerApiKey } from '../../store/third-party-api/third-party-api-slice';
 import { ThirdPartyApiSelectors } from '../../store/third-party-api/third-party-api.selectors';
 import { isNullOrWhitespace } from '../../utils/object.utils';
 
@@ -36,7 +36,7 @@ export const OpenExchangeRatesApi = () => {
         }
         setOerApiKeyError(undefined);
 
-        dispatch(ThirdPartyApiActions.updateOerApiKey(oerApiKey));
+        dispatch(updateOerApiKey(oerApiKey));
 
         setSuccessfulSave(true);
     };

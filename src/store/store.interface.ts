@@ -4,7 +4,7 @@ import { ICategoryStore } from './category/category.store.interface';
 import { IInvestmentRecordStore } from './investment-record/investment-record.store.interface';
 import { IPendingRecordStore } from './pending-record/pending-record.store.interface';
 import { IRecordStore } from './record/record.store.interface';
-import { IThirdPartyApiStore } from './third-party-api/third-party-api.store.interface';
+import { ThirdPartyApiStore } from './third-party-api/third-party-api-slice';
 
 export interface IStore {
     accounts: AccountStore;
@@ -13,7 +13,7 @@ export interface IStore {
     investmentRecords: IInvestmentRecordStore;
     pendingRecords: IPendingRecordStore;
     records: IRecordStore;
-    thirdPartyApi: IThirdPartyApiStore;
+    thirdPartyApi: ThirdPartyApiStore;
 }
 
 /**
@@ -25,5 +25,5 @@ export interface IPersistedStore {
     categories: ICategoryStore;
     investmentRecords: IInvestmentRecordStore;
     records: IRecordStore;
-    thirdPartyApi: IThirdPartyApiStore;
+    thirdPartyApi: ThirdPartyApiStore;
 }
