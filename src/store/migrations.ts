@@ -1,7 +1,7 @@
 import { createStore } from 'redux';
 import { Account } from '../models/account.type';
 import { AccountSelectors } from './account/account.selectors';
-import { CategoryActions } from './category/category.actions';
+import { addTransferCategory } from './category/category-slice';
 import { CategorySelectors } from './category/category.selectors';
 import { rootReducer } from './store';
 import { IPersistedStore } from './store.interface';
@@ -23,16 +23,14 @@ const migration_1_1_0 = storage => {
         console.log('Checking accountId: ', accountId);
         if (!categories.find(c => c.accountTransferId === accountId)) {
             console.log('Dispatching new account transfer category', accountId);
-            tmpStore.dispatch(CategoryActions.addTransferCategory(accounts[accountId]));
+            tmpStore.dispatch(addTransferCategory(accounts[accountId]));
         }
     }
 
     // Add the external transfer category...
     if (!categories.find(c => c.accountTransferId === '__EXTERNAL_ACCOUNT__')) {
         console.log('Adding __EXTERNAL_ACCOUNT__ transfer category');
-        tmpStore.dispatch(
-            CategoryActions.addTransferCategory({ id: '__EXTERNAL_ACCOUNT__', name: 'External Account' } as Account)
-        );
+        tmpStore.dispatch(addTransferCategory({ id: '__EXTERNAL_ACCOUNT__', name: 'External Account' } as Account));
     }
 
     const newState = tmpStore.getState();

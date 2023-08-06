@@ -1,4 +1,4 @@
-import { ICategory } from '../../../store/category/category.interface';
+import { Category } from '../../../models/category.type';
 import { IRecord } from '../../../store/record/record.interface';
 
 export interface IEditAutoCategoryProps {
@@ -10,7 +10,7 @@ export interface IEditAutoCategoryProps {
     /**
      * The list of available categories to choose from.
      */
-    categories: Array<ICategory>;
+    categories: Array<Category>;
 
     /**
      * Action to call when the modal closes.

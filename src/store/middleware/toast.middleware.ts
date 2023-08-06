@@ -1,6 +1,6 @@
 import { toaster } from 'evergreen-ui';
 import { saveNewAccount, updateAccount, deleteAccount } from '../account/account-slice';
-import { CategoryActions } from '../category/category.actions';
+import { saveNewCategory, updateCategory, deleteCategory } from '../category/category-slice';
 import { RecordActions } from '../record/record.actions';
 
 const toastActions = {
@@ -10,9 +10,9 @@ const toastActions = {
     [updateAccount.type]: action => toaster.success(`'${action.payload.name}' account updated`),
     [deleteAccount.type]: action => toaster.danger(`'${action.payload.name}' account deleted`),
 
-    [CategoryActions.SAVE_NEW_CATEGORY]: action => toaster.success(`'${action.payload.name}' category created`),
-    [CategoryActions.UPDATE_CATEGORY]: action => toaster.success(`'${action.payload.name}' category updated`),
-    [CategoryActions.DELETE_CATEGORY]: action => toaster.danger(`'${action.payload.name}' category deleted`),
+    [saveNewCategory.type]: action => toaster.success(`'${action.payload.name}' category created`),
+    [updateCategory.type]: action => toaster.success(`'${action.payload.name}' category updated`),
+    [deleteCategory.type]: action => toaster.danger(`'${action.payload.name}' category deleted`),
 };
 
 export const toastMiddleware = () => {

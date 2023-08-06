@@ -1,7 +1,7 @@
-import { ICategory } from '../../../store/category/category.interface';
+import { Category } from '../../../models/category.type';
 
 export interface ICombinedCategorySummaryProps {
-    categories: ICategory[];
+    categories: Category[];
     categoryTotalsByMonth: Array<{
         date: string;
         categoryBalances: { [id: string]: number };

@@ -1,4 +1,4 @@
-import { ICategory } from '../../../store/category/category.interface';
+import { Category } from '../../../models/category.type';
 import { RecordType } from '../record.type';
 
 export interface IEditSplitRecordsProps {
@@ -10,7 +10,7 @@ export interface IEditSplitRecordsProps {
     /**
      * The list of available categories to choose from.
      */
-    categories: Array<ICategory>;
+    categories: Array<Category>;
 
     /**
      * Function to close the edit split record section.

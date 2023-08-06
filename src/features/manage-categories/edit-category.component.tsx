@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { CategoryActions } from '../../store/category/category.actions';
-import { ICategory } from '../../store/category/category.interface';
+import { Category } from '../../models/category.type';
+import { updateCategory } from '../../store/category/category-slice';
 import { ModifyCategory, ModifyCategoryProps } from './modify-category.component';
 
 type EditCategoryProps = Pick<ModifyCategoryProps, 'close' | 'category'>;
@@ -9,10 +9,7 @@ type EditCategoryProps = Pick<ModifyCategoryProps, 'close' | 'category'>;
 export const EditCategory = ({ close, category }: EditCategoryProps) => {
     const dispatch = useDispatch();
 
-    const saveCategory = useCallback(
-        (category: ICategory) => dispatch(CategoryActions.updateCategory(category)),
-        [dispatch]
-    );
+    const saveCategory = useCallback((category: Category) => dispatch(updateCategory(category)), [dispatch]);
 
     return (
         <ModifyCategory

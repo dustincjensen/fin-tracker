@@ -1,4 +1,4 @@
-import { ICategory } from '../../../store/category/category.interface';
+import { Category } from '../../../models/category.type';
 import { RecordType } from '../record.type';
 
 export interface IAccountMonthlyProps {
@@ -10,7 +10,7 @@ export interface IAccountMonthlyProps {
     /**
      * The list of categories to choose from for each record.
      */
-    categories: Array<ICategory>;
+    categories: Array<Category>;
 
     /**
      * Function to update a category in state.

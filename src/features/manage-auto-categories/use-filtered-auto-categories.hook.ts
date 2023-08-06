@@ -2,16 +2,16 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useAccounts } from '../../hooks/accounts/use-accounts.hook';
 import { useCategories } from '../../hooks/categories/use-categories.hook';
+import { Category } from '../../models/category.type';
 import { IAutoCategory } from '../../store/auto-category/auto-category.interface';
 import { AutoCategorySelectors } from '../../store/auto-category/auto-category.selectors';
-import { ICategory } from '../../store/category/category.interface';
 import { RecordSelectors } from '../../store/record/record.selectors';
 
 type MappedAutoCategory = {
     accountId: string;
     accountName: string;
     accountArchived: boolean;
-    category: ICategory;
+    category: Category;
     categoryId: string;
     description: string;
     id: string;
@@ -42,7 +42,7 @@ const useAutoCategories = () => {
 
                 const mappedAutoCategory: MappedAutoCategory = {
                     ...ac,
-                    category: categories.find(c => c.id === ac.categoryId) as ICategory,
+                    category: categories.find(c => c.id === ac.categoryId) as Category,
                     accountName: account.name,
                     accountArchived: !!account.archived,
                     numberOfRecords: records[account.id]?.filter(r => r.autoCategoryId === ac.id).length,

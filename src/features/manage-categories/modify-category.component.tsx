@@ -13,7 +13,7 @@ import {
 } from 'evergreen-ui';
 import React from 'react';
 import { CirclePicker } from 'react-color';
-import { ICategory } from '../../store/category/category.interface';
+import { Category } from '../../models/category.type';
 import { newGuid } from '../../utils/guid.utils';
 
 export type ModifyCategoryProps = {
@@ -30,12 +30,12 @@ export type ModifyCategoryProps = {
     /**
      * Action to save a category.
      */
-    saveCategory: (category: ICategory) => void;
+    saveCategory: (category: Category) => void;
 
     /**
      * The existing category if available.
      */
-    category?: ICategory;
+    category?: Category;
 
     /**
      * A function when invoked will close the category section.
@@ -53,7 +53,7 @@ export const ModifyCategory = ({ close, saveCategory, saveButtonText, headerText
     const handleSubmit = evt => {
         evt.preventDefault();
 
-        const updatedCategory: ICategory = {
+        const updatedCategory: Category = {
             id: category?.id || newGuid(),
             accountTransferId: category?.accountTransferId,
             name,

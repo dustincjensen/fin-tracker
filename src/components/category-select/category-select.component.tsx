@@ -1,12 +1,12 @@
 import { Button, SelectMenu, SelectMenuItem } from 'evergreen-ui';
 import React from 'react';
 import { createSelector } from 'reselect';
-import { ICategory } from '../../store/category/category.interface';
+import { Category } from '../../models/category.type';
 import { CategoryTag } from '../category-tag/category-tag.component';
 import { ICategorySelectProps } from './category-select.props.interface';
 
 const selectOptions = createSelector(
-    (categories: ICategory[]) => categories,
+    (categories: Category[]) => categories,
     categories => categories.map(category => ({ label: category.name, value: category.id }))
 );
 

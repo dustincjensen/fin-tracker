@@ -1,4 +1,4 @@
-import { ICategory } from '../../store/category/category.interface';
+import { Category } from '../../models/category.type';
 
 export interface ICategorySelectProps {
     /**
@@ -6,13 +6,13 @@ export interface ICategorySelectProps {
      */
     record: {
         id: string;
-        category: ICategory;
+        category: Category;
     };
 
     /**
      * The categories to choose from.
      */
-    categories: Array<ICategory>;
+    categories: Array<Category>;
 
     /**
      * The function to update the record with a category id.

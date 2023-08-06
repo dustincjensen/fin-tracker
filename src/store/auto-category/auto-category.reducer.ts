@@ -1,8 +1,8 @@
 import { Draft } from 'immer';
 import { Account } from '../../models/account.type';
+import { Category } from '../../models/category.type';
 import { deleteAccount } from '../account/account-slice';
-import { CategoryActions } from '../category/category.actions';
-import { ICategory } from '../category/category.interface';
+import { deleteCategory } from '../category/category-slice';
 import { createReducer } from '../create-reducer';
 import { RecordActions } from '../record/record.actions';
 import { AutoCategoryActions } from './auto-category.actions';
@@ -15,7 +15,7 @@ export const AutoCategoryReducer = createReducer(
     {
         [RecordActions.SET_RECORD_AUTO_CATEGORY]: saveRecordAutoCategory,
         [AutoCategoryActions.DELETE_AUTO_CATEGORY]: deleteAutoCategory,
-        [CategoryActions.DELETE_CATEGORY]: deleteCategory,
+        [deleteCategory.type]: handleDeleteCategory,
         [deleteAccount.type]: handleDeleteAccount,
     },
     initialState
@@ -60,7 +60,7 @@ function deleteAutoCategory(draft: Draft<IAutoCategoryStore>, autoCategory: IAut
     draft.autoCategories[accountId] = [...autoCategories.slice(0, index), ...autoCategories.slice(index + 1)];
 }
 
-function deleteCategory(draft: Draft<IAutoCategoryStore>, category: ICategory) {
+function handleDeleteCategory(draft: Draft<IAutoCategoryStore>, category: Category) {
     const { id } = category;
     for (const accountId of Object.keys(draft.autoCategories)) {
         const autoCategories = draft.autoCategories[accountId];

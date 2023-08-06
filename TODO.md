@@ -7,6 +7,7 @@ Bugs
 Tasks
 =====
 Next
+- Zod for forms?
 - Package updates
 - Refactor 
   - Selectors

@@ -12,7 +12,7 @@ import {
     ReferenceLine,
 } from 'recharts';
 import { useLocalStorage } from '../../../hooks/use-local-storage.hook';
-import { ICategory } from '../../../store/category/category.interface';
+import { Category } from '../../../models/category.type';
 import { formatDateMonthYear } from '../../../utils/date.utils';
 import { isNullOrUndefined } from '../../../utils/object.utils';
 import { ICombinedCategorySummaryProps } from './combined-category-summary.props.interface';
@@ -21,7 +21,7 @@ const barChartMargins = { top: 5, right: 0, left: 0, bottom: 5 };
 const combinedCategorySummaryDisplayOption = 'combinedCategorySummaryDisplayOption';
 const combinedCategorySummaryStackedOption = 'combinedCategorySummaryStackedOption';
 
-const getSelectedName = (ids: string[], categories: ICategory[]): string => {
+const getSelectedName = (ids: string[], categories: Category[]): string => {
     let selectedNames = '';
     if (ids.length === 0) {
         selectedNames = '';
@@ -33,7 +33,7 @@ const getSelectedName = (ids: string[], categories: ICategory[]): string => {
     return selectedNames;
 };
 
-const idsThatExistInCategories = (ids: string, categories: ICategory[]) => {
+const idsThatExistInCategories = (ids: string, categories: Category[]) => {
     const idArray = ids.split(',');
     return idArray.filter(id => categories.some(c => c.id === id));
 };

@@ -1,14 +1,14 @@
 import { Dialog } from 'evergreen-ui';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { CategoryActions } from '../../store/category/category.actions';
-import { ICategory } from '../../store/category/category.interface';
+import { Category } from '../../models/category.type';
+import { deleteCategory } from '../../store/category/category-slice';
 
 type DeleteCategoryProps = {
     /**
      * The category to delete.
      */
-    category: ICategory;
+    category: Category;
 
     /**
      * Action to call when the modal closes.
@@ -24,7 +24,7 @@ export const DeleteCategoryDialog = ({ category, onClose }: DeleteCategoryProps)
     }
 
     const confirm = () => {
-        dispatch(CategoryActions.deleteCategory(category));
+        dispatch(deleteCategory(category));
         onClose();
     };
 

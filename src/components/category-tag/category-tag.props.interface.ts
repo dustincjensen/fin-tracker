@@ -1,10 +1,10 @@
-import { ICategory } from '../../store/category/category.interface';
+import { Category } from '../../models/category.type';
 
 export interface ICategoryTagProps {
     /**
      * The category to display.
      */
-    category: ICategory;
+    category: Category;
 
     /**
      * A function to invoke when the X is clicked on the category tag.
