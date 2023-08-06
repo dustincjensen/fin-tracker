@@ -1,5 +1,5 @@
 import { BankAccountIcon, ChartIcon, CreditCardIcon } from 'evergreen-ui';
-import { AccountType } from '../store/account/account.type';
+import { AccountType } from '../models/account-type.type';
 
 export const accountTypeLabels: Record<AccountType, string> = {
     Chequing: 'Chequing',

@@ -18,8 +18,8 @@ import {
 } from 'evergreen-ui';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { AccountType } from '../../../models/account-type.type';
 import { Account } from '../../../models/account.type';
-import { AccountType } from '../../../store/account/account.type';
 import {
     accountTypeNameValuePairs,
     accountTypeLabels,

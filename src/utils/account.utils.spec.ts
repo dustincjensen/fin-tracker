@@ -1,4 +1,4 @@
-import { AccountType } from '../store/account/account.type';
+import { AccountType } from '../models/account-type.type';
 import { getAccountStartDate, isBankAccount, isInvestmentAccount } from './account.utils';
 
 describe('utils', () => {

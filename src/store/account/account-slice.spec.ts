@@ -1,6 +1,12 @@
 import { Account } from '../../models/account.type';
-import { accountReducer, archiveAccount, deleteAccount, saveNewAccount, updateAccount } from './account-slice';
-import { IAccountStore } from './account.store.interface';
+import {
+    accountReducer,
+    archiveAccount,
+    deleteAccount,
+    saveNewAccount,
+    updateAccount,
+    AccountStore,
+} from './account-slice';
 
 describe('account slice', () => {
     const accountId = 'accountId';
@@ -62,7 +68,7 @@ describe('account slice', () => {
                 updateAccount({ ...account, endMonth: 11, endYear: 2021 })
             );
 
-            const expectedState: IAccountStore = {
+            const expectedState: AccountStore = {
                 accounts: {
                     [accountId]: { ...account, endMonth: 11, endYear: 2021 },
                     [otherAccountId]: otherAccount,
@@ -84,7 +90,7 @@ describe('account slice', () => {
                 deleteAccount(account)
             );
 
-            const expectedState: IAccountStore = {
+            const expectedState: AccountStore = {
                 accounts: {
                     [otherAccountId]: otherAccount,
                 },
@@ -104,7 +110,7 @@ describe('account slice', () => {
                 archiveAccount({ id: accountId, archived: true, endYear: 2020, endMonth: 11 })
             );
 
-            const expectedState: IAccountStore = {
+            const expectedState: AccountStore = {
                 accounts: {
                     [accountId]: {
                         ...account,

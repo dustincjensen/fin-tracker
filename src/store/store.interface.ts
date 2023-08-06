@@ -1,4 +1,4 @@
-import { IAccountStore } from './account/account.store.interface';
+import { AccountStore } from './account/account-slice';
 import { IAutoCategoryStore } from './auto-category/auto-category.store.interface';
 import { ICategoryStore } from './category/category.store.interface';
 import { IInvestmentRecordStore } from './investment-record/investment-record.store.interface';
@@ -7,7 +7,7 @@ import { IRecordStore } from './record/record.store.interface';
 import { IThirdPartyApiStore } from './third-party-api/third-party-api.store.interface';
 
 export interface IStore {
-    accounts: IAccountStore;
+    accounts: AccountStore;
     autoCategories: IAutoCategoryStore;
     categories: ICategoryStore;
     investmentRecords: IInvestmentRecordStore;
@@ -20,7 +20,7 @@ export interface IStore {
  * The store interface for what data should be persisted.
  */
 export interface IPersistedStore {
-    accounts: IAccountStore;
+    accounts: AccountStore;
     autoCategories: IAutoCategoryStore;
     categories: ICategoryStore;
     investmentRecords: IInvestmentRecordStore;

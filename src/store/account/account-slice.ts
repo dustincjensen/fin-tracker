@@ -1,9 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { Account } from '../../models/account.type';
-import { IAccountStore } from './account.store.interface';
 
-const initialState: IAccountStore = { accounts: {} };
+export type AccountStore = {
+    /**
+     * The accounts belonging to a user.
+     */
+    accounts: { [id: string]: Account };
+};
+
+const initialState: AccountStore = { accounts: {} };
 
 export const accountSlice = createSlice({
     name: 'accounts',
