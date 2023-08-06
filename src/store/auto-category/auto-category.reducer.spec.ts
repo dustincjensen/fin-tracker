@@ -1,8 +1,8 @@
 import { Account } from '../../models/account.type';
+import { Category } from '../../models/category.type';
 import { build } from '../../utils/test.utils';
 import { deleteAccount } from '../account/account-slice';
-import { CategoryActions } from '../category/category.actions';
-import { ICategory } from '../category/category.interface';
+import { deleteCategory } from '../category/category-slice';
 import { RecordActions } from '../record/record.actions';
 import { AutoCategoryActions } from './auto-category.actions';
 import { IAutoCategory } from './auto-category.interface';
@@ -166,8 +166,8 @@ describe('reducers', () => {
                 };
 
                 const newState = reducer(initialState, {
-                    type: CategoryActions.DELETE_CATEGORY,
-                    payload: build<ICategory>({ id: categoryId }),
+                    type: deleteCategory.type,
+                    payload: build<Category>({ id: categoryId }),
                 });
 
                 const expectedState: IAutoCategoryStore = {

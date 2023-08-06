@@ -1,6 +1,6 @@
 import { IconButton, Menu, MoreIcon, Popover, Position, Table, Tooltip, TrashIcon } from 'evergreen-ui';
 import React from 'react';
-import { IInvestmentRecord } from '../../store/investment-record/investment-record.interface';
+import { InvestmentRecord as InvestmentRecordType } from '../../models/investment-record.type';
 import * as dateUtils from '../../utils/date.utils';
 import { useBalanceByRate } from './_hooks/use-balance-by-rate.hook';
 
@@ -8,12 +8,12 @@ type InvestmentRecordProps = {
     /**
      * The investment record.
      */
-    record: IInvestmentRecord;
+    record: InvestmentRecordType;
 
     /**
      * UseState setter for the record to delete.
      */
-    setRecordToDelete: React.Dispatch<React.SetStateAction<IInvestmentRecord>>;
+    setRecordToDelete: React.Dispatch<React.SetStateAction<InvestmentRecordType>>;
 
     /**
      * True if the account is archived; false otherwise.

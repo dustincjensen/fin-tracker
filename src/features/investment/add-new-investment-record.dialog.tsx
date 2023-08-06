@@ -2,8 +2,8 @@ import { Dialog, FormField, majorScale, TextInput } from 'evergreen-ui';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { DatePicker } from '../../components/date-picker/date-picker.component';
-import { InvestmentRecordActions } from '../../store/investment-record/investment-record.actions';
-import { IInvestmentRecord } from '../../store/investment-record/investment-record.interface';
+import { InvestmentRecord } from '../../models/investment-record.type';
+import { addRecord } from '../../store/investment-record/investment-record-slice';
 import { newGuid } from '../../utils/guid.utils';
 import { isNullOrWhitespace } from '../../utils/object.utils';
 
@@ -63,7 +63,7 @@ export const AddNewInvestmentRecordDialog = ({ accountId, currency, onClose }: A
             return;
         }
 
-        const newRecord: IInvestmentRecord = {
+        const newRecord: InvestmentRecord = {
             id: newGuid(),
             accountId,
             date: transactionDate,
@@ -71,7 +71,7 @@ export const AddNewInvestmentRecordDialog = ({ accountId, currency, onClose }: A
             balance: balance as number,
         };
 
-        dispatch(InvestmentRecordActions.addRecord(newRecord));
+        dispatch(addRecord(newRecord));
 
         onClose();
     };
