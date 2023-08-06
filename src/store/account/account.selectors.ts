@@ -1,4 +1,3 @@
-import { createSelector } from 'reselect';
 import { IStore } from '../store.interface';
 
 export class AccountSelectors {
@@ -20,19 +19,4 @@ export class AccountSelectors {
     public static account(state: IStore, id: string) {
         return state.accounts.accounts[id];
     }
-
-    /**
-     * Returns an array of account ID's and names.
-     *
-     * @deprecated Do not use.
-     */
-    public static selectAccountNames = createSelector(AccountSelectors.accounts, accounts => {
-        return Object.keys(accounts).map(id => {
-            const { name } = accounts[id];
-            return {
-                id,
-                accountName: name,
-            };
-        });
-    });
 }
