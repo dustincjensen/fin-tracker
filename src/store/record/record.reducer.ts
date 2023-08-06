@@ -1,6 +1,6 @@
 import { Draft } from 'immer';
-import { AccountActions } from '../account/account.actions';
-import { IAccount } from '../account/account.interface';
+import { Account } from '../../models/account.type';
+import { deleteAccount } from '../account/account-slice';
 import { AutoCategoryActions } from '../auto-category/auto-category.actions';
 import { IAutoCategory } from '../auto-category/auto-category.interface';
 import { createReducer } from '../create-reducer';
@@ -20,7 +20,7 @@ export const RecordReducer = createReducer(
         [RecordActions.SET_SPLIT_RECORD_CATEGORY]: setSplitRecordCategory,
         [RecordActions.SET_SPLIT_RECORDS]: setSplitRecords,
         [RecordActions.DELETE_SPLIT_RECORDS]: deleteSplitRecords,
-        [AccountActions.DELETE_ACCOUNT]: deleteRecords,
+        [deleteAccount.type]: deleteRecords,
         [AutoCategoryActions.DELETE_AUTO_CATEGORY]: removeRecordAutoCategory,
     },
     initialState
@@ -166,6 +166,6 @@ function deleteSplitRecords(draft: Draft<IRecordStore>, payload: { accountId: st
  * @param draft       The draft state.
  * @param accountId   The account id to delete records for.
  */
-function deleteRecords(draft: Draft<IRecordStore>, account: IAccount) {
+function deleteRecords(draft: Draft<IRecordStore>, account: Account) {
     delete draft.records[account.id];
 }

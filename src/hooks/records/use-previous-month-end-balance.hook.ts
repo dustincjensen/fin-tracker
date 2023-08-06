@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { IAccount } from '../../store/account/account.interface';
+import { Account } from '../../models/account.type';
 import { AccountSelectors } from '../../store/account/account.selectors';
 import { IRecord } from '../../store/record/record.interface';
 import { RecordSelectors } from '../../store/record/record.selectors';
@@ -9,7 +9,7 @@ import { getAccountStartDate } from '../../utils/account.utils';
 import { createDate, getPreviousMonth } from '../../utils/date.utils';
 import { recordsByDate } from './use-records-by-date.hook';
 
-const previousMonthEndBalance = (account: IAccount, records: IRecord[], date: string): number | undefined => {
+const previousMonthEndBalance = (account: Account, records: IRecord[], date: string): number | undefined => {
     const previousMonth = getPreviousMonth(date);
     const previousMonthRecords = recordsByDate(records, previousMonth);
     if (previousMonthRecords.length > 0) {

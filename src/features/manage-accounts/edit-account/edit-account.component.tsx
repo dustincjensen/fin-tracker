@@ -18,7 +18,7 @@ import {
 } from 'evergreen-ui';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IAccount } from '../../../store/account/account.interface';
+import { Account } from '../../../models/account.type';
 import { AccountType } from '../../../store/account/account.type';
 import {
     accountTypeNameValuePairs,
@@ -61,7 +61,7 @@ export const EditAccount = ({
         evt.preventDefault();
 
         const at = accountType as AccountType;
-        const updatedAccount: IAccount = {
+        const updatedAccount: Account = {
             id: account?.id || newGuid(),
             name,
             startYear,

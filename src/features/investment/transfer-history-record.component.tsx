@@ -1,6 +1,6 @@
 import { ManuallyEnteredDataIcon, Pane, Table, Tooltip } from 'evergreen-ui';
 import React from 'react';
-import { IAccount } from '../../store/account/account.interface';
+import { Account } from '../../models/account.type';
 import { IRecord } from '../../store/record/record.interface';
 import * as dateUtils from '../../utils/date.utils';
 import { createStaticWidthCell } from '../../utils/table.utils';
@@ -22,7 +22,7 @@ type TransferHistoryRecordProps = {
     /**
      * The investment account.
      */
-    account: IAccount;
+    account: Account;
 };
 
 const TransferHistoryRecordComponent = ({ record, account }: TransferHistoryRecordProps) => {

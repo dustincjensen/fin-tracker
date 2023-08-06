@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { AccountActions } from '../../../store/account/account.actions';
-import { IAccount } from '../../../store/account/account.interface';
+import { Account } from '../../../models/account.type';
+import { saveNewAccount } from '../../../store/account/account-slice';
 import { EditAccount } from '../edit-account/edit-account.component';
 import { IEditAccountProps } from '../edit-account/edit-account.props.interface';
 
@@ -16,7 +16,7 @@ const mapStateToProps = (): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    saveAccount: (account: IAccount) => dispatch(AccountActions.saveNewAccount(account)),
+    saveAccount: (account: Account) => dispatch(saveNewAccount(account)),
 });
 
 export const NewAccountContainer = connect(mapStateToProps, mapDispatchToProps)(EditAccount);

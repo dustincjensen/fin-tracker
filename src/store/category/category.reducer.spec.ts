@@ -1,4 +1,4 @@
-import { AccountActions } from '../account/account.actions';
+import { deleteAccount } from '../account/account-slice';
 import { CategoryActions } from './category.actions';
 import { ICategory } from './category.interface';
 import { CategoryReducer as reducer } from './category.reducer';
@@ -114,7 +114,7 @@ describe('reducers', () => {
                 };
 
                 const newState = reducer(initialState, {
-                    type: AccountActions.DELETE_ACCOUNT,
+                    type: deleteAccount.type,
                     payload: { id: 'accountId' },
                 });
 

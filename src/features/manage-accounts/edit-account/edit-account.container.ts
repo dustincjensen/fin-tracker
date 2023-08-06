@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { createSelector } from 'reselect';
-import { AccountActions } from '../../../store/account/account.actions';
-import { IAccount } from '../../../store/account/account.interface';
+import { Account } from '../../../models/account.type';
+import { updateAccount, archiveAccount } from '../../../store/account/account-slice';
 import { InvestmentRecordSelectors } from '../../../store/investment-record/investment-record.selectors';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
@@ -60,9 +60,9 @@ const mapStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    saveAccount: (account: IAccount) => dispatch(AccountActions.updateAccount(account)),
+    saveAccount: (account: Account) => dispatch(updateAccount(account)),
     archiveAccount: (id: string, archived: boolean, endYear: number, endMonth: number) =>
-        dispatch(AccountActions.archiveAccount(id, archived, endYear, endMonth)),
+        dispatch(archiveAccount({ id, archived, endYear, endMonth })),
 });
 
 export const EditAccountContainer = connect(mapStateToProps, mapDispatchToProps)(EditAccount);

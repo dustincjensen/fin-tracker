@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { AccountReducer } from './account/account.reducer';
+import { accountReducer } from './account/account-slice';
 import { AutoCategoryReducer } from './auto-category/auto-category.reducer';
 import { CategoryReducer } from './category/category.reducer';
 import { InvestmentRecordReducer } from './investment-record/investment-record.reducer';
@@ -10,7 +10,7 @@ import { ThirdPartyApiReducer } from './third-party-api/third-party-api.reducer'
 
 // TODO fixing typing...
 export const rootReducer = combineReducers<IStore>({
-    accounts: AccountReducer,
+    accounts: accountReducer,
     autoCategories: AutoCategoryReducer,
     categories: CategoryReducer,
     investmentRecords: InvestmentRecordReducer,

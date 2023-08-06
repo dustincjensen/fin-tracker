@@ -1,4 +1,4 @@
-import { IAccount } from '../../../store/account/account.interface';
+import { Account } from '../../../models/account.type';
 
 export interface IEditAccountProps {
     /**
@@ -27,12 +27,12 @@ export interface IEditAccountProps {
     /**
      * Action to save an account.
      */
-    saveAccount: (account: IAccount) => void;
+    saveAccount: (account: Account) => void;
 
     /**
      * The existing account if available.
      */
-    account?: IAccount;
+    account?: Account;
 
     /**
      * The current balance of the account if available.

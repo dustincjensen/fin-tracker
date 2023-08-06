@@ -1,4 +1,4 @@
-import { IAccount } from '../account/account.interface';
+import { Account } from '../../models/account.type';
 import { ICategory } from './category.interface';
 
 export class CategoryActions {
@@ -22,7 +22,7 @@ export class CategoryActions {
         payload: category,
     });
 
-    public static addTransferCategory = (account: IAccount) => ({
+    public static addTransferCategory = (account: Account) => ({
         type: CategoryActions.ADD_TRANSFER_CATEGORY,
         payload: account,
     });

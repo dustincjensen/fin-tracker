@@ -3,10 +3,10 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { NavLink } from '../../components/nav-link/nav-link.component';
 import { useActiveAccounts } from '../../hooks/accounts/use-active-accounts.hook';
-import { IAccount } from '../../store/account/account.interface';
+import { Account } from '../../models/account.type';
 import { accountRoutes, accountTypeIcons, isBankAccount, isInvestmentAccount } from '../../utils/account.utils';
 
-const AccountLink = ({ account, pathname }: { account: IAccount; pathname: string }) => {
+const AccountLink = ({ account, pathname }: { account: Account; pathname: string }) => {
     const type = account.accountType;
     const toLocation = `${accountRoutes[type]}/${account.id}`;
     const icon = accountTypeIcons[account.accountType];

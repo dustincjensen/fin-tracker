@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useBackgroundWorkerContext } from '../../background-worker-provider.component';
 import { useActiveBankAccounts } from '../../hooks/accounts/use-active-bank-accounts.hook';
 import { WorkerEventType } from '../../models/_worker-event.type';
-import { IAccount } from '../../store/account/account.interface';
+import { Account } from '../../models/account.type';
 import { IAutoCategory } from '../../store/auto-category/auto-category.interface';
 import { AutoCategorySelectors } from '../../store/auto-category/auto-category.selectors';
 import { ParseType } from '../../store/pending-record/parse.type';
@@ -23,7 +23,7 @@ export const useNewRecords = () => {
     const worker = useBackgroundWorkerContext();
 
     const importAction = useCallback(
-        (account: IAccount, autoCategories: IAutoCategory[], file, parseType: ParseType) => {
+        (account: Account, autoCategories: IAutoCategory[], file, parseType: ParseType) => {
             dispatch(PendingRecordActions.clearError());
             const type = parseTypeLookup[parseType];
             worker.invokeBackgroundTask?.(type, [account.id, file, autoCategories, account.accountType]);

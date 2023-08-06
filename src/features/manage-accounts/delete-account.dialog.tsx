@@ -1,14 +1,14 @@
 import { Dialog } from 'evergreen-ui';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { AccountActions } from '../../store/account/account.actions';
-import { IAccount } from '../../store/account/account.interface';
+import { Account } from '../../models/account.type';
+import { deleteAccount } from '../../store/account/account-slice';
 
 type DeleteAccountProps = {
     /**
      * The account to delete.
      */
-    account: IAccount;
+    account: Account;
 
     /**
      * Action to call when the modal closes.
@@ -24,7 +24,7 @@ export const DeleteAccountDialog = ({ account, onClose }: DeleteAccountProps) =>
     }
 
     const confirm = () => {
-        dispatch(AccountActions.deleteAccount(account));
+        dispatch(deleteAccount(account));
         onClose();
     };
 

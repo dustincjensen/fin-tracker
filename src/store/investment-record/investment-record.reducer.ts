@@ -1,6 +1,6 @@
 import { Draft } from 'immer';
-import { AccountActions } from '../account/account.actions';
-import { IAccount } from '../account/account.interface';
+import { Account } from '../../models/account.type';
+import { deleteAccount } from '../account/account-slice';
 import { createReducer } from '../create-reducer';
 import { InvestmentRecordActions } from './investment-record.actions';
 import { IInvestmentRecord } from './investment-record.interface';
@@ -12,7 +12,7 @@ export const InvestmentRecordReducer = createReducer(
     {
         [InvestmentRecordActions.ADD_RECORD]: addRecord,
         [InvestmentRecordActions.DELETE_RECORD]: deleteRecord,
-        [AccountActions.DELETE_ACCOUNT]: deleteRecords,
+        [deleteAccount.type]: deleteRecords,
     },
     initialState
 );
@@ -36,6 +36,6 @@ function deleteRecord(draft: Draft<IInvestmentRecordStore>, record: IInvestmentR
  * @param draft       The draft state.
  * @param accountId   The account id to delete records for.
  */
-function deleteRecords(draft: Draft<IInvestmentRecordStore>, account: IAccount) {
+function deleteRecords(draft: Draft<IInvestmentRecordStore>, account: Account) {
     delete draft.records[account.id];
 }

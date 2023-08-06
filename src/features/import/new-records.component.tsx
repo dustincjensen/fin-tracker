@@ -1,11 +1,11 @@
 import { Button, FilePicker, FormField, Heading, majorScale, Pane, SelectField, Alert, ImportIcon } from 'evergreen-ui';
 import React from 'react';
-import { IAccount } from '../../store/account/account.interface';
+import { Account } from '../../models/account.type';
 import { ParseType } from '../../store/pending-record/parse.type';
 import { isNullOrUndefined } from '../../utils/object.utils';
 import { useNewRecords } from './use-new-records.hook';
 
-const getAccountOptions = (accounts: IAccount[]) =>
+const getAccountOptions = (accounts: Account[]) =>
     accounts.map(a => (
         <option key={a.id} value={a.id}>
             {a.name}{' '}

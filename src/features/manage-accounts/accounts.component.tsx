@@ -1,7 +1,7 @@
 import { Table, Tooltip, IconButton, Pane, ArchiveIcon, EditIcon, TrashIcon } from 'evergreen-ui';
 import React from 'react';
 import { useAccounts } from '../../hooks/accounts/use-accounts.hook';
-import { IAccount } from '../../store/account/account.interface';
+import { Account } from '../../models/account.type';
 import { accountTypeLabels } from '../../utils/account.utils';
 import { DeleteAccountDialog } from './delete-account.dialog';
 import { EditAccountContainer } from './edit-account/edit-account.container';
@@ -9,7 +9,7 @@ import { EditAccountContainer } from './edit-account/edit-account.container';
 export const Accounts = () => {
     const { accounts } = useAccounts();
 
-    const [accountToDelete, setAccountToDelete] = React.useState<IAccount | null>(null);
+    const [accountToDelete, setAccountToDelete] = React.useState<Account | null>(null);
     const [isEditing, setIsEditing] = React.useState<string | undefined>(undefined);
 
     React.useEffect(() => {

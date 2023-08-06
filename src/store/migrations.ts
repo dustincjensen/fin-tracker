@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import { IAccount } from './account/account.interface';
+import { Account } from '../models/account.type';
 import { AccountSelectors } from './account/account.selectors';
 import { CategoryActions } from './category/category.actions';
 import { CategorySelectors } from './category/category.selectors';
@@ -31,7 +31,7 @@ const migration_1_1_0 = storage => {
     if (!categories.find(c => c.accountTransferId === '__EXTERNAL_ACCOUNT__')) {
         console.log('Adding __EXTERNAL_ACCOUNT__ transfer category');
         tmpStore.dispatch(
-            CategoryActions.addTransferCategory({ id: '__EXTERNAL_ACCOUNT__', name: 'External Account' } as IAccount)
+            CategoryActions.addTransferCategory({ id: '__EXTERNAL_ACCOUNT__', name: 'External Account' } as Account)
         );
     }
 
