@@ -1,4 +1,5 @@
 import { Account } from '../../models/account.type';
+import { build } from '../../utils/test.utils';
 import {
     accountReducer,
     archiveAccount,
@@ -8,7 +9,7 @@ import {
     AccountStore,
 } from './account-slice';
 
-describe('account slice', () => {
+describe('Account slice', () => {
     const accountId = 'accountId';
     const otherAccountId = 'otherAccountId';
     const account: Account = {
@@ -30,18 +31,22 @@ describe('account slice', () => {
 
     describe('initial state', () => {
         it('should return the initial state', () => {
-            expect(accountReducer(undefined, { type: undefined })).toEqual({
-                accounts: {},
-            });
+            expect(accountReducer(undefined, { type: undefined })).toEqual(
+                build<AccountStore>({
+                    accounts: {},
+                })
+            );
         });
     });
 
     describe('saveNewAccount', () => {
         it('should add a new account', () => {
             const newState = accountReducer({ accounts: {} }, saveNewAccount(account));
-            expect(newState).toEqual({
-                accounts: { [accountId]: account },
-            });
+            expect(newState).toEqual(
+                build<AccountStore>({
+                    accounts: { [accountId]: account },
+                })
+            );
         });
     });
 
@@ -68,13 +73,14 @@ describe('account slice', () => {
                 updateAccount({ ...account, endMonth: 11, endYear: 2021 })
             );
 
-            const expectedState: AccountStore = {
-                accounts: {
-                    [accountId]: { ...account, endMonth: 11, endYear: 2021 },
-                    [otherAccountId]: otherAccount,
-                },
-            };
-            expect(newState).toEqual(expectedState);
+            expect(newState).toEqual(
+                build<AccountStore>({
+                    accounts: {
+                        [accountId]: { ...account, endMonth: 11, endYear: 2021 },
+                        [otherAccountId]: otherAccount,
+                    },
+                })
+            );
         });
     });
 
@@ -90,12 +96,13 @@ describe('account slice', () => {
                 deleteAccount(account)
             );
 
-            const expectedState: AccountStore = {
-                accounts: {
-                    [otherAccountId]: otherAccount,
-                },
-            };
-            expect(newState).toEqual(expectedState);
+            expect(newState).toEqual(
+                build<AccountStore>({
+                    accounts: {
+                        [otherAccountId]: otherAccount,
+                    },
+                })
+            );
         });
     });
 
@@ -110,17 +117,18 @@ describe('account slice', () => {
                 archiveAccount({ id: accountId, archived: true, endYear: 2020, endMonth: 11 })
             );
 
-            const expectedState: AccountStore = {
-                accounts: {
-                    [accountId]: {
-                        ...account,
-                        archived: true,
-                        endYear: 2020,
-                        endMonth: 11,
+            expect(newState).toEqual(
+                build<AccountStore>({
+                    accounts: {
+                        [accountId]: {
+                            ...account,
+                            archived: true,
+                            endYear: 2020,
+                            endMonth: 11,
+                        },
                     },
-                },
-            };
-            expect(newState).toEqual(expectedState);
+                })
+            );
         });
     });
 });
