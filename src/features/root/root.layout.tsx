@@ -15,24 +15,24 @@ import { SidebarLayout } from '../sidebar/sidebar.layout';
 const newThemeOption = 'newThemeOption';
 
 export const RootLayout = () => {
-  const [newTheme, setNewTheme] = useLocalStorage<boolean>(newThemeOption, false);
-  return (
-    <ThemeProvider value={newTheme ? defaultTheme : classicTheme}>
-      <Pane height='100%' display='grid' gridTemplateColumns='auto 1fr' borderTop className='app_fade_in'>
-        <SidebarLayout theme={newTheme} toggleTheme={setNewTheme} />
-        <Pane overflowX='hidden' overflowY='auto' className='scroll-bar-styled'>
-          <Switch>
-            <Route exact path='/' component={HomeLayout} />
-            <Route exact path='/accounts' component={ManageAccountLayout} />
-            <Route exact path='/autoCategories' component={ManageAutoCategoriesLayout} />
-            <Route exact path='/categories' component={ManageCategoryLayout} />
-            <Route exact path='/account/:accountId' component={AccountLayout} />
-            <Route exact path='/investment/:accountId' component={InvestmentLayout} />
-            <Route exact path='/import/:accountId?' component={ImportLayout} />
-            <Route exact path='/thirdPartyApis' component={ManageThirdPartyApisLayout} />
-          </Switch>
-        </Pane>
-      </Pane>
-    </ThemeProvider>
-  );
+    const [newTheme, setNewTheme] = useLocalStorage<boolean>(newThemeOption, false);
+    return (
+        <ThemeProvider value={newTheme ? defaultTheme : classicTheme}>
+            <Pane height='100%' display='grid' gridTemplateColumns='auto 1fr' borderTop className='app_fade_in'>
+                <SidebarLayout theme={newTheme} toggleTheme={setNewTheme} />
+                <Pane overflowX='hidden' overflowY='auto' className='scroll-bar-styled'>
+                    <Switch>
+                        <Route exact path='/' component={HomeLayout} />
+                        <Route exact path='/accounts' component={ManageAccountLayout} />
+                        <Route exact path='/autoCategories' component={ManageAutoCategoriesLayout} />
+                        <Route exact path='/categories' component={ManageCategoryLayout} />
+                        <Route exact path='/account/:accountId' component={AccountLayout} />
+                        <Route exact path='/investment/:accountId' component={InvestmentLayout} />
+                        <Route exact path='/import/:accountId?' component={ImportLayout} />
+                        <Route exact path='/thirdPartyApis' component={ManageThirdPartyApisLayout} />
+                    </Switch>
+                </Pane>
+            </Pane>
+        </ThemeProvider>
+    );
 };

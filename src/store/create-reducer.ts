@@ -9,11 +9,11 @@ import { produce, Draft, Immutable } from 'immer';
  */
 // eslint-disable-next-line @typescript-eslint/ban-types
 export function createReducer<T>(actionList: { [type: string]: Function }, initialState: Immutable<T>) {
-  return produce((draft: Draft<T>, action) => {
-    const actionToPerform = actionList[action.type];
-    if (!actionToPerform) {
-      return draft;
-    }
-    return actionToPerform(draft, action.payload);
-  }, initialState);
+    return produce((draft: Draft<T>, action) => {
+        const actionToPerform = actionList[action.type];
+        if (!actionToPerform) {
+            return draft;
+        }
+        return actionToPerform(draft, action.payload);
+    }, initialState);
 }

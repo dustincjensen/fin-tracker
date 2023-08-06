@@ -10,50 +10,50 @@ import { ICategoryStore } from './category.store.interface';
 const initialState: ICategoryStore = { categories: {} };
 
 export const CategoryReducer = createReducer(
-  {
-    [CategoryActions.SAVE_NEW_CATEGORY]: saveNewCategory,
-    [CategoryActions.UPDATE_CATEGORY]: updateCategory,
-    [CategoryActions.DELETE_CATEGORY]: deleteCategory,
-    [AccountActions.SAVE_NEW_ACCOUNT]: createTransferCategory,
-    [CategoryActions.ADD_TRANSFER_CATEGORY]: createTransferCategory,
-    [AccountActions.DELETE_ACCOUNT]: deleteTransferCategory,
-  },
-  initialState
+    {
+        [CategoryActions.SAVE_NEW_CATEGORY]: saveNewCategory,
+        [CategoryActions.UPDATE_CATEGORY]: updateCategory,
+        [CategoryActions.DELETE_CATEGORY]: deleteCategory,
+        [AccountActions.SAVE_NEW_ACCOUNT]: createTransferCategory,
+        [CategoryActions.ADD_TRANSFER_CATEGORY]: createTransferCategory,
+        [AccountActions.DELETE_ACCOUNT]: deleteTransferCategory,
+    },
+    initialState
 );
 
 function saveNewCategory(draft: Draft<ICategoryStore>, newCategory: ICategory) {
-  const { id } = newCategory;
-  draft.categories[id] = newCategory;
+    const { id } = newCategory;
+    draft.categories[id] = newCategory;
 }
 
 function updateCategory(draft: Draft<ICategoryStore>, updatedCategory: ICategory) {
-  const { id } = updatedCategory;
-  if (!draft.categories[id]) {
-    throw Error('Category does not exist.');
-  }
-  draft.categories[id] = updatedCategory;
+    const { id } = updatedCategory;
+    if (!draft.categories[id]) {
+        throw Error('Category does not exist.');
+    }
+    draft.categories[id] = updatedCategory;
 }
 
 function deleteCategory(draft: Draft<ICategoryStore>, deletedCategory: ICategory) {
-  delete draft.categories[deletedCategory.id];
+    delete draft.categories[deletedCategory.id];
 }
 
 function createTransferCategory(draft: Draft<ICategoryStore>, newAccount: IAccount) {
-  const newCategory: ICategory = {
-    id: newGuid(),
-    name: `${newAccount.name} Transfer`,
-    color: '#000',
-    accountTransferId: newAccount.id,
-  };
-  draft.categories[newCategory.id] = newCategory;
+    const newCategory: ICategory = {
+        id: newGuid(),
+        name: `${newAccount.name} Transfer`,
+        color: '#000',
+        accountTransferId: newAccount.id,
+    };
+    draft.categories[newCategory.id] = newCategory;
 }
 
 function deleteTransferCategory(draft: Draft<ICategoryStore>, account: IAccount) {
-  const category = Object.keys(draft.categories)
-    .map(id => draft.categories[id])
-    .find(c => c.accountTransferId === account.id);
+    const category = Object.keys(draft.categories)
+        .map(id => draft.categories[id])
+        .find(c => c.accountTransferId === account.id);
 
-  if (category) {
-    delete draft.categories[category.id];
-  }
+    if (category) {
+        delete draft.categories[category.id];
+    }
 }

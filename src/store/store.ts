@@ -10,11 +10,11 @@ import { ThirdPartyApiReducer } from './third-party-api/third-party-api.reducer'
 
 // TODO fixing typing...
 export const rootReducer = combineReducers<IStore>({
-  accounts: AccountReducer,
-  autoCategories: AutoCategoryReducer,
-  categories: CategoryReducer,
-  investmentRecords: InvestmentRecordReducer,
-  pendingRecords: PendingRecordReducer,
-  records: RecordReducer,
-  thirdPartyApi: ThirdPartyApiReducer,
+    accounts: AccountReducer,
+    autoCategories: AutoCategoryReducer,
+    categories: CategoryReducer,
+    investmentRecords: InvestmentRecordReducer,
+    pendingRecords: PendingRecordReducer,
+    records: RecordReducer,
+    thirdPartyApi: ThirdPartyApiReducer,
 });

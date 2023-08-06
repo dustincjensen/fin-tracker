@@ -5,43 +5,43 @@ import { RecordActions } from '../../../store/record/record.actions';
 import { IEditDetailsProps } from './edit-details.props.interface';
 
 export const EditDetailsDialogComponent = ({ record, onClose }: IEditDetailsProps) => {
-  const dispatch = useDispatch();
-  const [details, setDetails] = React.useState<string>('');
+    const dispatch = useDispatch();
+    const [details, setDetails] = React.useState<string>('');
 
-  React.useEffect(() => {
-    setDetails(record?.details || '');
-  }, [record]);
+    React.useEffect(() => {
+        setDetails(record?.details || '');
+    }, [record]);
 
-  if (!record) {
-    return null;
-  }
+    if (!record) {
+        return null;
+    }
 
-  const confirm = () => {
-    dispatch(RecordActions.setDetails(record.accountId, record.id, details));
-    onClose();
-  };
+    const confirm = () => {
+        dispatch(RecordActions.setDetails(record.accountId, record.id, details));
+        onClose();
+    };
 
-  return (
-    <Dialog
-      isShown={true}
-      onCloseComplete={onClose}
-      preventBodyScrolling
-      confirmLabel='Save Details'
-      title='Edit Details'
-      onConfirm={confirm}
-      shouldCloseOnOverlayClick={false}
-    >
-      <FormField label='Description' marginBottom={majorScale(3)}>
-        <Text>{record.description}</Text>
-      </FormField>
-      <TextInputField
-        label='Details'
-        value={details}
-        marginBottom={majorScale(3)}
-        onChange={evt => setDetails(evt.target.value)}
-      />
-    </Dialog>
-  );
+    return (
+        <Dialog
+            isShown={true}
+            onCloseComplete={onClose}
+            preventBodyScrolling
+            confirmLabel='Save Details'
+            title='Edit Details'
+            onConfirm={confirm}
+            shouldCloseOnOverlayClick={false}
+        >
+            <FormField label='Description' marginBottom={majorScale(3)}>
+                <Text>{record.description}</Text>
+            </FormField>
+            <TextInputField
+                label='Details'
+                value={details}
+                marginBottom={majorScale(3)}
+                onChange={evt => setDetails(evt.target.value)}
+            />
+        </Dialog>
+    );
 };
 
 export const EditDetailsDialog = React.memo(EditDetailsDialogComponent);

@@ -7,17 +7,17 @@ import { InvestmentForCurrency } from './investment-for-currency.component';
 import { TransferHistory } from './transfer-history.component';
 
 export const InvestmentLayout = () => {
-  const { accountId } = useParams<{ accountId: string }>();
-  return (
-    <ErrorBoundary>
-      <Pane padding={20}>
-        <InvestmentDetailSummary accountId={accountId} />
-        <Pane display='grid' gridTemplateColumns='1fr 1fr' columnGap='20px' marginBottom={30}>
-          <InvestmentForCurrency accountId={accountId} currency='CAD' />
-          <InvestmentForCurrency accountId={accountId} currency='USD' />
-        </Pane>
-        <TransferHistory accountId={accountId} />
-      </Pane>
-    </ErrorBoundary>
-  );
+    const { accountId } = useParams<{ accountId: string }>();
+    return (
+        <ErrorBoundary>
+            <Pane padding={20}>
+                <InvestmentDetailSummary accountId={accountId} />
+                <Pane display='grid' gridTemplateColumns='1fr 1fr' columnGap='20px' marginBottom={30}>
+                    <InvestmentForCurrency accountId={accountId} currency='CAD' />
+                    <InvestmentForCurrency accountId={accountId} currency='USD' />
+                </Pane>
+                <TransferHistory accountId={accountId} />
+            </Pane>
+        </ErrorBoundary>
+    );
 };

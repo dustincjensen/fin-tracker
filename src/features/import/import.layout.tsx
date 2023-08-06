@@ -9,22 +9,22 @@ import { NewRecords } from './new-records.component';
 import { PendingRecords } from './pending-records.component';
 
 export const ImportLayout = (props: RouteComponentProps<{ accountId?: string }>) => {
-  const hasPendingRecords = useSelector(PendingRecordSelectors.pendingRecords).accountId != undefined;
-  const { accountId } = props.match.params;
+    const hasPendingRecords = useSelector(PendingRecordSelectors.pendingRecords).accountId != undefined;
+    const { accountId } = props.match.params;
 
-  return (
-    <ErrorBoundary>
-      <Pane height='100%' padding={20}>
-        {!hasPendingRecords && <NewRecords key={accountId} accountId={accountId} />}
-        {hasPendingRecords && (
-          <>
-            <Pane marginBottom={20}>
-              <ActionPendingRecords />
+    return (
+        <ErrorBoundary>
+            <Pane height='100%' padding={20}>
+                {!hasPendingRecords && <NewRecords key={accountId} accountId={accountId} />}
+                {hasPendingRecords && (
+                    <>
+                        <Pane marginBottom={20}>
+                            <ActionPendingRecords />
+                        </Pane>
+                        <PendingRecords />
+                    </>
+                )}
             </Pane>
-            <PendingRecords />
-          </>
-        )}
-      </Pane>
-    </ErrorBoundary>
-  );
+        </ErrorBoundary>
+    );
 };

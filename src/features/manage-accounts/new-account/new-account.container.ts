@@ -9,14 +9,14 @@ type StateProps = Pick<IEditAccountProps, 'headerText' | 'saveButtonText' | 'can
 type DispatchProps = Pick<IEditAccountProps, 'saveAccount'>;
 
 const mapStateToProps = (): StateProps => ({
-  headerText: 'New Account',
-  saveButtonText: 'Save Account',
-  canEditComplexFields: true,
-  isNew: true,
+    headerText: 'New Account',
+    saveButtonText: 'Save Account',
+    canEditComplexFields: true,
+    isNew: true,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-  saveAccount: (account: IAccount) => dispatch(AccountActions.saveNewAccount(account)),
+    saveAccount: (account: IAccount) => dispatch(AccountActions.saveNewAccount(account)),
 });
 
 export const NewAccountContainer = connect(mapStateToProps, mapDispatchToProps)(EditAccount);

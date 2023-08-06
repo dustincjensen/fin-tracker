@@ -9,28 +9,28 @@ import { sortByDateDescending } from '../../utils/record.utils';
 import { useBalanceByRate } from '../investment/_hooks/use-balance-by-rate.hook';
 
 const latestBalanceSelector = createSelector(
-  InvestmentRecordSelectors.records,
-  (state: IStore, accountId: string) => accountId,
-  (state: IStore, accountId: string, currency: string) => currency,
-  (records, accountId, currency) =>
-    records[accountId]?.filter(r => r.investmentCurrency === currency).sort(sortByDateDescending)[0] || undefined
+    InvestmentRecordSelectors.records,
+    (state: IStore, accountId: string) => accountId,
+    (state: IStore, accountId: string, currency: string) => currency,
+    (records, accountId, currency) =>
+        records[accountId]?.filter(r => r.investmentCurrency === currency).sort(sortByDateDescending)[0] || undefined
 );
 
 export const useInvestmentSummary = (accountId: string) => {
-  const { name, accountType } = useSelector((state: IStore) => AccountSelectors.account(state, accountId));
-  const icon = accountTypeIcons[accountType];
+    const { name, accountType } = useSelector((state: IStore) => AccountSelectors.account(state, accountId));
+    const icon = accountTypeIcons[accountType];
 
-  const cadLatest = useSelector((state: IStore) => latestBalanceSelector(state, accountId, 'CAD'));
-  const usdLatest = useSelector((state: IStore) => latestBalanceSelector(state, accountId, 'USD'));
-  const { convertedBalance: usdConverted } = useBalanceByRate(
-    usdLatest?.balance,
-    usdLatest?.date,
-    usdLatest?.investmentCurrency
-  );
+    const cadLatest = useSelector((state: IStore) => latestBalanceSelector(state, accountId, 'CAD'));
+    const usdLatest = useSelector((state: IStore) => latestBalanceSelector(state, accountId, 'USD'));
+    const { convertedBalance: usdConverted } = useBalanceByRate(
+        usdLatest?.balance,
+        usdLatest?.date,
+        usdLatest?.investmentCurrency
+    );
 
-  const latestDate = formatDateFull(getLatestDate([cadLatest?.date, usdLatest?.date]));
-  const hasBalance = !!cadLatest?.balance || !!usdConverted;
-  const balance = (cadLatest?.balance || 0.0) + (usdConverted || 0.0);
+    const latestDate = formatDateFull(getLatestDate([cadLatest?.date, usdLatest?.date]));
+    const hasBalance = !!cadLatest?.balance || !!usdConverted;
+    const balance = (cadLatest?.balance || 0.0) + (usdConverted || 0.0);
 
-  return { name, icon, latestDate, balance: hasBalance ? balance : undefined };
+    return { name, icon, latestDate, balance: hasBalance ? balance : undefined };
 };

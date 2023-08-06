@@ -6,23 +6,23 @@ import { PendingRecordActions } from './pending-record.actions';
 import { IPendingRecordStore } from './pending-record.store.interface';
 
 const initialState: IPendingRecordStore = {
-  accountId: undefined,
-  filePath: undefined,
-  fileName: undefined,
-  records: [],
-  error: undefined,
+    accountId: undefined,
+    filePath: undefined,
+    fileName: undefined,
+    records: [],
+    error: undefined,
 };
 
 export const PendingRecordReducer = createReducer(
-  {
-    [PendingRecordActions.NEW_RECORDS_IMPORTED]: importRecords,
-    [PendingRecordActions.NEW_RECORDS_ERROR]: importError,
-    [PendingRecordActions.CLEAR_RECORDS_ERROR]: clearError,
-    [PendingRecordActions.CLEAR_RECORDS_IMPORTED]: clearRecords,
-    [RecordActions.SAVE_NEW_RECORDS]: clearRecords,
-    [PendingRecordActions.UPDATE_PENDING_RECORD_CATEGORY]: updatePendingRecordCategory,
-  },
-  initialState
+    {
+        [PendingRecordActions.NEW_RECORDS_IMPORTED]: importRecords,
+        [PendingRecordActions.NEW_RECORDS_ERROR]: importError,
+        [PendingRecordActions.CLEAR_RECORDS_ERROR]: clearError,
+        [PendingRecordActions.CLEAR_RECORDS_IMPORTED]: clearRecords,
+        [RecordActions.SAVE_NEW_RECORDS]: clearRecords,
+        [PendingRecordActions.UPDATE_PENDING_RECORD_CATEGORY]: updatePendingRecordCategory,
+    },
+    initialState
 );
 
 /**
@@ -32,29 +32,29 @@ export const PendingRecordReducer = createReducer(
  * @param records   The records to review for importing.
  */
 function importRecords(
-  draft: Draft<IPendingRecordStore>,
-  payload: {
-    records: IRecord[];
-    accountId: string;
-    filePath: string;
-    fileName: string;
-  }
+    draft: Draft<IPendingRecordStore>,
+    payload: {
+        records: IRecord[];
+        accountId: string;
+        filePath: string;
+        fileName: string;
+    }
 ) {
-  const { records, accountId, filePath, fileName } = payload;
+    const { records, accountId, filePath, fileName } = payload;
 
-  draft.error = undefined;
+    draft.error = undefined;
 
-  if (records && records.length > 0) {
-    draft.accountId = accountId;
-    draft.filePath = filePath;
-    draft.fileName = fileName;
-    draft.records = records;
-  } else {
-    draft.accountId = undefined;
-    draft.filePath = undefined;
-    // TODO why don't we clear file name here?
-    draft.records = [];
-  }
+    if (records && records.length > 0) {
+        draft.accountId = accountId;
+        draft.filePath = filePath;
+        draft.fileName = fileName;
+        draft.records = records;
+    } else {
+        draft.accountId = undefined;
+        draft.filePath = undefined;
+        // TODO why don't we clear file name here?
+        draft.records = [];
+    }
 }
 
 /**
@@ -64,13 +64,13 @@ function importRecords(
  * @param payload   The details of the file that failed parsing.
  */
 function importError(
-  draft: Draft<IPendingRecordStore>,
-  payload: { error: string; filePath: string; fileName: string }
+    draft: Draft<IPendingRecordStore>,
+    payload: { error: string; filePath: string; fileName: string }
 ) {
-  const { error, fileName, filePath } = payload;
-  draft.error = error;
-  draft.fileName = fileName;
-  draft.filePath = filePath;
+    const { error, fileName, filePath } = payload;
+    draft.error = error;
+    draft.fileName = fileName;
+    draft.filePath = filePath;
 }
 
 /**
@@ -79,7 +79,7 @@ function importError(
  * @param draft     The draft state.
  */
 function clearError(draft: Draft<IPendingRecordStore>) {
-  draft.error = undefined;
+    draft.error = undefined;
 }
 
 /**
@@ -88,11 +88,11 @@ function clearError(draft: Draft<IPendingRecordStore>) {
  * @param draft     The draft state.
  */
 function clearRecords(draft: Draft<IPendingRecordStore>) {
-  draft.accountId = undefined;
-  draft.filePath = undefined;
-  draft.fileName = undefined;
-  draft.records = [];
-  draft.error = undefined;
+    draft.accountId = undefined;
+    draft.filePath = undefined;
+    draft.fileName = undefined;
+    draft.records = [];
+    draft.error = undefined;
 }
 
 /**
@@ -102,13 +102,13 @@ function clearRecords(draft: Draft<IPendingRecordStore>) {
  * @param payload   The details of the new category.
  */
 function updatePendingRecordCategory(
-  draft: Draft<IPendingRecordStore>,
-  payload: { recordId: string; categoryId: string }
+    draft: Draft<IPendingRecordStore>,
+    payload: { recordId: string; categoryId: string }
 ) {
-  const { recordId, categoryId } = payload;
-  const record = draft.records.find(r => r.id === recordId);
-  if (record) {
-    record.categoryId = categoryId;
-    record.autoCategoryId = undefined;
-  }
+    const { recordId, categoryId } = payload;
+    const record = draft.records.find(r => r.id === recordId);
+    if (record) {
+        record.categoryId = categoryId;
+        record.autoCategoryId = undefined;
+    }
 }

@@ -5,5 +5,5 @@
  * @param value   The value to round.
  */
 export function round(value: number): number {
-  return Math.round((value + Number.EPSILON) * 100) / 100;
+    return Math.round((value + Number.EPSILON) * 100) / 100;
 }

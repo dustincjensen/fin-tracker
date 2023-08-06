@@ -12,18 +12,18 @@ import { ISplitRecord } from './split-record.interface';
 const initialState: IRecordStore = { records: {} };
 
 export const RecordReducer = createReducer(
-  {
-    [RecordActions.SAVE_NEW_RECORDS]: saveNewRecords,
-    [RecordActions.SET_DETAILS]: setDetails,
-    [RecordActions.SET_RECORD_CATEGORY]: setRecordCategory,
-    [RecordActions.SET_RECORD_AUTO_CATEGORY]: setRecordAutoCategory,
-    [RecordActions.SET_SPLIT_RECORD_CATEGORY]: setSplitRecordCategory,
-    [RecordActions.SET_SPLIT_RECORDS]: setSplitRecords,
-    [RecordActions.DELETE_SPLIT_RECORDS]: deleteSplitRecords,
-    [AccountActions.DELETE_ACCOUNT]: deleteRecords,
-    [AutoCategoryActions.DELETE_AUTO_CATEGORY]: removeRecordAutoCategory,
-  },
-  initialState
+    {
+        [RecordActions.SAVE_NEW_RECORDS]: saveNewRecords,
+        [RecordActions.SET_DETAILS]: setDetails,
+        [RecordActions.SET_RECORD_CATEGORY]: setRecordCategory,
+        [RecordActions.SET_RECORD_AUTO_CATEGORY]: setRecordAutoCategory,
+        [RecordActions.SET_SPLIT_RECORD_CATEGORY]: setSplitRecordCategory,
+        [RecordActions.SET_SPLIT_RECORDS]: setSplitRecords,
+        [RecordActions.DELETE_SPLIT_RECORDS]: deleteSplitRecords,
+        [AccountActions.DELETE_ACCOUNT]: deleteRecords,
+        [AutoCategoryActions.DELETE_AUTO_CATEGORY]: removeRecordAutoCategory,
+    },
+    initialState
 );
 
 /**
@@ -33,11 +33,11 @@ export const RecordReducer = createReducer(
  * @param records   The full list of our account records.
  */
 function saveNewRecords(draft: Draft<IRecordStore>, records: IRecord[]) {
-  // TODO if the only record is a manual and it get's deleted... this doesn't remove the record.
-  if (records && records.length > 0) {
-    const accountId = records[0]?.accountId;
-    draft.records[accountId] = records;
-  }
+    // TODO if the only record is a manual and it get's deleted... this doesn't remove the record.
+    if (records && records.length > 0) {
+        const accountId = records[0]?.accountId;
+        draft.records[accountId] = records;
+    }
 }
 
 /**
@@ -47,9 +47,9 @@ function saveNewRecords(draft: Draft<IRecordStore>, records: IRecord[]) {
  * @param payload   The payload containing the account, record, and the details for the record.
  */
 function setDetails(draft: Draft<IRecordStore>, payload: { accountId: string; recordId: string; details: string }) {
-  const { accountId, recordId, details } = payload;
-  const record = draft.records[accountId].find(record => record.id === recordId);
-  record.details = details;
+    const { accountId, recordId, details } = payload;
+    const record = draft.records[accountId].find(record => record.id === recordId);
+    record.details = details;
 }
 
 /**
@@ -59,13 +59,13 @@ function setDetails(draft: Draft<IRecordStore>, payload: { accountId: string; re
  * @param payload   The payload containing the account, record and the category for the record.
  */
 function setRecordCategory(
-  draft: Draft<IRecordStore>,
-  payload: { accountId: string; recordId: string; categoryId: string }
+    draft: Draft<IRecordStore>,
+    payload: { accountId: string; recordId: string; categoryId: string }
 ) {
-  const { accountId, recordId, categoryId } = payload;
-  const record = draft.records[accountId].find(record => record.id === recordId);
-  record.categoryId = categoryId;
-  record.autoCategoryId = undefined;
+    const { accountId, recordId, categoryId } = payload;
+    const record = draft.records[accountId].find(record => record.id === recordId);
+    record.categoryId = categoryId;
+    record.autoCategoryId = undefined;
 }
 
 /**
@@ -75,28 +75,28 @@ function setRecordCategory(
  * @param payload   The action payload.
  */
 function setRecordAutoCategory(
-  draft: Draft<IRecordStore>,
-  payload: {
-    autoCategoryId: string;
-    accountId: string;
-    categoryId: string;
-    description: string;
-    overwriteExisting: boolean;
-  }
+    draft: Draft<IRecordStore>,
+    payload: {
+        autoCategoryId: string;
+        accountId: string;
+        categoryId: string;
+        description: string;
+        overwriteExisting: boolean;
+    }
 ) {
-  const { autoCategoryId, accountId, categoryId, description, overwriteExisting } = payload;
+    const { autoCategoryId, accountId, categoryId, description, overwriteExisting } = payload;
 
-  const recordsThatMatchDescription = draft.records[accountId].filter(
-    r =>
-      !r.splitRecords &&
-      (!r.categoryId || (r.categoryId && r.autoCategoryId) || overwriteExisting) &&
-      r.description.startsWith(description)
-  );
+    const recordsThatMatchDescription = draft.records[accountId].filter(
+        r =>
+            !r.splitRecords &&
+            (!r.categoryId || (r.categoryId && r.autoCategoryId) || overwriteExisting) &&
+            r.description.startsWith(description)
+    );
 
-  for (const matchedRecord of recordsThatMatchDescription) {
-    matchedRecord.autoCategoryId = autoCategoryId;
-    matchedRecord.categoryId = categoryId;
-  }
+    for (const matchedRecord of recordsThatMatchDescription) {
+        matchedRecord.autoCategoryId = autoCategoryId;
+        matchedRecord.categoryId = categoryId;
+    }
 }
 
 /**
@@ -106,14 +106,14 @@ function setRecordAutoCategory(
  * @param autoCategory  The auto category that was removed.
  */
 function removeRecordAutoCategory(draft: Draft<IRecordStore>, autoCategory: IAutoCategory) {
-  const { accountId, id } = autoCategory;
-  const records = draft.records[accountId];
-  for (const record of records) {
-    if (record.autoCategoryId === id) {
-      record.autoCategoryId = undefined;
-      record.categoryId = undefined;
+    const { accountId, id } = autoCategory;
+    const records = draft.records[accountId];
+    for (const record of records) {
+        if (record.autoCategoryId === id) {
+            record.autoCategoryId = undefined;
+            record.categoryId = undefined;
+        }
     }
-  }
 }
 
 /**
@@ -123,13 +123,13 @@ function removeRecordAutoCategory(draft: Draft<IRecordStore>, autoCategory: IAut
  * @param payload   The payload containing the account, record, split record and category for the split record.
  */
 function setSplitRecordCategory(
-  draft: Draft<IRecordStore>,
-  payload: { accountId: string; recordId: string; splitRecordId: string; categoryId: string }
+    draft: Draft<IRecordStore>,
+    payload: { accountId: string; recordId: string; splitRecordId: string; categoryId: string }
 ) {
-  const { accountId, recordId, splitRecordId, categoryId } = payload;
-  const record = draft.records[accountId].find(record => record.id === recordId);
-  const splitRecord = record.splitRecords.find(sr => sr.id === splitRecordId);
-  splitRecord.categoryId = categoryId;
+    const { accountId, recordId, splitRecordId, categoryId } = payload;
+    const record = draft.records[accountId].find(record => record.id === recordId);
+    const splitRecord = record.splitRecords.find(sr => sr.id === splitRecordId);
+    splitRecord.categoryId = categoryId;
 }
 
 /**
@@ -139,13 +139,13 @@ function setSplitRecordCategory(
  * @param payload   The payload containing the account, record and the split records for the record.
  */
 function setSplitRecords(
-  draft: Draft<IRecordStore>,
-  payload: { accountId: string; recordId: string; splitRecords: ISplitRecord[] }
+    draft: Draft<IRecordStore>,
+    payload: { accountId: string; recordId: string; splitRecords: ISplitRecord[] }
 ) {
-  const { accountId, recordId, splitRecords } = payload;
-  const record = draft.records[accountId].find(record => record.id === recordId);
-  record.categoryId = undefined;
-  record.splitRecords = splitRecords;
+    const { accountId, recordId, splitRecords } = payload;
+    const record = draft.records[accountId].find(record => record.id === recordId);
+    record.categoryId = undefined;
+    record.splitRecords = splitRecords;
 }
 
 /**
@@ -155,9 +155,9 @@ function setSplitRecords(
  * @param payload   The payload containing the account and record to delete the split records from.
  */
 function deleteSplitRecords(draft: Draft<IRecordStore>, payload: { accountId: string; recordId: string }) {
-  const { accountId, recordId } = payload;
-  const record = draft.records[accountId].find(record => record.id === recordId);
-  delete record.splitRecords;
+    const { accountId, recordId } = payload;
+    const record = draft.records[accountId].find(record => record.id === recordId);
+    delete record.splitRecords;
 }
 
 /**
@@ -167,5 +167,5 @@ function deleteSplitRecords(draft: Draft<IRecordStore>, payload: { accountId: st
  * @param accountId   The account id to delete records for.
  */
 function deleteRecords(draft: Draft<IRecordStore>, account: IAccount) {
-  delete draft.records[account.id];
+    delete draft.records[account.id];
 }

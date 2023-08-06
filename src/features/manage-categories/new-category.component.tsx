@@ -7,19 +7,19 @@ import { ModifyCategory, ModifyCategoryProps } from './modify-category.component
 type NewCategoryProps = Pick<ModifyCategoryProps, 'close'>;
 
 export const NewCategory = ({ close }: NewCategoryProps) => {
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-  const saveCategory = useCallback(
-    (category: ICategory) => dispatch(CategoryActions.saveNewCategory(category)),
-    [dispatch]
-  );
+    const saveCategory = useCallback(
+        (category: ICategory) => dispatch(CategoryActions.saveNewCategory(category)),
+        [dispatch]
+    );
 
-  return (
-    <ModifyCategory
-      headerText='New Category'
-      saveButtonText='Save Category'
-      saveCategory={saveCategory}
-      close={close}
-    />
-  );
+    return (
+        <ModifyCategory
+            headerText='New Category'
+            saveButtonText='Save Category'
+            saveCategory={saveCategory}
+            close={close}
+        />
+    );
 };

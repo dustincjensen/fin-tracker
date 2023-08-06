@@ -13,28 +13,28 @@ type StateProps = IInstructionsProps;
 const hasAccounts = createSelector(AccountSelectors.accounts, accounts => Object.keys(accounts).length > 0);
 
 const hasRecords = createSelector(RecordSelectors.records, records =>
-  Object.keys(records).some(key => records[key]?.length > 0)
+    Object.keys(records).some(key => records[key]?.length > 0)
 );
 
 const hasCategories = createSelector(
-  CategorySelectors.selectDisplayCategories,
-  categories => Object.keys(categories).length > 0
+    CategorySelectors.selectDisplayCategories,
+    categories => Object.keys(categories).length > 0
 );
 
 const hasAutoCategory = createSelector(AutoCategorySelectors.autoCategories, autoCategories =>
-  Object.keys(autoCategories).some(key => autoCategories[key].length > 0)
+    Object.keys(autoCategories).some(key => autoCategories[key].length > 0)
 );
 
 const hasSplitRecords = createSelector(RecordSelectors.records, records =>
-  Object.keys(records).some(key => records[key].some(record => record.splitRecords?.length > 0))
+    Object.keys(records).some(key => records[key].some(record => record.splitRecords?.length > 0))
 );
 
 const mapStateToProps = (state: IStore): StateProps => ({
-  hasAccounts: hasAccounts(state),
-  atLeastOneAccountHasRecords: hasRecords(state),
-  hasCategories: hasCategories(state),
-  hasAutoCategories: hasAutoCategory(state),
-  hasSplitRecords: hasSplitRecords(state),
+    hasAccounts: hasAccounts(state),
+    atLeastOneAccountHasRecords: hasRecords(state),
+    hasCategories: hasCategories(state),
+    hasAutoCategories: hasAutoCategory(state),
+    hasSplitRecords: hasSplitRecords(state),
 });
 
 export const InstructionsContainer = connect(mapStateToProps)(Instructions);

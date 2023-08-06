@@ -10,20 +10,20 @@ import { createDate, getPreviousMonth } from '../../utils/date.utils';
 import { recordsByDate } from './use-records-by-date.hook';
 
 const previousMonthEndBalance = (account: IAccount, records: IRecord[], date: string): number | undefined => {
-  const previousMonth = getPreviousMonth(date);
-  const previousMonthRecords = recordsByDate(records, previousMonth);
-  if (previousMonthRecords.length > 0) {
-    return previousMonthRecords[previousMonthRecords.length - 1]?.balance;
-  }
+    const previousMonth = getPreviousMonth(date);
+    const previousMonthRecords = recordsByDate(records, previousMonth);
+    if (previousMonthRecords.length > 0) {
+        return previousMonthRecords[previousMonthRecords.length - 1]?.balance;
+    }
 
-  // The month before the provided date did not have records. Try again with the month
-  // before the previous month, but only if we are still after the start date of the account.
-  const accountStartDate = createDate(getAccountStartDate(account.startYear, account.startMonth));
-  if (accountStartDate <= createDate(previousMonth)) {
-    return previousMonthEndBalance(account, records, previousMonth);
-  }
+    // The month before the provided date did not have records. Try again with the month
+    // before the previous month, but only if we are still after the start date of the account.
+    const accountStartDate = createDate(getAccountStartDate(account.startYear, account.startMonth));
+    if (accountStartDate <= createDate(previousMonth)) {
+        return previousMonthEndBalance(account, records, previousMonth);
+    }
 
-  return undefined;
+    return undefined;
 };
 
 /**
@@ -33,9 +33,9 @@ const previousMonthEndBalance = (account: IAccount, records: IRecord[], date: st
  * @param date        The year/month to get the balance for.
  */
 export const usePreviousMonthEndBalance = (accountId: string, date: string) => {
-  const account = useSelector((state: IStore) => AccountSelectors.account(state, accountId));
-  const records = useSelector((state: IStore) => RecordSelectors.recordsByAccountId(state, accountId));
-  return {
-    balance: useMemo(() => previousMonthEndBalance(account, records, date), [account, records, date]),
-  };
+    const account = useSelector((state: IStore) => AccountSelectors.account(state, accountId));
+    const records = useSelector((state: IStore) => RecordSelectors.recordsByAccountId(state, accountId));
+    return {
+        balance: useMemo(() => previousMonthEndBalance(account, records, date), [account, records, date]),
+    };
 };

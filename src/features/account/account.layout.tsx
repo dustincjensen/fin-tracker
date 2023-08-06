@@ -4,9 +4,9 @@ import { ErrorBoundary } from '../../components/error-boundary/error-boundary.co
 import { AccountContainer } from './account/account.container';
 
 export const AccountLayout = (props: RouteComponentProps<{ accountId: string }>) => {
-  return (
-    <ErrorBoundary>
-      <AccountContainer accountId={props.match.params.accountId} />
-    </ErrorBoundary>
-  );
+    return (
+        <ErrorBoundary>
+            <AccountContainer accountId={props.match.params.accountId} />
+        </ErrorBoundary>
+    );
 };

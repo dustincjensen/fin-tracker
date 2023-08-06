@@ -5,42 +5,42 @@ import { CategoryActions } from '../../store/category/category.actions';
 import { ICategory } from '../../store/category/category.interface';
 
 type DeleteCategoryProps = {
-  /**
-   * The category to delete.
-   */
-  category: ICategory;
+    /**
+     * The category to delete.
+     */
+    category: ICategory;
 
-  /**
-   * Action to call when the modal closes.
-   */
-  onClose: () => void;
+    /**
+     * Action to call when the modal closes.
+     */
+    onClose: () => void;
 };
 
 export const DeleteCategoryDialog = ({ category, onClose }: DeleteCategoryProps) => {
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-  if (!category) {
-    return null;
-  }
+    if (!category) {
+        return null;
+    }
 
-  const confirm = () => {
-    dispatch(CategoryActions.deleteCategory(category));
-    onClose();
-  };
+    const confirm = () => {
+        dispatch(CategoryActions.deleteCategory(category));
+        onClose();
+    };
 
-  return (
-    <Dialog
-      isShown={true}
-      onCloseComplete={onClose}
-      preventBodyScrolling
-      intent='danger'
-      confirmLabel='Delete'
-      title='Delete Category?'
-      onConfirm={confirm}
-    >
-      Are you sure you want to delete the <b>&quot;{category.name}&quot;</b> category? Transactions will be kept, but
-      you will need to re-associate them with a new category. Auto Categories with this category will also be deleted
-      and un-associated with the transactions.
-    </Dialog>
-  );
+    return (
+        <Dialog
+            isShown={true}
+            onCloseComplete={onClose}
+            preventBodyScrolling
+            intent='danger'
+            confirmLabel='Delete'
+            title='Delete Category?'
+            onConfirm={confirm}
+        >
+            Are you sure you want to delete the <b>&quot;{category.name}&quot;</b> category? Transactions will be kept,
+            but you will need to re-associate them with a new category. Auto Categories with this category will also be
+            deleted and un-associated with the transactions.
+        </Dialog>
+    );
 };

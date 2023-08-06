@@ -11,31 +11,31 @@ import { PendingRecordActions } from '../../store/pending-record/pending-record.
 import { PendingRecordSelectors } from '../../store/pending-record/pending-record.selectors';
 
 const parseTypeLookup: Record<ParseType, WorkerEventType> = {
-  QFX: 'NEW_QFX_RECORDS_SELECTED',
-  Quicken: 'NEW_QUICKEN_RECORDS_SELECTED',
+    QFX: 'NEW_QFX_RECORDS_SELECTED',
+    Quicken: 'NEW_QUICKEN_RECORDS_SELECTED',
 };
 
 export const useNewRecords = () => {
-  const dispatch = useDispatch();
-  const { activeBankAccounts: accounts } = useActiveBankAccounts();
-  const autoCategories = useSelector(AutoCategorySelectors.autoCategories);
-  const error = useSelector(PendingRecordSelectors.error);
-  const worker = useBackgroundWorkerContext();
+    const dispatch = useDispatch();
+    const { activeBankAccounts: accounts } = useActiveBankAccounts();
+    const autoCategories = useSelector(AutoCategorySelectors.autoCategories);
+    const error = useSelector(PendingRecordSelectors.error);
+    const worker = useBackgroundWorkerContext();
 
-  const importAction = useCallback(
-    (account: IAccount, autoCategories: IAutoCategory[], file, parseType: ParseType) => {
-      dispatch(PendingRecordActions.clearError());
-      const type = parseTypeLookup[parseType];
-      worker.invokeBackgroundTask?.(type, [account.id, file, autoCategories, account.accountType]);
-    },
-    [worker, dispatch]
-  );
+    const importAction = useCallback(
+        (account: IAccount, autoCategories: IAutoCategory[], file, parseType: ParseType) => {
+            dispatch(PendingRecordActions.clearError());
+            const type = parseTypeLookup[parseType];
+            worker.invokeBackgroundTask?.(type, [account.id, file, autoCategories, account.accountType]);
+        },
+        [worker, dispatch]
+    );
 
-  return {
-    accounts,
-    autoCategories,
-    // The error that occurred when trying to import, if any.
-    error,
-    importAction,
-  };
+    return {
+        accounts,
+        autoCategories,
+        // The error that occurred when trying to import, if any.
+        error,
+        importAction,
+    };
 };

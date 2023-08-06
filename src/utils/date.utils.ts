@@ -1,23 +1,23 @@
 import moment, { isMoment, Moment } from 'moment';
 
 export interface IDate {
-  year: () => number;
-  month: () => number;
+    year: () => number;
+    month: () => number;
 }
 
 export const monthValues = [
-  { value: '0', month: 'January' },
-  { value: '1', month: 'February' },
-  { value: '2', month: 'March' },
-  { value: '3', month: 'April' },
-  { value: '4', month: 'May' },
-  { value: '5', month: 'June' },
-  { value: '6', month: 'July' },
-  { value: '7', month: 'August' },
-  { value: '8', month: 'September' },
-  { value: '9', month: 'October' },
-  { value: '10', month: 'November' },
-  { value: '11', month: 'December' },
+    { value: '0', month: 'January' },
+    { value: '1', month: 'February' },
+    { value: '2', month: 'March' },
+    { value: '3', month: 'April' },
+    { value: '4', month: 'May' },
+    { value: '5', month: 'June' },
+    { value: '6', month: 'July' },
+    { value: '7', month: 'August' },
+    { value: '8', month: 'September' },
+    { value: '9', month: 'October' },
+    { value: '10', month: 'November' },
+    { value: '11', month: 'December' },
 ];
 
 /**
@@ -26,7 +26,7 @@ export const monthValues = [
  * @param date  The date to create.
  */
 export function createDate(date: string): IDate {
-  return moment(date);
+    return moment(date);
 }
 
 /**
@@ -34,7 +34,7 @@ export function createDate(date: string): IDate {
  * eg) January, February...
  */
 export function monthNamesLong() {
-  return moment.localeData().months();
+    return moment.localeData().months();
 }
 
 /**
@@ -42,7 +42,7 @@ export function monthNamesLong() {
  * eg) Jan, Feb, Mar...
  */
 export function monthNamesShort() {
-  return moment.localeData().monthsShort();
+    return moment.localeData().monthsShort();
 }
 
 /**
@@ -52,7 +52,7 @@ export function monthNamesShort() {
  * @param date    the date to see if it occurs in the same year/month as the target.
  */
 export function isInYearMonth(target: IDate, date: IDate): boolean {
-  return date.year() === target.year() && date.month() === target.month();
+    return date.year() === target.year() && date.month() === target.month();
 }
 
 /**
@@ -62,7 +62,7 @@ export function isInYearMonth(target: IDate, date: IDate): boolean {
  * @param date    the date to see if it occurs in the same year as the target.
  */
 export function isInYear(target: IDate, date: IDate): boolean {
-  return date.year() === target.year();
+    return date.year() === target.year();
 }
 
 /**
@@ -71,7 +71,7 @@ export function isInYear(target: IDate, date: IDate): boolean {
  * @param date  the date to be formatted.
  */
 export function formatDate(date: string): string {
-  return moment(date).format('MMM D');
+    return moment(date).format('MMM D');
 }
 
 /**
@@ -80,10 +80,10 @@ export function formatDate(date: string): string {
  * @param date  the date to be formatted.
  */
 export function formatDateFull(date: string | Moment): string {
-  if (isMoment(date)) {
-    return date.format('LL');
-  }
-  return moment(date).format('LL');
+    if (isMoment(date)) {
+        return date.format('LL');
+    }
+    return moment(date).format('LL');
 }
 
 /**
@@ -92,7 +92,7 @@ export function formatDateFull(date: string | Moment): string {
  * @param date  the date to be formatted.
  */
 export function formatDateMonthYear(date: string): string {
-  return moment(date).format('MMM YYYY');
+    return moment(date).format('MMM YYYY');
 }
 
 /**
@@ -101,7 +101,7 @@ export function formatDateMonthYear(date: string): string {
  * @param date  the date to find the previous month of.
  */
 export function getPreviousMonth(date: string): string {
-  return moment(date).subtract(1, 'months').toISOString();
+    return moment(date).subtract(1, 'months').toISOString();
 }
 
 /**
@@ -110,8 +110,8 @@ export function getPreviousMonth(date: string): string {
  * @param date  the date to find the month and year of.
  */
 export function getMonthAndYearFromDate(date: string): number[] {
-  const d = moment(date);
-  return [d.month(), d.year()];
+    const d = moment(date);
+    return [d.month(), d.year()];
 }
 
 /**
@@ -120,7 +120,7 @@ export function getMonthAndYearFromDate(date: string): number[] {
  * @param date  the date to find the year of.
  */
 export function getYearFromDate(date: string): number {
-  return moment(date).year();
+    return moment(date).year();
 }
 
 /**
@@ -129,7 +129,7 @@ export function getYearFromDate(date: string): number {
  * @param date  the date to convert to the new date format.
  */
 export function stringToDayMonthYear(date: string): string {
-  return moment(date).format('D MMM YYYY');
+    return moment(date).format('D MMM YYYY');
 }
 
 /**
@@ -138,7 +138,7 @@ export function stringToDayMonthYear(date: string): string {
  * @param date  the date to convert to the new date format.
  */
 export function stringToMonthYear(date: string): string {
-  return moment(date).format('MMM YYYY');
+    return moment(date).format('MMM YYYY');
 }
 
 /**
@@ -149,16 +149,16 @@ export function stringToMonthYear(date: string): string {
  * @param end     the end date.
  */
 export function allMonthsBetweenDates(start: string | Moment, end: string | Moment): string[] {
-  const dateStart = moment(start);
-  const dateEnd = moment(end);
-  const timeValues = [];
+    const dateStart = moment(start);
+    const dateEnd = moment(end);
+    const timeValues = [];
 
-  while (dateEnd > dateStart || dateStart.format('M') === dateEnd.format('M')) {
-    timeValues.push(dateStart.format('YYYY-MM'));
-    dateStart.add(1, 'month');
-  }
+    while (dateEnd > dateStart || dateStart.format('M') === dateEnd.format('M')) {
+        timeValues.push(dateStart.format('YYYY-MM'));
+        dateStart.add(1, 'month');
+    }
 
-  return timeValues;
+    return timeValues;
 }
 
 /**
@@ -169,16 +169,16 @@ export function allMonthsBetweenDates(start: string | Moment, end: string | Mome
  * @param end     The end date.
  */
 export function allYearsBetweenDates(start: string | Moment, end: string | Moment): string[] {
-  const dateStart = moment(start);
-  const dateEnd = moment(end);
-  const timeValues = [];
+    const dateStart = moment(start);
+    const dateEnd = moment(end);
+    const timeValues = [];
 
-  while (dateEnd > dateStart || dateStart.format('YYYY') === dateEnd.format('YYYY')) {
-    timeValues.push(dateStart.format('YYYY'));
-    dateStart.add(1, 'year');
-  }
+    while (dateEnd > dateStart || dateStart.format('YYYY') === dateEnd.format('YYYY')) {
+        timeValues.push(dateStart.format('YYYY'));
+        dateStart.add(1, 'year');
+    }
 
-  return timeValues;
+    return timeValues;
 }
 
 /**
@@ -187,7 +187,7 @@ export function allYearsBetweenDates(start: string | Moment, end: string | Momen
  * @param dates   the dates to check.
  */
 export function getEarliestDate(dates: string[]) {
-  return moment.min(dates.filter(d => d).map(d => moment(d)));
+    return moment.min(dates.filter(d => d).map(d => moment(d)));
 }
 
 /**
@@ -196,7 +196,7 @@ export function getEarliestDate(dates: string[]) {
  * @param dates   the dates to check.
  */
 export function getLatestDate(dates: string[]) {
-  return moment.max(dates.filter(d => d).map(d => moment(d)));
+    return moment.max(dates.filter(d => d).map(d => moment(d)));
 }
 
 /**
@@ -205,7 +205,7 @@ export function getLatestDate(dates: string[]) {
  * @param date  The date to format.
  */
 export function getDateForOer(date: string): string {
-  return moment(date).format('YYYY-MM-DD');
+    return moment(date).format('YYYY-MM-DD');
 }
 
 /**
@@ -215,13 +215,13 @@ export function getDateForOer(date: string): string {
  * @param date  The date to format.
  */
 export function getMonthDateForOer(date: string): string {
-  const endOfMonth = moment(date).endOf('month');
-  const today = moment();
+    const endOfMonth = moment(date).endOf('month');
+    const today = moment();
 
-  if (endOfMonth > today) {
-    return today.format('YYYY-MM-DD');
-  }
-  return endOfMonth.format('YYYY-MM-DD');
+    if (endOfMonth > today) {
+        return today.format('YYYY-MM-DD');
+    }
+    return endOfMonth.format('YYYY-MM-DD');
 }
 
 /**
@@ -231,21 +231,21 @@ export function getMonthDateForOer(date: string): string {
  * @param date  The date to format.
  */
 export function getYearDateForOer(date: string): string {
-  const endOfYear = moment(date).endOf('year');
-  const today = moment();
+    const endOfYear = moment(date).endOf('year');
+    const today = moment();
 
-  if (endOfYear > today) {
-    return today.format('YYYY-MM-DD');
-  }
-  return endOfYear.format('YYYY-MM-DD');
+    if (endOfYear > today) {
+        return today.format('YYYY-MM-DD');
+    }
+    return endOfYear.format('YYYY-MM-DD');
 }
 
 // TODO remove?
 export function getDateFromTimestamp(timestamp: number): string {
-  return moment(timestamp).format('YYYY-MM-DD');
+    return moment(timestamp).format('YYYY-MM-DD');
 }
 
 // TODO docs
 export function today(): string {
-  return moment().format('YYYY-MM-DD');
+    return moment().format('YYYY-MM-DD');
 }

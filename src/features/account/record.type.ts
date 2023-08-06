@@ -3,13 +3,13 @@ import { IRecord } from '../../store/record/record.interface';
 import { SplitRecordType } from './split-record.type';
 
 export type RecordType = IRecord & {
-  /**
-   * The category to display.
-   */
-  category: ICategory;
+    /**
+     * The category to display.
+     */
+    category: ICategory;
 
-  /**
-   * Override to hide the splitRecords definition on IRecord.
-   */
-  splitRecords: SplitRecordType[];
+    /**
+     * Override to hide the splitRecords definition on IRecord.
+     */
+    splitRecords: SplitRecordType[];
 };

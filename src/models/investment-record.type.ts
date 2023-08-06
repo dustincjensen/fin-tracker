@@ -1,26 +1,26 @@
 export type InvestmentRecord = {
-  /**
-   * The ID of the record.
-   */
-  id: string;
+    /**
+     * The ID of the record.
+     */
+    id: string;
 
-  /**
-   * The ID of the account the record belongs to.
-   */
-  accountId: string;
+    /**
+     * The ID of the account the record belongs to.
+     */
+    accountId: string;
 
-  /**
-   * The currency type for the record.
-   */
-  investmentCurrency: string;
+    /**
+     * The currency type for the record.
+     */
+    investmentCurrency: string;
 
-  /**
-   * The date the record took place.
-   */
-  date: string;
+    /**
+     * The date the record took place.
+     */
+    date: string;
 
-  /**
-   * The balance of the account on this date.
-   */
-  balance: number;
+    /**
+     * The balance of the account on this date.
+     */
+    balance: number;
 };

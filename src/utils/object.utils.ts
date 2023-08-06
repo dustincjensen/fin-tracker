@@ -4,7 +4,7 @@
  * @param obj   An object to check.
  */
 export function isNullOrUndefined(obj: number | string | unknown) {
-  return obj === null || obj === undefined;
+    return obj === null || obj === undefined;
 }
 
 /**
@@ -13,5 +13,5 @@ export function isNullOrUndefined(obj: number | string | unknown) {
  * @param str   A string to check.
  */
 export function isNullOrWhitespace(str: string) {
-  return str === null || str === undefined || str.replace(/\s/g, '').length === 0;
+    return str === null || str === undefined || str.replace(/\s/g, '').length === 0;
 }

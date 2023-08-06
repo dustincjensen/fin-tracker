@@ -4,8 +4,8 @@
  * @param width   The width of the static cell.
  */
 export function createStaticWidthCell(width: number) {
-  return {
-    flex: 'none',
-    width,
-  };
+    return {
+        flex: 'none',
+        width,
+    };
 }

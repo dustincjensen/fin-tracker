@@ -12,8 +12,8 @@ import { createDate, isInYearMonth } from '../../utils/date.utils';
  * @param date        The year/month to get records for.
  */
 export const recordsByDate = (records: IRecord[], date: string): IRecord[] => {
-  const targetDate = createDate(date);
-  return records?.filter(r => isInYearMonth(targetDate, createDate(r.date)));
+    const targetDate = createDate(date);
+    return records?.filter(r => isInYearMonth(targetDate, createDate(r.date)));
 };
 
 /**
@@ -23,9 +23,9 @@ export const recordsByDate = (records: IRecord[], date: string): IRecord[] => {
  * @param date        The year/month to get records for.
  */
 export const useRecordsByDate = (accountId: string, date: string) => {
-  const records = useSelector((state: IStore) => RecordSelectors.recordsByAccountId(state, accountId));
+    const records = useSelector((state: IStore) => RecordSelectors.recordsByAccountId(state, accountId));
 
-  return {
-    records: useMemo(() => recordsByDate(records, date), [records, date]),
-  };
+    return {
+        records: useMemo(() => recordsByDate(records, date), [records, date]),
+    };
 };

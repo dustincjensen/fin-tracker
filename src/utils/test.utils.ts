@@ -4,5 +4,5 @@
  * @param obj   A partial implementation of the interface.
  */
 export function build<T>(obj: Partial<T>): T {
-  return obj as T;
+    return obj as T;
 }

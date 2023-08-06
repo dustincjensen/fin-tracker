@@ -6,55 +6,55 @@ import { parse as quickenParse } from '../business/quicken';
 import { sortRecordsByDate } from '../business/util';
 
 export function parseQuickenToRecords(
-  accountId: string,
-  file: File,
-  autoCategories: AutoCategory[],
-  accountType: 'Chequing' | 'Savings' | 'CreditCard'
+    accountId: string,
+    file: File,
+    autoCategories: AutoCategory[],
+    accountType: 'Chequing' | 'Savings' | 'CreditCard'
 ) {
-  return parse(quickenParse, accountId, file, autoCategories, accountType);
+    return parse(quickenParse, accountId, file, autoCategories, accountType);
 }
 
 export function parseQfxToRecords(
-  accountId: string,
-  file: File,
-  autoCategories: AutoCategory[],
-  accountType: 'Chequing' | 'Savings' | 'CreditCard'
+    accountId: string,
+    file: File,
+    autoCategories: AutoCategory[],
+    accountType: 'Chequing' | 'Savings' | 'CreditCard'
 ) {
-  return parse(qfxParse, accountId, file, autoCategories, accountType);
+    return parse(qfxParse, accountId, file, autoCategories, accountType);
 }
 
 function parse(
-  method: (
+    method: (
+        accountId: string,
+        file: File,
+        autoCategories: AutoCategory[],
+        accountType?: 'Chequing' | 'Savings' | 'CreditCard'
+    ) => Record[],
     accountId: string,
     file: File,
     autoCategories: AutoCategory[],
     accountType?: 'Chequing' | 'Savings' | 'CreditCard'
-  ) => Record[],
-  accountId: string,
-  file: File,
-  autoCategories: AutoCategory[],
-  accountType?: 'Chequing' | 'Savings' | 'CreditCard'
 ): {
-  type: WorkerReturnType;
-  args: Array<unknown>;
+    type: WorkerReturnType;
+    args: Array<unknown>;
 } {
-  try {
-    const parsedFileRecords = method(accountId, file, autoCategories, accountType);
-    if (!parsedFileRecords || parsedFileRecords.length === 0) {
-      throw new Error('Unable to parse transactions from file.');
-    }
+    try {
+        const parsedFileRecords = method(accountId, file, autoCategories, accountType);
+        if (!parsedFileRecords || parsedFileRecords.length === 0) {
+            throw new Error('Unable to parse transactions from file.');
+        }
 
-    const sorted = sortRecordsByDate(parsedFileRecords);
-    const fileName = file.name;
-    return {
-      type: 'NEW_RECORDS_PARSED',
-      args: [sorted, accountId, file, fileName],
-    };
-  } catch (error) {
-    const fileName = file.name;
-    return {
-      type: 'NEW_RECORDS_ERROR',
-      args: [error.message, file, fileName],
-    };
-  }
+        const sorted = sortRecordsByDate(parsedFileRecords);
+        const fileName = file.name;
+        return {
+            type: 'NEW_RECORDS_PARSED',
+            args: [sorted, accountId, file, fileName],
+        };
+    } catch (error) {
+        const fileName = file.name;
+        return {
+            type: 'NEW_RECORDS_ERROR',
+            args: [error.message, file, fileName],
+        };
+    }
 }

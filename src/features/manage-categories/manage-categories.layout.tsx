@@ -6,29 +6,29 @@ import { Categories } from './categories.component';
 import { NewCategory } from './new-category.component';
 
 export const ManageCategoryLayout = () => {
-  const [showNewCategory, setShowNewCategory] = React.useState<boolean>(false);
-  const [categoryFilter, setCategoryFilter] = React.useState<string>('');
+    const [showNewCategory, setShowNewCategory] = React.useState<boolean>(false);
+    const [categoryFilter, setCategoryFilter] = React.useState<string>('');
 
-  const openNewCategory = () => setShowNewCategory(true);
-  const closeNewCategory = () => setShowNewCategory(false);
+    const openNewCategory = () => setShowNewCategory(true);
+    const closeNewCategory = () => setShowNewCategory(false);
 
-  return (
-    <ErrorBoundary>
-      <Pane display='grid' padding={20}>
-        {showNewCategory && (
-          <Pane marginBottom={20}>
-            <NewCategory close={closeNewCategory} />
-          </Pane>
-        )}
-        <Pane marginBottom={10}>
-          <CategoriesFilter
-            openNewCategory={openNewCategory}
-            categoryFilter={categoryFilter}
-            setCategoryFilter={setCategoryFilter}
-          />
-        </Pane>
-        <Categories categoryFilter={categoryFilter} />
-      </Pane>
-    </ErrorBoundary>
-  );
+    return (
+        <ErrorBoundary>
+            <Pane display='grid' padding={20}>
+                {showNewCategory && (
+                    <Pane marginBottom={20}>
+                        <NewCategory close={closeNewCategory} />
+                    </Pane>
+                )}
+                <Pane marginBottom={10}>
+                    <CategoriesFilter
+                        openNewCategory={openNewCategory}
+                        categoryFilter={categoryFilter}
+                        setCategoryFilter={setCategoryFilter}
+                    />
+                </Pane>
+                <Categories categoryFilter={categoryFilter} />
+            </Pane>
+        </ErrorBoundary>
+    );
 };

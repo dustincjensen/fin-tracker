@@ -11,105 +11,108 @@ import { IEditAutoCategoryProps } from './edit-auto-category.props.interface';
 type CategoryRecord = ICategorySelectProps['record'];
 
 export const EditAutoCategoryDialogComponent = ({ record, categories, onClose }: IEditAutoCategoryProps) => {
-  const dispatch = useDispatch();
-  const [description, setDescription] = React.useState<string>('');
-  const [descriptionError, setDescriptionError] = React.useState<string>('');
-  const [categoryRecord, setCategoryRecord] = React.useState<CategoryRecord>({ id: undefined, category: undefined });
-  const [categoryError, setCategoryError] = React.useState<string>('');
-  const [overwriteExisting, setOverwriteExisting] = React.useState<boolean>(false);
+    const dispatch = useDispatch();
+    const [description, setDescription] = React.useState<string>('');
+    const [descriptionError, setDescriptionError] = React.useState<string>('');
+    const [categoryRecord, setCategoryRecord] = React.useState<CategoryRecord>({ id: undefined, category: undefined });
+    const [categoryError, setCategoryError] = React.useState<string>('');
+    const [overwriteExisting, setOverwriteExisting] = React.useState<boolean>(false);
 
-  React.useEffect(() => {
-    setDescription(record?.description || '');
-    setDescriptionError('');
-    setCategoryRecord({ id: undefined, category: undefined });
-    setCategoryError('');
-    setOverwriteExisting(false);
-  }, [record]);
+    React.useEffect(() => {
+        setDescription(record?.description || '');
+        setDescriptionError('');
+        setCategoryRecord({ id: undefined, category: undefined });
+        setCategoryError('');
+        setOverwriteExisting(false);
+    }, [record]);
 
-  if (!record) {
-    return null;
-  }
-
-  const confirm = () => {
-    let hasError = false;
-
-    if (isNullOrWhitespace(description)) {
-      hasError = true;
-      setDescriptionError('Please enter a description.');
-    } else {
-      setDescriptionError('');
+    if (!record) {
+        return null;
     }
 
-    if (!categoryRecord?.category?.id) {
-      hasError = true;
-      setCategoryError('Please select a category.');
-    } else {
-      setCategoryError('');
-    }
+    const confirm = () => {
+        let hasError = false;
 
-    if (hasError) {
-      return;
-    }
+        if (isNullOrWhitespace(description)) {
+            hasError = true;
+            setDescriptionError('Please enter a description.');
+        } else {
+            setDescriptionError('');
+        }
 
-    dispatch(
-      RecordActions.setRecordsAutoCategory(
-        record.accountId,
-        newGuid(),
-        categoryRecord.category.id,
-        description,
-        overwriteExisting
-      )
+        if (!categoryRecord?.category?.id) {
+            hasError = true;
+            setCategoryError('Please select a category.');
+        } else {
+            setCategoryError('');
+        }
+
+        if (hasError) {
+            return;
+        }
+
+        dispatch(
+            RecordActions.setRecordsAutoCategory(
+                record.accountId,
+                newGuid(),
+                categoryRecord.category.id,
+                description,
+                overwriteExisting
+            )
+        );
+
+        onClose();
+    };
+
+    const updateCategory = (_: string, categoryId: string) => {
+        setCategoryRecord({
+            id: record.id,
+            category: categoryId ? categories.find(c => c.id === categoryId) : undefined,
+        });
+    };
+
+    return (
+        <Dialog
+            isShown={true}
+            onCloseComplete={onClose}
+            preventBodyScrolling
+            confirmLabel='Save Auto Category'
+            title='New Auto Category'
+            onConfirm={confirm}
+            shouldCloseOnOverlayClick={false}
+        >
+            <Alert marginBottom={majorScale(3)} title='Matching descriptions is account specific.'>
+                Please note previously auto-categorized transactions that begin with the description below will also be
+                re-assigned to the new category selection.
+            </Alert>
+            <TextInputField
+                label='Description'
+                value={description}
+                marginBottom={majorScale(3)}
+                onChange={evt => setDescription(evt.target.value)}
+                required
+                validationMessage={descriptionError || undefined}
+            />
+            <FormField
+                label='Category'
+                marginBottom={majorScale(3)}
+                isRequired
+                validationMessage={categoryError || undefined}
+            >
+                <CategorySelect record={categoryRecord} categories={categories} updateCategory={updateCategory} />
+            </FormField>
+            <FormField
+                label='Overwrite Manual Transactions?'
+                description='Re-assign manually categorized transactions.'
+            >
+                <Switch
+                    height={majorScale(3)}
+                    checked={overwriteExisting}
+                    onChange={evt => setOverwriteExisting(evt.target.checked)}
+                />
+            </FormField>
+        </Dialog>
     );
-
-    onClose();
-  };
-
-  const updateCategory = (_: string, categoryId: string) => {
-    setCategoryRecord({
-      id: record.id,
-      category: categoryId ? categories.find(c => c.id === categoryId) : undefined,
-    });
-  };
-
-  return (
-    <Dialog
-      isShown={true}
-      onCloseComplete={onClose}
-      preventBodyScrolling
-      confirmLabel='Save Auto Category'
-      title='New Auto Category'
-      onConfirm={confirm}
-      shouldCloseOnOverlayClick={false}
-    >
-      <Alert marginBottom={majorScale(3)} title='Matching descriptions is account specific.'>
-        Please note previously auto-categorized transactions that begin with the description below will also be
-        re-assigned to the new category selection.
-      </Alert>
-      <TextInputField
-        label='Description'
-        value={description}
-        marginBottom={majorScale(3)}
-        onChange={evt => setDescription(evt.target.value)}
-        required
-        validationMessage={descriptionError || undefined}
-      />
-      <FormField
-        label='Category'
-        marginBottom={majorScale(3)}
-        isRequired
-        validationMessage={categoryError || undefined}
-      >
-        <CategorySelect record={categoryRecord} categories={categories} updateCategory={updateCategory} />
-      </FormField>
-      <FormField label='Overwrite Manual Transactions?' description='Re-assign manually categorized transactions.'>
-        <Switch
-          height={majorScale(3)}
-          checked={overwriteExisting}
-          onChange={evt => setOverwriteExisting(evt.target.checked)}
-        />
-      </FormField>
-    </Dialog>
-  );
 };
 
 export const EditAutoCategoryDialog = React.memo(EditAutoCategoryDialogComponent);

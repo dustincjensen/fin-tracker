@@ -5,124 +5,124 @@ import { CategoryReducer as reducer } from './category.reducer';
 import { ICategoryStore } from './category.store.interface';
 
 describe('reducers', () => {
-  describe('Category', () => {
-    const categoryId = 'categoryId';
-    const otherCategoryId = 'otherCategoryId';
-    const category: ICategory = {
-      id: categoryId,
-      name: 'Grocery',
-      color: '#123456',
-    };
-    const otherCategory: ICategory = {
-      id: otherCategoryId,
-      name: 'Eating Out',
-      color: '#654321',
-    };
-
-    describe('saveNewCategory', () => {
-      it('should add a new category', () => {
-        const initialState: ICategoryStore = {
-          categories: {},
+    describe('Category', () => {
+        const categoryId = 'categoryId';
+        const otherCategoryId = 'otherCategoryId';
+        const category: ICategory = {
+            id: categoryId,
+            name: 'Grocery',
+            color: '#123456',
+        };
+        const otherCategory: ICategory = {
+            id: otherCategoryId,
+            name: 'Eating Out',
+            color: '#654321',
         };
 
-        const newState = reducer(initialState, {
-          type: CategoryActions.SAVE_NEW_CATEGORY,
-          payload: category,
+        describe('saveNewCategory', () => {
+            it('should add a new category', () => {
+                const initialState: ICategoryStore = {
+                    categories: {},
+                };
+
+                const newState = reducer(initialState, {
+                    type: CategoryActions.SAVE_NEW_CATEGORY,
+                    payload: category,
+                });
+
+                const expectedState: ICategoryStore = {
+                    categories: {
+                        [categoryId]: category,
+                    },
+                };
+                expect(newState).toEqual(expectedState);
+            });
         });
 
-        const expectedState: ICategoryStore = {
-          categories: {
-            [categoryId]: category,
-          },
-        };
-        expect(newState).toEqual(expectedState);
-      });
-    });
+        describe('updateCategory', () => {
+            it('should throw an error when category does not exist', () => {
+                const initialState: ICategoryStore = {
+                    categories: {},
+                };
 
-    describe('updateCategory', () => {
-      it('should throw an error when category does not exist', () => {
-        const initialState: ICategoryStore = {
-          categories: {},
-        };
+                expect(() => {
+                    reducer(initialState, {
+                        type: CategoryActions.UPDATE_CATEGORY,
+                        payload: category,
+                    });
+                }).toThrowError('Category does not exist');
+            });
 
-        expect(() => {
-          reducer(initialState, {
-            type: CategoryActions.UPDATE_CATEGORY,
-            payload: category,
-          });
-        }).toThrowError('Category does not exist');
-      });
+            it('should update category when category exists', () => {
+                const initialState: ICategoryStore = {
+                    categories: {
+                        [categoryId]: category,
+                        [otherCategoryId]: otherCategory,
+                    },
+                };
 
-      it('should update category when category exists', () => {
-        const initialState: ICategoryStore = {
-          categories: {
-            [categoryId]: category,
-            [otherCategoryId]: otherCategory,
-          },
-        };
+                const newState = reducer(initialState, {
+                    type: CategoryActions.UPDATE_CATEGORY,
+                    payload: { ...category, color: '#ff5566' },
+                });
 
-        const newState = reducer(initialState, {
-          type: CategoryActions.UPDATE_CATEGORY,
-          payload: { ...category, color: '#ff5566' },
+                const expectedState: ICategoryStore = {
+                    categories: {
+                        [categoryId]: { ...category, color: '#ff5566' },
+                        [otherCategoryId]: otherCategory,
+                    },
+                };
+                expect(newState).toEqual(expectedState);
+            });
         });
 
-        const expectedState: ICategoryStore = {
-          categories: {
-            [categoryId]: { ...category, color: '#ff5566' },
-            [otherCategoryId]: otherCategory,
-          },
-        };
-        expect(newState).toEqual(expectedState);
-      });
-    });
+        describe('deleteCategory', () => {
+            it('should delete the category when it exists', () => {
+                const initialState: ICategoryStore = {
+                    categories: {
+                        [categoryId]: category,
+                        [otherCategoryId]: otherCategory,
+                    },
+                };
 
-    describe('deleteCategory', () => {
-      it('should delete the category when it exists', () => {
-        const initialState: ICategoryStore = {
-          categories: {
-            [categoryId]: category,
-            [otherCategoryId]: otherCategory,
-          },
-        };
+                const newState = reducer(initialState, {
+                    type: CategoryActions.DELETE_CATEGORY,
+                    payload: category,
+                });
 
-        const newState = reducer(initialState, {
-          type: CategoryActions.DELETE_CATEGORY,
-          payload: category,
+                const expectedState: ICategoryStore = {
+                    categories: {
+                        [otherCategoryId]: otherCategory,
+                    },
+                };
+                expect(newState).toEqual(expectedState);
+            });
         });
 
-        const expectedState: ICategoryStore = {
-          categories: {
-            [otherCategoryId]: otherCategory,
-          },
-        };
-        expect(newState).toEqual(expectedState);
-      });
-    });
+        describe('deleteTransferCategory', () => {
+            it('should delete transfer category when it exists', () => {
+                const transferCategory: ICategory = {
+                    id: categoryId,
+                    name: 'Eating Out',
+                    color: '#654321',
+                    accountTransferId: 'accountId',
+                };
+                const initialState: ICategoryStore = {
+                    categories: {
+                        [categoryId]: transferCategory,
+                    },
+                };
 
-    describe('deleteTransferCategory', () => {
-      it('should delete transfer category when it exists', () => {
-        const transferCategory: ICategory = {
-          id: categoryId,
-          name: 'Eating Out',
-          color: '#654321',
-          accountTransferId: 'accountId',
-        };
-        const initialState: ICategoryStore = {
-          categories: {
-            [categoryId]: transferCategory,
-          },
-        };
+                const newState = reducer(initialState, {
+                    type: AccountActions.DELETE_ACCOUNT,
+                    payload: { id: 'accountId' },
+                });
 
-        const newState = reducer(initialState, {
-          type: AccountActions.DELETE_ACCOUNT,
-          payload: { id: 'accountId' },
+                const expectedState: ICategoryStore = {
+                    categories: {},
+                };
+                expect(newState).toEqual(expectedState);
+            });
         });
-
-        const expectedState: ICategoryStore = {
-          categories: {},
-        };
-        expect(newState).toEqual(expectedState);
-      });
     });
-  });
 });
