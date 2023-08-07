@@ -1,4 +1,4 @@
-import { IRecord } from './record.interface';
+import { MergeRecordsReturnType } from '../../models/_worker-return.type';
 import { ISplitRecord } from './split-record.interface';
 
 export class RecordActions {
@@ -10,7 +10,7 @@ export class RecordActions {
     public static SET_SPLIT_RECORDS = 'SET_SPLIT_RECORDS';
     public static DELETE_SPLIT_RECORDS = 'DELETE_SPLIT_RECORDS';
 
-    public static saveNewRecords = (records: IRecord[]) => ({
+    public static saveNewRecords = ({ records }: MergeRecordsReturnType) => ({
         type: RecordActions.SAVE_NEW_RECORDS,
         payload: records,
     });

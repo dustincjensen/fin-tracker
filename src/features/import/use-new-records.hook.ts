@@ -7,7 +7,7 @@ import { Account } from '../../models/account.type';
 import { AutoCategory } from '../../models/auto-category.type';
 import { AutoCategorySelectors } from '../../store/auto-category/auto-category.selectors';
 import { ParseType } from '../../store/pending-record/parse.type';
-import { PendingRecordActions } from '../../store/pending-record/pending-record.actions';
+import { clearError } from '../../store/pending-record/pending-record-slice';
 import { PendingRecordSelectors } from '../../store/pending-record/pending-record.selectors';
 
 const parseTypeLookup: Record<ParseType, WorkerEventType> = {
@@ -24,7 +24,7 @@ export const useNewRecords = () => {
 
     const importAction = useCallback(
         (account: Account, autoCategories: AutoCategory[], file, parseType: ParseType) => {
-            dispatch(PendingRecordActions.clearError());
+            dispatch(clearError());
             const type = parseTypeLookup[parseType];
             worker.invokeBackgroundTask?.(type, [account.id, file, autoCategories, account.accountType]);
         },

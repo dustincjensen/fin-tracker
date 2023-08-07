@@ -1,4 +1,5 @@
-import { WorkerReturnType } from '../../models/_worker-return.type';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ImportErrorReturnType, ImportRecordsReturnType, WorkerReturnType } from '../../models/_worker-return.type';
 import { AutoCategory } from '../../models/auto-category.type';
 import { Record } from '../../models/record.type';
 import { parse as qfxParse } from '../business/qfx';
@@ -7,7 +8,7 @@ import { sortRecordsByDate } from '../business/util';
 
 export function parseQuickenToRecords(
     accountId: string,
-    file: File,
+    file: any,
     autoCategories: AutoCategory[],
     accountType: 'Chequing' | 'Savings' | 'CreditCard'
 ) {
@@ -16,7 +17,7 @@ export function parseQuickenToRecords(
 
 export function parseQfxToRecords(
     accountId: string,
-    file: File,
+    file: any,
     autoCategories: AutoCategory[],
     accountType: 'Chequing' | 'Savings' | 'CreditCard'
 ) {
@@ -26,18 +27,15 @@ export function parseQfxToRecords(
 function parse(
     method: (
         accountId: string,
-        file: File,
+        file: any,
         autoCategories: AutoCategory[],
         accountType?: 'Chequing' | 'Savings' | 'CreditCard'
     ) => Record[],
     accountId: string,
-    file: File,
+    file: any,
     autoCategories: AutoCategory[],
     accountType?: 'Chequing' | 'Savings' | 'CreditCard'
-): {
-    type: WorkerReturnType;
-    args: Array<unknown>;
-} {
+): WorkerReturnType {
     try {
         const parsedFileRecords = method(accountId, file, autoCategories, accountType);
         if (!parsedFileRecords || parsedFileRecords.length === 0) {
@@ -48,13 +46,13 @@ function parse(
         const fileName = file.name;
         return {
             type: 'NEW_RECORDS_PARSED',
-            args: [sorted, accountId, file, fileName],
+            output: { records: sorted, accountId, filePath: file.path, fileName } as ImportRecordsReturnType,
         };
     } catch (error) {
         const fileName = file.name;
         return {
             type: 'NEW_RECORDS_ERROR',
-            args: [error.message, file, fileName],
+            output: { error: error.message, filePath: file.path, fileName } as ImportErrorReturnType,
         };
     }
 }

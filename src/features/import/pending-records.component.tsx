@@ -3,7 +3,7 @@ import React, { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CategorySelect } from '../../components/category-select/category-select.component';
 import { useCategories } from '../../hooks/categories/use-categories.hook';
-import { PendingRecordActions } from '../../store/pending-record/pending-record.actions';
+import { updatePendingRecordCategory } from '../../store/pending-record/pending-record-slice';
 import { PendingRecordSelectors } from '../../store/pending-record/pending-record.selectors';
 import { formatDateFull } from '../../utils/date.utils';
 import { createStaticWidthCell } from '../../utils/table.utils';
@@ -33,9 +33,8 @@ export const PendingRecords = () => {
     const { categories } = useCategories();
     const { pendingRecords: records } = usePendingRecords();
 
-    const updatePendingRecordCategory = useCallback(
-        (recordId: string, categoryId: string) =>
-            dispatch(PendingRecordActions.updatePendingRecordCategory(recordId, categoryId)),
+    const updateCategory = useCallback(
+        (recordId: string, categoryId: string) => dispatch(updatePendingRecordCategory({ recordId, categoryId })),
         [dispatch]
     );
 
@@ -58,7 +57,7 @@ export const PendingRecords = () => {
                                 <CategorySelect
                                     record={record}
                                     categories={categories}
-                                    updateCategory={updatePendingRecordCategory}
+                                    updateCategory={updateCategory}
                                 />
                             </Table.Cell>
                             <Table.TextCell isNumber textAlign='right' {...w120}>

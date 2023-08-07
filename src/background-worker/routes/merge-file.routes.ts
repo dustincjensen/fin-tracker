@@ -6,13 +6,10 @@ export function mergeRecords(
     startingBalance: number,
     newRecords: Record[],
     existingRecords: Record[]
-): {
-    type: WorkerReturnType;
-    args: Array<unknown>;
-} {
+): WorkerReturnType {
     const sortedWithBalances = sortAndCalculateBalance(startingBalance, newRecords, existingRecords);
     return {
         type: 'NEW_RECORDS_MERGED',
-        args: [sortedWithBalances],
+        output: { records: sortedWithBalances },
     };
 }

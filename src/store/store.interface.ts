@@ -2,7 +2,7 @@ import { AccountStore } from './account/account-slice';
 import { AutoCategoryStore } from './auto-category/auto-category-slice';
 import { CategoryStore } from './category/category-slice';
 import { InvestmentRecordStore } from './investment-record/investment-record-slice';
-import { IPendingRecordStore } from './pending-record/pending-record.store.interface';
+import { PendingRecordStore } from './pending-record/pending-record-slice';
 import { IRecordStore } from './record/record.store.interface';
 import { ThirdPartyApiStore } from './third-party-api/third-party-api-slice';
 
@@ -11,7 +11,7 @@ export interface IStore {
     autoCategories: AutoCategoryStore;
     categories: CategoryStore;
     investmentRecords: InvestmentRecordStore;
-    pendingRecords: IPendingRecordStore;
+    pendingRecords: PendingRecordStore;
     records: IRecordStore;
     thirdPartyApi: ThirdPartyApiStore;
 }

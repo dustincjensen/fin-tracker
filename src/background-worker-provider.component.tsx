@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useMemo, useCallback, useS
 import { useDispatch } from 'react-redux';
 import { WorkerEventType } from './models/_worker-event.type';
 import { WorkerReturnType } from './models/_worker-return.type';
-import { PendingRecordActions } from './store/pending-record/pending-record.actions';
+import { importNewRecords, importError } from './store/pending-record/pending-record-slice';
 import { RecordActions } from './store/record/record.actions';
 
 export type BackgroundWorkerContextType = {
@@ -15,9 +15,9 @@ export const BackgroundWorkerContext = createContext<BackgroundWorkerContextType
 export const useBackgroundWorkerContext = () => useContext(BackgroundWorkerContext);
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-const lookup: Record<WorkerReturnType, Function> = {
-    NEW_RECORDS_PARSED: PendingRecordActions.importNewRecords,
-    NEW_RECORDS_ERROR: PendingRecordActions.importError,
+const lookup: Record<WorkerReturnType['type'], Function> = {
+    NEW_RECORDS_PARSED: importNewRecords,
+    NEW_RECORDS_ERROR: importError,
     NEW_RECORDS_MERGED: RecordActions.saveNewRecords,
 };
 
@@ -44,9 +44,9 @@ export const BackgroundWorkerProvider = ({ children }: BackgroundWorkerProviderP
             return;
         }
 
-        const handleEvent = (event: MessageEvent) => {
+        const handleEvent = (event: MessageEvent<WorkerReturnType>) => {
             const { data } = event;
-            dispatch(lookup[data.type](...data.args));
+            dispatch(lookup[data.type](data.output));
         };
 
         worker.addEventListener('message', handleEvent);

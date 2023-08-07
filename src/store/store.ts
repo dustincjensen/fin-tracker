@@ -3,7 +3,7 @@ import { accountReducer } from './account/account-slice';
 import { autoCategoryReducer } from './auto-category/auto-category-slice';
 import { categoryReducer } from './category/category-slice';
 import { investmentRecordReducer } from './investment-record/investment-record-slice';
-import { PendingRecordReducer } from './pending-record/pending-record.reducer';
+import { pendingRecordReducer } from './pending-record/pending-record-slice';
 import { RecordReducer } from './record/record.reducer';
 import { IStore } from './store.interface';
 import { thirdPartyApiReducer } from './third-party-api/third-party-api-slice';
@@ -14,7 +14,7 @@ export const rootReducer = combineReducers<IStore>({
     autoCategories: autoCategoryReducer,
     categories: categoryReducer,
     investmentRecords: investmentRecordReducer,
-    pendingRecords: PendingRecordReducer,
+    pendingRecords: pendingRecordReducer,
     records: RecordReducer,
     thirdPartyApi: thirdPartyApiReducer,
 });

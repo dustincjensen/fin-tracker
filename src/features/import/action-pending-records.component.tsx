@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useBackgroundWorkerContext } from '../../background-worker-provider.component';
 import { AccountSelectors } from '../../store/account/account.selectors';
-import { PendingRecordActions } from '../../store/pending-record/pending-record.actions';
+import { clearImportedRecords } from '../../store/pending-record/pending-record-slice';
 import { PendingRecordSelectors } from '../../store/pending-record/pending-record.selectors';
 import { RecordSelectors } from '../../store/record/record.selectors';
 import { IStore } from '../../store/store.interface';
@@ -26,7 +26,7 @@ export const ActionPendingRecords = () => {
         ]);
     }, [worker, account?.startingBalance, pendingRecords?.records, existingRecords]);
 
-    const clear = useCallback(() => dispatch(PendingRecordActions.clearImportedRecords()), [dispatch]);
+    const clear = useCallback(() => dispatch(clearImportedRecords()), [dispatch]);
 
     return (
         <Pane>
