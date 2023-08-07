@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useAccounts } from '../../hooks/accounts/use-accounts.hook';
 import { useCategories } from '../../hooks/categories/use-categories.hook';
+import { AutoCategory } from '../../models/auto-category.type';
 import { Category } from '../../models/category.type';
-import { IAutoCategory } from '../../store/auto-category/auto-category.interface';
 import { AutoCategorySelectors } from '../../store/auto-category/auto-category.selectors';
 import { RecordSelectors } from '../../store/record/record.selectors';
 
@@ -27,7 +27,7 @@ const useAutoCategories = () => {
     const mappedAutoCategories: Array<MappedAutoCategory> = useMemo(() => {
         return Object.keys(autoCategories)
             .map(key =>
-                [...autoCategories[key]].sort((ac1: IAutoCategory, ac2: IAutoCategory) => {
+                [...autoCategories[key]].sort((ac1: AutoCategory, ac2: AutoCategory) => {
                     const ac1Description = ac1.description.toLowerCase();
                     const ac2Description = ac2.description.toLowerCase();
                     return ac1Description < ac2Description ? -1 : ac1Description > ac2Description ? 1 : 0;

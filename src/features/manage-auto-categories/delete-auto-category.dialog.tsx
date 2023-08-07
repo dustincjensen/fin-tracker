@@ -1,14 +1,14 @@
 import { Dialog } from 'evergreen-ui';
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { AutoCategoryActions } from '../../store/auto-category/auto-category.actions';
-import { IAutoCategory } from '../../store/auto-category/auto-category.interface';
+import { AutoCategory } from '../../models/auto-category.type';
+import { deleteAutoCategory } from '../../store/auto-category/auto-category-slice';
 
 type DeleteAutoCategoryProps = {
     /**
      * The auto category to delete.
      */
-    autoCategory: IAutoCategory;
+    autoCategory: AutoCategory;
 
     /**
      * Action to call when the modal closes.
@@ -20,7 +20,7 @@ export const DeleteAutoCategoryDialog = ({ autoCategory, onClose }: DeleteAutoCa
     const dispatch = useDispatch();
 
     const confirm = useCallback(() => {
-        dispatch(AutoCategoryActions.deleteAutoCategory(autoCategory));
+        dispatch(deleteAutoCategory(autoCategory));
         onClose();
     }, [autoCategory, dispatch, onClose]);
 

@@ -1,8 +1,8 @@
 import { Account } from '../../models/account.type';
+import { AutoCategory } from '../../models/auto-category.type';
 import { build } from '../../utils/test.utils';
 import { deleteAccount } from '../account/account-slice';
-import { AutoCategoryActions } from '../auto-category/auto-category.actions';
-import { IAutoCategory } from '../auto-category/auto-category.interface';
+import { deleteAutoCategory } from '../auto-category/auto-category-slice';
 import { IRecord } from '../record/record.interface';
 import { RecordActions } from './record.actions';
 import { RecordReducer as reducer } from './record.reducer';
@@ -329,8 +329,8 @@ describe('reducers', () => {
                 };
 
                 const newState = reducer(initialState, {
-                    type: AutoCategoryActions.DELETE_AUTO_CATEGORY,
-                    payload: build<IAutoCategory>({
+                    type: deleteAutoCategory.type,
+                    payload: build<AutoCategory>({
                         id: autoCategoryId,
                         accountId,
                     }),

@@ -1,7 +1,7 @@
 import { Table, Pane, IconButton, Tooltip, ArchiveIcon, TrashIcon } from 'evergreen-ui';
 import React, { useState } from 'react';
 import { CategoryTag } from '../../components/category-tag/category-tag.component';
-import { IAutoCategory } from '../../store/auto-category/auto-category.interface';
+import { AutoCategory } from '../../models/auto-category.type';
 import { createStaticWidthCell } from '../../utils/table.utils';
 import { DeleteAutoCategoryDialog } from './delete-auto-category.dialog';
 import { useFilteredAutoCategories } from './use-filtered-auto-categories.hook';
@@ -23,7 +23,7 @@ type AutoCategoriesProps = {
 
 export const AutoCategories = ({ autoCategoryFilter, showArchived }: AutoCategoriesProps) => {
     const { filteredAutoCategories: autoCategories } = useFilteredAutoCategories(autoCategoryFilter, showArchived);
-    const [autoCategoryToDelete, setAutoCategoryToDelete] = useState<IAutoCategory>(null);
+    const [autoCategoryToDelete, setAutoCategoryToDelete] = useState<AutoCategory>(null);
 
     return (
         <Table>

@@ -4,7 +4,7 @@ import { useBackgroundWorkerContext } from '../../background-worker-provider.com
 import { useActiveBankAccounts } from '../../hooks/accounts/use-active-bank-accounts.hook';
 import { WorkerEventType } from '../../models/_worker-event.type';
 import { Account } from '../../models/account.type';
-import { IAutoCategory } from '../../store/auto-category/auto-category.interface';
+import { AutoCategory } from '../../models/auto-category.type';
 import { AutoCategorySelectors } from '../../store/auto-category/auto-category.selectors';
 import { ParseType } from '../../store/pending-record/parse.type';
 import { PendingRecordActions } from '../../store/pending-record/pending-record.actions';
@@ -23,7 +23,7 @@ export const useNewRecords = () => {
     const worker = useBackgroundWorkerContext();
 
     const importAction = useCallback(
-        (account: Account, autoCategories: IAutoCategory[], file, parseType: ParseType) => {
+        (account: Account, autoCategories: AutoCategory[], file, parseType: ParseType) => {
             dispatch(PendingRecordActions.clearError());
             const type = parseTypeLookup[parseType];
             worker.invokeBackgroundTask?.(type, [account.id, file, autoCategories, account.accountType]);

@@ -1,8 +1,8 @@
 import { Draft } from 'immer';
 import { Account } from '../../models/account.type';
+import { AutoCategory } from '../../models/auto-category.type';
 import { deleteAccount } from '../account/account-slice';
-import { AutoCategoryActions } from '../auto-category/auto-category.actions';
-import { IAutoCategory } from '../auto-category/auto-category.interface';
+import { deleteAutoCategory } from '../auto-category/auto-category-slice';
 import { createReducer } from '../create-reducer';
 import { RecordActions } from './record.actions';
 import { IRecord } from './record.interface';
@@ -21,7 +21,7 @@ export const RecordReducer = createReducer(
         [RecordActions.SET_SPLIT_RECORDS]: setSplitRecords,
         [RecordActions.DELETE_SPLIT_RECORDS]: deleteSplitRecords,
         [deleteAccount.type]: deleteRecords,
-        [AutoCategoryActions.DELETE_AUTO_CATEGORY]: removeRecordAutoCategory,
+        [deleteAutoCategory.type]: removeRecordAutoCategory,
     },
     initialState
 );
@@ -105,7 +105,7 @@ function setRecordAutoCategory(
  * @param draft         The draft state.
  * @param autoCategory  The auto category that was removed.
  */
-function removeRecordAutoCategory(draft: Draft<IRecordStore>, autoCategory: IAutoCategory) {
+function removeRecordAutoCategory(draft: Draft<IRecordStore>, autoCategory: AutoCategory) {
     const { accountId, id } = autoCategory;
     const records = draft.records[accountId];
     for (const record of records) {

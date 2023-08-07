@@ -3,6 +3,7 @@ Bugs
   - Description width could be larger on bigger monitors... maybe use css breakpoints?
   - If you delete an account that the transfer account category is in use for an auto category then it will end up being abandoned in the auto category list.
   - When you go between accounts that are on the same month/year it won't load the numbers on the category graph.
+  - Delete a category that is selected in the chart on the home screen and it will crash the home screen.
 
 Tasks
 =====
