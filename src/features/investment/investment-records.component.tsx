@@ -11,8 +11,8 @@ import { InvestmentRecord } from './investment-record.component';
 
 const recordsSelector = createSelector(
     (state: IStore) => state.investmentRecords.records,
-    (state: IStore, accountId: string) => accountId,
-    (State: IStore, accountId: string, currency: string) => currency,
+    (_state: IStore, accountId: string) => accountId,
+    (_state: IStore, _accountId: string, currency: string) => currency,
     (records, accountId, currency) =>
         records[accountId]?.filter(r => r.investmentCurrency === currency).sort(sortByDateDescending) || []
 );

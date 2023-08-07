@@ -31,7 +31,7 @@ export const AccountBalanceLineChart = ({ accountId, date }: AccountBalanceLineC
             <LineChart data={records} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
                 <Line type='monotone' dataKey='balance' stroke='#008800' dot={false} />
                 <CartesianGrid stroke='#222' strokeDasharray='5 5' />
-                <XAxis dataKey='date' ticks={[records?.map(() => '')]} />
+                <XAxis dataKey='date' ticks={records?.map(() => '')} />
                 <YAxis />
                 <Tooltip />
                 {dipsBelowZero && <ReferenceLine y={0} stroke='#ff0000' strokeDasharray='5 5' />}

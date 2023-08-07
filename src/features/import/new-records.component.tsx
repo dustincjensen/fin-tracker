@@ -1,8 +1,8 @@
 import { Button, FilePicker, FormField, Heading, majorScale, Pane, SelectField, Alert, ImportIcon } from 'evergreen-ui';
 import React from 'react';
 import { Account } from '../../models/account.type';
-import { ParseType } from '../../store/pending-record/parse.type';
 import { isNullOrUndefined } from '../../utils/object.utils';
+import { ParseType } from './parse.type';
 import { useNewRecords } from './use-new-records.hook';
 
 const getAccountOptions = (accounts: Account[]) =>

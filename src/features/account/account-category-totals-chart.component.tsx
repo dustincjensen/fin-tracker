@@ -59,8 +59,9 @@ export const AccountCategoryTotalsChart = ({ accountId, date }: AccountCategoryT
             <YAxis />
             {data.length > 0 && <Tooltip />}
             <ReferenceLine y={0} stroke='#000' />
-            <Bar dataKey='Total' label={{ position: 'top' }}>
-                {data.map((entry, index) => (
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+            <Bar dataKey='Total' label={{ position: 'top' } as any}>
+                {data.map((_entry, index) => (
                     <Cell key={`cell-${index}`} fill={colors[index]} />
                 ))}
             </Bar>

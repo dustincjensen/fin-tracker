@@ -33,7 +33,7 @@ export class RecordSelectors {
         RecordSelectors.selectAllRecordsAcrossAccounts,
         RecordSelectors.recordsByAccountId,
         AccountSelectors.accounts,
-        (state: IStore, accountId: string, categoryId: string) => categoryId,
+        (_state: IStore, _accountId: string, categoryId: string) => categoryId,
         (records, recordsForInvestment, accounts, categoryId) => {
             return [...records.filter(r => r.categoryId === categoryId), ...(recordsForInvestment || [])]
                 .map(r => {

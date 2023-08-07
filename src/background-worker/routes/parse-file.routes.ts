@@ -48,7 +48,7 @@ function parse(
             type: 'NEW_RECORDS_PARSED',
             output: { records: sorted, accountId, filePath: file.path, fileName } as ImportRecordsReturnType,
         };
-    } catch (error) {
+    } catch (error: any) {
         const fileName = file.name;
         return {
             type: 'NEW_RECORDS_ERROR',

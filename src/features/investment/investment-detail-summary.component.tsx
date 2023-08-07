@@ -21,15 +21,15 @@ const Field = ({ label, text }) => (
 // TODO Move to common location
 const latestBalanceSelector = createSelector(
     (state: IStore) => state.investmentRecords.records,
-    (state: IStore, accountId: string) => accountId,
-    (State: IStore, accountId: string, currency: string) => currency,
+    (_state: IStore, accountId: string) => accountId,
+    (_state: IStore, _accountId: string, currency: string) => currency,
     (records, accountId, currency) =>
         records[accountId]?.filter(r => r.investmentCurrency === currency).sort(sortByDateDescending)[0] || undefined
 );
 
 const selectTransferCost = createSelector(
     RecordSelectors.selectAllRecordsWithCategory,
-    (state: IStore, accountId: string) => accountId,
+    (_state: IStore, accountId: string) => accountId,
     (records, accountId) =>
         records
             ?.map(r => {

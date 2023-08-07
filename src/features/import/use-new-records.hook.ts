@@ -6,9 +6,9 @@ import { WorkerEventType } from '../../models/_worker-event.type';
 import { Account } from '../../models/account.type';
 import { AutoCategory } from '../../models/auto-category.type';
 import { AutoCategorySelectors } from '../../store/auto-category/auto-category.selectors';
-import { ParseType } from '../../store/pending-record/parse.type';
 import { clearError } from '../../store/pending-record/pending-record-slice';
 import { PendingRecordSelectors } from '../../store/pending-record/pending-record.selectors';
+import { ParseType } from './parse.type';
 
 const parseTypeLookup: Record<ParseType, WorkerEventType> = {
     QFX: 'NEW_QFX_RECORDS_SELECTED',
