@@ -1,10 +1,10 @@
 import { toaster } from 'evergreen-ui';
 import { saveNewAccount, updateAccount, deleteAccount } from '../account/account-slice';
 import { saveNewCategory, updateCategory, deleteCategory } from '../category/category-slice';
-import { RecordActions } from '../record/record.actions';
+import { saveNewRecords } from '../record/record-slice';
 
 const toastActions = {
-    [RecordActions.SAVE_NEW_RECORDS]: () => toaster.success('Records updated'),
+    [saveNewRecords.type]: () => toaster.success('Records updated'),
 
     [saveNewAccount.type]: action => toaster.success(`'${action.payload.name}' account created`),
     [updateAccount.type]: action => toaster.success(`'${action.payload.name}' account updated`),

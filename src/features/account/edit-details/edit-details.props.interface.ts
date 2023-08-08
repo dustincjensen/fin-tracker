@@ -1,10 +1,10 @@
-import { IRecord } from '../../../store/record/record.interface';
+import { Record } from '../../../models/record.type';
 
 export interface IEditDetailsProps {
     /**
      * The record edit the details of.
      */
-    record: IRecord;
+    record: Record;
 
     /**
      * Action to call when the modal closes.

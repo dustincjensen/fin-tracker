@@ -1,15 +1,15 @@
 import { Category } from '../../models/category.type';
-import { IRecord } from '../../store/record/record.interface';
+import { Record } from '../../models/record.type';
 import { SplitRecordType } from './split-record.type';
 
-export type RecordType = IRecord & {
+export type RecordType = Record & {
     /**
      * The category to display.
      */
     category: Category;
 
     /**
-     * Override to hide the splitRecords definition on IRecord.
+     * Override to hide the splitRecords definition on Record.
      */
     splitRecords: SplitRecordType[];
 };

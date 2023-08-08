@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { WorkerEventType } from './models/_worker-event.type';
 import { WorkerReturnType } from './models/_worker-return.type';
 import { importNewRecords, importError } from './store/pending-record/pending-record-slice';
-import { RecordActions } from './store/record/record.actions';
+import { saveNewRecords } from './store/record/record-slice';
 
 export type BackgroundWorkerContextType = {
     invokeBackgroundTask?: (eventType: WorkerEventType, args: Array<unknown>) => void;
@@ -18,7 +18,7 @@ export const useBackgroundWorkerContext = () => useContext(BackgroundWorkerConte
 const lookup: Record<WorkerReturnType['type'], Function> = {
     NEW_RECORDS_PARSED: importNewRecords,
     NEW_RECORDS_ERROR: importError,
-    NEW_RECORDS_MERGED: RecordActions.saveNewRecords,
+    NEW_RECORDS_MERGED: saveNewRecords,
 };
 
 type BackgroundWorkerProviderProps = {

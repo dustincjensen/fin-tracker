@@ -3,7 +3,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
 import { ICategorySelectProps } from '../../../components/category-select/category-select.props.interface';
-import { RecordActions } from '../../../store/record/record.actions';
+import { setRecordsAutoCategory } from '../../../store/record/record-slice';
 import { newGuid } from '../../../utils/guid.utils';
 import { isNullOrWhitespace } from '../../../utils/object.utils';
 import { IEditAutoCategoryProps } from './edit-auto-category.props.interface';
@@ -52,13 +52,13 @@ export const EditAutoCategoryDialogComponent = ({ record, categories, onClose }:
         }
 
         dispatch(
-            RecordActions.setRecordsAutoCategory(
-                record.accountId,
-                newGuid(),
-                categoryRecord.category.id,
+            setRecordsAutoCategory({
+                accountId: record.accountId,
+                autoCategoryId: newGuid(),
+                categoryId: categoryRecord.category.id,
                 description,
-                overwriteExisting
-            )
+                overwriteExisting,
+            })
         );
 
         onClose();

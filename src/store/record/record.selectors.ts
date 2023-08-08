@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect';
+import { Record } from '../../models/record.type';
 import { createDate, isInYearMonth } from '../../utils/date.utils';
 import { sortByDateDescending } from '../../utils/record.utils';
 import { AccountSelectors } from '../account/account.selectors';
 import { IStore } from '../store.interface';
-import { IRecord } from './record.interface';
 
 export class RecordSelectors {
     /**
@@ -52,7 +52,7 @@ export class RecordSelectors {
      * @param state       The current application state.
      * @param accountId   The ID of the account.
      */
-    public static recordsByAccountId(state: IStore, accountId: string): IRecord[] {
+    public static recordsByAccountId(state: IStore, accountId: string): Record[] {
         return state.records.records[accountId];
     }
 
@@ -64,7 +64,7 @@ export class RecordSelectors {
      * @param accountId   The ID of the account.
      * @param date        The year/month to get records for.
      */
-    public static recordsByDate(state: IStore, accountId: string, date: string): IRecord[] {
+    public static recordsByDate(state: IStore, accountId: string, date: string): Record[] {
         const records = state.records.records[accountId];
         const targetDate = createDate(date);
         return records?.filter(r => isInYearMonth(targetDate, createDate(r.date)));

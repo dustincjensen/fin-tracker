@@ -5,7 +5,7 @@ import { AutoCategory } from '../../models/auto-category.type';
 import { Category } from '../../models/category.type';
 import { deleteAccount } from '../account/account-slice';
 import { deleteCategory } from '../category/category-slice';
-import { RecordActions } from '../record/record.actions';
+import { setRecordsAutoCategory } from '../record/record-slice';
 
 export type AutoCategoryStore = {
     /**
@@ -37,7 +37,7 @@ export const autoCategorySlice = createSlice({
         builder.addCase(
             // TODO replace this with record action when it is created
             // Or make this an "auto category" reducer and move the extra case to the records extra section
-            RecordActions.SET_RECORD_AUTO_CATEGORY,
+            setRecordsAutoCategory,
             (
                 state,
                 {

@@ -4,7 +4,7 @@ import { autoCategoryReducer } from './auto-category/auto-category-slice';
 import { categoryReducer } from './category/category-slice';
 import { investmentRecordReducer } from './investment-record/investment-record-slice';
 import { pendingRecordReducer } from './pending-record/pending-record-slice';
-import { RecordReducer } from './record/record.reducer';
+import { recordReducer } from './record/record-slice';
 import { IStore } from './store.interface';
 import { thirdPartyApiReducer } from './third-party-api/third-party-api-slice';
 
@@ -15,6 +15,6 @@ export const rootReducer = combineReducers<IStore>({
     categories: categoryReducer,
     investmentRecords: investmentRecordReducer,
     pendingRecords: pendingRecordReducer,
-    records: RecordReducer,
+    records: recordReducer,
     thirdPartyApi: thirdPartyApiReducer,
 });

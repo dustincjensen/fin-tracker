@@ -3,7 +3,7 @@ import { AutoCategoryStore } from './auto-category/auto-category-slice';
 import { CategoryStore } from './category/category-slice';
 import { InvestmentRecordStore } from './investment-record/investment-record-slice';
 import { PendingRecordStore } from './pending-record/pending-record-slice';
-import { IRecordStore } from './record/record.store.interface';
+import { RecordStore } from './record/record-slice';
 import { ThirdPartyApiStore } from './third-party-api/third-party-api-slice';
 
 export interface IStore {
@@ -12,7 +12,7 @@ export interface IStore {
     categories: CategoryStore;
     investmentRecords: InvestmentRecordStore;
     pendingRecords: PendingRecordStore;
-    records: IRecordStore;
+    records: RecordStore;
     thirdPartyApi: ThirdPartyApiStore;
 }
 
@@ -24,6 +24,6 @@ export interface IPersistedStore {
     autoCategories: AutoCategoryStore;
     categories: CategoryStore;
     investmentRecords: InvestmentRecordStore;
-    records: IRecordStore;
+    records: RecordStore;
     thirdPartyApi: ThirdPartyApiStore;
 }

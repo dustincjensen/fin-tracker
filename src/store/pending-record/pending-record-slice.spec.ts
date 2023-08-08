@@ -1,6 +1,6 @@
+import { Record } from '../../models/record.type';
 import { build } from '../../utils/test.utils';
-import { RecordActions } from '../record/record.actions';
-import { IRecord } from '../record/record.interface';
+import { saveNewRecords } from '../record/record-slice';
 import {
     PendingRecordStore,
     pendingRecordReducer,
@@ -21,7 +21,7 @@ describe('Pending Record slice', () => {
     };
     const accountId = 'accountId';
     const recordId = 'recordId';
-    const record: IRecord = {
+    const record: Record = {
         accountId: accountId,
         date: '2020-12-31',
         description: 'description',
@@ -165,9 +165,7 @@ describe('Pending Record slice', () => {
                         records: [record],
                         error: 'Error',
                     },
-                    {
-                        type: RecordActions.SAVE_NEW_RECORDS,
-                    }
+                    saveNewRecords({ records: [build<Record>({ id: 'record1' }), build<Record>({ id: 'record2' })] })
                 );
 
                 expect(newState).toEqual(defaultState);

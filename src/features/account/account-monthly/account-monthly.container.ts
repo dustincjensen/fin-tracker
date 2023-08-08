@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { CategorySelectors } from '../../../store/category/category.selectors';
-import { RecordActions } from '../../../store/record/record.actions';
+import { setRecordCategory, setSplitRecordCategory } from '../../../store/record/record-slice';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
 import { AccountMonthly } from './account-monthly.component';
@@ -63,9 +63,9 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps): DispatchPro
     const { accountId } = ownProps;
     return {
         updateCategory: (recordId: string, categoryId: string) =>
-            dispatch(RecordActions.setRecordCategory(accountId, recordId, categoryId)),
+            dispatch(setRecordCategory({ accountId, recordId, categoryId })),
         updateSplitRecordCategory: (recordId: string, splitRecordId: string, categoryId: string) =>
-            dispatch(RecordActions.setSplitRecordCategory(accountId, recordId, splitRecordId, categoryId)),
+            dispatch(setSplitRecordCategory({ accountId, recordId, splitRecordId, categoryId })),
     };
 };
 

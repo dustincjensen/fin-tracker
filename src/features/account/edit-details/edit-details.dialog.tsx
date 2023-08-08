@@ -1,7 +1,7 @@
 import { Dialog, FormField, majorScale, TextInputField, Text } from 'evergreen-ui';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { RecordActions } from '../../../store/record/record.actions';
+import { setDetails as setDetailsAction } from '../../../store/record/record-slice';
 import { IEditDetailsProps } from './edit-details.props.interface';
 
 export const EditDetailsDialogComponent = ({ record, onClose }: IEditDetailsProps) => {
@@ -17,7 +17,7 @@ export const EditDetailsDialogComponent = ({ record, onClose }: IEditDetailsProp
     }
 
     const confirm = () => {
-        dispatch(RecordActions.setDetails(record.accountId, record.id, details));
+        dispatch(setDetailsAction({ accountId: record.accountId, recordId: record.id, details }));
         onClose();
     };
 

@@ -16,7 +16,7 @@ import {
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
-import { RecordActions } from '../../../store/record/record.actions';
+import { setSplitRecords as setSplitRecordsAction } from '../../../store/record/record-slice';
 import { round } from '../../../utils/currency.utils';
 import { newGuid } from '../../../utils/guid.utils';
 import { isNullOrWhitespace } from '../../../utils/object.utils';
@@ -75,7 +75,7 @@ export const EditSplitRecords = ({ record, categories, onClose }: IEditSplitReco
         setErrors(newErrors);
 
         if (newErrors.length === 0) {
-            dispatch(RecordActions.setSplitRecords(record.accountId, record.id, splitRecords));
+            dispatch(setSplitRecordsAction({ accountId: record.accountId, recordId: record.id, splitRecords }));
             onClose();
         }
     };

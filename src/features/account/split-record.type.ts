@@ -1,7 +1,7 @@
 import { Category } from '../../models/category.type';
-import { ISplitRecord } from '../../store/record/split-record.interface';
+import { SplitRecord } from '../../models/split-record.type';
 
-export type SplitRecordType = ISplitRecord & {
+export type SplitRecordType = SplitRecord & {
     /**
      * The category to display.
      */

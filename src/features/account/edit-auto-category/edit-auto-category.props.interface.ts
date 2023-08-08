@@ -1,11 +1,11 @@
 import { Category } from '../../../models/category.type';
-import { IRecord } from '../../../store/record/record.interface';
+import { Record } from '../../../models/record.type';
 
 export interface IEditAutoCategoryProps {
     /**
      * The record to base the auto category off of.
      */
-    record: IRecord;
+    record: Record;
 
     /**
      * The list of available categories to choose from.

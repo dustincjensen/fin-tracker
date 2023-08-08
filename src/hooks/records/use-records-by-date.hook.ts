@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { IRecord } from '../../store/record/record.interface';
+import { Record } from '../../models/record.type';
 import { RecordSelectors } from '../../store/record/record.selectors';
 import { IStore } from '../../store/store.interface';
 import { createDate, isInYearMonth } from '../../utils/date.utils';
@@ -11,7 +11,7 @@ import { createDate, isInYearMonth } from '../../utils/date.utils';
  * @param records     The list of records to filter.
  * @param date        The year/month to get records for.
  */
-export const recordsByDate = (records: IRecord[], date: string): IRecord[] => {
+export const recordsByDate = (records: Record[], date: string): Record[] => {
     const targetDate = createDate(date);
     return records?.filter(r => isInYearMonth(targetDate, createDate(r.date)));
 };

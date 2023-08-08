@@ -5,9 +5,9 @@ import { useBackgroundWorkerContext } from '../../../background-worker-provider.
 import { CategorySelect } from '../../../components/category-select/category-select.component';
 import { ICategorySelectProps } from '../../../components/category-select/category-select.props.interface';
 import { DatePicker } from '../../../components/date-picker/date-picker.component';
+import { Record } from '../../../models/record.type';
 import { AccountSelectors } from '../../../store/account/account.selectors';
 import { CategorySelectors } from '../../../store/category/category.selectors';
-import { IRecord } from '../../../store/record/record.interface';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
 import { newGuid } from '../../../utils/guid.utils';
@@ -103,7 +103,7 @@ export const AddNewRecordDialog = ({ accountId, isShown, onClose }: IAddNewRecor
             return;
         }
 
-        const newRecords: IRecord[] = [
+        const newRecords: Record[] = [
             {
                 isManualEntry: true,
                 accountId,

@@ -4,7 +4,7 @@ import { Category } from '../../models/category.type';
 import { build } from '../../utils/test.utils';
 import { deleteAccount } from '../account/account-slice';
 import { deleteCategory } from '../category/category-slice';
-import { RecordActions } from '../record/record.actions';
+import { setRecordsAutoCategory } from '../record/record-slice';
 import { AutoCategoryStore, autoCategoryReducer, deleteAutoCategory } from './auto-category-slice';
 
 describe('Auto Category slice', () => {
@@ -72,15 +72,13 @@ describe('Auto Category slice', () => {
                     {
                         autoCategories: {},
                     },
-                    {
-                        type: RecordActions.SET_RECORD_AUTO_CATEGORY,
-                        payload: {
-                            accountId,
-                            autoCategoryId,
-                            categoryId,
-                            description,
-                        },
-                    }
+                    setRecordsAutoCategory({
+                        accountId,
+                        autoCategoryId,
+                        categoryId,
+                        description,
+                        overwriteExisting: false,
+                    })
                 );
 
                 expect(newState).toEqual(
@@ -113,15 +111,13 @@ describe('Auto Category slice', () => {
                             [accountId]: [autoCategory],
                         },
                     },
-                    {
-                        type: RecordActions.SET_RECORD_AUTO_CATEGORY,
-                        payload: {
-                            accountId,
-                            autoCategoryId: otherAutoCategoryId,
-                            categoryId: otherCategoryId,
-                            description: otherDescription,
-                        },
-                    }
+                    setRecordsAutoCategory({
+                        accountId,
+                        autoCategoryId: otherAutoCategoryId,
+                        categoryId: otherCategoryId,
+                        description: otherDescription,
+                        overwriteExisting: false,
+                    })
                 );
 
                 expect(newState).toEqual(

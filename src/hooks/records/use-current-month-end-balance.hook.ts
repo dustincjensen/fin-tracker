@@ -1,15 +1,15 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Account } from '../../models/account.type';
+import { Record } from '../../models/record.type';
 import { AccountSelectors } from '../../store/account/account.selectors';
-import { IRecord } from '../../store/record/record.interface';
 import { RecordSelectors } from '../../store/record/record.selectors';
 import { IStore } from '../../store/store.interface';
 import { getAccountStartDate } from '../../utils/account.utils';
 import { createDate, getPreviousMonth } from '../../utils/date.utils';
 import { recordsByDate } from './use-records-by-date.hook';
 
-const currentMonthEndBalance = (account: Account, records: IRecord[], date: string): number | undefined => {
+const currentMonthEndBalance = (account: Account, records: Record[], date: string): number | undefined => {
     const monthsRecords = recordsByDate(records, date);
     if (monthsRecords.length > 0) {
         return monthsRecords[monthsRecords.length - 1]?.balance;

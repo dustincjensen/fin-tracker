@@ -16,7 +16,7 @@ import {
 import React from 'react';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
 import { CategoryTag } from '../../../components/category-tag/category-tag.component';
-import { IRecord } from '../../../store/record/record.interface';
+import { Record } from '../../../models/record.type';
 import { formatDate } from '../../../utils/date.utils';
 import { createStaticWidthCell } from '../../../utils/table.utils';
 import { DeleteRecordDialog } from '../delete-record/delete-record.dialog';
@@ -37,10 +37,10 @@ export const AccountMonthly = ({
     updateSplitRecordCategory,
     archived,
 }: IAccountMonthlyProps) => {
-    const [recordToDeleteSplitsFrom, setRecordToDeleteSplitsFrom] = React.useState<IRecord>(null);
-    const [recordToDelete, setRecordToDelete] = React.useState<IRecord>(null);
-    const [recordToAddDetails, setRecordToAddDetails] = React.useState<IRecord>(null);
-    const [recordToAutoCategorize, setRecordToAutoCategorize] = React.useState<IRecord>(null);
+    const [recordToDeleteSplitsFrom, setRecordToDeleteSplitsFrom] = React.useState<Record>(null);
+    const [recordToDelete, setRecordToDelete] = React.useState<Record>(null);
+    const [recordToAddDetails, setRecordToAddDetails] = React.useState<Record>(null);
+    const [recordToAutoCategorize, setRecordToAutoCategorize] = React.useState<Record>(null);
     const [isSplittingTransaction, setIsSplittingTransaction] = React.useState<string>(undefined);
 
     const onDeleteRecordClose = React.useCallback(() => setRecordToDelete(null), [setRecordToDelete]);

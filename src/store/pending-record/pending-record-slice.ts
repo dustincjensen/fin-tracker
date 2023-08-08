@@ -3,7 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from '@reduxjs/toolkit/node_modules/immer/dist/internal';
 import { ImportErrorReturnType, ImportRecordsReturnType } from '../../models/_worker-return.type';
 import { Record } from '../../models/record.type';
-import { RecordActions } from '../record/record.actions';
+import { saveNewRecords } from '../record/record-slice';
 
 export type PendingRecordStore = {
     /**
@@ -89,7 +89,7 @@ export const pendingRecordSlice = createSlice({
         },
     },
     extraReducers: builder => {
-        builder.addCase(RecordActions.SAVE_NEW_RECORDS, clearImportedRecordsHandler);
+        builder.addCase(saveNewRecords, clearImportedRecordsHandler);
     },
 });
 

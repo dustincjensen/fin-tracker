@@ -1,7 +1,7 @@
 import { Dialog } from 'evergreen-ui';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { RecordActions } from '../../../store/record/record.actions';
+import { deleteSplitRecords } from '../../../store/record/record-slice';
 import { IDeleteSplitRecordsProps } from './delete-split-records.props.interface';
 
 const DeleteSplitRecordsDialogComponent = ({ record, onClose }: IDeleteSplitRecordsProps) => {
@@ -12,7 +12,7 @@ const DeleteSplitRecordsDialogComponent = ({ record, onClose }: IDeleteSplitReco
     }
 
     const confirm = () => {
-        dispatch(RecordActions.deleteSplitRecords(record.accountId, record.id));
+        dispatch(deleteSplitRecords({ accountId: record.accountId, recordId: record.id }));
         onClose();
     };
 
