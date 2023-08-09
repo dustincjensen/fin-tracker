@@ -7,22 +7,36 @@ Bugs
 
 Tasks
 =====
-Next
-- Zod for forms?
-- Package updates
-- Refactor 
+- Fix Typescript checking for files. Tired of errors.
+- Investigate Zod for forms and fix up form creation.
+- Remove all createSelector
+- Refactor components
   - Selectors
   - Components
   - Containers
   - Reducers
   - Actions
-- Sorting order accounts by user input? (https://github.com/clauderic/react-sortable-hoc perhaps?)
-- Create regular backups
-  + Let them access the folder where the backup/regular data is.
-  - Restore a backup.
+- Remove props.interface.ts files in favour of in file prop type.
+- Add React Testing Library
+- Add Redux Dev Tools
+- Add tests for the whole application
+-- Consider removing background worker...
+- Re-test everything from scratch and import all files for all accounts and see if the totals line up.
+- Get latest back-up and compare all charts, graphs etc.
+------------------------------------------------------------------------------------------------------
+- Finish description quick edit
+- Account sorting
+  - Sorting order accounts by user input? (https://github.com/clauderic/react-sortable-hoc perhaps?)
+- Split record quick add the rest to the last field.
 - Mortgage
   - Amortization chart
   - Search for values that match the payment and associate them after user clicks ok.
+
+Next
+- Package updates
+- Create regular backups
+  + Let them access the folder where the backup/regular data is.
+  - Restore a backup.
 - README.md
 
 
@@ -31,7 +45,6 @@ Next
 - Improve account monthly header
 - Home page Mortgage Summary Card
 - Home page Mortgage in balance chart
-- Storybook
 - Feature component tests
 - Import multiple files at once
 - Add total wealth graph on home page

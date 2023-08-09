@@ -41,7 +41,7 @@ export const CategorySelect = ({ record, categories, updateCategory, disabled }:
         if (!state.menuOpen && state.categoryId) {
             updateCategory(record.id, state.categoryId);
         }
-    }, [state.menuOpen, state.categoryId]);
+    }, [state.menuOpen, state.categoryId, updateCategory, record.id]);
 
     const onSelect = (item: SelectMenuItem) => dispatch({ type: 'SET_CATEGORY_ID', payload: item.value as string });
     const onSelectMenuOpened = () => dispatch({ type: 'SET_MENU_OPEN', payload: true });

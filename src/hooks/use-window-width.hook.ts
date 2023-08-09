@@ -12,7 +12,7 @@ export const useWindowWidth = (delay = 300) => {
         return () => {
             window.removeEventListener('resize', debouncedHandleResize);
         };
-    }, []);
+    }, [delay]);
 
     return width;
 };

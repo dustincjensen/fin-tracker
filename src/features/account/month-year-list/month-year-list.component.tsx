@@ -31,6 +31,7 @@ export const MonthYearList = ({ startingDate, monthAndYears, setDate }: MonthYea
         setCurrentYearIndex(years.indexOf(startingYear));
         setCurrentMonthIndex(startingMonth);
         // TODO there has to be a better way to handle the array as a useEffect dependency
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [startingDate, JSON.stringify(monthAndYears)]);
 
     // When selecting the year, we don't want to send a new date yet,

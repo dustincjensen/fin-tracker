@@ -19,6 +19,7 @@ export const Account = ({ accountId, hasRecords, startingDate, monthAndYears, ar
     // Always reset the date when changing accounts.
     React.useEffect(() => {
         setDate(startingDate);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [accountId]);
 
     // Only reset the date when the selected date is greater
@@ -29,7 +30,7 @@ export const Account = ({ accountId, hasRecords, startingDate, monthAndYears, ar
         if (createDate(date) > createDate(startingDate)) {
             setDate(startingDate);
         }
-    }, [startingDate]);
+    }, [date, startingDate]);
 
     if (!hasRecords) {
         return <EmptyAccount accountId={accountId} />;

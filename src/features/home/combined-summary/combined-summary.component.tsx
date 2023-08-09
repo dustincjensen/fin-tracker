@@ -65,7 +65,7 @@ export const CombinedSummary = () => {
         // Have to adjust the starting column index since the window width sizing could affect
         // the calculation of the displayable balance range.
         setStartingColumnIndex(i => (i >= displayableDates.length - noc ? displayableDates.length - noc : i));
-    }, [windowWidth, byMonth, editHomeLocked]);
+    }, [windowWidth, byMonth, editHomeLocked, displayableDates.length]);
 
     const fullLeftClick = () => setStartingColumnIndex(displayableDates.length - numberOfColumns);
     const onLeftClick = () => {

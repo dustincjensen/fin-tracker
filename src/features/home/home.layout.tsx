@@ -96,7 +96,7 @@ export const HomeLayout = () => {
                 setFullHomePageOrder(newOrder);
             }
         },
-        [fullHomePageOrder]
+        [fullHomePageOrder, setHomePageOrder]
     );
 
     return (

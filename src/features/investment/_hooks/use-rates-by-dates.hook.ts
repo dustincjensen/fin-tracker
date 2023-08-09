@@ -40,7 +40,7 @@ export const useRatesByDates = (dates: string[], byMonth: boolean, currency: str
 
             setRates(dateRates);
         })();
-    }, [dates, currency, oerApiKey]);
+    }, [dates, currency, oerApiKey, byMonth]);
 
     return { rates };
 };
