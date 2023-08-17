@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { WritableDraft } from 'immer/dist/internal';
+import { WritableDraft } from '@reduxjs/toolkit/node_modules/immer/dist/internal';
 import { Account } from '../../models/account.type';
 import { Category } from '../../models/category.type';
 import { newGuid } from '../../utils/guid.utils';
