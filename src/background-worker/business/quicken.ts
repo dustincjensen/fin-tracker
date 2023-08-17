@@ -1,6 +1,6 @@
-import { AutoCategory } from '../../models/auto-category.type';
-import { Record } from '../../models/record.type';
-import { newGuid } from '../../utils/guid.utils';
+import { AutoCategory } from '../../app/models/auto-category.type';
+import { Record } from '../../app/models/record.type';
+import { newGuid } from '../../app/utils/guid.utils';
 
 const stringRemoveExtraneousSpaces = /\s{2,}/g;
 

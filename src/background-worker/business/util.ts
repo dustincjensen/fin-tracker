@@ -1,4 +1,4 @@
-import { Record } from '../../models/record.type';
+import { Record } from '../../app/models/record.type';
 
 export function sortRecordsByDate(records: Record[]): Record[] {
     records.sort(sortByDate);

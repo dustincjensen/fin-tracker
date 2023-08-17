@@ -1,5 +1,5 @@
-import { WorkerReturnType } from '../../models/_worker-return.type';
-import { Record } from '../../models/record.type';
+import { WorkerReturnType } from '../../app/models/_worker-return.type';
+import { Record } from '../../app/models/record.type';
 import { sortAndCalculateBalance } from '../business/util';
 
 export function mergeRecords(

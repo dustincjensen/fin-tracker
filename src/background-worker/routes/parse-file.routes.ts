@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ImportErrorReturnType, ImportRecordsReturnType, WorkerReturnType } from '../../models/_worker-return.type';
-import { AutoCategory } from '../../models/auto-category.type';
-import { Record } from '../../models/record.type';
+import { ImportErrorReturnType, ImportRecordsReturnType, WorkerReturnType } from '../../app/models/_worker-return.type';
+import { AutoCategory } from '../../app/models/auto-category.type';
+import { Record } from '../../app/models/record.type';
 import { parse as qfxParse } from '../business/qfx';
 import { parse as quickenParse } from '../business/quicken';
 import { sortRecordsByDate } from '../business/util';

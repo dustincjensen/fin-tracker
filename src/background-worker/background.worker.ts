@@ -1,4 +1,4 @@
-import { WorkerEventType } from '../models/_worker-event.type';
+import { WorkerEventType } from '../app/models/_worker-event.type';
 import * as mergeFileRoutes from './routes/merge-file.routes';
 import * as parseFileRoutes from './routes/parse-file.routes';
 
