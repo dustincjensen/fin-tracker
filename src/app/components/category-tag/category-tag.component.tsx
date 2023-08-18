@@ -5,9 +5,9 @@ import './category-tag.css';
 
 export const CategoryTag = ({ category, onClear }: ICategoryTagProps) => {
     return (
-        <Pane display='inline-block'>
+        <Pane data-testid='category-tag' display='inline-block'>
             <Pane
-                data-name='category-tag'
+                data-testid='wrapper'
                 display='flex'
                 alignItems='center'
                 background={category?.color || '#333'}
@@ -47,7 +47,12 @@ export const CategoryTag = ({ category, onClear }: ICategoryTagProps) => {
                 </Popover>
 
                 {onClear && (
-                    <button type='button' onClick={onClear} className='category_tag_button'>
+                    <button
+                        type='button'
+                        aria-label='Remove Category Tag'
+                        onClick={onClear}
+                        className='category_tag_button'
+                    >
                         <SmallCrossIcon color='white' />
                     </button>
                 )}

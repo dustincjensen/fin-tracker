@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { CategoryTag } from './category-tag.component';
 import { ICategoryTagProps } from './category-tag.props.interface';
@@ -24,9 +24,9 @@ describe('components', () => {
                 color: '#123456',
                 name: 'Grocery',
             };
-            const component = shallow(<CategoryTag {...props} category={category} />);
-            const paneBackground = component.find('[data-name="category-tag"]').props()['background'];
-            expect(paneBackground).toBe(category.color);
+
+            render(<CategoryTag {...props} category={category} />);
+            expect(screen.getByTestId('wrapper')).toHaveStyle(`background: ${category.color}`);
         });
 
         it('should render background in default color when category color is not provided', () => {
@@ -35,27 +35,29 @@ describe('components', () => {
                 color: undefined,
                 name: 'Grocery',
             };
-            const component = shallow(<CategoryTag {...props} category={category} />);
-            const paneBackground = component.find('[data-name="category-tag"]').props()['background'];
-            expect(paneBackground).toBe('#333');
+            render(<CategoryTag {...props} category={category} />);
+            expect(screen.getByTestId('wrapper')).toHaveStyle('background: #333');
         });
 
         it('should not render a button when onClear is not provided', () => {
-            const component = shallow(<CategoryTag {...props} onClear={undefined} />);
-            expect(component.find('button').length).toBe(0);
+            render(<CategoryTag {...props} onClear={undefined} />);
+            expect(screen.queryByRole('button', { name: 'Remove Category Tag' })).not.toBeInTheDocument();
         });
 
         it('should render a button when onClear is provided', () => {
             const onClear = jest.fn();
-            const component = shallow(<CategoryTag {...props} onClear={onClear} />);
-            expect(component.find('button').length).toBe(1);
+            render(<CategoryTag {...props} onClear={onClear} />);
+            expect(screen.queryByRole('button', { name: 'Remove Category Tag' })).toBeInTheDocument();
         });
 
         it('should call onClear when button is clicked', () => {
             const onClear = jest.fn();
-            const component = shallow(<CategoryTag {...props} onClear={onClear} />);
-            component.find('button').simulate('click');
-            expect(onClear).toHaveBeenCalled();
+            render(<CategoryTag {...props} onClear={onClear} />);
+
+            // TODO investigate @testing-library/user-event
+            fireEvent.click(screen.getByRole('button', { name: 'Remove Category Tag' }));
+
+            expect(onClear).toHaveBeenCalledTimes(1);
         });
     });
 });

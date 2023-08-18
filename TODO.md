@@ -7,7 +7,10 @@ Bugs
 
 Tasks
 =====
-- Fix Typescript checking for files. Tired of errors.
+- Rewrite all tests in RTL and remove enzyme
+- Remove props.interface.ts files in favour of in file prop type.
+- Add Redux Dev Tools
+
 - Investigate Zod for forms and fix up form creation.
 - Remove all createSelector
 - Refactor components
@@ -16,9 +19,6 @@ Tasks
   - Containers
   - Reducers
   - Actions
-- Remove props.interface.ts files in favour of in file prop type.
-- Add React Testing Library
-- Add Redux Dev Tools
 - Add tests for the whole application
 -- Consider removing background worker...
 - Re-test everything from scratch and import all files for all accounts and see if the totals line up.

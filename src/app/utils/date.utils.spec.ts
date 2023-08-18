@@ -25,6 +25,12 @@ import {
 
 describe('utils', () => {
     describe('date', () => {
+        beforeEach(() => {
+            jest.spyOn(console, 'warn').mockImplementation(() => {
+                // TODO actually fix moment warning
+            });
+        });
+
         describe('monthValues', () => {
             it('should return the correct month and value', () => {
                 const expected: Array<{ value: string; month: string }> = [

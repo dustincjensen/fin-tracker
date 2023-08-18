@@ -27,7 +27,7 @@ export function sortAndCalculateBalance(
 }
 
 // TODO DO some heavy testing on parsing to ensure that the date sorting for various QFX data sets works perfectly.
-function sortByDate(a: Record, b: Record): number {
+export function sortByDate(a: Record, b: Record): number {
     const aDate = new Date(a.date);
     const bDate = new Date(b.date);
 
