@@ -9,7 +9,7 @@ const dayNames = moment.weekdaysMin();
 const outsideMonthStyle = { color: 'rgba(67, 90, 111, 0.3)' };
 const todayStyle = { background: '#DDEBF7' };
 
-interface IDatePickerProps {
+type DatePickerProps = {
     /**
      * The value to use for the date picker.
      */
@@ -20,11 +20,11 @@ interface IDatePickerProps {
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onChange: any;
-}
+};
 
 // TODO remove moment references for IDate and date.utils methods.
 // TODO tests
-export const DatePicker = ({ value: date, onChange }: IDatePickerProps) => {
+export const DatePicker = ({ value: date, onChange }: DatePickerProps) => {
     const [today] = React.useState(() => moment().startOf('day').toISOString());
     const [monthInfo, setMonthInfo] = React.useState(() => buildMonth(moment(date || today)));
 

@@ -1,29 +1,44 @@
 import { Dialog, FormField, majorScale, TextInputField, SegmentedControl, TextInput, Pane } from 'evergreen-ui';
 import React from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
-import { useBackgroundWorkerContext } from '../../../background-worker-provider.component';
-import { CategorySelect } from '../../../components/category-select/category-select.component';
-import { ICategorySelectProps } from '../../../components/category-select/category-select.props.interface';
-import { DatePicker } from '../../../components/date-picker/date-picker.component';
-import { Record } from '../../../models/record.type';
-import { AccountSelectors } from '../../../store/account/account.selectors';
-import { CategorySelectors } from '../../../store/category/category.selectors';
-import { RecordSelectors } from '../../../store/record/record.selectors';
-import { IStore } from '../../../store/store.interface';
-import { newGuid } from '../../../utils/guid.utils';
-import { isNullOrWhitespace } from '../../../utils/object.utils';
-import { IAddNewRecordProps } from './add-new-record.props.interface';
+import { useBackgroundWorkerContext } from '../../background-worker-provider.component';
+import { CategorySelect, CategorySelectProps } from '../../components/category-select/category-select.component';
+import { DatePicker } from '../../components/date-picker/date-picker.component';
+import { Record } from '../../models/record.type';
+import { AccountSelectors } from '../../store/account/account.selectors';
+import { CategorySelectors } from '../../store/category/category.selectors';
+import { RecordSelectors } from '../../store/record/record.selectors';
+import { IStore } from '../../store/store.interface';
+import { newGuid } from '../../utils/guid.utils';
+import { isNullOrWhitespace } from '../../utils/object.utils';
 
 // TODO this is confusing...
-type CategoryRecord = ICategorySelectProps['record'];
+type CategoryRecord = CategorySelectProps['record'];
 
 const options = [
     { label: 'Debit', value: 'debit' },
     { label: 'Credit', value: 'credit' },
 ];
 
+type AddNewRecordProps = {
+    /**
+     * The account to add the record to.
+     */
+    accountId: string;
+
+    /**
+     * True if the dialog should be shown.
+     */
+    isShown: boolean;
+
+    /**
+     * Action to call when the modal closes.
+     */
+    onClose: () => void;
+};
+
 // TODO review this component
-export const AddNewRecordDialog = ({ accountId, isShown, onClose }: IAddNewRecordProps) => {
+export const AddNewRecordDialog = ({ accountId, isShown, onClose }: AddNewRecordProps) => {
     const categories = useSelector(CategorySelectors.selectCategories, shallowEqual);
     const account = useSelector((state: IStore) => AccountSelectors.account(state, accountId), shallowEqual);
     const existingRecords = useSelector(

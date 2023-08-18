@@ -2,7 +2,7 @@ import { Pane, Button } from 'evergreen-ui';
 import React from 'react';
 import { DisplayableCalendarDate } from './displayable-calendar-date.type';
 
-interface ICalendarDateProps {
+type CalendarDateProps = {
     /**
      * The date to render.
      */
@@ -27,9 +27,9 @@ interface ICalendarDateProps {
      * Tells the date picker to close when the calendar date is selected.
      */
     close: () => void;
-}
+};
 
-const CalendarDateComponent = ({ dateToRender, isSelected, setIsSelected, style, close }: ICalendarDateProps) => (
+const CalendarDateComponent = ({ dateToRender, isSelected, setIsSelected, style, close }: CalendarDateProps) => (
     <Pane>
         <Button
             appearance={isSelected ? 'primary' : 'minimal'}
@@ -49,4 +49,4 @@ const CalendarDateComponent = ({ dateToRender, isSelected, setIsSelected, style,
     </Pane>
 );
 
-export const CalendarDate: React.FC<ICalendarDateProps> = React.memo(CalendarDateComponent);
+export const CalendarDate: React.FC<CalendarDateProps> = React.memo(CalendarDateComponent);

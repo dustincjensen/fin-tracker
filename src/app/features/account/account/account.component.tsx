@@ -6,8 +6,8 @@ import { AccountBalanceLineChart } from '../account-balance-line-chart.component
 import { AccountCategoryTotalsChart } from '../account-category-totals-chart.component';
 import { AccountDetailSummary } from '../account-detail-summary.component';
 import { AccountMonthlyContainer } from '../account-monthly/account-monthly.container';
-import { EmptyAccount } from '../empty-account/empty-account.component';
-import { MonthYearList } from '../month-year-list/month-year-list.component';
+import { EmptyAccount } from '../empty-account.component';
+import { MonthYearList } from '../month-year-list.component';
 import { IAccountProps } from './account.props.interface';
 
 // TODO clean up the account id, date, state selector passed to the 3 containers.

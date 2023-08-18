@@ -1,11 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import { CategoryTag } from './category-tag.component';
-import { ICategoryTagProps } from './category-tag.props.interface';
+import { CategoryTag, CategoryTagProps } from './category-tag.component';
 
 describe('components', () => {
     describe('CategoryTag', () => {
-        let props: ICategoryTagProps;
+        let props: CategoryTagProps;
 
         beforeEach(() => {
             props = {
@@ -19,7 +18,7 @@ describe('components', () => {
         });
 
         it('should render background in category color when category color is provided', () => {
-            const category: ICategoryTagProps['category'] = {
+            const category: CategoryTagProps['category'] = {
                 id: 'id',
                 color: '#123456',
                 name: 'Grocery',
@@ -30,7 +29,7 @@ describe('components', () => {
         });
 
         it('should render background in default color when category color is not provided', () => {
-            const category: ICategoryTagProps['category'] = {
+            const category: CategoryTagProps['category'] = {
                 id: 'id',
                 color: undefined,
                 name: 'Grocery',

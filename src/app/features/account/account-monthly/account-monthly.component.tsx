@@ -19,12 +19,12 @@ import { CategoryTag } from '../../../components/category-tag/category-tag.compo
 import { Record } from '../../../models/record.type';
 import { formatDate } from '../../../utils/date.utils';
 import { createStaticWidthCell } from '../../../utils/table.utils';
-import { DeleteRecordDialog } from '../delete-record/delete-record.dialog';
-import { DeleteSplitRecordsDialog } from '../delete-split-records/delete-split-records.dialog';
-import { EditAutoCategoryDialog } from '../edit-auto-category/edit-auto-category.dialog';
-import { EditDetailsDialog } from '../edit-details/edit-details.dialog';
+import { DeleteRecordDialog } from '../delete-record.dialog';
+import { DeleteSplitRecordsDialog } from '../delete-split-records.dialog';
+import { EditAutoCategoryDialog } from '../edit-auto-category.dialog';
+import { EditDetailsDialog } from '../edit-details.dialog';
 import { EditSplitRecords } from '../edit-split-records/edit-split-records.component';
-import { SplitRecords } from '../split-records/split-records.component';
+import { SplitRecords } from '../split-records.component';
 import { IAccountMonthlyProps } from './account-monthly.props.interface';
 
 const w100 = createStaticWidthCell(100);

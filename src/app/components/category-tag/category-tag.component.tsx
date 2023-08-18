@@ -1,9 +1,22 @@
 import { Pane, Text, SmallCrossIcon, Popover } from 'evergreen-ui';
 import React from 'react';
-import { ICategoryTagProps } from './category-tag.props.interface';
+import { Category } from '../../models/category.type';
 import './category-tag.css';
 
-export const CategoryTag = ({ category, onClear }: ICategoryTagProps) => {
+export type CategoryTagProps = {
+    /**
+     * The category to display.
+     */
+    category: Category;
+
+    /**
+     * A function to invoke when the X is clicked on the category tag.
+     * If undefined, the X will not display.
+     */
+    onClear?: () => void;
+};
+
+export const CategoryTag = ({ category, onClear }: CategoryTagProps) => {
     return (
         <Pane data-testid='category-tag' display='inline-block'>
             <Pane

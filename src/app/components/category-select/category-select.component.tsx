@@ -3,14 +3,38 @@ import React from 'react';
 import { createSelector } from 'reselect';
 import { Category } from '../../models/category.type';
 import { CategoryTag } from '../category-tag/category-tag.component';
-import { ICategorySelectProps } from './category-select.props.interface';
+
+export type CategorySelectProps = {
+    /**
+     * The record with category and id.
+     */
+    record: {
+        id: string;
+        category: Category;
+    };
+
+    /**
+     * The categories to choose from.
+     */
+    categories: Array<Category>;
+
+    /**
+     * The function to update the record with a category id.
+     */
+    updateCategory: (recordId: string, categoryId: string) => void;
+
+    /**
+     * If true, the button will be disabled.
+     */
+    disabled?: boolean;
+};
 
 const selectOptions = createSelector(
     (categories: Category[]) => categories,
     categories => categories.map(category => ({ label: category.name, value: category.id }))
 );
 
-export const CategorySelect = ({ record, categories, updateCategory, disabled }: ICategorySelectProps) => {
+export const CategorySelect = ({ record, categories, updateCategory, disabled }: CategorySelectProps) => {
     // TODO clean up reducer?
     const [state, dispatch] = React.useReducer(
         (state, action) => {

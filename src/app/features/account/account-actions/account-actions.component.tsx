@@ -1,6 +1,6 @@
 import { majorScale, Button, Pane, AddIcon, TextInput } from 'evergreen-ui';
 import React from 'react';
-import { AddNewRecordDialog } from '../add-new-record/add-new-record.dialog';
+import { AddNewRecordDialog } from '../add-new-record.dialog';
 import { IAccountActionsProps } from './account-actions.props.interface';
 import { SelectCategory } from './select-category.component';
 

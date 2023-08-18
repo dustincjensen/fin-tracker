@@ -1,13 +1,25 @@
 import { Dialog } from 'evergreen-ui';
 import React from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
-import { useBackgroundWorkerContext } from '../../../background-worker-provider.component';
-import { AccountSelectors } from '../../../store/account/account.selectors';
-import { RecordSelectors } from '../../../store/record/record.selectors';
-import { IStore } from '../../../store/store.interface';
-import { IDeleteRecordProps } from './delete-record.props.interface';
+import { useBackgroundWorkerContext } from '../../background-worker-provider.component';
+import { Record } from '../../models/record.type';
+import { AccountSelectors } from '../../store/account/account.selectors';
+import { RecordSelectors } from '../../store/record/record.selectors';
+import { IStore } from '../../store/store.interface';
 
-const DeleteRecordDialogComponent = ({ record, onClose }: IDeleteRecordProps) => {
+type DeleteRecordProps = {
+    /**
+     * The record to delete.
+     */
+    record: Record;
+
+    /**
+     * Action to call when the modal closes.
+     */
+    onClose: () => void;
+};
+
+const DeleteRecordDialogComponent = ({ record, onClose }: DeleteRecordProps) => {
     const account = useSelector((state: IStore) => AccountSelectors.account(state, record?.accountId), shallowEqual);
     const existingRecords = useSelector(
         (state: IStore) => RecordSelectors.recordsByAccountId(state, record?.accountId),

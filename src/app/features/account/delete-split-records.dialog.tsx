@@ -1,10 +1,22 @@
 import { Dialog } from 'evergreen-ui';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteSplitRecords } from '../../../store/record/record-slice';
-import { IDeleteSplitRecordsProps } from './delete-split-records.props.interface';
+import { Record } from '../../models/record.type';
+import { deleteSplitRecords } from '../../store/record/record-slice';
 
-const DeleteSplitRecordsDialogComponent = ({ record, onClose }: IDeleteSplitRecordsProps) => {
+type DeleteSplitRecordsProps = {
+    /**
+     * The record to delete the split records from.
+     */
+    record: Record;
+
+    /**
+     * Action to call when the modal closes.
+     */
+    onClose: () => void;
+};
+
+const DeleteSplitRecordsDialogComponent = ({ record, onClose }: DeleteSplitRecordsProps) => {
     const dispatch = useDispatch();
 
     if (!record) {

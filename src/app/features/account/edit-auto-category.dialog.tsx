@@ -1,16 +1,33 @@
 import { Dialog, FormField, majorScale, Alert, TextInputField, Switch } from 'evergreen-ui';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { CategorySelect } from '../../../components/category-select/category-select.component';
-import { ICategorySelectProps } from '../../../components/category-select/category-select.props.interface';
-import { setRecordsAutoCategory } from '../../../store/record/record-slice';
-import { newGuid } from '../../../utils/guid.utils';
-import { isNullOrWhitespace } from '../../../utils/object.utils';
-import { IEditAutoCategoryProps } from './edit-auto-category.props.interface';
+import { CategorySelect, CategorySelectProps } from '../../components/category-select/category-select.component';
+import { Category } from '../../models/category.type';
+import { Record } from '../../models/record.type';
+import { setRecordsAutoCategory } from '../../store/record/record-slice';
+import { newGuid } from '../../utils/guid.utils';
+import { isNullOrWhitespace } from '../../utils/object.utils';
 
-type CategoryRecord = ICategorySelectProps['record'];
+type CategoryRecord = CategorySelectProps['record'];
 
-export const EditAutoCategoryDialogComponent = ({ record, categories, onClose }: IEditAutoCategoryProps) => {
+type EditAutoCategoryProps = {
+    /**
+     * The record to base the auto category off of.
+     */
+    record: Record;
+
+    /**
+     * The list of available categories to choose from.
+     */
+    categories: Array<Category>;
+
+    /**
+     * Action to call when the modal closes.
+     */
+    onClose: () => void;
+};
+
+export const EditAutoCategoryDialogComponent = ({ record, categories, onClose }: EditAutoCategoryProps) => {
     const dispatch = useDispatch();
     const [description, setDescription] = React.useState<string>('');
     const [descriptionError, setDescriptionError] = React.useState<string>('');

@@ -1,13 +1,31 @@
 import { Pane, Table, Text, ForkIcon } from 'evergreen-ui';
 import React from 'react';
-import { CategorySelect } from '../../../components/category-select/category-select.component';
-import { createStaticWidthCell } from '../../../utils/table.utils';
-import { ISplitRecordsProps } from './split-records.props.interface';
+import { CategorySelect } from '../../components/category-select/category-select.component';
+import { Category } from '../../models/category.type';
+import { createStaticWidthCell } from '../../utils/table.utils';
+import { SplitRecordType } from './split-record.type';
 
 const w100 = createStaticWidthCell(100);
 const w200 = createStaticWidthCell(200);
 
-export const SplitRecords = ({ records, categories, updateCategory }: ISplitRecordsProps) => {
+type SplitRecordsProps = {
+    /**
+     * The split records that are underneath the record.
+     */
+    records: SplitRecordType[];
+
+    /**
+     * The categories to choose from.
+     */
+    categories: Array<Category>;
+
+    /**
+     * The function to update the split record with a category id.
+     */
+    updateCategory: (splitRecordId: string, categoryId: string) => void;
+};
+
+export const SplitRecords = ({ records, categories, updateCategory }: SplitRecordsProps) => {
     if (!records) {
         return null;
     }

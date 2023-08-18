@@ -1,11 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { CategorySelect } from './category-select.component';
-import { ICategorySelectProps } from './category-select.props.interface';
+import { CategorySelect, CategorySelectProps } from './category-select.component';
 
 describe('components', () => {
     describe('CategorySelect', () => {
-        let props: ICategorySelectProps;
+        let props: CategorySelectProps;
 
         beforeEach(() => {
             props = {
@@ -19,7 +18,7 @@ describe('components', () => {
         });
 
         it('should render a SelectMenu when record has no category', () => {
-            const record: ICategorySelectProps['record'] = {
+            const record: CategorySelectProps['record'] = {
                 id: 'id',
                 category: undefined,
             };
@@ -28,7 +27,7 @@ describe('components', () => {
         });
 
         it('should render CategoryTag when record has a category selected', () => {
-            const record: ICategorySelectProps['record'] = {
+            const record: CategorySelectProps['record'] = {
                 id: 'id',
                 category: {
                     id: 'categoryId',

@@ -1,10 +1,22 @@
 import { Dialog, FormField, majorScale, TextInputField, Text } from 'evergreen-ui';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { setDetails as setDetailsAction } from '../../../store/record/record-slice';
-import { IEditDetailsProps } from './edit-details.props.interface';
+import { Record } from '../../models/record.type';
+import { setDetails as setDetailsAction } from '../../store/record/record-slice';
 
-export const EditDetailsDialogComponent = ({ record, onClose }: IEditDetailsProps) => {
+type EditDetailsProps = {
+    /**
+     * The record edit the details of.
+     */
+    record: Record;
+
+    /**
+     * Action to call when the modal closes.
+     */
+    onClose: () => void;
+};
+
+export const EditDetailsDialogComponent = ({ record, onClose }: EditDetailsProps) => {
     const dispatch = useDispatch();
     const [details, setDetails] = React.useState<string>('');
 

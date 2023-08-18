@@ -3,9 +3,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { formatDateFull } from '../../utils/date.utils';
 import { useInvestmentSummary } from './investment-summary.hook';
-import { IInvestmentSummaryProps } from './investment-summary.props.interface';
 
-export const InvestmentSummary = ({ accountId }: IInvestmentSummaryProps) => {
+export type InvestmentSummaryProps = {
+    /**
+     * The ID of the account.
+     */
+    accountId: string;
+};
+
+export const InvestmentSummary = ({ accountId }: InvestmentSummaryProps) => {
     const { name, icon, latestDate, balance } = useInvestmentSummary(accountId);
 
     return (

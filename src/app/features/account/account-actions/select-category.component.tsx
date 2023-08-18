@@ -3,6 +3,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { CategorySelectors } from '../../../store/category/category.selectors';
 
+// TODO props type
+
 export const SelectCategory = ({ selectedCategory, setSelectedCategory }) => {
     const categories = useSelector(CategorySelectors.selectCategories);
     const categoryOptions = [

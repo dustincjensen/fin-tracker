@@ -4,16 +4,24 @@ import { Link } from 'react-router-dom';
 import { IconType } from '../../utils/account.utils';
 
 type NavLinkProps = {
-    /** The route to navigate to. */
+    /**
+     * The route to navigate to.
+     */
     to: string;
 
-    /** The evergreen ui icon to display. */
+    /**
+     * The evergreen ui icon to display.
+     */
     iconBefore: IconType;
 
-    /** The text to display for the button. */
+    /**
+     * The text to display for the button.
+     */
     text: string;
 
-    /** Whether or not the current route is active. */
+    /**
+     * Whether or not the current route is active.
+     */
     isSelected?: boolean;
 };
 
