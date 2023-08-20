@@ -1,17 +1,43 @@
 import { Pane } from 'evergreen-ui';
 import React from 'react';
 import { createDate } from '../../../utils/date.utils';
-import { AccountActions } from '../account-actions/account-actions.component';
+import { AccountActions } from '../account-actions.component';
 import { AccountBalanceLineChart } from '../account-balance-line-chart.component';
 import { AccountCategoryTotalsChart } from '../account-category-totals-chart.component';
 import { AccountDetailSummary } from '../account-detail-summary.component';
 import { AccountMonthlyContainer } from '../account-monthly/account-monthly.container';
 import { EmptyAccount } from '../empty-account.component';
 import { MonthYearList } from '../month-year-list.component';
-import { IAccountProps } from './account.props.interface';
+
+export type AccountProps = {
+    /**
+     * Whether or not the account has records.
+     */
+    hasRecords: boolean;
+
+    /**
+     * The month/year we should select when opening the account page.
+     */
+    startingDate: string;
+
+    /**
+     * The month and years of records we have for this account.
+     */
+    monthAndYears: number[][];
+
+    /**
+     * The account to load.
+     */
+    accountId: string;
+
+    /**
+     * True if the account is archived, false otherwise.
+     */
+    archived: boolean;
+};
 
 // TODO clean up the account id, date, state selector passed to the 3 containers.
-export const Account = ({ accountId, hasRecords, startingDate, monthAndYears, archived }: IAccountProps) => {
+export const Account = ({ accountId, hasRecords, startingDate, monthAndYears, archived }: AccountProps) => {
     const [date, setDate] = React.useState(startingDate);
     const [filterDescription, setFilteredDescription] = React.useState<string>('');
     const [selectedCategoryId, setSelectedCategoryId] = React.useState<string>('');

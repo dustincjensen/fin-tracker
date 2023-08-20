@@ -7,8 +7,7 @@ import { CombinedCategorySummaryContainer } from './combined-category-summary/co
 import { CombinedSummary } from './combined-summary/combined-summary.component';
 import { EditHomeContext } from './edit-home.context';
 import { InstructionsContainer } from './instructions/instructions.container';
-import { OptionalDisplay } from './optional-display/optional-display.component';
-import { IOptionalDisplayProps } from './optional-display/optional-display.props.interface';
+import { OptionalDisplay, OptionalDisplayProps } from './optional-display.component';
 
 const homePageOrderLocalStorage = 'homePageOrder';
 const accountsSummaryTilesDisplayed = 'accountsSummaryTilesDisplayed';
@@ -21,7 +20,7 @@ const defaultOrder = [
     categoriesSummaryMonthlyYearlyDisplayed,
 ];
 
-const renderAccountsSummaryTitle = (locked: boolean, updateOrder: IOptionalDisplayProps['updateOrder']) => (
+const renderAccountsSummaryTitle = (locked: boolean, updateOrder: OptionalDisplayProps['updateOrder']) => (
     <OptionalDisplay
         locked={locked}
         title='Accounts Summary (Tiles)'
@@ -31,7 +30,7 @@ const renderAccountsSummaryTitle = (locked: boolean, updateOrder: IOptionalDispl
     />
 );
 
-const renderAccountsSummaryMonthlyYearly = (locked: boolean, updateOrder: IOptionalDisplayProps['updateOrder']) => (
+const renderAccountsSummaryMonthlyYearly = (locked: boolean, updateOrder: OptionalDisplayProps['updateOrder']) => (
     <OptionalDisplay
         locked={locked}
         title='Accounts Summary (Monthly/Yearly)'
@@ -41,7 +40,7 @@ const renderAccountsSummaryMonthlyYearly = (locked: boolean, updateOrder: IOptio
     />
 );
 
-const renderCategoriesSummaryMonthlyYearly = (locked: boolean, updateOrder: IOptionalDisplayProps['updateOrder']) => (
+const renderCategoriesSummaryMonthlyYearly = (locked: boolean, updateOrder: OptionalDisplayProps['updateOrder']) => (
     <OptionalDisplay
         locked={locked}
         title='Category Totals Chart (Monthly/Yearly)'

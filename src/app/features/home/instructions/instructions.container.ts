@@ -5,10 +5,9 @@ import { AutoCategorySelectors } from '../../../store/auto-category/auto-categor
 import { CategorySelectors } from '../../../store/category/category.selectors';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
-import { Instructions } from './instructions.component';
-import { IInstructionsProps } from './instructions.props.interface';
+import { Instructions, InstructionsProps } from './instructions.component';
 
-type StateProps = IInstructionsProps;
+type StateProps = InstructionsProps;
 
 const hasAccounts = createSelector(AccountSelectors.accounts, accounts => Object.keys(accounts).length > 0);
 

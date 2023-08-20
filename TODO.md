@@ -8,8 +8,8 @@ Bugs
 Tasks
 =====
 - Rewrite all tests in RTL and remove enzyme
-- Remove props.interface.ts files in favour of in file prop type.
 - Add Redux Dev Tools
+- Fix eslint typescript
 
 - Investigate Zod for forms and fix up form creation.
 - Remove all createSelector

@@ -9,11 +9,10 @@ import {
     getMonthAndYearFromDate,
     stringToDayMonthYear,
 } from '../../../utils/date.utils';
-import { Account } from './account.component';
-import { IAccountProps } from './account.props.interface';
+import { Account, AccountProps } from './account.component';
 
-type StateProps = Pick<IAccountProps, 'hasRecords' | 'startingDate' | 'monthAndYears' | 'archived'>;
-type OwnProps = Pick<IAccountProps, 'accountId'>;
+type StateProps = Pick<AccountProps, 'hasRecords' | 'startingDate' | 'monthAndYears' | 'archived'>;
+type OwnProps = Pick<AccountProps, 'accountId'>;
 
 const mapStateToProps = (state: IStore, { accountId }: OwnProps): StateProps => {
     const account = AccountSelectors.account(state, accountId);

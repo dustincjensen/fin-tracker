@@ -16,6 +16,7 @@ import {
 import React from 'react';
 import { CategorySelect } from '../../../components/category-select/category-select.component';
 import { CategoryTag } from '../../../components/category-tag/category-tag.component';
+import { Category } from '../../../models/category.type';
 import { Record } from '../../../models/record.type';
 import { formatDate } from '../../../utils/date.utils';
 import { createStaticWidthCell } from '../../../utils/table.utils';
@@ -23,12 +24,59 @@ import { DeleteRecordDialog } from '../delete-record.dialog';
 import { DeleteSplitRecordsDialog } from '../delete-split-records.dialog';
 import { EditAutoCategoryDialog } from '../edit-auto-category.dialog';
 import { EditDetailsDialog } from '../edit-details.dialog';
-import { EditSplitRecords } from '../edit-split-records/edit-split-records.component';
+import { EditSplitRecords } from '../edit-split-records.component';
+import { RecordType } from '../record.type';
 import { SplitRecords } from '../split-records.component';
-import { IAccountMonthlyProps } from './account-monthly.props.interface';
 
 const w100 = createStaticWidthCell(100);
 const w200 = createStaticWidthCell(200);
+
+export type AccountMonthlyProps = {
+    /**
+     * The records to display.
+     */
+    records: RecordType[];
+
+    /**
+     * The list of categories to choose from for each record.
+     */
+    categories: Array<Category>;
+
+    /**
+     * Function to update a category in state.
+     */
+    updateCategory: (recordId: string, categoryId: string) => void;
+
+    /**
+     * Function to update a split record category in state.
+     */
+    updateSplitRecordCategory: (recordId: string, splitRecordId: string, categoryId: string) => void;
+
+    /**
+     * The ID of the account to display.
+     */
+    accountId: string;
+
+    /**
+     * The first date of the month to get the data for.
+     */
+    date: string;
+
+    /**
+     * True if the account is archived, false otherwise.
+     */
+    archived: boolean;
+
+    /**
+     * The description to filter by.
+     */
+    filterDescription?: string;
+
+    /**
+     * The ID of the category to filter by.
+     */
+    filterCategoryId?: string;
+};
 
 export const AccountMonthly = ({
     records,
@@ -36,7 +84,7 @@ export const AccountMonthly = ({
     updateCategory,
     updateSplitRecordCategory,
     archived,
-}: IAccountMonthlyProps) => {
+}: AccountMonthlyProps) => {
     const [recordToDeleteSplitsFrom, setRecordToDeleteSplitsFrom] = React.useState<Record>(null);
     const [recordToDelete, setRecordToDelete] = React.useState<Record>(null);
     const [recordToAddDetails, setRecordToAddDetails] = React.useState<Record>(null);

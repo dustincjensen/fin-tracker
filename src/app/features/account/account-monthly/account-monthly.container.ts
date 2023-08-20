@@ -4,12 +4,11 @@ import { CategorySelectors } from '../../../store/category/category.selectors';
 import { setRecordCategory, setSplitRecordCategory } from '../../../store/record/record-slice';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
-import { AccountMonthly } from './account-monthly.component';
-import { IAccountMonthlyProps } from './account-monthly.props.interface';
+import { AccountMonthly, AccountMonthlyProps } from './account-monthly.component';
 
-type StateProps = Pick<IAccountMonthlyProps, 'records' | 'categories'>;
-type DispatchProps = Pick<IAccountMonthlyProps, 'updateCategory' | 'updateSplitRecordCategory'>;
-type OwnProps = Pick<IAccountMonthlyProps, 'accountId' | 'date' | 'filterDescription' | 'filterCategoryId'>;
+type StateProps = Pick<AccountMonthlyProps, 'records' | 'categories'>;
+type DispatchProps = Pick<AccountMonthlyProps, 'updateCategory' | 'updateSplitRecordCategory'>;
+type OwnProps = Pick<AccountMonthlyProps, 'accountId' | 'date' | 'filterDescription' | 'filterCategoryId'>;
 
 const mapStateToProps = (state: IStore, ownProps: OwnProps): StateProps => {
     const { accountId, date } = ownProps;

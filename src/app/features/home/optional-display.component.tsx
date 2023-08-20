@@ -10,8 +10,34 @@ import {
     ArrowDownIcon,
 } from 'evergreen-ui';
 import React from 'react';
-import { useLocalStorage } from '../../../hooks/use-local-storage.hook';
-import { IOptionalDisplayProps } from './optional-display.props.interface';
+import { useLocalStorage } from '../../hooks/use-local-storage.hook';
+
+export type OptionalDisplayProps = {
+    /**
+     * The name of the local storage key that will be toggled.
+     */
+    displayKey: string;
+
+    /**
+     * The title of the optional component that will be rendered.
+     */
+    title: string;
+
+    /**
+     * If the component should render the locked state or not.
+     */
+    locked: boolean;
+
+    /**
+     * A method to inform the parent to update the ordering of the optional components.
+     */
+    updateOrder: (key: string, direction: 'up' | 'down') => void;
+
+    /**
+     * The optional component to render.
+     */
+    component: React.FunctionComponent;
+};
 
 export const OptionalDisplay = ({
     displayKey,
@@ -19,7 +45,7 @@ export const OptionalDisplay = ({
     locked,
     updateOrder,
     component: OptionalComponent,
-}: IOptionalDisplayProps) => {
+}: OptionalDisplayProps) => {
     const [displayed, setDisplayed] = useLocalStorage<boolean>(displayKey, true);
 
     if (!displayed && locked) {

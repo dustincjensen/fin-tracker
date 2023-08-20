@@ -15,14 +15,15 @@ import {
 } from 'evergreen-ui';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { CategorySelect } from '../../../components/category-select/category-select.component';
-import { setSplitRecords as setSplitRecordsAction } from '../../../store/record/record-slice';
-import { round } from '../../../utils/currency.utils';
-import { newGuid } from '../../../utils/guid.utils';
-import { isNullOrWhitespace } from '../../../utils/object.utils';
-import { createStaticWidthCell } from '../../../utils/table.utils';
-import { SplitRecordType } from '../split-record.type';
-import { IEditSplitRecordsProps } from './edit-split-records.props.interface';
+import { CategorySelect } from '../../components/category-select/category-select.component';
+import { Category } from '../../models/category.type';
+import { setSplitRecords as setSplitRecordsAction } from '../../store/record/record-slice';
+import { round } from '../../utils/currency.utils';
+import { newGuid } from '../../utils/guid.utils';
+import { isNullOrWhitespace } from '../../utils/object.utils';
+import { createStaticWidthCell } from '../../utils/table.utils';
+import { RecordType } from './record.type';
+import { SplitRecordType } from './split-record.type';
 
 const w100 = createStaticWidthCell(100);
 const w200 = createStaticWidthCell(200);
@@ -44,7 +45,24 @@ function getCreditTotal(splitRecords: SplitRecordType[]): number {
     return getTotal(splitRecords, (value: SplitRecordType) => value.credit);
 }
 
-export const EditSplitRecords = ({ record, categories, onClose }: IEditSplitRecordsProps) => {
+type EditSplitRecordsProps = {
+    /**
+     * The record the splits should be associated to.
+     */
+    record: RecordType;
+
+    /**
+     * The list of available categories to choose from.
+     */
+    categories: Array<Category>;
+
+    /**
+     * Function to close the edit split record section.
+     */
+    onClose: () => void;
+};
+
+export const EditSplitRecords = ({ record, categories, onClose }: EditSplitRecordsProps) => {
     const dispatch = useDispatch();
     const [splitRecords, setSplitRecords] = React.useState<SplitRecordType[]>(
         record?.splitRecords || [createSplitRecord(), createSplitRecord()]

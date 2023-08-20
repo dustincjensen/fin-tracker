@@ -15,7 +15,6 @@ import { useLocalStorage } from '../../../hooks/use-local-storage.hook';
 import { Category } from '../../../models/category.type';
 import { formatDateMonthYear } from '../../../utils/date.utils';
 import { isNullOrUndefined } from '../../../utils/object.utils';
-import { ICombinedCategorySummaryProps } from './combined-category-summary.props.interface';
 
 const barChartMargins = { top: 5, right: 0, left: 0, bottom: 5 };
 const combinedCategorySummaryDisplayOption = 'combinedCategorySummaryDisplayOption';
@@ -38,7 +37,15 @@ const idsThatExistInCategories = (ids: string, categories: Category[]) => {
     return idArray.filter(id => categories.some(c => c.id === id));
 };
 
-export const CombinedCategorySummary = ({ categories, categoryTotalsByMonth }: ICombinedCategorySummaryProps) => {
+export type CombinedCategorySummaryProps = {
+    categories: Category[];
+    categoryTotalsByMonth: Array<{
+        date: string;
+        categoryBalances: { [id: string]: number };
+    }>;
+};
+
+export const CombinedCategorySummary = ({ categories, categoryTotalsByMonth }: CombinedCategorySummaryProps) => {
     const firstCategory = categories?.[0];
     const [selectedCategories, setSelectedCategories] = React.useState(() => {
         const ids = localStorage.getItem(combinedCategorySummaryDisplayOption);

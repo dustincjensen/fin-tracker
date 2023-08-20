@@ -6,10 +6,9 @@ import { CategorySelectors } from '../../../store/category/category.selectors';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
 import { DateCurriedQuery, displayMonthDates, queryByIsInYearAndMonth } from '../combined.utils';
-import { CombinedCategorySummary } from './combined-category-summary.component';
-import { ICombinedCategorySummaryProps } from './combined-category-summary.props.interface';
+import { CombinedCategorySummary, CombinedCategorySummaryProps } from './combined-category-summary.component';
 
-type StateProps = ICombinedCategorySummaryProps;
+type StateProps = CombinedCategorySummaryProps;
 
 const selectAccounts = createSelector(AccountSelectors.accounts, accounts =>
     Object.keys(accounts).map(id => {

@@ -7,15 +7,14 @@ import { InvestmentRecordSelectors } from '../../../store/investment-record/inve
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
 import { createDate } from '../../../utils/date.utils';
-import { EditAccount } from './edit-account.component';
-import { IEditAccountProps } from './edit-account.props.interface';
+import { EditAccount, EditAccountProps } from './edit-account.component';
 
 type StateProps = Pick<
-    IEditAccountProps,
+    EditAccountProps,
     'saveButtonText' | 'canEditComplexFields' | 'currentBalance' | 'lastTransactionDate'
 >;
-type DispatchProps = Pick<IEditAccountProps, 'saveAccount' | 'archiveAccount'>;
-type OwnProps = Pick<IEditAccountProps, 'account'>;
+type DispatchProps = Pick<EditAccountProps, 'saveAccount' | 'archiveAccount'>;
+type OwnProps = Pick<EditAccountProps, 'account'>;
 
 const mapStateToProps = () => {
     const selectLastTransactionDate = createSelector(

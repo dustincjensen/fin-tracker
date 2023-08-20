@@ -1,8 +1,34 @@
 import { majorScale, Button, Pane, AddIcon, TextInput } from 'evergreen-ui';
 import React from 'react';
-import { AddNewRecordDialog } from '../add-new-record.dialog';
-import { IAccountActionsProps } from './account-actions.props.interface';
+import { AddNewRecordDialog } from './add-new-record.dialog';
 import { SelectCategory } from './select-category.component';
+
+type AccountActionsProps = {
+    /**
+     * The ID of the account to action against.
+     */
+    accountId: string;
+
+    /**
+     * The filtered description.
+     */
+    filterDescription: string;
+
+    /**
+     * Function to set the filtered description.
+     */
+    setFilterDescription: React.Dispatch<React.SetStateAction<string>>;
+
+    /**
+     * The selected category ID.
+     */
+    selectedCategoryId: string;
+
+    /**
+     * Function to set the selected category ID.
+     */
+    setSelectedCategoryId: React.Dispatch<React.SetStateAction<string>>;
+};
 
 const AccountActionsComponent = ({
     accountId,
@@ -10,7 +36,7 @@ const AccountActionsComponent = ({
     setFilterDescription,
     selectedCategoryId,
     setSelectedCategoryId,
-}: IAccountActionsProps) => {
+}: AccountActionsProps) => {
     const [addNewRecordIsShown, setAddNewRecordIsShown] = React.useState(false);
 
     const onAddNewClick = React.useCallback(() => setAddNewRecordIsShown(true), [setAddNewRecordIsShown]);

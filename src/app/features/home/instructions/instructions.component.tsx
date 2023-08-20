@@ -17,7 +17,6 @@ import {
 } from 'evergreen-ui';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { IInstructionsProps } from './instructions.props.interface';
 
 const ACCOUNTS_HINT = 'accountsHint';
 const RECORDS_HINT = 'recordsHint';
@@ -25,13 +24,40 @@ const CATEGORIES_HINT = 'categoriesHint';
 const AUTO_CATEGORIES_HINT = 'autoCategoriesHint';
 const SPLIT_RECORDS_HINT = 'splitRecordsHint';
 
+export type InstructionsProps = {
+    /**
+     * Whether the user has created any accounts.
+     */
+    hasAccounts: boolean;
+
+    /**
+     * Whether the user has imported records into at least one account.
+     */
+    atLeastOneAccountHasRecords: boolean;
+
+    /**
+     * Whether the user has created an categories.
+     */
+    hasCategories: boolean;
+
+    /**
+     * Whether the user has created any auto categories.
+     */
+    hasAutoCategories?: boolean;
+
+    /**
+     * Whether the user has created any split records.
+     */
+    hasSplitRecords?: boolean;
+};
+
 export const Instructions = ({
     atLeastOneAccountHasRecords,
     hasAccounts,
     hasCategories,
     hasAutoCategories,
     hasSplitRecords,
-}: IInstructionsProps) => {
+}: InstructionsProps) => {
     const [showAccountsHint, setShowAccountsHint] = React.useState<boolean>(!localStorage.getItem(ACCOUNTS_HINT));
     const [showRecordsHint, setShowRecordsHint] = React.useState<boolean>(!localStorage.getItem(RECORDS_HINT));
     const [showCategoriesHint, setShowCategoriesHint] = React.useState<boolean>(!localStorage.getItem(CATEGORIES_HINT));
