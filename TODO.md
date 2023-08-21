@@ -7,10 +7,6 @@ Bugs
 
 Tasks
 =====
-- Add Redux Dev Tools
-- Fix eslint typescript
-
-- Investigate Zod for forms and fix up form creation.
 - Remove all createSelector
 - Refactor components
   - Selectors
@@ -18,6 +14,9 @@ Tasks
   - Containers
   - Reducers
   - Actions
+- Add Redux Dev Tools
+
+- Investigate Zod for forms and fix up form creation.
 - Add tests for the whole application
 -- Consider removing background worker...
 - Re-test everything from scratch and import all files for all accounts and see if the totals line up.

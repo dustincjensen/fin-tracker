@@ -28,4 +28,4 @@ const customRender = (ui: React.ReactElement, options?: Omit<RenderOptions, 'wra
     render(ui, { wrapper: AllTheProviders, ...options });
 
 export * from '@testing-library/react';
-export { customRender as render };
+export { customRender as renderApp };

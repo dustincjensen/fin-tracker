@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
-import { WritableDraft } from '@reduxjs/toolkit/node_modules/immer/dist/internal';
+import type { Draft, PayloadAction } from '@reduxjs/toolkit';
 import { ImportErrorReturnType, ImportRecordsReturnType } from '../../models/_worker-return.type';
 import { Record } from '../../models/record.type';
 import { saveNewRecords } from '../record/record-slice';
@@ -40,7 +39,7 @@ const initialState: PendingRecordStore = {
     error: undefined,
 };
 
-const clearImportedRecordsHandler = (state: WritableDraft<PendingRecordStore>) => {
+const clearImportedRecordsHandler = (state: Draft<PendingRecordStore>) => {
     state.accountId = undefined;
     state.filePath = undefined;
     state.fileName = undefined;

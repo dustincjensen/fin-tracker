@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '../../utils/test.utils';
+import { renderApp, screen } from '../../utils/test.utils';
 import { ErrorBoundary } from './error-boundary.component';
 
 const TestChild = () => <div data-testid='test-child'>Test Child Render</div>;
@@ -11,7 +11,7 @@ const TestChildError = () => {
 describe('components', () => {
     describe('ErrorBoundary', () => {
         it('should render children when no error has occurred', () => {
-            render(
+            renderApp(
                 <ErrorBoundary>
                     <TestChild />
                 </ErrorBoundary>
@@ -25,7 +25,7 @@ describe('components', () => {
                 // Fake mock
             });
 
-            render(
+            renderApp(
                 <ErrorBoundary>
                     <TestChildError />
                 </ErrorBoundary>

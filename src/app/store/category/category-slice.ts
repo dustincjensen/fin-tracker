@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
-import { WritableDraft } from '@reduxjs/toolkit/node_modules/immer/dist/internal';
+import type { Draft, PayloadAction } from '@reduxjs/toolkit';
 import { Account } from '../../models/account.type';
 import { Category } from '../../models/category.type';
 import { newGuid } from '../../utils/guid.utils';
@@ -15,10 +14,7 @@ export type CategoryStore = {
 
 const initialState: CategoryStore = { categories: {} };
 
-const createTransferCategory = (
-    state: WritableDraft<CategoryStore>,
-    { payload: newAccount }: PayloadAction<Account>
-) => {
+const createTransferCategory = (state: Draft<CategoryStore>, { payload: newAccount }: PayloadAction<Account>) => {
     const newCategory: Category = {
         id: newGuid(),
         name: `${newAccount.name} Transfer`,

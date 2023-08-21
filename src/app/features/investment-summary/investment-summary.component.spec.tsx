@@ -1,6 +1,6 @@
 import { ChartIcon } from 'evergreen-ui';
 import React from 'react';
-import { render, screen } from '../../utils/test.utils';
+import { renderApp, screen } from '../../utils/test.utils';
 import { InvestmentSummary, InvestmentSummaryProps } from './investment-summary.component';
 import * as useInvestmentSummaryHook from './investment-summary.hook';
 
@@ -22,7 +22,7 @@ describe('components', () => {
                 latestDate: '2021-07-12',
             });
 
-            render(<InvestmentSummary {...props} />);
+            renderApp(<InvestmentSummary {...props} />);
 
             expect(screen.getByTestId('empty-account')).toBeInTheDocument();
             expect(screen.queryByTestId('account-details')).not.toBeInTheDocument();
@@ -36,7 +36,7 @@ describe('components', () => {
                 latestDate: '2021-07-12',
             });
 
-            render(<InvestmentSummary {...props} />);
+            renderApp(<InvestmentSummary {...props} />);
 
             expect(screen.queryByTestId('empty-account')).not.toBeInTheDocument();
             expect(screen.getByTestId('account-details')).toBeInTheDocument();
