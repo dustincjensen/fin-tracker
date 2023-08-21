@@ -4,7 +4,7 @@ import { useAccounts } from '../../hooks/accounts/use-accounts.hook';
 import { Account } from '../../models/account.type';
 import { accountTypeLabels } from '../../utils/account.utils';
 import { DeleteAccountDialog } from './delete-account.dialog';
-import { EditAccountContainer } from './edit-account/edit-account.container';
+import { EditAccountContainer } from './edit-account.container';
 
 export const Accounts = () => {
     const { accounts } = useAccounts();

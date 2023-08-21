@@ -18,18 +18,18 @@ import {
 } from 'evergreen-ui';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AccountType } from '../../../models/account-type.type';
-import { Account } from '../../../models/account.type';
+import { AccountType } from '../../models/account-type.type';
+import { Account } from '../../models/account.type';
 import {
     accountTypeNameValuePairs,
     accountTypeLabels,
     isBankAccount,
     isInvestmentAccount,
     accountRoutes,
-} from '../../../utils/account.utils';
-import { monthValues, monthNamesLong } from '../../../utils/date.utils';
-import { newGuid } from '../../../utils/guid.utils';
-import { isNullOrUndefined } from '../../../utils/object.utils';
+} from '../../utils/account.utils';
+import { monthValues, monthNamesLong } from '../../utils/date.utils';
+import { newGuid } from '../../utils/guid.utils';
+import { isNullOrUndefined } from '../../utils/object.utils';
 
 export type EditAccountProps = {
     /**

@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { createSelector } from 'reselect';
-import { Account } from '../../../models/account.type';
-import { updateAccount, archiveAccount } from '../../../store/account/account-slice';
-import { InvestmentRecordSelectors } from '../../../store/investment-record/investment-record.selectors';
-import { RecordSelectors } from '../../../store/record/record.selectors';
-import { IStore } from '../../../store/store.interface';
-import { createDate } from '../../../utils/date.utils';
+import { Account } from '../../models/account.type';
+import { updateAccount, archiveAccount } from '../../store/account/account-slice';
+import { InvestmentRecordSelectors } from '../../store/investment-record/investment-record.selectors';
+import { RecordSelectors } from '../../store/record/record.selectors';
+import { IStore } from '../../store/store.interface';
+import { createDate } from '../../utils/date.utils';
 import { EditAccount, EditAccountProps } from './edit-account.component';
 
 type StateProps = Pick<

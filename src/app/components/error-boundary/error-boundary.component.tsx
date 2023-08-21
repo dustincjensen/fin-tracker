@@ -29,7 +29,14 @@ export class ErrorBoundary extends React.Component<{}, ErrorBoundaryState> {
         // If the error boundary captured an error, display an error message.
         if (this.state.hasError) {
             return (
-                <Pane height='100%' display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
+                <Pane
+                    data-testid='error-boundary'
+                    height='100%'
+                    display='flex'
+                    flexDirection='column'
+                    alignItems='center'
+                    justifyContent='center'
+                >
                     <WarningSignIcon color='default' size={majorScale(5)} />
                     <Heading size={700} marginBottom={majorScale(2)}>
                         Something went wrong

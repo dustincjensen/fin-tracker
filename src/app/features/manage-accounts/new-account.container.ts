@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { Account } from '../../../models/account.type';
-import { saveNewAccount } from '../../../store/account/account-slice';
-import { EditAccount, EditAccountProps } from '../edit-account/edit-account.component';
+import { Account } from '../../models/account.type';
+import { saveNewAccount } from '../../store/account/account-slice';
+import { EditAccount, EditAccountProps } from './edit-account.component';
 
 type StateProps = Pick<EditAccountProps, 'headerText' | 'saveButtonText' | 'canEditComplexFields' | 'isNew'>;
 type DispatchProps = Pick<EditAccountProps, 'saveAccount'>;

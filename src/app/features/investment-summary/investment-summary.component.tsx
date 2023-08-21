@@ -32,19 +32,19 @@ export const InvestmentSummary = ({ accountId }: InvestmentSummaryProps) => {
                     <Heading>{name}</Heading>
                 </Pane>
                 {balance && (
-                    <Pane data-name='account-details' marginBottom={10}>
+                    <Pane data-testid='account-details' marginBottom={10}>
                         <Pane display='flex' alignItems='center'>
                             <Pane width={105}>
                                 <Text color='muted'>Balance:</Text>
                             </Pane>
                             <DollarIcon color='default' size={12} marginLeft={10} />
-                            <Strong data-name='account-balance'>{balance.toFixed(2)}</Strong>
+                            <Strong data-testid='account-balance'>{balance.toFixed(2)}</Strong>
                         </Pane>
                         <Pane display='flex' alignItems='center'>
                             <Pane width={105}>
                                 <Text color='muted'>Last Transaction:</Text>
                             </Pane>
-                            <Strong data-name='latest-transaction' marginLeft={12}>
+                            <Strong data-testid='latest-transaction' marginLeft={12}>
                                 {formatDateFull(latestDate)}
                             </Strong>
                         </Pane>
@@ -52,7 +52,7 @@ export const InvestmentSummary = ({ accountId }: InvestmentSummaryProps) => {
                 )}
                 {!balance && (
                     <Pane
-                        data-name='empty-account'
+                        data-testid='empty-account'
                         marginBottom={10}
                         padding={10}
                         display='flex'

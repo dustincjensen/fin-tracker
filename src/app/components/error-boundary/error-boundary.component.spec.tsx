@@ -1,29 +1,36 @@
-import { mount } from 'enzyme';
-import { Pane } from 'evergreen-ui';
 import React from 'react';
+import { render, screen } from '../../utils/test.utils';
 import { ErrorBoundary } from './error-boundary.component';
 
-const TestChild = () => <div data-name='test-child'>Test Child Render</div>;
+const TestChild = () => <div data-testid='test-child'>Test Child Render</div>;
+
+const TestChildError = () => {
+    throw new Error('Error');
+};
 
 describe('components', () => {
     describe('ErrorBoundary', () => {
         it('should render children when no error has occurred', () => {
-            const component = mount(
+            render(
                 <ErrorBoundary>
                     <TestChild />
                 </ErrorBoundary>
             );
-            expect(component.find(TestChild).length).toBe(1);
+            expect(screen.queryByTestId('error-boundary')).not.toBeInTheDocument();
+            expect(screen.getByTestId('test-child')).toBeInTheDocument();
         });
 
         it('should render error when an error has occurred', () => {
-            const component = mount(
+            jest.spyOn(console, 'error').mockImplementation(() => {
+                // Fake mock
+            });
+
+            render(
                 <ErrorBoundary>
-                    <TestChild />
+                    <TestChildError />
                 </ErrorBoundary>
             );
-            component.find(TestChild).simulateError(new Error('Error'));
-            expect(component.find(Pane).length).toBe(1);
+            expect(screen.getByTestId('error-boundary')).toBeInTheDocument();
         });
     });
 });

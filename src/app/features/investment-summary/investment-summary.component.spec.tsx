@@ -1,6 +1,6 @@
-import { shallow } from 'enzyme';
 import { ChartIcon } from 'evergreen-ui';
 import React from 'react';
+import { render, screen } from '../../utils/test.utils';
 import { InvestmentSummary, InvestmentSummaryProps } from './investment-summary.component';
 import * as useInvestmentSummaryHook from './investment-summary.hook';
 
@@ -22,9 +22,10 @@ describe('components', () => {
                 latestDate: '2021-07-12',
             });
 
-            const component = shallow(<InvestmentSummary {...props} />);
-            expect(component.find('[data-name="empty-account"]').length).toBe(1);
-            expect(component.find('[data-name="account-details"]').length).toBe(0);
+            render(<InvestmentSummary {...props} />);
+
+            expect(screen.getByTestId('empty-account')).toBeInTheDocument();
+            expect(screen.queryByTestId('account-details')).not.toBeInTheDocument();
         });
 
         it('should render account details when balance is defined', () => {
@@ -35,9 +36,10 @@ describe('components', () => {
                 latestDate: '2021-07-12',
             });
 
-            const component = shallow(<InvestmentSummary {...props} />);
-            expect(component.find('[data-name="empty-account"]').length).toBe(0);
-            expect(component.find('[data-name="account-details"]').length).toBe(1);
+            render(<InvestmentSummary {...props} />);
+
+            expect(screen.queryByTestId('empty-account')).not.toBeInTheDocument();
+            expect(screen.getByTestId('account-details')).toBeInTheDocument();
         });
     });
 });

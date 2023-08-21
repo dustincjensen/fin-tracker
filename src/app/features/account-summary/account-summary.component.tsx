@@ -66,7 +66,7 @@ export const AccountSummary = ({ accountId }: AccountSummaryProps) => {
                     <Heading>{name}</Heading>
                 </Pane>
                 {!isNullOrUndefined(balance) && (
-                    <Pane data-name='account-details' marginBottom={10}>
+                    <Pane data-testid='account-details' marginBottom={10}>
                         <Pane display='flex' alignItems='center'>
                             <Pane width={105}>
                                 <Text color='muted'>Balance:</Text>
@@ -84,7 +84,7 @@ export const AccountSummary = ({ accountId }: AccountSummaryProps) => {
                 )}
                 {isNullOrUndefined(balance) && (
                     <Pane
-                        data-name='empty-account'
+                        data-testid='empty-account'
                         marginBottom={10}
                         padding={10}
                         display='flex'

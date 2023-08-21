@@ -7,7 +7,6 @@ Bugs
 
 Tasks
 =====
-- Rewrite all tests in RTL and remove enzyme
 - Add Redux Dev Tools
 - Fix eslint typescript
 
