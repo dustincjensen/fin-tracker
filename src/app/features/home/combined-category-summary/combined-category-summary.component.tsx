@@ -11,6 +11,7 @@ import {
     ResponsiveContainer,
     ReferenceLine,
 } from 'recharts';
+import { useDisplayCategories } from '../../../hooks/categories/use-display-categories.hook';
 import { useLocalStorage } from '../../../hooks/use-local-storage.hook';
 import { Category } from '../../../models/category.type';
 import { formatDateMonthYear } from '../../../utils/date.utils';
@@ -38,14 +39,15 @@ const idsThatExistInCategories = (ids: string, categories: Category[]) => {
 };
 
 export type CombinedCategorySummaryProps = {
-    categories: Category[];
     categoryTotalsByMonth: Array<{
         date: string;
         categoryBalances: { [id: string]: number };
     }>;
 };
 
-export const CombinedCategorySummary = ({ categories, categoryTotalsByMonth }: CombinedCategorySummaryProps) => {
+export const CombinedCategorySummary = ({ categoryTotalsByMonth }: CombinedCategorySummaryProps) => {
+    const { categories } = useDisplayCategories();
+
     const firstCategory = categories?.[0];
     const [selectedCategories, setSelectedCategories] = React.useState(() => {
         const ids = localStorage.getItem(combinedCategorySummaryDisplayOption);

@@ -3,6 +3,9 @@ import { useSelector } from 'react-redux';
 import { CategorySelectors } from '../../store/category/category.selectors';
 import { categorySort } from './category-sort';
 
+/**
+ * Returns an array of categories that filters out the account transfer categories.
+ */
 export const useDisplayCategories = () => {
     const categories = useSelector(CategorySelectors.categories);
 

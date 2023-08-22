@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { AccountSelectors } from '../../../store/account/account.selectors';
 import { AutoCategorySelectors } from '../../../store/auto-category/auto-category.selectors';
-import { CategorySelectors } from '../../../store/category/category.selectors';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
 import { DateCurriedQuery, displayMonthDates, queryByIsInYearAndMonth } from '../combined.utils';
@@ -85,7 +84,6 @@ const selectCategoryTotalsByMonth = categorySummarySelector(queryByIsInYearAndMo
 
 const mapStateToProps = (state: IStore): StateProps => {
     return {
-        categories: CategorySelectors.selectDisplayCategories(state),
         categoryTotalsByMonth: selectCategoryTotalsByMonth(state),
     };
 };

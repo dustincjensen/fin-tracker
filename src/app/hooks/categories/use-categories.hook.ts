@@ -3,6 +3,9 @@ import { useSelector } from 'react-redux';
 import { CategorySelectors } from '../../store/category/category.selectors';
 import { categorySort } from './category-sort';
 
+/**
+ * Returns all categories in an array.
+ */
 export const useCategories = () => {
     const categories = useSelector(CategorySelectors.categories);
 

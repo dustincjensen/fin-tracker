@@ -1,18 +1,19 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { CategorySelectors } from '../../../store/category/category.selectors';
 import { setRecordCategory, setSplitRecordCategory } from '../../../store/record/record-slice';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
 import { AccountMonthly, AccountMonthlyProps } from './account-monthly.component';
 
-type StateProps = Pick<AccountMonthlyProps, 'records' | 'categories'>;
+type StateProps = Pick<AccountMonthlyProps, 'records'>;
 type DispatchProps = Pick<AccountMonthlyProps, 'updateCategory' | 'updateSplitRecordCategory'>;
-type OwnProps = Pick<AccountMonthlyProps, 'accountId' | 'date' | 'filterDescription' | 'filterCategoryId'>;
+type OwnProps = Pick<
+    AccountMonthlyProps,
+    'accountId' | 'date' | 'filterDescription' | 'filterCategoryId' | 'categories'
+>;
 
 const mapStateToProps = (state: IStore, ownProps: OwnProps): StateProps => {
-    const { accountId, date } = ownProps;
-    const categories = CategorySelectors.selectCategories(state);
+    const { accountId, date, categories } = ownProps;
 
     const records = RecordSelectors.recordsByDate(state, accountId, date)?.map(record => {
         return {
@@ -54,7 +55,6 @@ const mapStateToProps = (state: IStore, ownProps: OwnProps): StateProps => {
 
     return {
         records: filteredRecords,
-        categories,
     };
 };
 

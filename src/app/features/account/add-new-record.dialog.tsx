@@ -4,9 +4,9 @@ import { shallowEqual, useSelector } from 'react-redux';
 import { useBackgroundWorkerContext } from '../../background-worker-provider.component';
 import { CategorySelect, CategorySelectProps } from '../../components/category-select/category-select.component';
 import { DatePicker } from '../../components/date-picker/date-picker.component';
+import { useCategories } from '../../hooks/categories/use-categories.hook';
 import { Record } from '../../models/record.type';
 import { AccountSelectors } from '../../store/account/account.selectors';
-import { CategorySelectors } from '../../store/category/category.selectors';
 import { RecordSelectors } from '../../store/record/record.selectors';
 import { IStore } from '../../store/store.interface';
 import { newGuid } from '../../utils/guid.utils';
@@ -39,7 +39,7 @@ type AddNewRecordProps = {
 
 // TODO review this component
 export const AddNewRecordDialog = ({ accountId, isShown, onClose }: AddNewRecordProps) => {
-    const categories = useSelector(CategorySelectors.selectCategories, shallowEqual);
+    const { categories } = useCategories();
     const account = useSelector((state: IStore) => AccountSelectors.account(state, accountId), shallowEqual);
     const existingRecords = useSelector(
         (state: IStore) => RecordSelectors.recordsByAccountId(state, accountId),

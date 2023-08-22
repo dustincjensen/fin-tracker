@@ -1,4 +1,5 @@
 import { createStore } from 'redux';
+import { categorySort } from '../hooks/categories/category-sort';
 import { Account } from '../models/account.type';
 import { AccountSelectors } from './account/account.selectors';
 import { addTransferCategory } from './category/category-slice';
@@ -18,7 +19,9 @@ const migration_1_1_0 = storage => {
 
     // Add Transfer categories for each account that exists but does not have one yet.
     const accounts = AccountSelectors.accounts(state);
-    const categories = CategorySelectors.selectCategories(state);
+    const categories = Object.keys(CategorySelectors.categories(state))
+        .map(id => categories[id])
+        .sort(categorySort);
     for (const accountId of Object.keys(accounts)) {
         console.log('Checking accountId: ', accountId);
         if (!categories.find(c => c.accountTransferId === accountId)) {

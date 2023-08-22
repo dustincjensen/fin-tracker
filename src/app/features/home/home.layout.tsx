@@ -6,7 +6,7 @@ import { AccountSummaries } from './account-summaries/account-summaries.componen
 import { CombinedCategorySummaryContainer } from './combined-category-summary/combined-category-summary.container';
 import { CombinedSummary } from './combined-summary/combined-summary.component';
 import { EditHomeContext } from './edit-home.context';
-import { InstructionsContainer } from './instructions/instructions.container';
+import { Instructions } from './instructions/instructions.component';
 import { OptionalDisplay, OptionalDisplayProps } from './optional-display.component';
 
 const homePageOrderLocalStorage = 'homePageOrder';
@@ -114,7 +114,7 @@ export const HomeLayout = () => {
                     </Pane>
                     <Pane>
                         {/* Don't display instructions when unlocking the home page */}
-                        {locked && <InstructionsContainer />}
+                        {locked && <Instructions />}
 
                         {/* Render the home page components that the user can turn on/off */}
                         {fullHomePageOrder.map(key => {

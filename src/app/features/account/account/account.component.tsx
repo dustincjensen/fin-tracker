@@ -1,5 +1,6 @@
 import { Pane } from 'evergreen-ui';
 import React from 'react';
+import { useCategories } from '../../../hooks/categories/use-categories.hook';
 import { createDate } from '../../../utils/date.utils';
 import { AccountActions } from '../account-actions.component';
 import { AccountBalanceLineChart } from '../account-balance-line-chart.component';
@@ -41,6 +42,8 @@ export const Account = ({ accountId, hasRecords, startingDate, monthAndYears, ar
     const [date, setDate] = React.useState(startingDate);
     const [filterDescription, setFilteredDescription] = React.useState<string>('');
     const [selectedCategoryId, setSelectedCategoryId] = React.useState<string>('');
+
+    const { categories } = useCategories();
 
     // Always reset the date when changing accounts.
     React.useEffect(() => {
@@ -93,6 +96,7 @@ export const Account = ({ accountId, hasRecords, startingDate, monthAndYears, ar
                         archived={archived}
                         filterCategoryId={selectedCategoryId}
                         filterDescription={filterDescription}
+                        categories={categories}
                     />
                 </Pane>
             </Pane>

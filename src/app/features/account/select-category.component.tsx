@@ -1,12 +1,11 @@
 import { Pane, SelectMenu, Button, IconButton, CrossIcon, majorScale, SelectMenuItem } from 'evergreen-ui';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { CategorySelectors } from '../../store/category/category.selectors';
+import { useCategories } from '../../hooks/categories/use-categories.hook';
 
 // TODO props type
 
 export const SelectCategory = ({ selectedCategory, setSelectedCategory }) => {
-    const categories = useSelector(CategorySelectors.selectCategories);
+    const { categories } = useCategories();
     const categoryOptions = [
         { label: 'Uncategorized', value: 'Uncategorized' },
         ...categories.map(c => ({ label: c.name, value: c.id })),

@@ -2,8 +2,8 @@ import { Alert, FormField, majorScale, Pane, Text } from 'evergreen-ui';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
+import { useCategories } from '../../hooks/categories/use-categories.hook';
 import { AccountSelectors } from '../../store/account/account.selectors';
-import { CategorySelectors } from '../../store/category/category.selectors';
 import { RecordSelectors } from '../../store/record/record.selectors';
 import { IStore } from '../../store/store.interface';
 import { accountTypeLabels, getAccountStartDate } from '../../utils/account.utils';
@@ -52,9 +52,10 @@ export const InvestmentDetailSummary = ({ accountId }: InvestmentDetailSummaryPr
     const { archived, name, accountType, startYear, startMonth } = useSelector((state: IStore) =>
         AccountSelectors.account(state, accountId)
     );
-    const transferCategory = useSelector((state: IStore) =>
-        CategorySelectors.selectCategories(state).find(c => c.accountTransferId === accountId)
-    );
+
+    const { categories } = useCategories();
+    const transferCategory = categories.find(c => c.accountTransferId === accountId);
+
     const transferCost = useSelector((state: IStore) => selectTransferCost(state, accountId, transferCategory?.id));
 
     const startDate = stringToMonthYear(getAccountStartDate(startYear, startMonth));

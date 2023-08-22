@@ -40,7 +40,7 @@ export type AccountMonthlyProps = {
     /**
      * The list of categories to choose from for each record.
      */
-    categories: Array<Category>;
+    categories: Category[];
 
     /**
      * Function to update a category in state.

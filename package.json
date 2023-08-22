@@ -11,7 +11,7 @@
     "prod": "electron .",
     "lint": "eslint src/**/*.{ts,tsx,js,jsx}",
     "lint:fix": "eslint src/**/*.{ts,tsx,js,jsx} --fix",
-    "precommit": "npm run lint && npm test",
+    "precommit": "npm run clean && npm run build && npm run lint && npm test",
     "make": "electron-forge make",
     "test": "jest",
     "test:dev": "jest --watch"
