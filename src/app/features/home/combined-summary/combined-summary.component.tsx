@@ -10,12 +10,11 @@ import {
     DoubleChevronRightIcon,
 } from 'evergreen-ui';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { useAccounts } from '../../../hooks/accounts/use-accounts.hook';
 import { useWindowWidth } from '../../../hooks/use-window-width.hook';
 import { isBankAccount } from '../../../utils/account.utils';
 import { useRatesByDates } from '../../investment/_hooks/use-rates-by-dates.hook';
-import { displayMonthDates, displayYearDates } from '../combined.utils';
+import { useDisplayMonthDates, useDisplayYearDates } from '../combined.utils';
 import { EditHomeContext } from '../edit-home.context';
 import { BankAccountRowSummary } from './bank-account-row-summary.component';
 import { CombinedChart } from './combined-chart.component';
@@ -39,8 +38,9 @@ export const CombinedSummary = () => {
     const containerRef = React.useRef<HTMLDivElement>();
     const windowWidth = useWindowWidth();
 
-    const dateSelector = React.useMemo(() => (byMonth === 'monthly' ? displayMonthDates : displayYearDates), [byMonth]);
-    const displayableDates = useSelector(dateSelector);
+    const displayYearDates = useDisplayYearDates();
+    const displayMonthDates = useDisplayMonthDates();
+    const displayableDates = byMonth === 'monthly' ? displayMonthDates : displayYearDates;
 
     const { accounts } = useAccounts();
 

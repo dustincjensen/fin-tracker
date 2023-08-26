@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { AccountSelectors } from '../../store/account/account.selectors';
 import { InvestmentRecordSelectors } from '../../store/investment-record/investment-record.selectors';
@@ -76,13 +78,45 @@ export const displayMonthDates = createSelector(
 );
 
 /**
+ * Gets the displayable months for a set of accounts and records.
+ */
+export const useDisplayMonthDates = () => {
+    const accounts = useSelector(AccountSelectors.accounts);
+    const records = useSelector(RecordSelectors.records);
+    const investmentRecords = useSelector(InvestmentRecordSelectors.records);
+
+    return useMemo(() => {
+        const startingDates = Object.keys(accounts).map(id => {
+            // TODO nothing stops a record, or investment record from appearing earlier than the start date of the account.
+            const { startYear, startMonth } = accounts[id];
+            return getAccountStartDate(startYear, startMonth);
+        });
+
+        const endDates = Object.keys(accounts)
+            .map(id => {
+                const accountRecords = records[id];
+                const investRecords = investmentRecords[id] ? [...investmentRecords[id]] : [];
+                investRecords?.sort((a, b) => (createDate(a.date) > createDate(b.date) ? 1 : -1));
+                return [
+                    accountRecords?.[accountRecords.length - 1].date,
+                    investRecords?.[investRecords?.length - 1].date,
+                ];
+            })
+            .reduce((prev: string[], curr: string[]) => [...prev, ...curr], []);
+
+        return allMonthsBetweenDates(getEarliestDate(startingDates), getLatestDate(endDates));
+    }, [accounts, investmentRecords, records]);
+};
+
+/**
  * Gets the displayable years for a set of accounts and records.
  */
-export const displayYearDates = createSelector(
-    AccountSelectors.accounts,
-    RecordSelectors.records,
-    InvestmentRecordSelectors.records,
-    (accounts, records, investmentRecords) => {
+export const useDisplayYearDates = () => {
+    const accounts = useSelector(AccountSelectors.accounts);
+    const records = useSelector(RecordSelectors.records);
+    const investmentRecords = useSelector(InvestmentRecordSelectors.records);
+
+    return useMemo(() => {
         const startingDates = Object.keys(accounts).map(id => {
             // TODO nothing stops a record, or investment record from appearing earlier than the start date of the account.
             const { startYear } = accounts[id];
@@ -102,5 +136,5 @@ export const displayYearDates = createSelector(
             .reduce((prev: string[], curr: string[]) => [...prev, ...curr], []);
 
         return allYearsBetweenDates(getEarliestDate(startingDates), getLatestDate(endDates));
-    }
-);
+    }, [accounts, investmentRecords, records]);
+};

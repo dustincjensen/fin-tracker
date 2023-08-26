@@ -1,6 +1,5 @@
 import { Button, SelectMenu, SelectMenuItem } from 'evergreen-ui';
-import React from 'react';
-import { createSelector } from 'reselect';
+import React, { useMemo } from 'react';
 import { Category } from '../../models/category.type';
 import { CategoryTag } from '../category-tag/category-tag.component';
 
@@ -29,11 +28,6 @@ export type CategorySelectProps = {
     disabled?: boolean;
 };
 
-const selectOptions = createSelector(
-    (categories: Category[]) => categories,
-    categories => categories.map(category => ({ label: category.name, value: category.id }))
-);
-
 export const CategorySelect = ({ record, categories, updateCategory, disabled }: CategorySelectProps) => {
     // TODO clean up reducer?
     const [state, dispatch] = React.useReducer(
@@ -57,7 +51,10 @@ export const CategorySelect = ({ record, categories, updateCategory, disabled }:
         }
     );
 
-    const options = selectOptions(categories);
+    const options = useMemo(
+        () => categories.map(category => ({ label: category.name, value: category.id })),
+        [categories]
+    );
 
     React.useEffect(() => {
         // Don't update the category until the category id is set

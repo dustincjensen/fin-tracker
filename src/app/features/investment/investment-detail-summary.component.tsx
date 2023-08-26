@@ -1,14 +1,13 @@
 import { Alert, FormField, majorScale, Pane, Text } from 'evergreen-ui';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
 import { useCategories } from '../../hooks/categories/use-categories.hook';
+import { useInvestmentRecords } from '../../hooks/investment-records/use-investment-records.hook';
 import { AccountSelectors } from '../../store/account/account.selectors';
 import { RecordSelectors } from '../../store/record/record.selectors';
 import { IStore } from '../../store/store.interface';
 import { accountTypeLabels, getAccountStartDate } from '../../utils/account.utils';
 import { stringToMonthYear, today } from '../../utils/date.utils';
-import { sortByDateDescending } from '../../utils/record.utils';
 import { useBalanceByRate } from './_hooks/use-balance-by-rate.hook';
 
 // TODO tidy up component
@@ -18,28 +17,23 @@ const Field = ({ label, text }) => (
     </FormField>
 );
 
-// TODO Move to common location
-const latestBalanceSelector = createSelector(
-    (state: IStore) => state.investmentRecords.records,
-    (_state: IStore, accountId: string) => accountId,
-    (_state: IStore, _accountId: string, currency: string) => currency,
-    (records, accountId, currency) =>
-        records[accountId]?.filter(r => r.investmentCurrency === currency).sort(sortByDateDescending)[0] || undefined
-);
-
-const selectTransferCost = createSelector(
-    RecordSelectors.selectAllRecordsWithCategory,
-    (_state: IStore, accountId: string) => accountId,
-    (records, accountId) =>
-        records
-            ?.map(r => {
-                if (r?.credit) {
-                    return r.accountId === accountId ? r.credit : -r.credit;
-                }
-                return r.accountId === accountId ? -r.debit : r.debit;
-            })
-            .reduce((prev, curr) => curr + prev, 0.0)
-);
+const useTransferCost = (accountId: string, transferCategoryId: string) => {
+    const records = useSelector((state: IStore) =>
+        RecordSelectors.selectAllRecordsWithCategory(state, accountId, transferCategoryId)
+    );
+    return useMemo(
+        () =>
+            records
+                ?.map(r => {
+                    if (r?.credit) {
+                        return r.accountId === accountId ? r.credit : -r.credit;
+                    }
+                    return r.accountId === accountId ? -r.debit : r.debit;
+                })
+                .reduce((prev, curr) => curr + prev, 0.0),
+        [accountId, records]
+    );
+};
 
 type InvestmentDetailSummaryProps = {
     /**
@@ -55,13 +49,12 @@ export const InvestmentDetailSummary = ({ accountId }: InvestmentDetailSummaryPr
 
     const { categories } = useCategories();
     const transferCategory = categories.find(c => c.accountTransferId === accountId);
-
-    const transferCost = useSelector((state: IStore) => selectTransferCost(state, accountId, transferCategory?.id));
+    const transferCost = useTransferCost(accountId, transferCategory?.id);
 
     const startDate = stringToMonthYear(getAccountStartDate(startYear, startMonth));
 
-    const cadLatest = useSelector((state: IStore) => latestBalanceSelector(state, accountId, 'CAD'));
-    const usdLatest = useSelector((state: IStore) => latestBalanceSelector(state, accountId, 'USD'));
+    const cadLatest = useInvestmentRecords(accountId, 'CAD')?.[0];
+    const usdLatest = useInvestmentRecords(accountId, 'USD')?.[0];
     const { convertedBalance: latestUsdConverted } = useBalanceByRate(
         usdLatest?.balance,
         usdLatest?.date,

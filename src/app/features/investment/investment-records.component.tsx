@@ -1,21 +1,12 @@
 import { Pane, Table } from 'evergreen-ui';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
+import { useInvestmentRecords } from '../../hooks/investment-records/use-investment-records.hook';
 import { InvestmentRecord as InvestmentRecordType } from '../../models/investment-record.type';
 import { AccountSelectors } from '../../store/account/account.selectors';
 import { IStore } from '../../store/store.interface';
-import { sortByDateDescending } from '../../utils/record.utils';
 import { DeleteInvestmentRecordDialog } from './delete-investment-record.dialog';
 import { InvestmentRecord } from './investment-record.component';
-
-const recordsSelector = createSelector(
-    (state: IStore) => state.investmentRecords.records,
-    (_state: IStore, accountId: string) => accountId,
-    (_state: IStore, _accountId: string, currency: string) => currency,
-    (records, accountId, currency) =>
-        records[accountId]?.filter(r => r.investmentCurrency === currency).sort(sortByDateDescending) || []
-);
 
 type InvestmentRecordsProps = {
     /**
@@ -31,7 +22,7 @@ type InvestmentRecordsProps = {
 
 // TODO support other default currency other than CAD
 export const InvestmentRecords = ({ accountId, currency }: InvestmentRecordsProps) => {
-    const records = useSelector((state: IStore) => recordsSelector(state, accountId, currency));
+    const records = useInvestmentRecords(accountId, currency);
     const [recordToDelete, setRecordToDelete] = React.useState<InvestmentRecordType | undefined>(undefined);
     const { archived } = useSelector((state: IStore) => AccountSelectors.account(state, accountId));
 

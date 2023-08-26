@@ -12,8 +12,6 @@ Tasks
   - Selectors
   - Components
   - Containers
-  - Reducers
-  - Actions
 - Add Redux Dev Tools
 
 - Investigate Zod for forms and fix up form creation.
@@ -29,6 +27,8 @@ Tasks
 - Mortgage
   - Amortization chart
   - Search for values that match the payment and associate them after user clicks ok.
+- Focus category tag when it is rendered into DOM if there is a selected category id.
+- Reduce the range for the charts on the home page.
 
 Next
 - Package updates
@@ -36,7 +36,6 @@ Next
   + Let them access the folder where the backup/regular data is.
   - Restore a backup.
 - README.md
-
 
 - Cannot remove single record when it is manual transaction.
 - Update manual transactions? (Or just delete and re-add?)
