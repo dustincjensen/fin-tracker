@@ -1,44 +1,27 @@
 import { Pane } from 'evergreen-ui';
 import React from 'react';
-import { useCategories } from '../../../hooks/categories/use-categories.hook';
-import { createDate } from '../../../utils/date.utils';
-import { AccountActions } from '../account-actions.component';
-import { AccountBalanceLineChart } from '../account-balance-line-chart.component';
-import { AccountCategoryTotalsChart } from '../account-category-totals-chart.component';
-import { AccountDetailSummary } from '../account-detail-summary.component';
-import { AccountMonthly } from '../account-monthly.component';
-import { EmptyAccount } from '../empty-account.component';
-import { MonthYearList } from '../month-year-list.component';
+import { useCategories } from '../../hooks/categories/use-categories.hook';
+import { createDate } from '../../utils/date.utils';
+import { AccountActions } from './account-actions.component';
+import { AccountBalanceLineChart } from './account-balance-line-chart.component';
+import { AccountCategoryTotalsChart } from './account-category-totals-chart.component';
+import { AccountDetailSummary } from './account-detail-summary.component';
+import { AccountMonthly } from './account-monthly.component';
+import { useAccountComponent } from './account.hook';
+import { EmptyAccount } from './empty-account.component';
+import { MonthYearList } from './month-year-list.component';
 
 export type AccountProps = {
-    /**
-     * Whether or not the account has records.
-     */
-    hasRecords: boolean;
-
-    /**
-     * The month/year we should select when opening the account page.
-     */
-    startingDate: string;
-
-    /**
-     * The month and years of records we have for this account.
-     */
-    monthAndYears: number[][];
-
     /**
      * The account to load.
      */
     accountId: string;
-
-    /**
-     * True if the account is archived, false otherwise.
-     */
-    archived: boolean;
 };
 
 // TODO clean up the account id, date, state selector passed to the 3 containers.
-export const Account = ({ accountId, hasRecords, startingDate, monthAndYears, archived }: AccountProps) => {
+export const Account = ({ accountId }: AccountProps) => {
+    const { hasRecords, startingDate, monthAndYears, archived } = useAccountComponent(accountId);
+
     const [date, setDate] = React.useState(startingDate);
     const [filterDescription, setFilteredDescription] = React.useState<string>('');
     const [selectedCategoryId, setSelectedCategoryId] = React.useState<string>('');
