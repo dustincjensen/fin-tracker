@@ -65,7 +65,9 @@ export const CategorySelect = ({ record, categories, updateCategory, disabled }:
         if (!state.menuOpen && state.categoryId) {
             updateCategory(record.id, state.categoryId);
         }
-    }, [state.menuOpen, state.categoryId, updateCategory, record.id]);
+        // Watching all dependencies causes issues because not all updateCategory methods are useCallbacks.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [state.menuOpen, state.categoryId]);
 
     const onSelect = (item: SelectMenuItem) => dispatch({ type: 'SET_CATEGORY_ID', payload: item.value as string });
     const onSelectMenuOpened = () => dispatch({ type: 'SET_MENU_OPEN', payload: true });

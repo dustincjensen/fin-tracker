@@ -6,7 +6,7 @@ import { AccountActions } from '../account-actions.component';
 import { AccountBalanceLineChart } from '../account-balance-line-chart.component';
 import { AccountCategoryTotalsChart } from '../account-category-totals-chart.component';
 import { AccountDetailSummary } from '../account-detail-summary.component';
-import { AccountMonthlyContainer } from '../account-monthly/account-monthly.container';
+import { AccountMonthly } from '../account-monthly.component';
 import { EmptyAccount } from '../empty-account.component';
 import { MonthYearList } from '../month-year-list.component';
 
@@ -90,7 +90,7 @@ export const Account = ({ accountId, hasRecords, startingDate, monthAndYears, ar
                             setSelectedCategoryId={setSelectedCategoryId}
                         />
                     )}
-                    <AccountMonthlyContainer
+                    <AccountMonthly
                         accountId={accountId}
                         date={date}
                         archived={archived}

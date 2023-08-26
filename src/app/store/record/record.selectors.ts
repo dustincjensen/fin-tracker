@@ -57,20 +57,6 @@ export class RecordSelectors {
     }
 
     /**
-     * Returns the records for a specific account in the given year and month.
-     * TODO this creates a new array every time it is used.
-     *
-     * @param state       The current application state.
-     * @param accountId   The ID of the account.
-     * @param date        The year/month to get records for.
-     */
-    public static recordsByDate(state: IStore, accountId: string, date: string): Record[] {
-        const records = state.records.records[accountId];
-        const targetDate = createDate(date);
-        return records?.filter(r => isInYearMonth(targetDate, createDate(r.date)));
-    }
-
-    /**
      * Returns the balance of the last record in the account.
      * This should be the account balance.
      *

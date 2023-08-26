@@ -1,9 +1,5 @@
 Bugs
 ====
-  - SPLIT RECORD SETTING CATEGORY IS COMPLETELY BROKEN.
-  - ADD NEW RECORD SETTING CATEGORY IS COMPLETELY BROKEN.
-  --- ROOT CAUSE SEEMS TO BE A BAD CATEGORY SELECT COMPONENT.
-
   - Description width could be larger on bigger monitors... maybe use css breakpoints?
   - If you delete an account that the transfer account category is in use for an auto category then it will end up being abandoned in the auto category list.
   - When you go between accounts that are on the same month/year it won't load the numbers on the category graph.

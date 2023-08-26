@@ -14,43 +14,28 @@ import {
     MoreIcon,
 } from 'evergreen-ui';
 import React from 'react';
-import { CategorySelect } from '../../../components/category-select/category-select.component';
-import { CategoryTag } from '../../../components/category-tag/category-tag.component';
-import { Category } from '../../../models/category.type';
-import { Record } from '../../../models/record.type';
-import { formatDate } from '../../../utils/date.utils';
-import { createStaticWidthCell } from '../../../utils/table.utils';
-import { DeleteRecordDialog } from '../delete-record.dialog';
-import { DeleteSplitRecordsDialog } from '../delete-split-records.dialog';
-import { EditAutoCategoryDialog } from '../edit-auto-category.dialog';
-import { EditDetailsDialog } from '../edit-details.dialog';
-import { EditSplitRecords } from '../edit-split-records.component';
-import { RecordType } from '../record.type';
-import { SplitRecords } from '../split-records.component';
+import { CategorySelect } from '../../components/category-select/category-select.component';
+import { CategoryTag } from '../../components/category-tag/category-tag.component';
+import { Category } from '../../models/category.type';
+import { Record } from '../../models/record.type';
+import { formatDate } from '../../utils/date.utils';
+import { createStaticWidthCell } from '../../utils/table.utils';
+import { useAccountMonthly, useAccountMonthlyActions } from './account-monthly.hooks';
+import { DeleteRecordDialog } from './delete-record.dialog';
+import { DeleteSplitRecordsDialog } from './delete-split-records.dialog';
+import { EditAutoCategoryDialog } from './edit-auto-category.dialog';
+import { EditDetailsDialog } from './edit-details.dialog';
+import { EditSplitRecords } from './edit-split-records.component';
+import { SplitRecords } from './split-records.component';
 
 const w100 = createStaticWidthCell(100);
 const w200 = createStaticWidthCell(200);
 
 export type AccountMonthlyProps = {
     /**
-     * The records to display.
-     */
-    records: RecordType[];
-
-    /**
      * The list of categories to choose from for each record.
      */
     categories: Category[];
-
-    /**
-     * Function to update a category in state.
-     */
-    updateCategory: (recordId: string, categoryId: string) => void;
-
-    /**
-     * Function to update a split record category in state.
-     */
-    updateSplitRecordCategory: (recordId: string, splitRecordId: string, categoryId: string) => void;
 
     /**
      * The ID of the account to display.
@@ -79,12 +64,16 @@ export type AccountMonthlyProps = {
 };
 
 export const AccountMonthly = ({
-    records,
+    accountId,
+    date,
+    filterCategoryId,
+    filterDescription,
     categories,
-    updateCategory,
-    updateSplitRecordCategory,
     archived,
 }: AccountMonthlyProps) => {
+    const records = useAccountMonthly(accountId, date, categories, filterCategoryId, filterDescription);
+    const { updateCategory, updateSplitRecordCategory } = useAccountMonthlyActions(accountId);
+
     const [recordToDeleteSplitsFrom, setRecordToDeleteSplitsFrom] = React.useState<Record>(null);
     const [recordToDelete, setRecordToDelete] = React.useState<Record>(null);
     const [recordToAddDetails, setRecordToAddDetails] = React.useState<Record>(null);
