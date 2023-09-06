@@ -62,7 +62,7 @@
     "@typescript-eslint/parser": "^4.28.1",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.2",
     "concurrently": "^6.2.0",
-    "electron": "^13.3.0",
+    "electron": "^22.3.21",
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.2",
     "eslint": "^7.30.0",
