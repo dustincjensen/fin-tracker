@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "ES2020",
+        "module": "AMD",
+        "strict": true,
+        "moduleResolution": "node",
+        "rootDir": "../..",
+        "outFile": "../../dist/background.worker.js",
+        "composite": true,
+        "declarationMap": true,
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "lib": ["esnext", "webworker"],
+    },
+    "include": [
+        "./define.ts",
+        "./**/*.ts",
+        "../app/models/*",
+        "../app/utils/guid.utils.ts"
+    ]
+}

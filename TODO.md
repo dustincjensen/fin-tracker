@@ -3,33 +3,45 @@ Bugs
   - Description width could be larger on bigger monitors... maybe use css breakpoints?
   - If you delete an account that the transfer account category is in use for an auto category then it will end up being abandoned in the auto category list.
   - When you go between accounts that are on the same month/year it won't load the numbers on the category graph.
+  - Delete a category that is selected in the chart on the home screen and it will crash the home screen.
 
 Tasks
 =====
-Next
-- Package updates
-- Refactor 
+- Remove all createSelector
+- Refactor components
   - Selectors
   - Components
   - Containers
-  - Reducers
-  - Actions
-- Sorting order accounts by user input? (https://github.com/clauderic/react-sortable-hoc perhaps?)
-- Create regular backups
-  + Let them access the folder where the backup/regular data is.
-  - Restore a backup.
+- Add Redux Dev Tools
+
+- Investigate Zod for forms and fix up form creation.
+- Add tests for the whole application
+-- Consider removing background worker...
+- Re-test everything from scratch and import all files for all accounts and see if the totals line up.
+- Get latest back-up and compare all charts, graphs etc.
+------------------------------------------------------------------------------------------------------
+- Finish description quick edit
+- Account sorting
+  - Sorting order accounts by user input? (https://github.com/clauderic/react-sortable-hoc perhaps?)
+- Split record quick add the rest to the last field.
 - Mortgage
   - Amortization chart
   - Search for values that match the payment and associate them after user clicks ok.
-- README.md
+- Focus category tag when it is rendered into DOM if there is a selected category id.
+- Reduce the range for the charts on the home page.
 
+Next
+- Package updates
+- Create regular backups
+  + Let them access the folder where the backup/regular data is.
+  - Restore a backup.
+- README.md
 
 - Cannot remove single record when it is manual transaction.
 - Update manual transactions? (Or just delete and re-add?)
 - Improve account monthly header
 - Home page Mortgage Summary Card
 - Home page Mortgage in balance chart
-- Storybook
 - Feature component tests
 - Import multiple files at once
 - Add total wealth graph on home page
