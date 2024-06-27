@@ -19,11 +19,4 @@ export interface IStore {
 /**
  * The store interface for what data should be persisted.
  */
-export interface IPersistedStore {
-    accounts: AccountStore;
-    autoCategories: AutoCategoryStore;
-    categories: CategoryStore;
-    investmentRecords: InvestmentRecordStore;
-    records: RecordStore;
-    thirdPartyApi: ThirdPartyApiStore;
-}
+export interface IPersistedStore extends Omit<IStore, 'pendingRecords'> {}

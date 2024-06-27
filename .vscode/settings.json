@@ -2,7 +2,7 @@
 	"eslint.format.enable": true,
 	"editor.defaultFormatter": "dbaeumer.vscode-eslint",
 	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": true
+		"source.fixAll.eslint": "always"
 	},
 	"editor.tabSize": 4,
 	"files.exclude": {
