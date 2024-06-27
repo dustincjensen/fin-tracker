@@ -27,6 +27,7 @@ import { SplitRecordType } from './split-record.type';
 
 const w100 = createStaticWidthCell(100);
 const w200 = createStaticWidthCell(200);
+const w354 = createStaticWidthCell(354);
 const tableColumnPadding = 12;
 
 function createSplitRecord(): SplitRecordType {
@@ -151,6 +152,12 @@ export const EditSplitRecords = ({ record, categories, onClose }: EditSplitRecor
     const canRemoveRow = splitRecords && splitRecords.length > 2;
     const total = record.debit ? getDebitTotal(splitRecords) : record.credit ? getCreditTotal(splitRecords) : 0.0;
 
+    const recordTotal = record.debit || record.credit;
+    // After subtracting all the values for the split records, if this is still above 0, we have some amount remaining
+    // and can still show the fill remaining buttons.
+    const someAmountRemaining = recordTotal - total > 0;
+    const isDebit = !!record.debit;
+
     return (
         <Pane>
             <form onSubmit={handleSubmit}>
@@ -208,32 +215,64 @@ export const EditSplitRecords = ({ record, categories, onClose }: EditSplitRecor
                                         updateCategory={updateCategory}
                                     />
                                 </Table.Cell>
-                                <Table.Cell {...w100}>
+                                {/* Groups debit/credit/balance/button columns into 1 to allow the credit/debit to have fill and clear buttons */}
+                                <Table.Cell {...w354}>
                                     {!!record.debit && (
                                         <TextInput
                                             width={76}
                                             type='number'
                                             step={0.01}
                                             min={0}
+                                            // Modify padding so we can see larger numbers without scrolling left/right
+                                            paddingLeft={2}
+                                            paddingRight={2}
                                             value={splitRecord.debit}
                                             onChange={evt => onDebitChange(splitRecord.id, evt.target.value)}
                                         />
                                     )}
-                                </Table.Cell>
-                                <Table.Cell {...w100}>
                                     {!!record.credit && (
                                         <TextInput
+                                            // Because we are in the same 354 width cell, we have to move over 100px to be inline with the header again.
+                                            marginLeft={100}
                                             width={76}
                                             type='number'
                                             step={0.01}
                                             min={0}
+                                            // Modify padding so we can see larger numbers without scrolling left/right
+                                            paddingLeft={2}
+                                            paddingRight={2}
                                             value={splitRecord.credit}
                                             onChange={evt => onCreditChange(splitRecord.id, evt.target.value)}
                                         />
                                     )}
+                                    {!splitRecord.credit && !splitRecord.debit && someAmountRemaining ? (
+                                        // If the splitRecord has no credit and no debit value show the fill remaining button
+                                        <Button
+                                            type='button'
+                                            appearance='primary'
+                                            marginLeft={10}
+                                            onClick={() => {
+                                                const method = isDebit ? onDebitChange : onCreditChange;
+                                                method(splitRecord.id, (recordTotal - total).toFixed(2));
+                                            }}
+                                        >
+                                            Fill Remaining
+                                        </Button>
+                                    ) : (
+                                        // Otherwise show a clear button to remove the value.
+                                        <Button
+                                            type='button'
+                                            appearance='default'
+                                            marginLeft={10}
+                                            onClick={() => {
+                                                const method = isDebit ? onDebitChange : onCreditChange;
+                                                method(splitRecord.id, '0');
+                                            }}
+                                        >
+                                            Clear
+                                        </Button>
+                                    )}
                                 </Table.Cell>
-                                <Table.Cell {...w100}></Table.Cell>
-                                <Table.Cell flex='none' justifyContent='flex-end' width={54}></Table.Cell>
                             </Table.Row>
                         );
                     })}
