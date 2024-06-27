@@ -1,11 +1,10 @@
 {
-	"eslint.alwaysShowStatus": true,
 	"eslint.format.enable": true,
 	"editor.defaultFormatter": "dbaeumer.vscode-eslint",
 	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": true
+		"source.fixAll.eslint": "always"
 	},
-	"editor.tabSize": 2,
+	"editor.tabSize": 4,
 	"files.exclude": {
 		"**/.git": true,
 		"**/.svn": true,
@@ -15,5 +14,9 @@
 		".parcel-cache": true,
 		"node_modules": true,
 		"out": true,
-	}
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+	},
+	"typescript.tsdk": "node_modules\\typescript\\lib"
 }
