@@ -5,6 +5,7 @@ import { createDate } from '../../utils/date.utils';
 import { AccountActions } from './account-actions.component';
 import { AccountBalanceLineChart } from './account-balance-line-chart.component';
 import { AccountCategoryTotalsChart } from './account-category-totals-chart.component';
+import { AccountDebitsCreditsChart } from './account-debits-credits-chart.component';
 import { AccountDetailSummary } from './account-detail-summary.component';
 import { AccountMonthly } from './account-monthly.component';
 import { useAccountComponent } from './account.hook';
@@ -59,6 +60,7 @@ export const Account = ({ accountId }: AccountProps) => {
             <Pane padding={20} overflowX='hidden' overflowY='auto' className='scroll-bar-styled'>
                 <Pane display='flex'>
                     <AccountBalanceLineChart accountId={accountId} date={date} />
+                    <AccountDebitsCreditsChart accountId={accountId} date={date} />
                     <AccountCategoryTotalsChart accountId={accountId} date={date} />
                 </Pane>
                 <Pane display='grid'>

@@ -8,9 +8,17 @@ import { IStore } from '../../store/store.interface';
 import { accountTypeLabels } from '../../utils/account.utils';
 import { stringToMonthYear } from '../../utils/date.utils';
 
-const Field = ({ label, text }) => (
+type FieldProps = {
+    label: string;
+    text: string;
+    textColor?: string;
+};
+
+const Field = ({ label, text, textColor }: FieldProps) => (
     <FormField label={label}>
-        <Text>{text}</Text>
+        <Text color={textColor} fontWeight={textColor ? 700 : undefined}>
+            {text}
+        </Text>
     </FormField>
 );
 
@@ -25,6 +33,7 @@ export const AccountDetailSummary = ({ accountId, date, archived }: AccountDetai
     const { balance: previousMonthEndBalance } = usePreviousMonthEndBalance(accountId, date);
     const { balance: currentMonthEndBalance } = useCurrentMonthEndBalance(accountId, date);
     const displayDate = stringToMonthYear(date);
+    const difference = (currentMonthEndBalance ?? 0) - (previousMonthEndBalance ?? 0);
 
     return (
         <>
@@ -47,6 +56,11 @@ export const AccountDetailSummary = ({ accountId, date, archived }: AccountDetai
                     <Field label='Date' text={displayDate} />
                     <Field label='Previous Balance' text={previousMonthEndBalance?.toFixed(2) ?? ''} />
                     <Field label='End Balance' text={currentMonthEndBalance?.toFixed(2) ?? ''} />
+                    <Field
+                        label='Difference'
+                        text={(difference >= 0 ? '+' : '') + difference?.toFixed(2) ?? ''}
+                        textColor={difference >= 0 ? '#4caf50' : '#f44336'}
+                    />
                 </Pane>
             </Pane>
         </>
