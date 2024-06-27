@@ -18,5 +18,8 @@
         "./**/*.ts",
         "../app/models/*",
         "../app/utils/guid.utils.ts"
+    ],
+    "exclude": [
+        "./**/*.spec.ts"
     ]
 }
