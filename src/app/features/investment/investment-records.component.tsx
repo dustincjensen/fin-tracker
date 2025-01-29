@@ -38,7 +38,7 @@ export const InvestmentRecords = ({ accountId, currency }: InvestmentRecordsProp
                     {currency !== 'CAD' && <Table.TextHeaderCell>Converted</Table.TextHeaderCell>}
                     {!archived && <Table.HeaderCell flex='none' width={54}></Table.HeaderCell>}
                 </Table.Head>
-                <Table.VirtualBody height={300}>
+                <Table.Body height={400}>
                     {records?.map(record => (
                         <InvestmentRecord
                             key={record.id}
@@ -47,7 +47,7 @@ export const InvestmentRecords = ({ accountId, currency }: InvestmentRecordsProp
                             accountArchived={archived}
                         />
                     ))}
-                </Table.VirtualBody>
+                </Table.Body>
             </Table>
 
             {recordToDelete && <DeleteInvestmentRecordDialog record={recordToDelete} onClose={clearRecordToDelete} />}
