@@ -1,0 +1,4 @@
+.account_monthly_row:focus-within .edit_button,
+.account_monthly_row:hover .edit_button {
+  opacity: 1;
+}

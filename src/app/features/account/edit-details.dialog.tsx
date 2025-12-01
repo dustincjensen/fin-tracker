@@ -1,8 +1,9 @@
-import { Dialog, FormField, majorScale, TextInputField, Text } from 'evergreen-ui';
+import { Dialog, FormField, majorScale, TextInputField, Text, Autocomplete } from 'evergreen-ui';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Record } from '../../models/record.type';
 import { setDetails as setDetailsAction } from '../../store/record/record-slice';
+import { useEditDetails } from './edit-details.hook';
 
 type EditDetailsProps = {
     /**
@@ -19,6 +20,7 @@ type EditDetailsProps = {
 export const EditDetailsDialogComponent = ({ record, onClose }: EditDetailsProps) => {
     const dispatch = useDispatch();
     const [details, setDetails] = React.useState<string>('');
+    const { suggestions } = useEditDetails();
 
     React.useEffect(() => {
         setDetails(record?.details || '');
@@ -46,12 +48,30 @@ export const EditDetailsDialogComponent = ({ record, onClose }: EditDetailsProps
             <FormField label='Description' marginBottom={majorScale(3)}>
                 <Text>{record.description}</Text>
             </FormField>
-            <TextInputField
-                label='Details'
-                value={details}
-                marginBottom={majorScale(3)}
-                onChange={evt => setDetails(evt.target.value)}
-            />
+            <Autocomplete onChange={changedItem => setDetails(changedItem)} items={suggestions}>
+                {props => {
+                    const { getInputProps, getRef } = props;
+                    const { onChange, ...inputProps } = getInputProps();
+                    return (
+                        <TextInputField
+                            ref={getRef}
+                            label='Details'
+                            marginBottom={majorScale(3)}
+                            autoFocus
+                            {...inputProps}
+                            // This overrides the value from inputProps and get's the appropriate
+                            // value set since we want to be able to autocomplete or use a new value.
+                            value={details}
+                            // We need to set details as we type, because we want to use that as the value from the dialog.
+                            // If we didn't then the autocomplete would only suggest values that it knows about.
+                            onChange={(evt: React.ChangeEvent<HTMLInputElement>) => {
+                                setDetails(evt.target.value);
+                                onChange(evt);
+                            }}
+                        />
+                    );
+                }}
+            </Autocomplete>
         </Dialog>
     );
 };

@@ -12,6 +12,7 @@ import {
     AutomaticUpdatesIcon,
     TrashIcon,
     MoreIcon,
+    Button,
 } from 'evergreen-ui';
 import React from 'react';
 import { CategorySelect } from '../../components/category-select/category-select.component';
@@ -27,6 +28,8 @@ import { EditAutoCategoryDialog } from './edit-auto-category.dialog';
 import { EditDetailsDialog } from './edit-details.dialog';
 import { EditSplitRecords } from './edit-split-records.component';
 import { SplitRecords } from './split-records.component';
+
+import './account-monthly.css';
 
 const w100 = createStaticWidthCell(100);
 const w200 = createStaticWidthCell(200);
@@ -107,7 +110,7 @@ export const AccountMonthly = ({
                 {records?.map(record => {
                     return (
                         <Pane key={record.id}>
-                            <Table.Row isSelectable>
+                            <Table.Row isSelectable className='account_monthly_row'>
                                 <Table.TextCell {...w100}>{formatDate(record.date)}</Table.TextCell>
                                 <Table.TextCell>
                                     <Pane display='flex' alignItems='center'>
@@ -131,6 +134,21 @@ export const AccountMonthly = ({
                                                 </Tooltip>
                                             )}
                                         </Pane>
+                                        {!archived && (
+                                            <Button
+                                                iconBefore={EditIcon}
+                                                opacity={0}
+                                                marginLeft='auto'
+                                                className='edit_button'
+                                                onClick={() => {
+                                                    setRecordToAddDetails(record);
+                                                    setRecordToAutoCategorize(undefined);
+                                                    setIsSplittingTransaction(undefined);
+                                                }}
+                                            >
+                                                Edit Details
+                                            </Button>
+                                        )}
                                     </Pane>
                                 </Table.TextCell>
                                 <Table.TextCell {...w200}>

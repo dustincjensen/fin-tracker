@@ -22,7 +22,6 @@ Tasks
 - Re-test everything from scratch and import all files for all accounts and see if the totals line up.
 - Get latest back-up and compare all charts, graphs etc.
 ------------------------------------------------------------------------------------------------------
-- Finish description quick edit
 - Account sorting
   - Sorting order accounts by user input? (https://github.com/clauderic/react-sortable-hoc perhaps?)
 - Mortgage
