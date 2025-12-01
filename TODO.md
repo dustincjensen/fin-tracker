@@ -4,6 +4,8 @@ Bugs
   - If you delete an account that the transfer account category is in use for an auto category then it will end up being abandoned in the auto category list.
   - When you go between accounts that are on the same month/year it won't load the numbers on the category graph.
   - Delete a category that is selected in the chart on the home screen and it will crash the home screen.
+  - Hitting enter inside Split Transaction removes rows
+  - Renaming account doesn't rename account transfer
 
 Tasks
 =====
@@ -23,7 +25,6 @@ Tasks
 - Finish description quick edit
 - Account sorting
   - Sorting order accounts by user input? (https://github.com/clauderic/react-sortable-hoc perhaps?)
-- Split record quick add the rest to the last field.
 - Mortgage
   - Amortization chart
   - Search for values that match the payment and associate them after user clicks ok.
