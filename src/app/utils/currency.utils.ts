@@ -7,3 +7,19 @@
 export function round(value: number): number {
     return Math.round((value + Number.EPSILON) * 100) / 100;
 }
+
+// TODO support localization
+/**
+ * Formats a number as a currency string.
+ *
+ * @param value The value to format.
+ */
+export function formatCurrency(value: number): string {
+    return Intl.NumberFormat('en-CA', {
+        // TODO support localization, and the currency icons from Evergreen UI?
+        style: 'currency',
+        currency: 'CAD',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    }).format(value);
+}

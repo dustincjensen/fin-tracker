@@ -103,7 +103,9 @@ export const HomeLayout = () => {
             <EditHomeContext.Provider value={{ locked }}>
                 <Pane padding={20}>
                     <Pane display='flex' justifyContent='space-between' marginBottom={10}>
-                        <Heading size={700}>{locked ? 'Home' : 'Edit Home'}</Heading>
+                        <Heading is='h1' size={700}>
+                            {locked ? 'Home' : 'Edit Home'}
+                        </Heading>
                         <Tooltip position='left' content={locked ? 'Edit Home page' : 'Finish Edit Home page'}>
                             <IconButton
                                 icon={locked ? LockIcon : UnlockIcon}

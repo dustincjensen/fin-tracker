@@ -1,19 +1,21 @@
-import { Pane, Card, Heading, Text, IconButton, Tooltip, EyeOpenIcon, ImportIcon, Icon, Badge } from 'evergreen-ui';
+import { Pane, Card, Heading, Text, IconButton, Icon, Tooltip, EyeOpenIcon, Badge } from 'evergreen-ui';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { accountRoutes } from '../../utils/account.utils';
 import { formatCurrency } from '../../utils/currency.utils';
+import { formatDateFull } from '../../utils/date.utils';
 import { isNullOrUndefined } from '../../utils/object.utils';
-import { useAccountSummary } from './account-summary.hook';
+import { useInvestmentSummary } from './investment-summary.hook';
 
-export type AccountSummaryProps = {
+export type InvestmentSummaryProps = {
     /**
      * The ID of the account.
      */
     accountId: string;
 };
 
-export const AccountSummary = ({ accountId }: AccountSummaryProps) => {
-    const { name, balance, dateOfLastTransaction, icon, isUpdateNeeded } = useAccountSummary(accountId);
+export const InvestmentSummary = ({ accountId }: InvestmentSummaryProps) => {
+    const { name, icon, accountType, latestDate, balance, isUpdateNeeded } = useInvestmentSummary(accountId);
 
     return (
         <Card
@@ -37,40 +39,36 @@ export const AccountSummary = ({ accountId }: AccountSummaryProps) => {
                             {formatCurrency(balance)}
                         </Text>
                         <br />
-                        <Text>{dateOfLastTransaction}</Text>
+                        <Text>{formatDateFull(latestDate)}</Text>
                     </Pane>
                 )}
                 {isNullOrUndefined(balance) && (
                     <Pane
                         data-testid='empty-account'
                         paddingX='10px'
-                        paddingTop='10px'
-                        paddingBottom='15px'
+                        paddingY='5px'
                         display='flex'
                         justifyContent='center'
                     >
                         <Text color='muted'>
-                            Empty! Import records{' '}
-                            <Text is={Link} to={`/import/${accountId}`}>
+                            Empty! Enter balances{' '}
+                            <Text is={Link} to={`${accountRoutes[accountType]}/${accountId}`}>
                                 here
                             </Text>
                             .
                         </Text>
                     </Pane>
                 )}
-                <Pane display='flex' alignItems='center' justifyContent='space-between'>
+                <Pane display='flex' justifyContent='space-between' alignItems='center'>
                     <Pane>{isUpdateNeeded && <Badge color='yellow'>Update needed</Badge>}</Pane>
                     <Pane>
-                        <Tooltip content='Open Account'>
+                        <Tooltip content='Open Investment Account'>
                             <IconButton
                                 appearance='minimal'
                                 icon={EyeOpenIcon}
                                 is={Link}
-                                to={`/account/${accountId}`}
+                                to={`/investment/${accountId}`}
                             />
-                        </Tooltip>
-                        <Tooltip content='Import Records'>
-                            <IconButton appearance='minimal' icon={ImportIcon} is={Link} to={`/import/${accountId}`} />
                         </Tooltip>
                     </Pane>
                 </Pane>

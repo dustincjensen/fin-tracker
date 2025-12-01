@@ -17,9 +17,11 @@ describe('components', () => {
         it('should render empty account when balance is undefined', () => {
             jest.spyOn(useInvestmentSummaryHook, 'useInvestmentSummary').mockReturnValue({
                 name: 'TFSA',
+                accountType: 'TFSA',
                 icon: ChartIcon,
                 balance: undefined,
                 latestDate: '2021-07-12',
+                isUpdateNeeded: false,
             });
 
             renderApp(<InvestmentSummary {...props} />);
@@ -31,9 +33,11 @@ describe('components', () => {
         it('should render account details when balance is defined', () => {
             jest.spyOn(useInvestmentSummaryHook, 'useInvestmentSummary').mockReturnValue({
                 name: 'TFSA',
+                accountType: 'TFSA',
                 icon: ChartIcon,
                 balance: 12345.54,
                 latestDate: '2021-07-12',
+                isUpdateNeeded: false,
             });
 
             renderApp(<InvestmentSummary {...props} />);

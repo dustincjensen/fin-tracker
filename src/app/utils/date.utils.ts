@@ -249,3 +249,15 @@ export function getDateFromTimestamp(timestamp: number): string {
 export function today(): string {
     return moment().format('YYYY-MM-DD');
 }
+
+/**
+ * Returns the number of months since the given date.
+ *
+ * @param date The date to calculate from.
+ */
+export function monthsSince(date: string): number {
+    const then = moment(date);
+    const now = moment();
+    const diff = now.diff(then, 'months');
+    return diff > 0 ? diff : 0;
+}

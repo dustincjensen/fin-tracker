@@ -21,6 +21,7 @@ import {
     stringToDayMonthYear,
     stringToMonthYear,
     getDateForOer,
+    monthsSince,
 } from './date.utils';
 
 describe('utils', () => {
@@ -304,6 +305,48 @@ describe('utils', () => {
 
             it('should return end of year when it is less than today', () => {
                 expect(getYearDateForOer('2020-01-05')).toBe('2020-12-31');
+            });
+        });
+
+        describe('monthsSince', () => {
+            it("should return 0 months when given today's date", () => {
+                const todayStr = moment().format('YYYY-MM-DD');
+                expect(monthsSince(todayStr)).toBe(0);
+            });
+
+            it('should return 1 month when given date one month ago', () => {
+                const oneMonthAgo = moment().subtract(1, 'month').format('YYYY-MM-DD');
+                expect(monthsSince(oneMonthAgo)).toBe(1);
+            });
+
+            it('should return 6 months when given date six months ago', () => {
+                const sixMonthsAgo = moment().subtract(6, 'month').format('YYYY-MM-DD');
+                expect(monthsSince(sixMonthsAgo)).toBe(6);
+            });
+
+            it('should return 12 months when given date one year ago', () => {
+                const oneYearAgo = moment().subtract(1, 'year').format('YYYY-MM-DD');
+                expect(monthsSince(oneYearAgo)).toBe(12);
+            });
+
+            it('should return 0 months when given date is in the future', () => {
+                const futureDate = moment().add(3, 'month').format('YYYY-MM-DD');
+                expect(monthsSince(futureDate)).toBe(0);
+            });
+
+            it('should return 0 months when given date is 5 days ago', () => {
+                const fiveDaysAgo = moment().subtract(5, 'day').format('YYYY-MM-DD');
+                expect(monthsSince(fiveDaysAgo)).toBe(0);
+            });
+
+            it('should return 1 month when given date is 35 days ago', () => {
+                const thirtyFiveDaysAgo = moment().subtract(35, 'day').format('YYYY-MM-DD');
+                expect(monthsSince(thirtyFiveDaysAgo)).toBe(1);
+            });
+
+            it('should return 2 months when given date is 65 days ago', () => {
+                const sixtyFiveDaysAgo = moment().subtract(65, 'day').format('YYYY-MM-DD');
+                expect(monthsSince(sixtyFiveDaysAgo)).toBe(2);
             });
         });
     });
