@@ -47,4 +47,9 @@ export type Account = {
      * The type of the account.
      */
     accountType: AccountType;
+
+    /**
+     * The order of the account in lists.
+     */
+    order?: number;
 };

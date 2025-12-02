@@ -16,6 +16,11 @@ export const accountSlice = createSlice({
     initialState,
     reducers: {
         saveNewAccount: (state, { payload: newAccount }: PayloadAction<Account>) => {
+            // Assign an order number based on the current number of accounts.
+            const newOrderNumber = Object.keys(state.accounts).length;
+            newAccount.order = newOrderNumber;
+
+            // Save the new account.
             state.accounts[newAccount.id] = newAccount;
         },
         updateAccount: (state, { payload: updatedAccount }: PayloadAction<Account>) => {

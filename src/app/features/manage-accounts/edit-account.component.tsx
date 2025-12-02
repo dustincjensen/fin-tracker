@@ -128,6 +128,7 @@ export const EditAccount = ({
             startingBalance: isBankAccount(at) ? startingBalance : undefined,
             // Todo fix typing
             accountType: at,
+            order: account?.order || 0,
         };
 
         saveAccount(updatedAccount);

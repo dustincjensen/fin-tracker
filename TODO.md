@@ -9,24 +9,27 @@ Bugs
 
 Tasks
 =====
+- Reorder accounts
+- Format currencies
+- Mortgage
+  - Amortization chart
+  - Search for values that match the payment and associate them after user clicks ok.
+- Consider removing background worker...
+- Add tests for the whole application
+- Re-test everything from scratch and import all files for all accounts and see if the totals line up.
+- Get latest back-up and compare all charts, graphs etc.
+
+
 - Remove all createSelector
 - Refactor components
   - Selectors
   - Components
   - Containers
 - Add Redux Dev Tools
-
 - Investigate Zod for forms and fix up form creation.
-- Add tests for the whole application
--- Consider removing background worker...
-- Re-test everything from scratch and import all files for all accounts and see if the totals line up.
-- Get latest back-up and compare all charts, graphs etc.
 ------------------------------------------------------------------------------------------------------
 - Account sorting
   - Sorting order accounts by user input? (https://github.com/clauderic/react-sortable-hoc perhaps?)
-- Mortgage
-  - Amortization chart
-  - Search for values that match the payment and associate them after user clicks ok.
 - Focus category tag when it is rendered into DOM if there is a selected category id.
 - Reduce the range for the charts on the home page.
 

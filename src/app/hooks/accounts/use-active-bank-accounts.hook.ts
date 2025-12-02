@@ -12,6 +12,7 @@ export const useActiveBankAccounts = () => {
         activeBankAccounts: useMemo(
             () =>
                 Object.keys(accounts)
+                    .sort((a, b) => (accounts[a].order ?? 0) - (accounts[b].order ?? 0))
                     .map(id => accounts[id])
                     .filter(a => !a.archived && isBankAccount(a.accountType)),
             [accounts]
