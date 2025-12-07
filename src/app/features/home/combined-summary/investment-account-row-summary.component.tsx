@@ -139,6 +139,7 @@ export const InvestmentAccountRowSummary = ({
                         borderLeft
                         display='flex'
                         justifyContent='flex-end'
+                        className='combined_summary_cell'
                     >
                         <Text>{isNullOrUndefined(total) ? '-' : `~ ${formatNumber(total)}`}</Text>
                     </Pane>

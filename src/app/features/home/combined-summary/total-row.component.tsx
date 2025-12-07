@@ -29,6 +29,7 @@ export const TotalRow = ({ start, end }: { start: number; end: number }) => {
                         borderLeft
                         display='flex'
                         justifyContent='flex-end'
+                        className='combined_summary_cell'
                     >
                         <Text>{isNullOrUndefined(t) ? '-' : formatCurrency(t)}</Text>
                     </Pane>

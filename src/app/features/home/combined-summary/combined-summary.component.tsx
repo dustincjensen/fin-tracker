@@ -22,6 +22,7 @@ import { DateHeaders } from './date-headers.component';
 import { InvestmentAccountRowSummary } from './investment-account-row-summary.component';
 import { TotalRow } from './total-row.component';
 import { TotalContext } from './total.context';
+import './combined-summary.css';
 
 const displayWidth = 300;
 const nameWidth = 150;

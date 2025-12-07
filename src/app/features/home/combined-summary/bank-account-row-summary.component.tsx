@@ -83,6 +83,7 @@ export const BankAccountRowSummary = ({
                         borderLeft
                         display='flex'
                         justifyContent='flex-end'
+                        className='combined_summary_cell'
                     >
                         <Text>{isNullOrUndefined(balance) ? '-' : formatNumber(balance)}</Text>
                     </Pane>
