@@ -14,6 +14,7 @@ import {
 import { useDisplayCategories } from '../../../hooks/categories/use-display-categories.hook';
 import { useLocalStorage } from '../../../hooks/use-local-storage.hook';
 import { Category } from '../../../models/category.type';
+import { formatCurrency } from '../../../utils/currency.utils';
 import { formatDateMonthYear } from '../../../utils/date.utils';
 import { isNullOrUndefined } from '../../../utils/object.utils';
 
@@ -148,8 +149,8 @@ export const CombinedCategorySummary = ({ categoryTotalsByMonth }: CombinedCateg
                 <BarChart data={data} margin={barChartMargins} barGap={0} stackOffset='sign'>
                     <CartesianGrid strokeDasharray='3 3' />
                     <XAxis dataKey='name' />
-                    <YAxis />
-                    <Tooltip isAnimationActive={false} />
+                    <YAxis tickFormatter={(value: number) => formatCurrency(value)} width={120} />
+                    <Tooltip isAnimationActive={false} formatter={(value: number) => formatCurrency(value)} />
                     <ReferenceLine y={0} stroke='#000' />
                     <Legend />
                     {categoryBars}

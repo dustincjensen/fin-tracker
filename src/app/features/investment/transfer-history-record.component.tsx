@@ -2,11 +2,14 @@ import { ManuallyEnteredDataIcon, Pane, Table, Tooltip } from 'evergreen-ui';
 import React from 'react';
 import { Account } from '../../models/account.type';
 import { Record } from '../../models/record.type';
+import { formatNumber } from '../../utils/currency.utils';
 import * as dateUtils from '../../utils/date.utils';
 import { createStaticWidthCell } from '../../utils/table.utils';
 
 const w100 = createStaticWidthCell(100);
 const w200 = createStaticWidthCell(200);
+
+const renderAmount = (value?: number) => (value ? formatNumber(value) : '');
 
 type TransferHistoryRecordProps = {
     /**
@@ -50,10 +53,10 @@ const TransferHistoryRecordComponent = ({ record, account }: TransferHistoryReco
                 </Pane>
             </Table.TextCell>
             <Table.TextCell isNumber textAlign='right' {...w100}>
-                {record.accountId === account.id ? record.debit?.toFixed(2) || '' : record.credit?.toFixed(2) || ''}
+                {record.accountId === account.id ? renderAmount(record.debit) : renderAmount(record.credit)}
             </Table.TextCell>
             <Table.TextCell isNumber textAlign='right' {...w100}>
-                {record.accountId === account.id ? record.credit?.toFixed(2) || '' : record.debit?.toFixed(2) || ''}
+                {record.accountId === account.id ? renderAmount(record.credit) : renderAmount(record.debit)}
             </Table.TextCell>
         </Table.Row>
     );

@@ -1,11 +1,11 @@
 import { Pane, Text } from 'evergreen-ui';
 import React, { useMemo } from 'react';
-
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { AccountSelectors } from '../../../store/account/account.selectors';
 import { InvestmentRecordSelectors } from '../../../store/investment-record/investment-record.selectors';
 import { IStore } from '../../../store/store.interface';
+import { formatNumber } from '../../../utils/currency.utils';
 import { createDate } from '../../../utils/date.utils';
 import { isNullOrUndefined } from '../../../utils/object.utils';
 import { IDateRate } from '../../investment/_hooks/use-rates-by-dates.hook';
@@ -140,7 +140,7 @@ export const InvestmentAccountRowSummary = ({
                         display='flex'
                         justifyContent='flex-end'
                     >
-                        <Text>{isNullOrUndefined(total) ? '-' : `~ ${total?.toFixed(2)}`}</Text>
+                        <Text>{isNullOrUndefined(total) ? '-' : `~ ${formatNumber(total)}`}</Text>
                     </Pane>
                 );
             })}

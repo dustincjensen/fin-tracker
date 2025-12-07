@@ -1,6 +1,7 @@
 import { IconButton, Menu, MoreIcon, Popover, Position, Table, Tooltip, TrashIcon } from 'evergreen-ui';
 import React from 'react';
 import { InvestmentRecord as InvestmentRecordType } from '../../models/investment-record.type';
+import { formatNumber } from '../../utils/currency.utils';
 import * as dateUtils from '../../utils/date.utils';
 import { useBalanceByRate } from './_hooks/use-balance-by-rate.hook';
 
@@ -34,11 +35,11 @@ const InvestmentRecordComponent = ({ record, setRecordToDelete, accountArchived 
             )}
             <Table.TextCell isNumber textAlign='right'>
                 {record.investmentCurrency !== 'CAD' && `${record.investmentCurrency} `}
-                {record.balance?.toFixed(2) || ''}
+                {formatNumber(record.balance)}
             </Table.TextCell>
             {record.investmentCurrency !== 'CAD' && (
                 <Table.TextCell isNumber textAlign='right'>
-                    {convertedBalance?.toFixed(2)}
+                    {formatNumber(convertedBalance)}
                 </Table.TextCell>
             )}
             {!accountArchived && (

@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useRecordsByDate } from '../../hooks/records/use-records-by-date.hook';
+import { formatCurrency } from '../../utils/currency.utils';
 import { formatDate } from '../../utils/date.utils';
 
 export type AccountBalanceLineChartProps = {
@@ -32,8 +33,8 @@ export const AccountBalanceLineChart = ({ accountId, date }: AccountBalanceLineC
                 <Line type='monotone' dataKey='balance' stroke='#008800' dot={false} />
                 <CartesianGrid stroke='#222' strokeDasharray='5 5' />
                 <XAxis dataKey='date' ticks={records?.map(() => '')} />
-                <YAxis />
-                <Tooltip />
+                <YAxis tickFormatter={(value: number) => formatCurrency(value)} width={100} />
+                <Tooltip formatter={(value: number) => formatCurrency(value)} />
                 {dipsBelowZero && <ReferenceLine y={0} stroke='#ff0000' strokeDasharray='5 5' />}
             </LineChart>
         </ResponsiveContainer>

@@ -2,6 +2,7 @@ import React from 'react';
 import { CartesianGrid, BarChart, XAxis, YAxis, Bar, Cell, Tooltip, ReferenceLine } from 'recharts';
 import { useDisplayCategories } from '../../hooks/categories/use-display-categories.hook';
 import { useRecordsByDate } from '../../hooks/records/use-records-by-date.hook';
+import { formatCurrency } from '../../utils/currency.utils';
 
 type AccountCategoryTotalsChartProps = {
     /**
@@ -51,16 +52,18 @@ export const AccountCategoryTotalsChart = ({ accountId, date }: AccountCategoryT
             data={data}
             margin={{
                 top: 20,
-                bottom: 5,
+                bottom: 20,
             }}
         >
             <CartesianGrid strokeDasharray='3 3' />
-            <XAxis dataKey='name' />
-            <YAxis />
-            {data.length > 0 && <Tooltip />}
+            <XAxis dataKey='name' tickMargin={15} />
+            <YAxis tickFormatter={(value: number) => formatCurrency(value)} width={100} />
+            {data.length > 0 && <Tooltip formatter={(value: number) => formatCurrency(value)} />}
             <ReferenceLine y={0} stroke='#000' />
-            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-            <Bar dataKey='Total' label={{ position: 'top' } as any}>
+            <Bar
+                dataKey='Total'
+                label={{ position: 'top', formatter: (value: number) => formatCurrency(value) } as never}
+            >
                 {data.map((_entry, index) => (
                     <Cell key={`cell-${index}`} fill={colors[index]} />
                 ))}

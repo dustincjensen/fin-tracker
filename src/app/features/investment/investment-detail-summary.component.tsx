@@ -7,6 +7,7 @@ import { AccountSelectors } from '../../store/account/account.selectors';
 import { RecordSelectors } from '../../store/record/record.selectors';
 import { IStore } from '../../store/store.interface';
 import { accountTypeLabels, getAccountStartDate } from '../../utils/account.utils';
+import { formatCurrency } from '../../utils/currency.utils';
 import { stringToMonthYear, today } from '../../utils/date.utils';
 import { useBalanceByRate } from './_hooks/use-balance-by-rate.hook';
 
@@ -88,9 +89,9 @@ export const InvestmentDetailSummary = ({ accountId }: InvestmentDetailSummaryPr
                     <Field label='Account Type' text={accountTypeLabels[accountType]} />
                     <Field label='Start Date' text={startDate} />
                     <Field label='Transfer Category' text={transferCategory?.name} />
-                    <Field label='Transfer Cost' text={transferCost?.toFixed(2)} />
-                    <Field label='Latest Balance' text={latestBalance.toFixed(2)} />
-                    <Field label="Today's Balance" text={todaysBalance.toFixed(2)} />
+                    <Field label='Transfer Cost' text={formatCurrency(transferCost)} />
+                    <Field label='Latest Balance' text={formatCurrency(latestBalance)} />
+                    <Field label="Today's Balance" text={formatCurrency(todaysBalance)} />
                 </Pane>
             </Pane>
         </>

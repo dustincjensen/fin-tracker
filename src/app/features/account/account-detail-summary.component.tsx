@@ -6,6 +6,7 @@ import { usePreviousMonthEndBalance } from '../../hooks/records/use-previous-mon
 import { AccountSelectors } from '../../store/account/account.selectors';
 import { IStore } from '../../store/store.interface';
 import { accountTypeLabels } from '../../utils/account.utils';
+import { formatCurrency } from '../../utils/currency.utils';
 import { stringToMonthYear } from '../../utils/date.utils';
 
 type FieldProps = {
@@ -54,11 +55,17 @@ export const AccountDetailSummary = ({ accountId, date, archived }: AccountDetai
                     <Field label='Account Name' text={account?.name} />
                     <Field label='Account Type' text={accountTypeLabels[account?.accountType]} />
                     <Field label='Date' text={displayDate} />
-                    <Field label='Previous Balance' text={previousMonthEndBalance?.toFixed(2) ?? ''} />
-                    <Field label='End Balance' text={currentMonthEndBalance?.toFixed(2) ?? ''} />
+                    <Field
+                        label='Previous Balance'
+                        text={previousMonthEndBalance ? formatCurrency(previousMonthEndBalance) : ''}
+                    />
+                    <Field
+                        label='End Balance'
+                        text={currentMonthEndBalance ? formatCurrency(currentMonthEndBalance) : ''}
+                    />
                     <Field
                         label='Difference'
-                        text={(difference >= 0 ? '+' : '') + difference?.toFixed(2) ?? ''}
+                        text={difference !== 0 ? (difference > 0 ? '+' : '') + formatCurrency(difference) : ''}
                         textColor={difference >= 0 ? '#4caf50' : '#f44336'}
                     />
                 </Pane>

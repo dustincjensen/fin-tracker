@@ -23,3 +23,15 @@ export function formatCurrency(value: number): string {
         maximumFractionDigits: 2,
     }).format(value);
 }
+
+/**
+ * Formats a number as a string with two decimal places and the appropriate thousands separators.
+ *
+ * @param value The value to format.
+ */
+export function formatNumber(value: number): string {
+    return Intl.NumberFormat('en-CA', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    }).format(value);
+}

@@ -19,6 +19,7 @@ import { CategorySelect } from '../../components/category-select/category-select
 import { CategoryTag } from '../../components/category-tag/category-tag.component';
 import { Category } from '../../models/category.type';
 import { Record } from '../../models/record.type';
+import { formatNumber } from '../../utils/currency.utils';
 import { formatDate } from '../../utils/date.utils';
 import { createStaticWidthCell } from '../../utils/table.utils';
 import { useAccountMonthly, useAccountMonthlyActions } from './account-monthly.hooks';
@@ -163,13 +164,13 @@ export const AccountMonthly = ({
                                     {archived && record.category && <CategoryTag category={record.category} />}
                                 </Table.TextCell>
                                 <Table.TextCell isNumber textAlign='right' {...w100}>
-                                    {record.debit?.toFixed(2) || ''}
+                                    {record.debit ? formatNumber(record.debit) : ''}
                                 </Table.TextCell>
                                 <Table.TextCell isNumber textAlign='right' {...w100}>
-                                    {record.credit?.toFixed(2) || ''}
+                                    {record.credit ? formatNumber(record.credit) : ''}
                                 </Table.TextCell>
                                 <Table.TextCell isNumber textAlign='right' {...w100}>
-                                    {record.balance?.toFixed(2) || ''}
+                                    {record.balance ? formatNumber(record.balance) : ''}
                                 </Table.TextCell>
                                 {!archived && (
                                     <Table.Cell flex='none' justifyContent='flex-end' width={54}>

@@ -11,6 +11,7 @@ import {
     XAxis,
     YAxis,
 } from 'recharts';
+import { formatCurrency } from '../../../utils/currency.utils';
 import { formatDateMonthYear, getYearFromDate } from '../../../utils/date.utils';
 import { TotalContext } from './total.context';
 
@@ -54,10 +55,10 @@ export const CombinedChart = (props: {
                 <XAxis dataKey='date' minTickGap={20}>
                     <Label value='Date' position='insideBottom' offset={-5} />
                 </XAxis>
-                <YAxis>
+                <YAxis tickFormatter={(value: number) => formatCurrency(value)} width={130}>
                     <Label value='Total' position='left' angle={270} />
                 </YAxis>
-                <Tooltip isAnimationActive={false} />
+                <Tooltip isAnimationActive={false} formatter={(value: number) => formatCurrency(value)} />
                 {dipsBelowZero && <ReferenceLine y={0} stroke='#ff0000' strokeDasharray='5 5' />}
 
                 {/* TODO handle reference area when it is 1 month/year. */}

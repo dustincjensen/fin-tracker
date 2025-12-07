@@ -18,7 +18,7 @@ import { useDispatch } from 'react-redux';
 import { CategorySelect } from '../../components/category-select/category-select.component';
 import { Category } from '../../models/category.type';
 import { setSplitRecords as setSplitRecordsAction } from '../../store/record/record-slice';
-import { round } from '../../utils/currency.utils';
+import { formatNumber, round } from '../../utils/currency.utils';
 import { newGuid } from '../../utils/guid.utils';
 import { isNullOrWhitespace } from '../../utils/object.utils';
 import { createStaticWidthCell } from '../../utils/table.utils';
@@ -288,7 +288,7 @@ export const EditSplitRecords = ({ record, categories, onClose }: EditSplitRecor
                         {!!record.credit && <Table.Cell {...w100}></Table.Cell>}
                         <Table.Cell justifyContent='space-between' borderTop {...w100}>
                             <DollarIcon size={14} />
-                            <Strong size={400}>{total?.toFixed(2)}</Strong>
+                            <Strong size={400}>{formatNumber(total)}</Strong>
                         </Table.Cell>
                         {!!record.debit && <Table.Cell {...w100}></Table.Cell>}
                         <Table.Cell {...w100}></Table.Cell>

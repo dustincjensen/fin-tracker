@@ -1,5 +1,6 @@
 import { Pane, Text } from 'evergreen-ui';
 import React from 'react';
+import { formatCurrency } from '../../../utils/currency.utils';
 import { isNullOrUndefined } from '../../../utils/object.utils';
 import { TotalContext } from './total.context';
 
@@ -29,7 +30,7 @@ export const TotalRow = ({ start, end }: { start: number; end: number }) => {
                         display='flex'
                         justifyContent='flex-end'
                     >
-                        <Text>{isNullOrUndefined(t) ? '-' : t?.toFixed(2)}</Text>
+                        <Text>{isNullOrUndefined(t) ? '-' : formatCurrency(t)}</Text>
                     </Pane>
                 );
             })}

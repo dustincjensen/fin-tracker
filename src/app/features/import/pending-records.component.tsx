@@ -5,6 +5,7 @@ import { CategorySelect } from '../../components/category-select/category-select
 import { useCategories } from '../../hooks/categories/use-categories.hook';
 import { updatePendingRecordCategory } from '../../store/pending-record/pending-record-slice';
 import { PendingRecordSelectors } from '../../store/pending-record/pending-record.selectors';
+import { formatNumber } from '../../utils/currency.utils';
 import { formatDateFull } from '../../utils/date.utils';
 import { createStaticWidthCell } from '../../utils/table.utils';
 import './pending-records.css';
@@ -61,10 +62,10 @@ export const PendingRecords = () => {
                                 />
                             </Table.Cell>
                             <Table.TextCell isNumber textAlign='right' {...w120}>
-                                {record.debit?.toFixed(2) || ''}
+                                {record.debit ? formatNumber(record.debit) : ''}
                             </Table.TextCell>
                             <Table.TextCell isNumber textAlign='right' {...w120}>
-                                {record.credit?.toFixed(2) || ''}
+                                {record.credit ? formatNumber(record.credit) : ''}
                             </Table.TextCell>
                         </Table.Row>
                     );

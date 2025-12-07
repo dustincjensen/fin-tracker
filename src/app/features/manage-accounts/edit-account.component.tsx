@@ -27,6 +27,7 @@ import {
     isInvestmentAccount,
     accountRoutes,
 } from '../../utils/account.utils';
+import { formatCurrency } from '../../utils/currency.utils';
 import { monthValues, monthNamesLong } from '../../utils/date.utils';
 import { newGuid } from '../../utils/guid.utils';
 import { isNullOrUndefined } from '../../utils/object.utils';
@@ -260,7 +261,7 @@ export const EditAccount = ({
                                 <FormField label='Starting Balance' marginBottom={majorScale(3)}>
                                     {/* TODO fix number/string typing and parsing? */}
                                     {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                                    <Text>{parseFloat(startingBalance as any).toFixed(2)}</Text>
+                                    <Text>{formatCurrency(parseFloat(startingBalance as any))}</Text>
                                 </FormField>
                             </>
                         )}
@@ -312,7 +313,8 @@ export const EditAccount = ({
                                 <FormField label='Current Balance' marginBottom={majorScale(3)}>
                                     {isBankAccount(account?.accountType) && (
                                         <Text>
-                                            {(!isNullOrUndefined(currentBalance) && currentBalance.toFixed(2)) || '-'}
+                                            {(!isNullOrUndefined(currentBalance) && formatCurrency(currentBalance)) ||
+                                                '-'}
                                         </Text>
                                     )}
                                     {isInvestmentAccount(account?.accountType) && <Text>Calculated value</Text>}

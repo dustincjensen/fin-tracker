@@ -9,8 +9,6 @@ Bugs
 
 Tasks
 =====
-- Reorder accounts
-- Format currencies
 - Mortgage
   - Amortization chart
   - Search for values that match the payment and associate them after user clicks ok.
@@ -28,8 +26,6 @@ Tasks
 - Add Redux Dev Tools
 - Investigate Zod for forms and fix up form creation.
 ------------------------------------------------------------------------------------------------------
-- Account sorting
-  - Sorting order accounts by user input? (https://github.com/clauderic/react-sortable-hoc perhaps?)
 - Focus category tag when it is rendered into DOM if there is a selected category id.
 - Reduce the range for the charts on the home page.
 

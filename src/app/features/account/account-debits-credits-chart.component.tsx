@@ -11,6 +11,7 @@ import {
     YAxis,
 } from 'recharts';
 import { useRecordsByDate } from '../../hooks/records/use-records-by-date.hook';
+import { formatCurrency } from '../../utils/currency.utils';
 import { formatDate } from '../../utils/date.utils';
 
 export type AccountDebitsCreditsChartProps = {
@@ -68,10 +69,13 @@ export const AccountDebitsCreditsChart = ({ accountId, date }: AccountDebitsCred
             >
                 <CartesianGrid strokeDasharray='3 3' />
                 <XAxis dataKey='name' />
-                <YAxis />
-                <Tooltip isAnimationActive={false} />
+                <YAxis tickFormatter={(value: number) => formatCurrency(value)} width={100} />
+                <Tooltip isAnimationActive={false} formatter={(value: number) => formatCurrency(value)} />
                 <ReferenceLine y={0} stroke='#000' />
-                <Bar dataKey='value' label={{ position: 'top' } as never}>
+                <Bar
+                    dataKey='value'
+                    label={{ position: 'top', formatter: (value: number) => formatCurrency(value) } as never}
+                >
                     {data.map((_entry, index) => (
                         <Cell key={`cell-${index}`} fill={data[index].color} />
                     ))}

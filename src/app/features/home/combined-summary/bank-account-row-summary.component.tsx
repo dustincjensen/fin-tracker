@@ -1,11 +1,11 @@
 import { Pane, Text } from 'evergreen-ui';
 import React, { useMemo } from 'react';
-
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { AccountSelectors } from '../../../store/account/account.selectors';
 import { RecordSelectors } from '../../../store/record/record.selectors';
 import { IStore } from '../../../store/store.interface';
+import { formatNumber } from '../../../utils/currency.utils';
 import { createDate } from '../../../utils/date.utils';
 import { isNullOrUndefined } from '../../../utils/object.utils';
 import { DateCurriedQuery, queryByIsInYear, queryByIsInYearAndMonth } from '../combined.utils';
@@ -84,7 +84,7 @@ export const BankAccountRowSummary = ({
                         display='flex'
                         justifyContent='flex-end'
                     >
-                        <Text>{isNullOrUndefined(balance) ? '-' : balance?.toFixed(2)}</Text>
+                        <Text>{isNullOrUndefined(balance) ? '-' : formatNumber(balance)}</Text>
                     </Pane>
                 );
             })}

@@ -2,6 +2,7 @@ import { Pane, Table, Text, ForkIcon } from 'evergreen-ui';
 import React from 'react';
 import { CategorySelect } from '../../components/category-select/category-select.component';
 import { Category } from '../../models/category.type';
+import { formatNumber } from '../../utils/currency.utils';
 import { createStaticWidthCell } from '../../utils/table.utils';
 import { SplitRecordType } from './split-record.type';
 
@@ -49,10 +50,10 @@ export const SplitRecords = ({ records, categories, updateCategory }: SplitRecor
                                 />
                             </Table.TextCell>
                             <Table.TextCell isNumber textAlign='right' {...w100}>
-                                {(record.debit && record.debit?.toFixed(2)) || ''}
+                                {record.debit ? formatNumber(record.debit) : ''}
                             </Table.TextCell>
                             <Table.TextCell isNumber textAlign='right' {...w100}>
-                                {(record.credit && record.credit?.toFixed(2)) || ''}
+                                {record.credit ? formatNumber(record.credit) : ''}
                             </Table.TextCell>
                             <Table.Cell {...w100}></Table.Cell>
                             <Table.Cell flex='none' justifyContent='flex-end' width={54}></Table.Cell>
