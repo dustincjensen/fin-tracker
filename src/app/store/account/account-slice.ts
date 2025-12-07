@@ -43,9 +43,16 @@ export const accountSlice = createSlice({
             account.endYear = endYear;
             account.endMonth = endMonth;
         },
+        updateAccountOrder: (state, { payload }: PayloadAction<{ id: string; order: number }[]>) => {
+            payload.forEach(({ id, order }) => {
+                const account = state.accounts[id];
+                account.order = order;
+            });
+        },
     },
 });
 
-export const { saveNewAccount, updateAccount, deleteAccount, archiveAccount } = accountSlice.actions;
+export const { saveNewAccount, updateAccount, deleteAccount, archiveAccount, updateAccountOrder } =
+    accountSlice.actions;
 
 export const accountReducer = accountSlice.reducer;

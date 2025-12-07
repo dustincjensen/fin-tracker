@@ -7,6 +7,7 @@ import {
     saveNewAccount,
     updateAccount,
     AccountStore,
+    updateAccountOrder,
 } from './account-slice';
 
 describe('Account slice', () => {
@@ -126,6 +127,32 @@ describe('Account slice', () => {
                             endYear: 2020,
                             endMonth: 11,
                         },
+                    },
+                })
+            );
+        });
+    });
+
+    describe('updateAccountOrder', () => {
+        it('should update the order of the accounts', () => {
+            const newState = accountReducer(
+                {
+                    accounts: {
+                        [accountId]: { ...account, order: 0 },
+                        [otherAccountId]: { ...otherAccount, order: 1 },
+                    },
+                },
+                updateAccountOrder([
+                    { id: accountId, order: 1 },
+                    { id: otherAccountId, order: 0 },
+                ])
+            );
+
+            expect(newState).toEqual(
+                build<AccountStore>({
+                    accounts: {
+                        [accountId]: { ...account, order: 1 },
+                        [otherAccountId]: { ...otherAccount, order: 0 },
                     },
                 })
             );
