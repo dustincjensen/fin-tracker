@@ -10,6 +10,7 @@ import {
     Legend,
     ResponsiveContainer,
     ReferenceLine,
+    Brush,
 } from 'recharts';
 import { useDisplayCategories } from '../../../hooks/categories/use-display-categories.hook';
 import { useLocalStorage } from '../../../hooks/use-local-storage.hook';
@@ -21,6 +22,9 @@ import { isNullOrUndefined } from '../../../utils/object.utils';
 const barChartMargins = { top: 5, right: 0, left: 0, bottom: 5 };
 const combinedCategorySummaryDisplayOption = 'combinedCategorySummaryDisplayOption';
 const combinedCategorySummaryStackedOption = 'combinedCategorySummaryStackedOption';
+const combinedCategorySummaryReducedRangeOption = 'combinedCategorySummaryReducedRangeOption';
+
+const defaultNumberOfMonths = 18;
 
 const getSelectedName = (ids: string[], categories: Category[]): string => {
     let selectedNames = '';
@@ -70,6 +74,10 @@ export const CombinedCategorySummary = ({ categoryTotalsByMonth }: CombinedCateg
         );
     });
     const [isStacked, setIsStacked] = useLocalStorage<boolean>(combinedCategorySummaryStackedOption, false);
+    const [isReducedRangeEnabled, setIsReducedRangeEnabled] = useLocalStorage<boolean>(
+        combinedCategorySummaryReducedRangeOption,
+        false
+    );
 
     // Create the data structure, which flattens the categories
     // into an array of objects that is keyed by the name of the
@@ -129,6 +137,12 @@ export const CombinedCategorySummary = ({ categoryTotalsByMonth }: CombinedCateg
     return (
         <Pane marginLeft={-20}>
             <Pane display='flex' alignItems='center' justifyContent='flex-end'>
+                <Checkbox
+                    label='Use Range?'
+                    checked={isReducedRangeEnabled}
+                    onChange={() => setIsReducedRangeEnabled(!isReducedRangeEnabled)}
+                    marginRight={15}
+                />
                 <Checkbox label='Stacked?' checked={isStacked} onChange={onStackChange} marginRight={15} />
                 <SelectMenu
                     isMultiSelect
@@ -151,6 +165,14 @@ export const CombinedCategorySummary = ({ categoryTotalsByMonth }: CombinedCateg
                     <XAxis dataKey='name' />
                     <YAxis tickFormatter={(value: number) => formatCurrency(value)} width={120} />
                     <Tooltip isAnimationActive={false} formatter={(value: number) => formatCurrency(value)} />
+                    {isReducedRangeEnabled && (
+                        <Brush
+                            dataKey='name'
+                            startIndex={
+                                data.length - defaultNumberOfMonths > 0 ? data.length - defaultNumberOfMonths : 0
+                            }
+                        />
+                    )}
                     <ReferenceLine y={0} stroke='#000' />
                     <Legend />
                     {categoryBars}

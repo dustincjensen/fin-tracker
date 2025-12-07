@@ -27,7 +27,6 @@ Tasks
 - Investigate Zod for forms and fix up form creation.
 ------------------------------------------------------------------------------------------------------
 - Focus category tag when it is rendered into DOM if there is a selected category id.
-- Reduce the range for the charts on the home page.
 
 Next
 - Package updates
