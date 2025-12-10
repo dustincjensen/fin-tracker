@@ -261,3 +261,20 @@ export function monthsSince(date: string): number {
     const diff = now.diff(then, 'months');
     return diff > 0 ? diff : 0;
 }
+
+// TODO added as part of mortgage implementation. Evaluate if keeping.
+export function endOfNextMonth(date: IDate): IDate {
+    return moment(date as moment.Moment)
+        .add(1, 'week')
+        .endOf('month');
+}
+
+// TODO added as part of mortgage implementation. Evaluate if keeping.
+export function withinFiveDays(date: IDate, compare: IDate): boolean {
+    const diff = moment(date as moment.Moment).diff(moment(compare as moment.Moment));
+    const duration = moment.duration(diff);
+
+    if (Math.abs(duration.subtract(5, 'days').asDays()) <= moment.duration(5, 'days').asDays()) return true;
+    if (Math.abs(duration.add(5, 'days').asDays()) <= moment.duration(5, 'days').asDays()) return true;
+    return false;
+}

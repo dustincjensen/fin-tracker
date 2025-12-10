@@ -1,6 +1,7 @@
 import { Pane, ThemeProvider, classicTheme, defaultTheme } from 'evergreen-ui';
 import React from 'react';
 import { Route, Switch } from 'react-router';
+import { useFeatureEnabled } from '../../hooks/use-feature-enabled.hook';
 import { useLocalStorage } from '../../hooks/use-local-storage.hook';
 import { AccountLayout } from '../account/account.layout';
 import { HomeLayout } from '../home/home.layout';
@@ -10,12 +11,15 @@ import { ManageAccountLayout } from '../manage-accounts/manage-accounts.layout';
 import { ManageAutoCategoriesLayout } from '../manage-auto-categories/manage-auto-categories.layout';
 import { ManageCategoryLayout } from '../manage-categories/manage-categories.layout';
 import { ManageThirdPartyApisLayout } from '../manage-third-party-apis/manage-third-party-apis.layout';
+import { MortgageLayout } from '../mortgage/mortgage.layout';
 import { SidebarLayout } from '../sidebar/sidebar.layout';
 
 const newThemeOption = 'newThemeOption';
 
 export const RootLayout = () => {
     const [newTheme, setNewTheme] = useLocalStorage<boolean>(newThemeOption, false);
+    const isMortgageFeatureEnabled = useFeatureEnabled('mortgage');
+
     return (
         <ThemeProvider value={newTheme ? defaultTheme : classicTheme}>
             <Pane height='100%' display='grid' gridTemplateColumns='auto 1fr' borderTop className='app_fade_in'>
@@ -28,6 +32,9 @@ export const RootLayout = () => {
                         <Route exact path='/categories' component={ManageCategoryLayout} />
                         <Route exact path='/account/:accountId' component={AccountLayout} />
                         <Route exact path='/investment/:accountId' component={InvestmentLayout} />
+                        {isMortgageFeatureEnabled && (
+                            <Route exact path='/mortgage/:mortgageId' component={MortgageLayout} />
+                        )}
                         <Route exact path='/import/:accountId?' component={ImportLayout} />
                         <Route exact path='/thirdPartyApis' component={ManageThirdPartyApisLayout} />
                     </Switch>

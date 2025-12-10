@@ -1,8 +1,9 @@
-import { Pane, Heading } from 'evergreen-ui';
+import { Pane, Heading, BankAccountIcon } from 'evergreen-ui';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { NavLink } from '../../components/nav-link/nav-link.component';
 import { useActiveAccounts } from '../../hooks/accounts/use-active-accounts.hook';
+import { useFeatureEnabled } from '../../hooks/use-feature-enabled.hook';
 import { Account } from '../../models/account.type';
 import { accountRoutes, accountTypeIcons, isBankAccount, isInvestmentAccount } from '../../utils/account.utils';
 
@@ -15,6 +16,7 @@ const AccountLink = ({ account, pathname }: { account: Account; pathname: string
 };
 
 export const AccountsSidebar = () => {
+    const isMortgageFeatureEnabled = useFeatureEnabled('mortgage');
     const { pathname } = useLocation<Location>();
     const { activeAccounts: accounts } = useActiveAccounts();
 
@@ -43,6 +45,16 @@ export const AccountsSidebar = () => {
                         <AccountLink key={account.id} account={account} pathname={pathname} />
                     ))}
                 </>
+            )}
+
+            {isMortgageFeatureEnabled && (
+                <NavLink
+                    key={'mortgageId'}
+                    to='/mortgage/mortgageId'
+                    text='Mortgage'
+                    iconBefore={BankAccountIcon}
+                    isSelected={pathname === '/mortgage/mortgageId'}
+                />
             )}
         </Pane>
     );
