@@ -9,6 +9,9 @@ Bugs
 
 Tasks
 =====
+- Add icon next to account if out of date by 1+ month.
+- Add icon that shows uncategorized records for whole account, clickable and will show all in the account.
+- Add button to confirm all imported line items. Add filter to account to hide confirmed line items.
 - Mortgage
   - Amortization chart
   - Search for values that match the payment and associate them after user clicks ok.
