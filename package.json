@@ -7,6 +7,7 @@
     "clean": "rimraf .parcel-cache .cache dist out",
     "build:dev": "tsc -b ./src/app ./src/electron ./src/background-worker && parcel ./src/app/renderer.html --target electron",
     "build": "tsc -b ./src/app ./src/electron ./src/background-worker && parcel build ./src/app/renderer.html --target electron",
+    "dev": "npm run clean && concurrently --kill-others \"npm run build:dev\" \"wait-on dist/renderer.html && npm start\"",
     "start": "electron ./dist/index.js --dev",
     "prod": "electron .",
     "lint": "eslint src/**/*.{ts,tsx,js,jsx}",
@@ -67,7 +68,8 @@
     "rimraf": "^3.0.2",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "wait-on": "^9.0.5"
   },
   "config": {
     "forge": {
